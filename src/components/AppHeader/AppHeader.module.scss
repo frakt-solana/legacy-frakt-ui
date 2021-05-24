@@ -10,9 +10,12 @@
 
 .navigation {
   display: flex;
-
   & li {
     margin-right: 24px;
+    a {
+      text-decoration: none;
+      color: $color-white;
+    }
   }
 }
 
