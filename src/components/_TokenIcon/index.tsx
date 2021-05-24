@@ -1,4 +1,4 @@
-import { Identicon } from "../Identicon";
+import { Identicon } from "../_Identicon";
 import React from "react";
 import { getTokenIcon } from "../../utils/utils";
 import { useConnectionConfig } from "../../contexts/connection";
