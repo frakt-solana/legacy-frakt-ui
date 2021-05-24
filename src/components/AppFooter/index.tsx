@@ -1,4 +1,5 @@
 import React from 'react'
+import { GitHubIcon, TelegramIcon, TwitterIcon } from '../icons'
 import styles from './AppFooter.module.scss'
 
 const AppFooter = (props: any) => {
@@ -10,9 +11,15 @@ const AppFooter = (props: any) => {
         <li>#HashTag3</li>
       </ul>
       <ul className={styles.icons}>
-        <li>icon1</li>
-        <li>icon2</li>
-        <li>icon3</li>
+        <li>
+          <GitHubIcon size={32} />
+        </li>
+        <li>
+          <TwitterIcon size={32} />
+        </li>
+        <li>
+          <TelegramIcon size={32} />
+        </li>
       </ul>
     </div>
   )
