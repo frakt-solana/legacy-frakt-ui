@@ -13,8 +13,10 @@
 
   & li {
     margin-right: 24px;
-    &:last-child {
-      margin-right: 0;
-    }
   }
+}
+
+.rightPart {
+  display: flex;
+  align-items: center;
 }

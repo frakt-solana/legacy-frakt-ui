@@ -11,7 +11,6 @@ const AppNavigation = ({ className }: any) => {
       <li>
         <NavLink to={URLS.MY_FACTS}>My FRACT'S</NavLink>
       </li>
-      <li>BUTTON HERE</li>
     </ul>
   )
 }
