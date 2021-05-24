@@ -5,6 +5,8 @@ import { ConnectionProvider } from './contexts/connection'
 import { AccountsProvider } from './contexts/accounts'
 import { MarketProvider } from './contexts/market'
 
+import { URLS } from './constants'
+
 import HomePage from './pages/HomePage'
 import ExplorePage from './pages/ExplorePage'
 import MyFractsPage from './pages/MyFractsPage'
@@ -17,15 +19,15 @@ export function Routes() {
           <AccountsProvider>
             <MarketProvider>
               <Switch>
-                <Route exact path='/' component={() => <HomePage />} />
+                <Route exact path={URLS.ROOT} component={() => <HomePage />} />
                 <Route
                   exact
-                  path='/explore'
+                  path={URLS.EXPLORE}
                   component={() => <ExplorePage />}
                 />
                 <Route
                   exact
-                  path='/myfracts'
+                  path={URLS.MY_FACTS}
                   component={() => <MyFractsPage />}
                 />
               </Switch>
