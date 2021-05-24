@@ -1,0 +1,22 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid $color-white;
+  padding: 12px 24px;
+}
+
+.hashtags {
+  font-weight: 800;
+  font-size: 1.5rem;
+  display: flex;
+  
+  & li {
+    margin-right: 1rem;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
