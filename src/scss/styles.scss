@@ -1,0 +1,14 @@
+@import './base/reset.scss';
+
+@import './abstracts/fonts.scss';
+@import './abstracts/variables.scss';
+
+* {
+  font-size: $font-size;
+}
+
+body {
+  background: $color-dark;
+  color: $color-white;
+  font-family: $font-family;
+}

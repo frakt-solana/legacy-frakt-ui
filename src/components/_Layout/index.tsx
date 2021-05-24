@@ -4,7 +4,7 @@ import { Layout } from "antd";
 import { Link } from "react-router-dom";
 
 import { LABELS } from "../../constants";
-import { AppBar } from "../AppBar";
+import { AppBar } from "../_AppBar";
 
 const { Header, Content } = Layout;
 

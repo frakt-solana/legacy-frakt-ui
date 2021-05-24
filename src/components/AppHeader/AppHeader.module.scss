@@ -1,0 +1,20 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $color-white;
+  padding: 12px 24px 12px 0;
+}
+
+.menuList {
+  display: flex;
+
+  & li {
+    margin-right: 24px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
