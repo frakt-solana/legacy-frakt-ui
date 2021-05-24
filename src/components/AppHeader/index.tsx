@@ -8,9 +8,9 @@ const AppHeader = (props: any) => {
     <div className={styles.root}>
       <CompanyLogo />
       <ul className={styles.menuList}>
-        <li>My Collection</li>
         <li>Explore</li>
-        <li>Migration</li>
+        <li>My FRACT'S</li>
+        <li>BUTTON HERE</li>
       </ul>
     </div>
   )
