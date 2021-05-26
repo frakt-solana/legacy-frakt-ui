@@ -10,7 +10,7 @@ const AppHeader = (props: any) => {
     <div className={styles.root}>
       <CompanyLogo />
       <div className={styles.rightPart}>
-        <AppNavigation className={styles.navigation} />
+        <AppNavigation />
         <ConnectButton />
       </div>
     </div>

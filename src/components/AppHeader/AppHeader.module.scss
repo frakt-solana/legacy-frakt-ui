@@ -4,19 +4,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid $color-white;
+  border-bottom: 0.125rem solid $color-white;
   padding: 12px 24px;
-}
-
-.navigation {
-  display: flex;
-  & li {
-    margin-right: 24px;
-    a {
-      text-decoration: none;
-      color: $color-white;
-    }
-  }
 }
 
 .rightPart {

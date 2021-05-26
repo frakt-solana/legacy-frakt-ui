@@ -1,0 +1,29 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  display: flex;
+  & li {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    margin-right: 24px;
+  }
+}
+
+.link {
+  text-decoration: none;
+  color: $color-white;
+  padding: 0.4rem 0.5rem 0;
+  border: {
+    top: 0.125rem solid transparent;
+    left: 0.125rem solid transparent;
+  }
+  transition: border-color 0.2s ease-in;
+
+  &:hover {
+    border-color: $color-white;
+  }
+}
+
+.activeLink {
+  border-color: $color-white;
+}
