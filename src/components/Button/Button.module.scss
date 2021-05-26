@@ -1,0 +1,19 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  font-family: $font-family;
+  font-size: 1.25rem;
+  border: 0.125rem solid transparent;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: $color-white;
+  color: $color-dark;
+  transition: 0.2s ease-in;
+
+  &:hover {
+    border-color: $color-white;
+    color: $color-white;
+    background: $color-dark;
+  }
+}

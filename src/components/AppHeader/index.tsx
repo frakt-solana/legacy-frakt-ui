@@ -3,7 +3,8 @@ import styles from './AppHeader.module.scss'
 
 import CompanyLogo from '../CompanyLogo'
 import AppNavigation from '../AppNavigation'
-import { ConnectButton } from '../_ConnectButton'
+// import { ConnectButton } from '../_ConnectButton'
+import Button from '../Button'
 
 const AppHeader = (props: any) => {
   return (
@@ -11,7 +12,8 @@ const AppHeader = (props: any) => {
       <CompanyLogo />
       <div className={styles.rightPart}>
         <AppNavigation />
-        <ConnectButton />
+        <Button className={styles.connectButton} onClick={() => alert("Modal here")}>Connect wallet</Button>
+        {/* <ConnectButton /> */}
       </div>
     </div>
   )

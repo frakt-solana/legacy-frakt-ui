@@ -6,6 +6,10 @@
     font-size: 1.25rem;
     text-transform: uppercase;
     margin-right: 24px;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 
