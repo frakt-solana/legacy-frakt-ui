@@ -1,16 +1,12 @@
 import React from 'react'
 import styles from './ArtCard.module.scss'
 
-import MOCK_ART_IMAGE from './MOCK_ART_IMAGE.png'
-
-const OWNER_ADDRESS = 'tz1VqpBkA8bkwkWBVWe39LU7VCcD4EG863gP'
-
-const ArtCard = ({ className, onClick = () => {} }: any) => {
+const ArtCard = ({ className, onClick = () => {}, data = {} }: any) => {
   return (
     <div className={`${styles.root} ${className || ''}`} onClick={onClick}>
-      <img className={styles.image} src={MOCK_ART_IMAGE} alt='Art' />
+      <img className={styles.image} src={data.imageSrc} alt='Art' />
       <p className={styles.ownerAddress}>
-        {truncateString(OWNER_ADDRESS, 7, 4)}
+        {truncateString(data.ownerAddress, 7, 4)}
       </p>
     </div>
   )
