@@ -1,0 +1,8 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  padding: 25px;
+  display: grid;
+  gap: 25px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
