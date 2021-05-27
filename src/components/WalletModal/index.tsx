@@ -26,7 +26,6 @@ const WalletModal = ({ onCancel, visible, onElementClick = () => {} }: any) => {
             <img
               alt={`${provider.name}`}
               src={provider.icon}
-              style={{ marginRight: 8 }}
             />
           </WalletItem>
         )

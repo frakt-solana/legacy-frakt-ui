@@ -6,4 +6,8 @@
   text-transform: uppercase;
   text-decoration: none;
   color: $color-white;
+
+  &:hover {
+    color: $color-white;
+  }
 }
