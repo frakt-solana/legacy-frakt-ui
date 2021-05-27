@@ -2,7 +2,6 @@ import type { PublicKey } from '@solana/web3.js'
 
 import Wallet from '@project-serum/sol-wallet-adapter'
 import { Transaction } from '@solana/web3.js'
-import { Button, Modal } from 'antd'
 import EventEmitter from 'eventemitter3'
 import React, {
   useCallback,
