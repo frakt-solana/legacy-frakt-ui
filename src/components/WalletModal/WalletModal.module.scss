@@ -22,7 +22,7 @@
     }
     .ant-modal-close {
       top: 10px;
-      right: 10px;
+      right: calc(10px + #{$scroll-bar-width});
       position: fixed;
       svg {
         width: 50px;
