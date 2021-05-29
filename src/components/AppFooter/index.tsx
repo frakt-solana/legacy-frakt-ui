@@ -1,24 +1,23 @@
 import React from 'react'
-import { GitHubIcon, TelegramIcon, TwitterIcon } from '../icons'
+import { GitHubIcon, TelegramIcon } from '../icons'
 import styles from './AppFooter.module.scss'
 
-const AppFooter = (props: any) => {
+const GITHUB_LINK = 'https://github.com/frakt-solana'
+const TELEGRAM_LINK = 'https://telegram.org/'
+
+const AppFooter = ({ className }: any) => {
   return (
-    <div className={styles.root}>
-      <ul className={styles.hashtags}>
-        <li>#HashTag1</li>
-        <li>#HashTag2</li>
-        <li>#HashTag3</li>
-      </ul>
+    <div className={`${styles.root} ${className || ''}`}>
       <ul className={styles.icons}>
         <li>
-          <GitHubIcon size={32} />
+          <a href={GITHUB_LINK} target='_blank' rel='noopener noreferrer'>
+            <GitHubIcon size={32} />
+          </a>
         </li>
         <li>
-          <TwitterIcon size={32} />
-        </li>
-        <li>
-          <TelegramIcon size={32} />
+          <a href={TELEGRAM_LINK} target='_blank' rel='noopener noreferrer'>
+            <TelegramIcon size={32} />
+          </a>
         </li>
       </ul>
     </div>
