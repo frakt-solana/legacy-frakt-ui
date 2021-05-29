@@ -31,3 +31,11 @@ $button-font-size-sm: 1.25rem;
     height: calc(#{$button-font-size-sm} / 2);
   }
 }
+
+.arrowLeft {
+  svg {
+    transform: rotate(180deg);
+    margin-right: calc(#{$button-font-size-sm} / 6 * 6);
+    margin-left: 0;
+  }
+}

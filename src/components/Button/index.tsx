@@ -6,6 +6,7 @@ const Button = ({
   className,
   onClick = () => {},
   size = 'md',
+  arrowLeft = false,
   children,
 }: any) => {
   return (
@@ -13,11 +14,12 @@ const Button = ({
       type='button'
       className={`${styles.root} ${
         size === 'md' ? styles.md : size === 'sm' ? styles.sm : styles.lg
-      } ${className || ''}`}
+      } ${arrowLeft ? styles.arrowLeft : ''} ${className || ''}`}
       onClick={onClick}
     >
+      {arrowLeft && <ArrowRightIcon />}
       {children}
-      <ArrowRightIcon />
+      {!arrowLeft && <ArrowRightIcon />}
     </button>
   )
 }

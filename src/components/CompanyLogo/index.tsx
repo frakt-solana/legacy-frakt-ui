@@ -6,7 +6,7 @@ import { URLS } from '../../constants'
 const CompanyLogo = ({ className }: any) => {
   return (
     <NavLink to={URLS.ROOT} className={`${styles.root} ${className || ''}`}>
-      Fract
+      Frakt
     </NavLink>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './AppLayout.module.scss'
 
 import CompanyLogo from '../CompanyLogo'
@@ -7,6 +7,7 @@ import { ConnectButton } from '../ConnectButton'
 import AppFooter from '../AppFooter'
 import CurrentUserTable from '../CurrentUserTable'
 import { useWallet } from '../../contexts/wallet'
+import WalletContent from '../WalletContent'
 
 const AppLayout = ({
   CustomHeader,
@@ -14,7 +15,12 @@ const AppLayout = ({
   children,
   className,
 }: any) => {
-  const { connected } = useWallet()
+  const { connected, isModalVisible, closeModal } = useWallet()
+
+  useEffect(() => {
+    isModalVisible && closeModal()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className={`${styles.root} ${className || ''}`}>
@@ -23,7 +29,11 @@ const AppLayout = ({
           <CompanyLogo />
         </div>
         <div className={styles.profileWrapper}>
-          {connected ? <CurrentUserTable /> : <ConnectButton />}
+          {connected ? (
+            <CurrentUserTable />
+          ) : isModalVisible ? null : (
+            <ConnectButton />
+          )}
         </div>
         <div className={styles.navigationWrapper}>
           <AppNavigation />
@@ -31,9 +41,15 @@ const AppLayout = ({
         </div>
       </Sidebar>
       <Main>
-        {CustomHeader && <CustomHeader />}
-        {headerText && <Header>{headerText}</Header>}
-        {children}
+        {isModalVisible ? (
+          <WalletContent />
+        ) : (
+          <>
+            {CustomHeader && <CustomHeader />}
+            {headerText && <Header>{headerText}</Header>}
+            {children}
+          </>
+        )}
       </Main>
     </div>
   )

@@ -16,7 +16,6 @@ import { useLocalStorageState } from './../utils/utils'
 import { LedgerWalletAdapter } from '../wallet-adapters/ledger'
 import { SolongWalletAdapter } from '../wallet-adapters/solong'
 import { PhantomWalletAdapter } from '../wallet-adapters/phantom'
-import WalletModal from '../components/WalletModal'
 
 const ASSETS_URL =
   'https://raw.githubusercontent.com/solana-labs/oyster/main/assets/wallets/'
@@ -68,11 +67,21 @@ export const WalletContext = React.createContext<{
   connected: boolean
   select: () => void
   provider: typeof WALLET_PROVIDERS[number] | undefined
+  isModalVisible: boolean
+  closeModal: () => void
+  providerUrl: any
+  setProviderUrl: any
+  setAutoConnect: any
 }>({
   wallet: undefined,
   connected: false,
   select() {},
   provider: undefined,
+  isModalVisible: false,
+  closeModal() {},
+  providerUrl: null,
+  setProviderUrl() {},
+  setAutoConnect: null,
 })
 
 export function WalletProvider({ children = null as any }) {
@@ -162,31 +171,37 @@ export function WalletProvider({ children = null as any }) {
         connected,
         select,
         provider,
+        isModalVisible,
+        closeModal: close,
+        providerUrl,
+        setProviderUrl,
+        setAutoConnect,
       }}
     >
-      <WalletModal
-        onCancel={close}
-        visible={isModalVisible}
-        providerUrl={providerUrl}
-        setProviderUrl={setProviderUrl}
-        setAutoConnect={setAutoConnect}
-        onElementClick={(url: string) => {
-          setProviderUrl(url)
-          setAutoConnect(true)
-          close()
-        }}
-      />
       {children}
     </WalletContext.Provider>
   )
 }
 
 export function useWallet() {
-  const { wallet, connected, provider, select } = useContext(WalletContext)
+  const {
+    wallet,
+    connected,
+    provider,
+    select,
+    isModalVisible,
+    closeModal,
+    setAutoConnect,
+    setProviderUrl,
+  } = useContext(WalletContext)
   return {
     wallet,
     connected,
     provider,
+    isModalVisible,
+    closeModal,
+    setProviderUrl,
+    setAutoConnect,
     select,
     publicKey: wallet?.publicKey,
     connect() {

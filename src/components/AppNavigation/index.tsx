@@ -26,11 +26,11 @@ const AppNavigation = ({ className }: any) => {
             activeClassName={styles.activeLink}
             to={URLS.MY_FACTS}
           >
-            My Fract's
+            My Frakt's
           </NavLink>
         ) : (
           <p className={styles.link} onClick={select}>
-            My Fract's
+            My Frakt's
           </p>
         )}
       </li>
