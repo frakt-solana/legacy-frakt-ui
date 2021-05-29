@@ -1,4 +1,5 @@
 import React from 'react'
+import { shortenAddress } from '../../utils/utils'
 import styles from './ArtCard.module.scss'
 
 const InfoTable = ({ ownerAddress, rarity }: any) => {
@@ -6,7 +7,7 @@ const InfoTable = ({ ownerAddress, rarity }: any) => {
     <div className={styles.infoTable}>
       <div>
         <p>Owner</p>
-        <p>{truncateString(ownerAddress, 7, 4)}</p>
+        <p>{shortenAddress(ownerAddress)}</p>
       </div>
       <div>
         <p>Rarity</p>
@@ -27,6 +28,3 @@ const ArtCard = ({ className, onClick = () => {}, data = {} }: any) => {
 }
 
 export default ArtCard
-
-const truncateString = (str, startLength, endLength) =>
-  `${str.substr(0, startLength)}...${str.substr(str.length - endLength)}`
