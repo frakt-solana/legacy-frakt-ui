@@ -1,4 +1,5 @@
 import React from 'react'
+import { ArrowRightIcon } from '../icons'
 import styles from './Button.module.scss'
 
 const Button = ({ className, onClick = () => {}, children }: any) => {
@@ -9,6 +10,7 @@ const Button = ({ className, onClick = () => {}, children }: any) => {
       onClick={onClick}
     >
       {children}
+      <ArrowRightIcon className={styles.arrow} />
     </button>
   )
 }
