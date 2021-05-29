@@ -5,6 +5,8 @@ import CompanyLogo from '../CompanyLogo'
 import AppNavigation from '../AppNavigation'
 import { ConnectButton } from '../ConnectButton'
 import AppFooter from '../AppFooter'
+import CurrentUserTable from '../CurrentUserTable'
+import { useWallet } from '../../contexts/wallet'
 
 const AppLayout = ({
   CustomHeader,
@@ -12,6 +14,8 @@ const AppLayout = ({
   children,
   className,
 }: any) => {
+  const { connected } = useWallet()
+
   return (
     <div className={`${styles.root} ${className || ''}`}>
       <Sidebar>
@@ -19,7 +23,7 @@ const AppLayout = ({
           <CompanyLogo />
         </div>
         <div className={styles.profileWrapper}>
-          <ConnectButton />
+          {connected ? <CurrentUserTable /> : <ConnectButton />}
         </div>
         <div className={styles.navigationWrapper}>
           <AppNavigation />
