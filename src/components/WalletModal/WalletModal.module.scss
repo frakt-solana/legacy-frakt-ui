@@ -1,13 +1,14 @@
 @import '../../scss/abstracts/variables.scss';
 
 .root {
-  width: calc((250px + 2rem) * 3) !important;
+  width: calc(250px * 3) !important;
   max-width: 100% !important;
-  height: calc((250px + 2rem) * 2) !important;
+  height: calc(250px * 2) !important;
   padding: 0 !important;
   :global {
     .ant-modal-content {
-      background: $color-dark;
+      background: $color-black;
+      border: 1px solid $color-gray-1;
       height: 100%;
       border-radius: 0;
       box-shadow: none;
@@ -18,11 +19,10 @@
     .ant-modal-body {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 2rem;
     }
     .ant-modal-close {
       top: 10px;
-      right: calc(10px + #{$scroll-bar-width});
+      right: 10px;
       position: fixed;
       svg {
         width: 50px;
@@ -33,13 +33,12 @@
 }
 
 .wrap {
-  background: $color-dark;
+  background: $color-black;
 }
 
 .walletItem {
   width: 250px;
   height: 250px;
-  background: $color-dark;
   color: $color-white;
   font-size: 1.5rem;
   display: flex;
@@ -47,35 +46,27 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  outline: 0.125rem solid $color-white;
-  outline-offset: -0.125rem;
   position: relative;
+  border-right: 1px solid $color-gray-1;
+  border-bottom: 1px solid $color-gray-1;
+  color: transparentize($color-white, 0.5);
+  transition: color 0.2s ease-in;
+
+  &:nth-child(3n + 3) {
+    border-right: none;
+  }
 
   &:hover {
-    &:after {
+    color: $color-white;
+    img {
       opacity: 1;
     }
   }
 
-  &:after {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    color: $color-dark;
-    background: $color-white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-    font-size: 2rem;
-    content: 'Select';
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-  }
-
   img {
+    transition: opacity 0.2s ease-in;
     width: 100px;
     margin-bottom: 1rem;
+    opacity: 0.5;
   }
 }
