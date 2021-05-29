@@ -2,33 +2,35 @@
 
 .root {
   display: flex;
+  flex-direction: column;
   & li {
-    font-size: 1.25rem;
-    text-transform: uppercase;
-    margin-right: 24px;
-
-    &:last-child {
-      margin-right: 0;
-    }
+    font-size: 2.4rem;
+    line-height: 4rem;
   }
 }
 
 .link {
   text-decoration: none;
   color: $color-white;
-  padding: 0.4rem 0.5rem 0;
-  border: {
-    top: 0.125rem solid transparent;
-    left: 0.125rem solid transparent;
-  }
-  transition: border-color 0.2s ease-in;
+  display: block;
 
   &:hover {
-    border-color: $color-white;
     color: $color-white;
   }
 }
 
 .activeLink {
-  border-color: $color-white;
+  position: relative;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    right: 0;
+    width: 0.3rem;
+    height: 3rem;
+    background: $color-white;
+  }
 }
