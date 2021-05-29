@@ -8,6 +8,7 @@ import AppFooter from '../AppFooter'
 import CurrentUserTable from '../CurrentUserTable'
 import { useWallet } from '../../contexts/wallet'
 import WalletContent from '../WalletContent'
+import { useLocation } from 'react-router-dom'
 
 const AppLayout = ({
   CustomHeader,
@@ -16,11 +17,12 @@ const AppLayout = ({
   className,
 }: any) => {
   const { connected, isModalVisible, closeModal } = useWallet()
+  const location = useLocation();
 
   useEffect(() => {
     isModalVisible && closeModal()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [location])
 
   return (
     <div className={`${styles.root} ${className || ''}`}>
