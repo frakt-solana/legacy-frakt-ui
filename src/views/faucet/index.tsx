@@ -3,7 +3,7 @@ import { useConnection } from "../../contexts/connection";
 import { useWallet } from "../../contexts/wallet";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { notify } from "../../utils/notifications";
-import { ConnectButton } from "./../../components/_ConnectButton";
+import { ConnectButton } from "../../components/_legacy/_ConnectButton";
 import { LABELS } from "../../constants";
 
 export const FaucetView = () => {

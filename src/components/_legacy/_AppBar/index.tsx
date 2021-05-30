@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Popover } from "antd";
-import { useWallet } from "../../contexts/wallet";
+import { useWallet } from "../../../contexts/wallet";
 import { CurrentUserBadge } from "../_CurrentUserBadge";
 import { SettingOutlined } from "@ant-design/icons";
 import { Settings } from "../_Settings";
-import { LABELS } from "../../constants";
+import { LABELS } from "../../../constants";
 import { ConnectButton } from "../_ConnectButton";
 
 export const AppBar = (props: { left?: JSX.Element; right?: JSX.Element }) => {

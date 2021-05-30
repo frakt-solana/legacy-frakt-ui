@@ -1,8 +1,8 @@
 import { Button, Dropdown, Menu } from "antd";
 import { ButtonProps } from "antd/lib/button";
 import React from "react";
-import { LABELS } from "../../constants";
-import { useWallet } from "../../contexts/wallet";
+import { LABELS } from "../../../constants";
+import { useWallet } from "../../../contexts/wallet";
 
 export interface ConnectButtonProps
   extends ButtonProps,
