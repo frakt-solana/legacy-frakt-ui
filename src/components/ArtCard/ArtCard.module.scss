@@ -1,0 +1,83 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  border-right: 1px solid $color-gray-1;
+  border-bottom: 1px solid $color-gray-1;
+  display: grid;
+  color: $color-white;
+  position: relative;
+  // padding: 3rem;
+  cursor: pointer;
+
+  &:hover {
+    .infoTable {
+      & > div {
+        opacity: 0;
+      }
+      .exploreButton {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.title {
+  text-transform: uppercase;
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  padding: 3rem 3rem 0;
+  opacity: 0.75;
+}
+
+.titleRainbow {
+  background: linear-gradient(
+    90deg,
+    #ff0000,
+    #ffa500,
+    #ffff00,
+    #00e1ff,
+    #0000ff,
+    #800080
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.image {
+  width: 100%;
+}
+
+.infoTable {
+  padding: 1.5rem 3rem 3rem;
+  position: relative;
+  // padding-top: 1.5rem;
+
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-gray-1;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    color: $color-gray-2;
+    font-size: 1rem;
+    transition: opacity 0.4s ease-in;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
+}
+
+.exploreButton {
+  padding: 0 3rem 3rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+}

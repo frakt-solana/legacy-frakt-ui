@@ -1,0 +1,56 @@
+@import '../../scss/abstracts/variables.scss';
+
+.ArtContentHeader {
+  padding: 3rem 0 0;
+}
+
+.backButton {
+  padding: 0 3rem 3rem;
+  color: $color-gray-3;
+}
+
+.title {
+  font-size: 2.5rem;
+  padding: 0 3rem 3rem;
+  border-bottom: 1px solid $color-gray-1;
+}
+
+.root {
+}
+
+.artContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid $color-gray-1;
+}
+
+.image {
+  width: 100%;
+  border-right: 1px solid $color-gray-1;
+}
+
+.info {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-gray-1;
+    padding-bottom: 0.75rem;
+    padding-top: 0.75rem;
+    color: $color-gray-2;
+    font-size: 1.25rem;
+    transition: opacity 0.4s ease-in;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
+}

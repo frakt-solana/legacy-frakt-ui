@@ -4,17 +4,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid $color-white;
-  padding: 12px 24px 12px 0;
+  border-bottom: 0.125rem solid $color-white;
+  padding: 12px 24px;
 }
 
-.menuList {
+.rightPart {
   display: flex;
+  align-items: center;
+}
 
-  & li {
-    margin-right: 24px;
-    &:last-child {
-      margin-right: 0;
-    }
-  }
+.connectButton {
+  margin-left: 3.5rem;
 }

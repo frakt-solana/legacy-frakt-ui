@@ -9,7 +9,7 @@ import {
 } from "@solana/web3.js";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { notify } from "./../utils/notifications";
-import { ExplorerLink } from "../components/_ExplorerLink";
+import { ExplorerLink } from "../components/_legacy/_ExplorerLink";
 import { setProgramIds } from "../utils/ids";
 import { WalletAdapter } from "./wallet";
 import { cache, getMultipleAccounts, MintParser } from "./accounts";

@@ -2,6 +2,12 @@
 
 .root {
   font-size: 4rem;
-  font-weight: 200;
+  font-weight: 400;
   text-transform: uppercase;
+  text-decoration: none;
+  color: $color-white;
+
+  &:hover {
+    color: $color-white;
+  }
 }

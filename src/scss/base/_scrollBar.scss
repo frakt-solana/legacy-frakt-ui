@@ -1,0 +1,21 @@
+@import './abstracts/variables.scss';
+
+/* width */
+::-webkit-scrollbar {
+  width: $scroll-bar-width;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $color-dark;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $color-white;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $color-white;
+}

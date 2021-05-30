@@ -1,0 +1,50 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  padding: 3rem;
+  border-bottom: 1px solid $color-gray-1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.title {
+  font-size: 1.4rem;
+}
+
+.separator {
+  margin: 0 1rem;
+  width: 10rem;
+  border-bottom: 1px dashed $color-gray-1;
+}
+
+.inputLabel {
+  cursor: pointer;
+  margin-right: 1.5rem;
+  font-size: 1.4rem;
+  display: flex;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &::before {
+    display: block;
+    content: '';
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    border: 2px solid $color-gray-3;
+    margin-right: 0.25rem;
+    transition: background 0.2s ease-in;
+  }
+
+  input {
+    display: none;
+  }
+}
+
+.inputLabelActive {
+  &::before {
+    background: $color-white;
+  }
+}

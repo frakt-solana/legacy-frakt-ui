@@ -4,17 +4,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid $color-white;
-  padding: 12px 24px;
 }
 
-.hashtags {
-  font-weight: 800;
-  font-size: 1.5rem;
+.icons {
   display: flex;
-  
+  align-items: center;
   & li {
-    margin-right: 1rem;
+    margin-right: 12px;
+    opacity: 1;
+    transition: opacity 0.2s ease-in;
+    &:hover {
+      opacity: 0.75;
+    }
     &:last-child {
       margin-right: 0;
     }

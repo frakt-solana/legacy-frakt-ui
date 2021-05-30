@@ -1,5 +1,5 @@
 @import './base/reset.scss';
-
+@import './base/scrollBar.scss';
 @import './abstracts/fonts.scss';
 @import './abstracts/variables.scss';
 
@@ -8,7 +8,7 @@
 }
 
 body {
-  background: $color-dark;
+  background: $color-black;
   color: $color-white;
   font-family: $font-family;
 }
