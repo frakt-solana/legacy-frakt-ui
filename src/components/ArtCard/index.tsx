@@ -1,7 +1,19 @@
 import React from 'react'
+import { useArtDetails } from '../../contexts/artDetails'
 import { shortenAddress } from '../../utils/utils'
 import Button from '../Button'
 import styles from './ArtCard.module.scss'
+
+const MOCK_DATA = [
+  ['Owner', shortenAddress('sadjklj2o4j2ojasxlk242jla21asd')],
+  ['Figure', 'Portal'],
+  ['Color', 'White'],
+  ['λ', '156'],
+  ['μ', '15'],
+  ['Density', '300'],
+  ['Distortion', '-320'],
+  ['Rarity', '0.001%'],
+]
 
 const InfoTable = ({ ownerAddress, rarity }: any) => {
   return (
@@ -14,16 +26,23 @@ const InfoTable = ({ ownerAddress, rarity }: any) => {
         <p>Rarity</p>
         <p>{rarity}</p>
       </div>
-      <Button size='sm' className={styles.exploreButton}>Explore</Button>
+      <Button size='sm' className={styles.exploreButton}>
+        Explore
+      </Button>
     </div>
   )
 }
 
-const ArtCard = ({ className, onClick = () => {}, artData = {} }: any) => {
+const ArtCard = ({ className, artData = {} }: any) => {
   const { figureName, imageSrc, address, colorName, colorHex, rarity } = artData
 
+  const { setData } = useArtDetails()
+
   return (
-    <div className={`${styles.root} ${className || ''}`} onClick={onClick}>
+    <div
+      className={`${styles.root} ${className || ''}`}
+      onClick={() => setData(MOCK_DATA)}
+    >
       <p
         className={`${styles.title} ${
           colorName === 'Rainbow' ? styles.titleRainbow : ''

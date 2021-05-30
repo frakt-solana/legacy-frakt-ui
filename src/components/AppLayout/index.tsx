@@ -9,6 +9,7 @@ import CurrentUserTable from '../CurrentUserTable'
 import { useWallet } from '../../contexts/wallet'
 import WalletContent from '../WalletContent'
 import { useLocation } from 'react-router-dom'
+import { useArtDetails } from '../../contexts/artDetails'
 
 const AppLayout = ({
   CustomHeader,
@@ -17,11 +18,13 @@ const AppLayout = ({
   className,
 }: any) => {
   const { connected, isModalVisible, closeModal } = useWallet()
-  const location = useLocation();
+  const { data, setData } = useArtDetails()
+  const location = useLocation()
 
   useEffect(() => {
     isModalVisible && closeModal()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    data.length && setData([])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
 
   return (

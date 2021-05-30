@@ -10,6 +10,7 @@ import { URLS } from './constants'
 import HomePage from './pages/HomePage'
 import ExplorePage from './pages/ExplorePage'
 import MyFractsPage from './pages/MyFractsPage'
+import { ArtDetailsProvider } from './contexts/artDetails'
 
 export function Routes() {
   return (
@@ -18,19 +19,25 @@ export function Routes() {
         <WalletProvider>
           <AccountsProvider>
             <MarketProvider>
-              <Switch>
-                <Route exact path={URLS.ROOT} component={() => <HomePage />} />
-                <Route
-                  exact
-                  path={URLS.EXPLORE}
-                  component={() => <ExplorePage />}
-                />
-                <Route
-                  exact
-                  path={URLS.MY_FACTS}
-                  component={() => <MyFractsPage />}
-                />
-              </Switch>
+              <ArtDetailsProvider>
+                <Switch>
+                  <Route
+                    exact
+                    path={URLS.ROOT}
+                    component={() => <HomePage />}
+                  />
+                  <Route
+                    exact
+                    path={URLS.EXPLORE}
+                    component={() => <ExplorePage />}
+                  />
+                  <Route
+                    exact
+                    path={URLS.MY_FACTS}
+                    component={() => <MyFractsPage />}
+                  />
+                </Switch>
+              </ArtDetailsProvider>
             </MarketProvider>
           </AccountsProvider>
         </WalletProvider>
