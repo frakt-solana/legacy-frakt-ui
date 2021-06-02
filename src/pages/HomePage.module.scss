@@ -1,0 +1,80 @@
+@import '../scss/abstracts/variables.scss';
+
+.root {
+}
+
+.heroSection {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: no-repeat center;
+
+  h1 {
+    font-size: 8rem;
+    text-transform: uppercase;
+  }
+  p {
+    position: relative;
+    font-size: 2rem;
+    color: $color-gray-2;
+  }
+}
+
+.scrollBottomButton {
+  position: absolute;
+  bottom: -5rem;
+  left: calc(50% - 3rem);
+  transform: rotate(90deg);
+  color: $color-gray-1;
+  svg {
+    height: 1.5rem;
+  }
+
+  &:hover {
+    color: $color-gray-2;
+  }
+}
+
+//? ===================================
+
+.textSection {
+  padding: 5rem 3rem;
+  color: $color-gray-3;
+  font-size: 1.75rem;
+  border: {
+    top: 1px solid $color-gray-1;
+    bottom: 1px solid $color-gray-1;
+  }
+  text-align: center;
+
+  a {
+    color: $color-gray-2;
+
+    &:hover {
+      color: $color-white;
+    }
+  }
+}
+
+//? ===================================
+
+.artExamples {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.artExample {
+  img {
+    width: 100%;
+  }
+  border: {
+    right: 1px solid $color-gray-1;
+    bottom: 1px solid $color-gray-1;
+  }
+
+  &:nth-child(3n+3) {
+    border-right: none;
+  }
+}
