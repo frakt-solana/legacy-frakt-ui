@@ -1,0 +1,41 @@
+@import '../scss/abstracts/variables.scss';
+
+.root {
+}
+
+.heroSection {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: no-repeat center;
+
+  h1 {
+    font-size: 8rem;
+    text-transform: uppercase;
+  }
+  p {
+    position: relative;
+    font-size: 2rem;
+    color: $color-gray-2;
+  }
+}
+
+.scrollBottomButton {
+  position: absolute;
+  bottom: -5rem;
+  left: calc(50% - 3rem);
+  transform: rotate(90deg);
+  color: $color-gray-1;
+  svg {
+    height: 1.5rem;
+  }
+
+  &:hover {
+    color: $color-gray-2;
+  }
+}
+
+//? ===================================
+
