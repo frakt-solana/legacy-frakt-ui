@@ -42,12 +42,39 @@
 .intoTextSection {
   padding: 5rem 3rem;
   color: $color-gray-3;
-  font-size: 2rem;
+  font-size: 1.75rem;
   border: {
     top: 1px solid $color-gray-1;
     bottom: 1px solid $color-gray-1;
   }
   text-align: center;
+
+  a {
+    color: $color-gray-2;
+
+    &:hover {
+      color: $color-white;
+    }
+  }
 }
 
 //? ===================================
+
+.artExamples {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.artExample {
+  img {
+    width: 100%;
+  }
+  border: {
+    right: 1px solid $color-gray-1;
+    bottom: 1px solid $color-gray-1;
+  }
+
+  &:nth-child(3n+3) {
+    border-right: none;
+  }
+}
