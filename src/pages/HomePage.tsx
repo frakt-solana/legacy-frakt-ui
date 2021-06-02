@@ -23,7 +23,7 @@ const HeroSection = () => (
 )
 
 const IntroTextSection = () => (
-  <div className={styles.intoTextSection} id='introTextSection'>
+  <div className={styles.textSection} id='introTextSection'>
     Frakt is generative{' '}
     <a
       href='https://en.wikipedia.org/wiki/Fractal_art'
@@ -55,12 +55,38 @@ const ArtExamplesSection = () => (
   </div>
 )
 
+const HowItWorksSection = () => (
+  <div className={styles.textSection}>
+    Each frakt represents one piece of art. With total supply of 10 000 frakts,
+    there are 5 different figures types and 4 different colors with{' '}
+    <a
+      href='https://docs.google.com/spreadsheets/d/1QuXS1_NtmwvBwflQSCZ6L7m5n1midraWZeltrGUx_Yg/edit#gid=1782623236'
+      target='_blank'
+      rel='noopener noreferrer'
+    >
+      specific chances of generation
+    </a>
+    . Other than that, every generation uses your transaction hash which makes
+    it really unique and personalized. No one knows how it will look like, and
+    how rare it would be. Frakts tokens rarity is decided on Solana's{' '}
+    <a
+      href='https://solana.com/'
+      target='_blank'
+      rel='noopener noreferrer'
+    >
+      smart contract
+    </a>{' '}
+    and after NFT minting art is stored on IPFS.
+  </div>
+)
+
 const HomePage = (props: any) => {
   return (
     <AppLayout>
       <HeroSection />
       <IntroTextSection />
       <ArtExamplesSection />
+      <HowItWorksSection />
     </AppLayout>
   )
 }
