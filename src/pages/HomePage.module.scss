@@ -39,3 +39,15 @@
 
 //? ===================================
 
+.intoTextSection {
+  padding: 5rem 3rem;
+  color: $color-gray-3;
+  font-size: 2rem;
+  border: {
+    top: 1px solid $color-gray-1;
+    bottom: 1px solid $color-gray-1;
+  }
+  text-align: center;
+}
+
+//? ===================================

@@ -5,7 +5,7 @@ import styles from './HomePage.module.scss'
 import { ArrowRightIcon } from '../components/icons'
 
 import PORTAl from '../mocks/images/Portal.png'
-import { Link } from 'react-router-dom'
+import { HashLink as Link } from 'react-router-hash-link';
 
 const HeroSection = () => (
   <div
@@ -15,21 +15,27 @@ const HeroSection = () => (
     <h1>Frakt</h1>
     <p>
       Fractal NFT's on Solana
-      <Link to='' className={styles.scrollBottomButton}>
+      <Link smooth to='#introTextSection' className={styles.scrollBottomButton}>
         <ArrowRightIcon />
       </Link>
     </p>
   </div>
 )
 
+const IntroTextSection = () => (
+  <div className={styles.intoTextSection} id='introTextSection'>
+    Frakt is generative fractal art NFT collection. We are using the
+    mathematical beauty of fractals to generate stunning art and blockchain to
+    make every piece of it unique, decentralized and fun.
+  </div>
+)
+
+
 const HomePage = (props: any) => {
   return (
     <AppLayout>
       <HeroSection />
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe iste cum
-      obcaecati voluptas veniam nisi numquam maiores beatae consequuntur
-      laudantium consequatur dolores, eveniet architecto quia fuga officiis
-      magni, at earum!
+      <IntroTextSection />
     </AppLayout>
   )
 }
