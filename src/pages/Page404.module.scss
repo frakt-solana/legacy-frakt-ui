@@ -1,0 +1,19 @@
+@import '../scss/abstracts/variables.scss';
+
+.root {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 10rem;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: $color-gray-2;
+}

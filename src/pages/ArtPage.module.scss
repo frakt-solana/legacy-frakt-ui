@@ -1,6 +1,6 @@
-@import '../../scss/abstracts/variables.scss';
+@import '../scss/abstracts/variables.scss';
 
-.ArtContentHeader {
+.ArtHeader {
   padding: 3rem 0 0;
 }
 
@@ -13,9 +13,6 @@
   font-size: 2.5rem;
   padding: 0 3rem 3rem;
   border-bottom: 1px solid $color-gray-1;
-}
-
-.root {
 }
 
 .artContainer {

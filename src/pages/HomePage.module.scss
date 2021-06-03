@@ -74,7 +74,12 @@
     bottom: 1px solid $color-gray-1;
   }
 
-  &:nth-child(3n+3) {
+  &:nth-child(3n + 3) {
     border-right: none;
+  }
+  &:nth-child(4),
+  &:nth-child(5),
+  &:nth-child(6) {
+    border-bottom: none;
   }
 }

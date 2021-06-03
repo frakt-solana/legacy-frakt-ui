@@ -2,6 +2,8 @@ import React from 'react'
 import ArtCard from '../ArtCard'
 import styles from './ArtsList.module.scss'
 import MOCK_ARTS from '../../mocks/mock_arts'
+import { Link } from 'react-router-dom'
+import { URLS } from '../../constants'
 
 const ArtsList = ({ className }: any) => {
   return (
@@ -16,18 +18,20 @@ const ArtsList = ({ className }: any) => {
           colorHex,
           rarity,
         }) => (
-          <ArtCard
-            key={id}
-            artData={{
-              imageSrc,
-              address,
-              figureName,
-              colorName,
-              colorHex,
-              rarity,
-            }}
-            onClick = {() => alert('Something happens')}
-          />
+          <Link to={`${URLS.EXPLORE}/0`}>
+            <ArtCard
+              key={id}
+              artData={{
+                imageSrc,
+                address,
+                figureName,
+                colorName,
+                colorHex,
+                rarity,
+              }}
+              onClick={() => alert('Something happens')}
+            />
+          </Link>
         )
       )}
     </div>
