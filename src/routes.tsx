@@ -11,6 +11,7 @@ import HomePage from './pages/HomePage'
 import ExplorePage from './pages/ExplorePage'
 import MyFractsPage from './pages/MyFractsPage'
 import { ArtDetailsProvider } from './contexts/artDetails'
+import ArtPage from './pages/ArtPage'
 
 export function Routes() {
   return (
@@ -36,6 +37,7 @@ export function Routes() {
                     path={URLS.MY_FACTS}
                     component={() => <MyFractsPage />}
                   />
+                  <Route exact path={`/:id`} component={() => <ArtPage />} />
                 </Switch>
               </ArtDetailsProvider>
             </MarketProvider>
