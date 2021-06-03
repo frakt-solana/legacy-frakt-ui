@@ -56,7 +56,9 @@ const ArtHeader = () => {
       <Button
         arrowLeft
         className={styles.backButton}
-        onClick={() => history.goBack()}
+        onClick={() =>
+          history.length <= 2 ? history.replace(URLS.ROOT) : history.goBack()
+        }
       >
         Back
       </Button>
@@ -80,8 +82,10 @@ const ArtInfo = ({ data }: any) => {
 
 const ArtPage = (props: any) => {
   const { id } = useParams<{ id: string }>()
-  
-  const artData = MOCK_DATA_2.find(({ metadata }) => metadata.id.toString() === id)
+
+  const artData = MOCK_DATA_2.find(
+    ({ metadata }) => metadata.id.toString() === id
+  )
 
   if (!artData) {
     return <Redirect to={URLS.PAGE_404} />

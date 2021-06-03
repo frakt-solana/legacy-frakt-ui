@@ -27,8 +27,6 @@ const ArtCard = ({ className, artData = {} }: any) => {
   return (
     <div
       className={`${styles.root} ${className || ''}`}
-      //TODO Implement go to art page
-      onClick={() => {}}
     >
       <p
         className={`${styles.title} ${
