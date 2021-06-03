@@ -1,10 +1,11 @@
 import React from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory, Redirect } from 'react-router-dom'
 import AppLayout from '../components/AppLayout'
 import Button from '../components/Button'
 import styles from './ArtPage.module.scss'
 import { shortenAddress } from '../utils/utils'
 import PORTAL from '../mocks/images/Portal.png'
+import { URLS } from '../constants'
 
 const MOCK_DATA = {
   test_id: [
@@ -82,8 +83,8 @@ const ArtPage = (props: any) => {
   
   const artData = MOCK_DATA_2.find(({ metadata }) => metadata.id.toString() === id)
 
-  if (artData) {
-    //TODO redirect to 404
+  if (!artData) {
+    return <Redirect to={URLS.PAGE_404} />
   }
 
   return (
