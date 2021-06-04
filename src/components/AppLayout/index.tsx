@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect} from 'react'
 import styles from './AppLayout.module.scss'
 
 import CompanyLogo from '../CompanyLogo'

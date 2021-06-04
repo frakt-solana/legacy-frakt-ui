@@ -5,7 +5,7 @@ import { useWallet } from '../../contexts/wallet'
 import styles from './AppNavigation.module.scss'
 
 const AppNavigation = ({ className }: any) => {
-  const { connected, select } = useWallet()
+  const { connected, select, wallet } = useWallet()
 
   return (
     <ul className={`${styles.root} ${className || ''}`}>
@@ -24,7 +24,7 @@ const AppNavigation = ({ className }: any) => {
           <NavLink
             className={styles.link}
             activeClassName={styles.activeLink}
-            to={URLS.MY_FACTS}
+            to={`${URLS.USER}/${wallet.publicKey}`}
           >
             My Frakt's
           </NavLink>

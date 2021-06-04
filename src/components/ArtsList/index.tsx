@@ -1,16 +1,28 @@
 import React from 'react'
 import ArtCard from '../ArtCard'
 import styles from './ArtsList.module.scss'
-import MOCK_ARTS from '../../mocks/mock_arts'
 import { Link } from 'react-router-dom'
 import { URLS } from '../../constants'
 
-const ArtsList = ({ className }: any) => {
+const MOCK_OWNER_ADDRESS = '4FQEivpqXX2SN4nFR9k8uuawGdcwDQ6GQpBjEXsvXLTw'
+
+//TODO Fix MOCK_OWNER_ADDRESS 
+
+
+const ArtsList = ({ className, arts }: any) => {
   return (
-    <div
-      className={`${styles.root} ${className || ''}`}
-    >
-      {MOCK_ARTS.map(
+    <div className={`${styles.root} ${className || ''}`}>
+      {arts.map((art) => {
+        return (
+          <Link
+            to={`${URLS.EXPLORE}/${art.metadata.artAccountPubkey}`}
+            key={art.metadata.artAccountPubkey}
+          >
+            <ArtCard art={art} ownerAddress={MOCK_OWNER_ADDRESS}/>
+          </Link>
+        )
+      })}
+      {/* {MOCK_ARTS.map(
         ({
           id,
           imageSrc,
@@ -33,7 +45,7 @@ const ArtsList = ({ className }: any) => {
             />
           </Link>
         )
-      )}
+      )} */}
     </div>
   )
 }
