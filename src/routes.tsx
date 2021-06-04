@@ -10,7 +10,7 @@ import { URLS } from './constants'
 import HomePage from './pages/HomePage'
 import ExplorePage from './pages/ExplorePage'
 import MyFractsPage from './pages/MyFractsPage'
-import { ArtDetailsProvider } from './contexts/artDetails'
+import { ArtsProvider } from './contexts/artDetails'
 import ArtPage from './pages/ArtPage'
 import Page404 from './pages/Page404'
 
@@ -21,7 +21,7 @@ export function Routes() {
         <WalletProvider>
           <AccountsProvider>
             <MarketProvider>
-              <ArtDetailsProvider>
+              <ArtsProvider>
                 <Switch>
                   <Route
                     exact
@@ -42,7 +42,7 @@ export function Routes() {
                   <Route exact path={URLS.PAGE_404} component={() => <Page404 />} />
                   <Route exact path={'*'} component={() => <Page404 />} />
                 </Switch>
-              </ArtDetailsProvider>
+              </ArtsProvider>
             </MarketProvider>
           </AccountsProvider>
         </WalletProvider>

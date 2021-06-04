@@ -44,7 +44,7 @@ export const ENDPOINTS = [
   },
 ];
 
-const DEFAULT = ENDPOINTS[0].endpoint;
+const DEFAULT = ENDPOINTS[2].endpoint;
 const DEFAULT_SLIPPAGE = 0.25;
 
 interface ConnectionConfig {
@@ -61,12 +61,12 @@ interface ConnectionConfig {
 
 const ConnectionContext = React.createContext<ConnectionConfig>({
   endpoint: DEFAULT,
-  setEndpoint: () => {},
+  setEndpoint: () => { },
   slippage: DEFAULT_SLIPPAGE,
-  setSlippage: (val: number) => {},
-  connection: new Connection(DEFAULT, "recent"),
-  sendConnection: new Connection(DEFAULT, "recent"),
-  env: ENDPOINTS[0].name,
+  setSlippage: (val: number) => { },
+  connection: new Connection(DEFAULT, "processed"),
+  sendConnection: new Connection(DEFAULT, "processed"),
+  env: ENDPOINTS[2].name,
   tokens: [],
   tokenMap: new Map<string, TokenInfo>(),
 });
@@ -74,7 +74,7 @@ const ConnectionContext = React.createContext<ConnectionConfig>({
 export function ConnectionProvider({ children = undefined as any }) {
   const [endpoint, setEndpoint] = useLocalStorageState(
     "connectionEndpts",
-    ENDPOINTS[0].endpoint
+    ENDPOINTS[2].endpoint
   );
 
   const [slippage, setSlippage] = useLocalStorageState(
@@ -82,15 +82,15 @@ export function ConnectionProvider({ children = undefined as any }) {
     DEFAULT_SLIPPAGE.toString()
   );
 
-  const connection = useMemo(() => new Connection(endpoint, "recent"), [
+  const connection = useMemo(() => new Connection(endpoint, "processed"), [
     endpoint,
   ]);
-  const sendConnection = useMemo(() => new Connection(endpoint, "recent"), [
+  const sendConnection = useMemo(() => new Connection(endpoint, "processed"), [
     endpoint,
   ]);
 
   const chain =
-    ENDPOINTS.find((end) => end.endpoint === endpoint) || ENDPOINTS[0];
+    ENDPOINTS.find((end) => end.endpoint === endpoint) || ENDPOINTS[2];
   const env = chain.name;
 
   const [tokens, setTokens] = useState<TokenInfo[]>([]);
@@ -112,7 +112,7 @@ export function ConnectionProvider({ children = undefined as any }) {
       const accounts = await getMultipleAccounts(connection, [...knownMints.keys()], 'single');
       accounts.keys.forEach((key, index) => {
         const account = accounts.array[index];
-        if(!account) {
+        if (!account) {
           return;
         }
 
@@ -130,7 +130,7 @@ export function ConnectionProvider({ children = undefined as any }) {
   // is empty after opening its first time, preventing subsequent subscriptions from receiving responses.
   // This is a hack to prevent the list from every getting empty
   useEffect(() => {
-    const id = connection.onAccountChange(new Account().publicKey, () => {});
+    const id = connection.onAccountChange(new Account().publicKey, () => { });
     return () => {
       connection.removeAccountChangeListener(id);
     };
@@ -146,7 +146,7 @@ export function ConnectionProvider({ children = undefined as any }) {
   useEffect(() => {
     const id = sendConnection.onAccountChange(
       new Account().publicKey,
-      () => {}
+      () => { }
     );
     return () => {
       sendConnection.removeAccountChangeListener(id);
