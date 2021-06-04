@@ -9,7 +9,6 @@ import { URLS } from './constants'
 
 import HomePage from './pages/HomePage'
 import ExplorePage from './pages/ExplorePage'
-import MyFractsPage from './pages/MyFractsPage'
 import { ArtsProvider } from './contexts/artDetails'
 import ArtPage from './pages/ArtPage'
 import Page404 from './pages/Page404'
@@ -35,11 +34,19 @@ export function Routes() {
                   />
                   <Route
                     exact
-                    path={URLS.MY_FACTS}
-                    component={() => <MyFractsPage />}
+                    path={`${URLS.USER}/:userAddress`}
+                    component={() => <ExplorePage />}
                   />
-                  <Route exact path={`${URLS.EXPLORE}/:id`} component={() => <ArtPage />} />
-                  <Route exact path={URLS.PAGE_404} component={() => <Page404 />} />
+                  <Route
+                    exact
+                    path={`${URLS.EXPLORE}/:artAccountPubkey`}
+                    component={() => <ArtPage />}
+                  />
+                  <Route
+                    exact
+                    path={URLS.PAGE_404}
+                    component={() => <Page404 />}
+                  />
                   <Route exact path={'*'} component={() => <Page404 />} />
                 </Switch>
               </ArtsProvider>

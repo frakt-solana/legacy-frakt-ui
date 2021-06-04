@@ -1,6 +1,6 @@
 export const URLS = {
   ROOT: '/',
   EXPLORE: '/explore',
-  MY_FACTS: '/myfracts',
+  USER: '/user',
   PAGE_404: '/404'
 }

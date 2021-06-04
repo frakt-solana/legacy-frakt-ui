@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect} from 'react'
 import styles from './AppLayout.module.scss'
 
 import CompanyLogo from '../CompanyLogo'
@@ -42,7 +42,7 @@ const AppLayout = ({
           <AppFooter className={styles.footer} />
         </div>
       </Sidebar>
-      <Main>
+      <div className={styles.main}>
         {isModalVisible ? (
           <WalletContent />
         ) : (
@@ -52,7 +52,7 @@ const AppLayout = ({
             {children}
           </>
         )}
-      </Main>
+      </div>
     </div>
   )
 }
@@ -63,10 +63,6 @@ const Sidebar = ({ children, className }: any) => {
   return (
     <div className={`${styles.sideBar} ${className || ''}`}>{children}</div>
   )
-}
-
-const Main = ({ children, className }: any) => {
-  return <div className={`${styles.main} ${className || ''}`}>{children}</div>
 }
 
 const Header = ({ children, className }: any) => {
