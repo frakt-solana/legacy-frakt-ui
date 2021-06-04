@@ -7,7 +7,9 @@ import { URLS } from '../../constants'
 
 const ArtsList = ({ className }: any) => {
   return (
-    <div className={`${styles.root} ${className || ''}`}>
+    <div
+      className={`${styles.root} ${className || ''}`}
+    >
       {MOCK_ARTS.map(
         ({
           id,
@@ -18,9 +20,8 @@ const ArtsList = ({ className }: any) => {
           colorHex,
           rarity,
         }) => (
-          <Link to={`${URLS.EXPLORE}/0`}>
+          <Link to={`${URLS.EXPLORE}/0`} key={id}>
             <ArtCard
-              key={id}
               artData={{
                 imageSrc,
                 address,
@@ -29,7 +30,6 @@ const ArtsList = ({ className }: any) => {
                 colorHex,
                 rarity,
               }}
-              onClick={() => alert('Something happens')}
             />
           </Link>
         )
