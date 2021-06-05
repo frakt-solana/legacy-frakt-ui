@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useEffect } from 'react'
 import styles from './AppLayout.module.scss'
 
 import CompanyLogo from '../CompanyLogo'
@@ -15,6 +15,7 @@ const AppLayout = ({
   headerText = '',
   children,
   className,
+  mainClassName,
 }: any) => {
   const { connected, isModalVisible, closeModal } = useWallet()
   const location = useLocation()
@@ -42,7 +43,7 @@ const AppLayout = ({
           <AppFooter className={styles.footer} />
         </div>
       </Sidebar>
-      <div className={styles.main}>
+      <div className={`${styles.main} ${mainClassName || ''}`}>
         {isModalVisible ? (
           <WalletContent />
         ) : (
