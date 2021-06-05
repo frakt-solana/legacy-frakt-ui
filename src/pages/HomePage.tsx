@@ -3,16 +3,31 @@ import React from 'react'
 import AppLayout from '../components/AppLayout'
 import styles from './HomePage.module.scss'
 import { ArrowRightIcon } from '../components/icons'
-
+import TextScramble from '@twistezo/react-text-scramble'
 import PORTAL from '../mocks/images/Portal.png'
+import WAVE_RAINBOW from '../images/waveRainbow.png'
+import STAR_WHITE from '../images/starWhite.png'
+import PORTAL_ORANGE from '../images/portalOrange.png'
+import EYE_MAGENTA from '../images/eyeMagenta.png'
+import NET_RED from '../images/netRed.png'
+import EYE_WHITE from '../images/eyeWhite.png'
+import HERO_BG from '../images/heroImage.svg'
 import { HashLink as Link } from 'react-router-hash-link'
 
 const HeroSection = () => (
   <div
     className={styles.heroSection}
-    style={{ backgroundImage: `url('${PORTAL}')`, backgroundSize: '80%' }}
+    style={{ backgroundImage: `url('${HERO_BG}')`, backgroundSize: '80%' }}
   >
-    <h1>Frakt</h1>
+    <TextScramble
+      nextLetterSpeed={100}
+      className={styles.heroSectionTitle}
+      texts={['Frakt', 'Frakt ']}
+      pauseTime={2500}
+      paused={false}
+      letterSpeed={20}
+    />
+    {/* <h1>Frakt</h1> */}
     <p>
       Fractal NFT's on Solana
       <Link smooth to='#introTextSection' className={styles.scrollBottomButton}>
@@ -38,20 +53,20 @@ const IntroTextSection = () => (
   </div>
 )
 
-const ArtExample = () => (
+const ArtExample = ({src}: any) => (
   <div className={styles.artExample}>
-    <img src={PORTAL} alt='art' />
+    <img src={src} alt='art' />
   </div>
 )
 
 const ArtExamplesSection = () => (
   <div className={styles.artExamples}>
-    <ArtExample />
-    <ArtExample />
-    <ArtExample />
-    <ArtExample />
-    <ArtExample />
-    <ArtExample />
+    <ArtExample src={STAR_WHITE} />
+    <ArtExample src={PORTAL_ORANGE} />
+    <ArtExample src={EYE_MAGENTA} />
+    <ArtExample src={NET_RED} />
+    <ArtExample src={WAVE_RAINBOW} />
+    <ArtExample src={EYE_WHITE} />
   </div>
 )
 
@@ -69,11 +84,7 @@ const HowItWorksSection = () => (
     . Other than that, every generation uses your transaction hash which makes
     it really unique and personalized. No one knows how it will look like, and
     how rare it would be. Frakts tokens rarity is decided on Solana's{' '}
-    <a
-      href='https://solana.com/'
-      target='_blank'
-      rel='noopener noreferrer'
-    >
+    <a href='https://solana.com/' target='_blank' rel='noopener noreferrer'>
       smart contract
     </a>{' '}
     and after NFT minting art is stored on IPFS.
