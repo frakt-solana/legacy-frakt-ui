@@ -14,6 +14,7 @@ import { useWallet } from '../contexts/wallet'
 //   getAllUserMintedArts,
 // } from '../mocks/mock_functions'
 import { shortenAddress } from '../utils/utils'
+import { BuyButton } from '../components/BuyButton'
 
 const getHeaderText = ({ walletKey, userAddress }) => {
   return `${walletKey}` === userAddress
@@ -21,6 +22,21 @@ const getHeaderText = ({ walletKey, userAddress }) => {
     : userAddress
     ? `Collection of ${shortenAddress(userAddress)}`
     : 'Explore'
+}
+
+const NoFractsBlock = ({ type = 'explore', myFracts = false }: any) => {
+  const message = myFracts
+    ? "You don't have Frakt's yet"
+    : type === 'user'
+    ? "This owner doesn't have Frakt's yet"
+    : "There are no Frakt's here"
+
+  return (
+    <div className={styles.noFractsBlock}>
+      <p>{message}</p>
+      {myFracts && <BuyButton className={styles.noFractBuyButton} />}
+    </div>
+  )
 }
 
 const ExplorePage = (props: any) => {
@@ -51,11 +67,17 @@ const ExplorePage = (props: any) => {
 
   return (
     <AppLayout headerText={headerText} mainClassName={styles.appMain}>
-      {loading ? (
-        <Preloader size='lg' className={styles.preloader} />
-      ) : (
+      {loading && <Preloader size='lg' className={styles.preloader} />}
+      {!loading && !arts.length && (
+        <NoFractsBlock
+          myFracts={`${wallet?.publicKey}` === userAddress}
+          type={userAddress ? 'user' : 'explore'}
+        />
+      )}
+      {!loading && arts.length && (
         <>
           <ArtsSort />
+          <ArtsList arts={arts} />
           <ArtsList arts={arts} />
         </>
       )}
