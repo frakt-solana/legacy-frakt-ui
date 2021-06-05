@@ -10,11 +10,25 @@ import * as contract from 'frakt-client';
 import { useWallet } from './wallet';
 import { useConnection } from './connection';
 
+const programPubKey = new PublicKey("6zcw5qXiCjScAxYLhxhuPgAo69PSoDijpnWTDGmDVDbv")
+const adminPubKey = new PublicKey("DQfi54Fspjfi6VyMH1iSDyYAcui2hUF1QRbQ1GM7N1uo")
+
+interface IArtsContext {
+  currentUserArts: any,
+  arts: any,
+  getArts: any,
+  getCurrentUserArts: any,
+  getUserArts: any,
+  buyArt: any,
+  getArtOwner: any
+}
+
 export const ArtsContext = React.createContext({
   currentUserArts: [],
   arts: [],
   getArts: () => { },
   getCurrentUserArts: () => { },
+  getUserArts: () => { },
   buyArt: () => { }
 })
 
@@ -24,12 +38,11 @@ export const ArtsProvider = ({ children = null as any }) => {
 
   const { wallet } = useWallet();
   const connection = useConnection();
-  const programPubKey = new PublicKey("6zcw5qXiCjScAxYLhxhuPgAo69PSoDijpnWTDGmDVDbv")
-  const adminPubKey = new PublicKey("DQfi54Fspjfi6VyMH1iSDyYAcui2hUF1QRbQ1GM7N1uo")
+
 
   const proccessArts = (arts) => {
     // * тут можно сделать всякие преобразования и подсчёты циферок
-    return arts.map(camelcaseKeysDeep)
+    return arts;
   }
 
   // * optional, might be deleted
@@ -65,6 +78,12 @@ export const ArtsProvider = ({ children = null as any }) => {
     }
   }
 
+  const getArtOwner = async (mintAddres: PublicKey) => {
+    const largestAccounts = (await connection.getTokenLargestAccounts(mintAddress, 'processed')).value;
+    const tokenHolderPubkey = largestAccounts[0].address;
+    return tokenHolderPubkey;
+  }
+
   const getArts = async () => {
     const arts = await contract.getArts(programPubKey, {
       connection
@@ -75,15 +94,18 @@ export const ArtsProvider = ({ children = null as any }) => {
     return arts
   }
 
+  const getUserArts = async (userPubKey: PublicKey) => {
+    const tokens = await contract.getAllUserTokens(userPubKey, { connection });
+    const arts = await contract.getArts(programPubKey, { connection });
+    setArts(proccessArts(arts));
+    const userArts = contract.getArtTokensFromTokens(arts, tokens);
+    return proccessArts(userArts)
+  }
+
   const getCurrentUserArts = async () => {
-    const arts = await contract.getArts(programPubKey, {
-      connection
-    })
-    setArts(proccessArts(arts))
-    const userArtsWithNotMinted = arts.filter(art => art.metadata.first_owner_pubkey == wallet.publicKey.toBase58())
-    setCurrentUserArts(proccessArts(userArtsWithNotMinted))
-    console.log({ userArtsWithNotMinted, arts })
-    return userArtsWithNotMinted;
+    const userArts = await getUserArts(wallet.publicKey);
+    setCurrentUserArts(userArts);
+    return userArts;
   }
 
   return (
@@ -91,10 +113,12 @@ export const ArtsProvider = ({ children = null as any }) => {
       value={{
         getCurrentUserArts,
         getArts,
+        getUserArts,
         arts,
         currentUserArts,
-        buyArt
-      }}
+        buyArt,
+        getArtOwner
+      } as IArtsContext}
     >
       {children}
     </ArtsContext.Provider>
@@ -102,6 +126,6 @@ export const ArtsProvider = ({ children = null as any }) => {
 }
 
 export const useArts = () => {
-  const { getArts, getCurrentUserArts, currentUserArts, arts, buyArt } = useContext(ArtsContext)
-  return { getArts, getCurrentUserArts, currentUserArts, arts, buyArt }
+  const { getArts, getCurrentUserArts, getUserArts, currentUserArts, arts, buyArt, getArtOwner } = useContext(ArtsContext) as IArtsContext;
+  return { getArts, getCurrentUserArts, getUserArts, currentUserArts, arts, buyArt, getArtOwner }
 }

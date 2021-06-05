@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { shortenAddress } from '../../utils/utils'
 import Button from '../Button'
 import styles from './ArtCard.module.scss'
 import MOCK_IMAGE from '../../mocks/images/Portal.png'
+import { ipfsUriToGatewayUrl } from '../../utils/ipfs'
+import { useArts } from '../../contexts/artDetails'
+import { PublicKey } from '@solana/web3.js'
 
 export enum SHAPE {
   Wave = 1,
@@ -20,10 +23,10 @@ export enum COLOR {
 }
 
 export enum COLOR_HEX {
-  '#ff00ff' = 1,
-  '#ff0000' = 2,
-  '#ff6600' = 3,
-  '#ffffff' = 4,
+  '#ff00ff' = COLOR.Purple,
+  '#ff0000' = COLOR.Red,
+  '#ff6600' = COLOR.Orange,
+  '#ffffff' = COLOR.White,
 }
 
 export const getArtName = ({
@@ -33,7 +36,7 @@ export const getArtName = ({
   color: number
   shape: number
 }): string =>
-  shape === 1 && color === 1
+  shape === SHAPE.Wave && color === COLOR.Purple
     ? `Rainbow ${SHAPE[shape]}`
     : `${COLOR[color]} ${SHAPE[shape]}`
 
@@ -46,11 +49,11 @@ export const getArtRarity = ({
 }): number => (color_rarity * shape_rarity) / 100
 
 const ArtTitle = ({ color, shape }: { color: number; shape: number }) => {
+
   return (
     <p
-      className={`${styles.title} ${
-        shape === 1 && color === 1 ? styles.titleRainbow : ''
-      }`}
+      className={`${styles.title} ${shape === SHAPE.Wave && color === COLOR.Purple ? styles.titleRainbow : ''
+        }`}
       style={{ color: COLOR_HEX[color] }}
     >
       {getArtName({ color, shape }).toLowerCase()}
@@ -58,15 +61,39 @@ const ArtTitle = ({ color, shape }: { color: number; shape: number }) => {
   )
 }
 
-const ArtCard = ({ className, art = {}, ownerAddress = '' }: any) => {
+const ArtCard = ({ className, art = {} }: any) => {
+  const { getArtOwner } = useArts();
   const {
     attributes: { color, color_rarity, shape_rarity, image_url, shape },
   } = art
 
+  const [imageSrc, setImageSrc] = useState(null);
+  const [loadingImage, setLoadingImage] = useState(false);
+  const [ownerAddress, setOwnerAddress] = useState(null);
+  const [loadingOwnerAddress, setLoadingOwnerAddress] = useState(false);
+  const loadImage = async () => {
+    setLoadingImage(true);
+    const token = await (await fetch(ipfsUriToGatewayUrl(image_url))).json();
+    setImageSrc(ipfsUriToGatewayUrl(token.image));
+    setLoadingImage(false);
+  }
+
+  const loadOwnerAddress = async () => {
+    setLoadingOwnerAddress(true);
+    const ownerAddress = await getArtOwner(new PublicKey(art.metadata.minted_token_pubkey));
+    setOwnerAddress(ownerAddress);
+    setLoadingOwnerAddress(false);
+  }
+
+  useEffect(() => {
+    loadImage();
+    loadOwnerAddress();
+  }, [])
+
   return (
     <div className={`${styles.root} ${className || ''}`}>
       <ArtTitle color={color} shape={shape} />
-      <img className={styles.image} src={image_url || MOCK_IMAGE} alt='Art' />
+      {imageSrc ? <img className={styles.image} src={imageSrc} alt='Art' /> : <p>Loading...</p>}
       <InfoTable
         ownerAddress={ownerAddress}
         rarity={`${getArtRarity({ color_rarity, shape_rarity }).toFixed(2)}%`}
@@ -80,7 +107,7 @@ const InfoTable = ({ ownerAddress, rarity }: any) => {
     <div className={styles.infoTable}>
       <div>
         <p>Owner</p>
-        <p>{shortenAddress(ownerAddress)}</p>
+        {!ownerAddress ? <p>Loading...</p> : <p>{shortenAddress(ownerAddress)}</p>}
       </div>
       <div>
         <p>Rarity</p>

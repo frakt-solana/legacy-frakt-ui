@@ -5556,10 +5556,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-frakt-client@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/frakt-client/-/frakt-client-1.0.5.tgz#91dcbe2c70ce3718b1bc6e122f674ccea6043bca"
-  integrity sha512-ubeaeRG0wLsJkJwlC+UEO2QXZm6R6hY/ju7kjKu2A6SsNlgp/iuXz//mwSUK9CP4pb2xEECFl/YNmZHPvtXwFQ==
+frakt-client@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/frakt-client/-/frakt-client-1.0.7.tgz#46f3756e0bd2791ec7f5154dfe91b57a4dacf9a8"
+  integrity sha512-T5mBxJcK0lGwUK00fJrhKNevzi519LiiESCKf/z7WItnfx39E3TViK1JVQhzEBTGxvGuSZmK9hdeIl/NatOHaw==
   dependencies:
     "@solana/spl-token" latest
     "@solana/web3.js" latest
