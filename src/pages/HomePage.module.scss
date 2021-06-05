@@ -11,15 +11,20 @@
   align-items: center;
   background: no-repeat center;
 
-  h1 {
-    font-size: 8rem;
-    text-transform: uppercase;
-  }
+  // h1 {
+  //   font-size: 8rem;
+  //   text-transform: uppercase;
+  // }
   p {
     position: relative;
     font-size: 2rem;
     color: $color-gray-2;
   }
+}
+
+.heroSectionTitle {
+  font-size: 8rem;
+    text-transform: uppercase;
 }
 
 .scrollBottomButton {
@@ -41,7 +46,7 @@
 
 .textSection {
   padding: 5rem 3rem;
-  color: $color-gray-3;
+  color: $color-gray-5;
   font-size: 1.75rem;
   border: {
     top: 1px solid $color-gray-1;
@@ -50,7 +55,8 @@
   text-align: center;
 
   a {
-    color: $color-gray-2;
+    color: $color-white;
+    text-decoration: underline;
 
     &:hover {
       color: $color-white;
