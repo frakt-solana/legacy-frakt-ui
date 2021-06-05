@@ -40,13 +40,7 @@ export const getArtName = ({
     ? `Rainbow ${SHAPE[shape]}`
     : `${COLOR[color]} ${SHAPE[shape]}`
 
-export const getArtRarity = ({
-  color_rarity,
-  shape_rarity,
-}: {
-  color_rarity: number
-  shape_rarity: number
-}): number => (color_rarity * shape_rarity) / 100
+
 
 const ArtTitle = ({ color, shape }: { color: number; shape: number }) => {
 
@@ -80,8 +74,9 @@ const ArtCard = ({ className, art = {} }: any) => {
 
   const loadOwnerAddress = async () => {
     setLoadingOwnerAddress(true);
-    const ownerAddress = await getArtOwner(new PublicKey(art.metadata.minted_token_pubkey));
-    setOwnerAddress(ownerAddress);
+    const ownerAddress: PublicKey = await getArtOwner(new PublicKey(art.metadata.minted_token_pubkey));
+    console.log({ ownerAddress })
+    setOwnerAddress(`${ownerAddress}`);
     setLoadingOwnerAddress(false);
   }
 
@@ -96,7 +91,7 @@ const ArtCard = ({ className, art = {} }: any) => {
       {imageSrc ? <img className={styles.image} src={imageSrc} alt='Art' /> : <p>Loading...</p>}
       <InfoTable
         ownerAddress={ownerAddress}
-        rarity={`${getArtRarity({ color_rarity, shape_rarity }).toFixed(2)}%`}
+        rarity={`${art.rarity.toFixed(2)}%`}
       />
     </div>
   )

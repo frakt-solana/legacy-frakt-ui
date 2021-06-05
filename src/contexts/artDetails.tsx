@@ -23,6 +23,16 @@ interface IArtsContext {
   getArtOwner: any
 }
 
+export const getArtRarity = ({
+  color_rarity,
+  shape_rarity,
+}: {
+  color_rarity: number
+  shape_rarity: number
+}): number => (color_rarity * shape_rarity) / 100
+
+
+
 export const ArtsContext = React.createContext({
   currentUserArts: [],
   arts: [],
@@ -42,7 +52,7 @@ export const ArtsProvider = ({ children = null as any }) => {
 
   const proccessArts = (arts) => {
     // * тут можно сделать всякие преобразования и подсчёты циферок
-    return arts;
+    return arts.map(art => ({ ...art, rarity: getArtRarity({ color_rarity: art.attributes.color_rarity, shape_rarity: art.attributes.shape_rarity }) }));
   }
 
   // * optional, might be deleted
@@ -78,19 +88,21 @@ export const ArtsProvider = ({ children = null as any }) => {
     }
   }
 
-  const getArtOwner = async (mintAddres: PublicKey) => {
-    const largestAccounts = (await connection.getTokenLargestAccounts(mintAddress, 'processed')).value;
-    const tokenHolderPubkey = largestAccounts[0].address;
-    return tokenHolderPubkey;
+  const getArtOwner = async (mintAddress: PublicKey): Promise<String> => {
+    const largestTokenAccountOwner = await contract.getLargestTokenAccountOwnerByMint(
+      mintAddress,
+      { connection }
+    );
+    return largestTokenAccountOwner;
   }
 
   const getArts = async () => {
-    const arts = await contract.getArts(programPubKey, {
+    const arts = proccessArts(await contract.getArts(programPubKey, {
       connection
-    });
+    }));
 
     console.log({ arts })
-    setArts(proccessArts(arts));
+    setArts(arts);
     return arts
   }
 
