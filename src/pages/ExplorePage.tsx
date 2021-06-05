@@ -23,8 +23,6 @@ const getHeaderText = ({ walletKey, userAddress }) => {
     : 'Explore'
 }
 
-const filterMintedArts = (art => art.metadata.is_minted === true)
-
 const ExplorePage = (props: any) => {
   const { userAddress } = useParams<{ userAddress: string }>()
   const { wallet } = useWallet()
@@ -40,10 +38,10 @@ const ExplorePage = (props: any) => {
   const loadArts = async () => {
     setLoading(true)
     ;`${wallet?.publicKey}` === userAddress
-      ? setArts((await getUserArts(wallet?.publicKey)).filter(filterMintedArts))
+      ? setArts(await getUserArts(wallet?.publicKey))
       : userAddress
-      ? setArts((await getUserArts(new PublicKey(userAddress))).filter(filterMintedArts))
-      : setArts((await getArts()).filter(filterMintedArts))
+      ? setArts(await getUserArts(new PublicKey(userAddress)))
+      : setArts(await getArts())
     setLoading(false)
   }
 
