@@ -24,12 +24,12 @@ const getHeaderText = ({ walletKey, userAddress }) => {
     : 'Explore'
 }
 
-const NoFractsBlock = ({ type = 'explore', myFracts = false }: any) => {
+const NoFraktsBlock = ({ type = 'explore', myFracts = false }: any) => {
   const message = myFracts
-    ? "You don't have Frakt's yet"
+    ? "Unfortunately, you don't have any frakt's yet"
     : type === 'user'
-    ? "This owner doesn't have Frakt's yet"
-    : "There are no Frakt's here"
+    ? "This account doesn't have any frakt's yet"
+    : ''
 
   return (
     <div className={styles.noFractsBlock}>
@@ -69,7 +69,7 @@ const ExplorePage = (props: any) => {
     <AppLayout headerText={headerText} mainClassName={styles.appMain}>
       {loading && <Preloader size='lg' className={styles.preloader} />}
       {!loading && !arts.length && (
-        <NoFractsBlock
+        <NoFraktsBlock
           myFracts={`${wallet?.publicKey}` === userAddress}
           type={userAddress ? 'user' : 'explore'}
         />
