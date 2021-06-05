@@ -21,6 +21,19 @@ const getHeaderText = ({ walletKey, userAddress }) => {
       : 'Explore'
 }
 
+const sortArts = (sortBy: 'created_at' | 'rarity', arts) => {
+  const newArts = [...arts];
+  if (sortBy === 'rarity') {
+    newArts.sort((a, b) => (-(a.rarity - b.rarity)))
+    return newArts
+  }
+
+  if (sortBy === 'created_at') {
+    newArts.sort((a, b) => (a.metadata.created_at - b.metadata.created_at))
+    return newArts;
+  }
+}
+
 const ExplorePage = (props: any) => {
   const { userAddress } = useParams<{ userAddress: string }>()
   const { wallet } = useWallet()
@@ -29,17 +42,21 @@ const ExplorePage = (props: any) => {
   const [arts, setArts] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const onSortChange = (sortBy: 'created_at' | 'rarity') => {
+    setArts(sortArts(sortBy, arts))
+  }
+
   useEffect(() => {
     setHeaderText(getHeaderText({ walletKey: wallet?.publicKey, userAddress }))
   }, [userAddress, wallet])
 
   const loadArts = async () => {
     setLoading(true);
-    `${wallet?.publicKey}` === userAddress
-      ? setArts(await getUserArts(wallet?.publicKey))
+    setArts(sortArts('created_at', `${wallet?.publicKey}` === userAddress
+      ? await getUserArts(wallet?.publicKey)
       : userAddress
-        ? setArts(await getUserArts(new PublicKey(userAddress)))
-        : setArts(await getArts())
+        ? await getUserArts(new PublicKey(userAddress))
+        : await getArts()));
     setLoading(false);
   }
 
@@ -49,7 +66,7 @@ const ExplorePage = (props: any) => {
 
   return (
     <AppLayout headerText={headerText}>
-      <ArtsSort />
+      <ArtsSort onChange={onSortChange} />
       <ArtsList arts={arts} />
     </AppLayout>
   )

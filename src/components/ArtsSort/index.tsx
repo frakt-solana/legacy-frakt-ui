@@ -4,7 +4,7 @@ import styles from './ArtsSort.module.scss'
 const filters = [
   {
     name: 'New',
-    value: 'new',
+    value: 'created_at',
   },
   {
     name: 'Rarity',
@@ -12,7 +12,14 @@ const filters = [
   },
 ]
 
-const ArtsSort = ({ className }: any) => {
+const ArtsSort = ({ className, onChange }: any) => {
+
+  const handleChange = (event) => {
+    const { value } = event.target;
+    setSelectedValue(value);
+    onChange(value);
+  }
+
   const [selectedValue, setSelectedValue] = useState(filters[0].value)
 
   return (
@@ -22,16 +29,15 @@ const ArtsSort = ({ className }: any) => {
       {filters.map(({ name, value }, idx) => (
         <label
           key={idx}
-          className={`${styles.inputLabel} ${
-            value === selectedValue ? styles.inputLabelActive : ''
-          }`}
+          className={`${styles.inputLabel} ${value === selectedValue ? styles.inputLabelActive : ''
+            }`}
         >
           <input
             type='radio'
             value={value}
             name='sort'
             checked={value === selectedValue}
-            onChange={(event) => setSelectedValue(event.target.value)}
+            onChange={handleChange}
           />{' '}
           {name}
         </label>
