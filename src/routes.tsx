@@ -12,6 +12,7 @@ import ExplorePage from './pages/ExplorePage'
 import { ArtsProvider } from './contexts/artDetails'
 import ArtPage from './pages/ArtPage'
 import Page404 from './pages/Page404'
+import RarityPage from './pages/RarityPage'
 
 export function Routes() {
   return (
@@ -41,6 +42,11 @@ export function Routes() {
                     exact
                     path={`${URLS.EXPLORE}/:artAccountPubkey`}
                     component={() => <ArtPage />}
+                  />
+                  <Route
+                    exact
+                    path={URLS.RARITY}
+                    component={() => <RarityPage />}
                   />
                   <Route
                     exact

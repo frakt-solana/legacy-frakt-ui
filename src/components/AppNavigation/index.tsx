@@ -34,6 +34,16 @@ const AppNavigation = ({ className }: any) => {
           </p>
         )}
       </li>
+
+      <li>
+        <NavLink
+          className={styles.link}
+          activeClassName={styles.activeLink}
+          to={URLS.RARITY}
+        >
+          Rarity
+        </NavLink>
+      </li>
     </ul>
   )
 }
