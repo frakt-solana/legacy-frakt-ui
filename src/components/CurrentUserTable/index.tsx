@@ -8,7 +8,7 @@ import Button from '../Button'
 import { BuyButton } from '../BuyButton'
 
 const DisconnectButton = ({ onClick }: any) => (
-  <Button className={styles.disconnectButton} onClick={onClick} size='sm'>
+  <Button className={styles.disconnectButton} onClick={onClick} size='sm' showArrow={false}>
     Disconnect wallet
   </Button>
 )
