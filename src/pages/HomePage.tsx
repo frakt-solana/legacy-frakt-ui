@@ -48,9 +48,7 @@ const IntroTextSection = () => (
     >
       fractal art
     </a>{' '}
-    NFT collection. We are using the mathematical beauty of fractals to generate
-    stunning art and blockchain to make every piece of it unique, decentralized
-    and fun.
+    NFT collection. We use the mathematical beauty of fractals to generate stunning art and Solana blockchain to make every piece of it unique, decentralized and fun to interact as NFT
   </div>
 )
 
@@ -136,6 +134,7 @@ const BuySection = () => {
   return (
   <div className={styles.buySection}>
     <div className={styles.buySectionContainer}>
+
       <div className={styles.buySectionTable}>
         <div>
           <p>Generated</p>
@@ -147,6 +146,7 @@ const BuySection = () => {
         </div>
       </div>
       <BuyButton className={styles.buySectionButton} />
+
     </div>
   </div>
 )}
@@ -155,45 +155,42 @@ const HowItWorksSection = () => (
   <div className={styles.textSection}>
     Each frakt represents one piece of art. With total supply of 10 000 frakts,
     there are 5 different figures types and 4 different colors with{' '}
-    <a
-      href='https://docs.google.com/spreadsheets/d/1QuXS1_NtmwvBwflQSCZ6L7m5n1midraWZeltrGUx_Yg/edit#gid=1782623236'
-      target='_blank'
-      rel='noopener noreferrer'
-    >
+    <Link to="/rarity">
       specific chances of generation
-    </a>
-    . Other than that, every generation uses your transaction hash which makes
-    it really unique and personalized. No one knows how it will look like, and
-    how rare it would be. Frakts tokens rarity is decided on Solana's{' '}
+    </Link>
+    .<br/><br/> Other than that, every generation uses token hash which makes
+    it really unique. No one knows how it will look like, and
+    how rare it would be. Rarity determines by cryptographically secure random generator, all Frakts tokens are stored on Solana's{' '}
     <a href='https://solana.com/' target='_blank' rel='noopener noreferrer'>
       smart contract
     </a>{' '}
-    and after NFT minting art is stored on IPFS.
+    and after generation art is stored on IPFS. All of that makes this project trustless and decentralized. Oh, and whole codebase is{' '}
+    <a href='https://github.com/frakt-solana' target='_blank' rel='noopener noreferrer'>
+      opensourced
+    </a>.
   </div>
 )
 
 const RoadMap = ({}: any) => (
   <div className={styles.roadMap}>
+    
     <div
-      className={`${styles.roadMapContainer} ${styles.roadMapContainerChecked} ${styles.roadMapContainerLeft}`}
+      className={`${styles.roadMapContainer}  ${styles.roadMapContainerLeft}`}
     >
       <div className={styles.roadMapContent}>
         <h2>VRF ORACLE</h2>
         <p>
-          Currently there's no oracle for Solana providing VRF. But that's not a
-          problem for us, we can build one. It should provide decentralization
-          for dapp relying on random, like us
+        Lacking of oracle with Verified Random Function on Solana. But we for sure can build such oracle. It definetly needed for games, gambling and other projects needed random just like ours
         </p>
       </div>
     </div>
     <div
-      className={`${styles.roadMapContainer} ${styles.roadMapContainerChecked} ${styles.roadMapContainerRight}`}
+      className={`${styles.roadMapContainer} ${styles.roadMapContainerRight}`}
     >
       <div className={styles.roadMapContent}>
         <h2>AIRDROPS</h2>
         <p>
-          More value through collaboration with new projects and airdrops to
-          holders.
+          We would be thrilled to collaborate with interesting projects from this hackathon or ecosystem in general to provide more liquidity for collection holders
         </p>
       </div>
     </div>
@@ -203,9 +200,7 @@ const RoadMap = ({}: any) => (
       <div className={styles.roadMapContent}>
         <h2>NFT MARKETPLACE</h2>
         <p>
-          We believe we can do much better than solible and create stunning
-          NFT-marketplace with different types of auctions and royalties as soon
-          as NFT standard is established on Solana
+          All frakts can be traded p2p since day one, but we believe that we can build some better marketplace than solible.io. It will be with verified artists, royalties and more
         </p>
       </div>
     </div>
@@ -214,6 +209,16 @@ const RoadMap = ({}: any) => (
 
 const FooterSection = () => (
   <div className={styles.footerSection}>
+        <p className={styles.footerDisclaimer}>
+      Developed as a part of{' '}
+      <a
+        href='https://solana.com/solanaszn'
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        Solana Season
+      </a>
+    </p>
     <p className={styles.footerDisclaimer}>
       Disclaimer: FRAKT is an art experiment with an unaudited smart contract
       aimed at showcasing possibilities of Solana
@@ -237,8 +242,28 @@ const HomePage = (props: any) => {
       <HeroSection />
       <IntroTextSection />
       <ArtExamplesSection />
+      <div  className={styles.textSection}>
+        <TextScramble
+        nextLetterSpeed={100}
+        className={styles.roadMapTitle}
+        texts={['No price increase', 'Forever']}
+        pauseTime={2500}
+        paused={false}
+        letterSpeed={20}
+      />
+      </div>
       <BuySection />
       <HowItWorksSection />
+      <div  className={styles.textSection}>
+        <TextScramble
+        nextLetterSpeed={100}
+        className={styles.roadMapTitle}
+        texts={['Roadmap', 'ROADMAP']}
+        pauseTime={2500}
+        paused={false}
+        letterSpeed={20}
+      />
+      </div>
       <RoadMap />
       <FooterSection />
     </AppLayout>
