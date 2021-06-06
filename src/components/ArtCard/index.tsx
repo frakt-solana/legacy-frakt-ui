@@ -41,14 +41,14 @@ export const getArtName = ({
     ? `Rainbow ${SHAPE[shape]}`
     : `${COLOR[color]} ${SHAPE[shape]}`
 
-
-
 const ArtTitle = ({ color, shape }: { color: number; shape: number }) => {
-
   return (
     <p
-      className={`${styles.title} ${shape === SHAPE.Wave && color === COLOR.Purple ? styles.titleRainbow : ''
-        }`}
+      className={`${styles.title} ${
+        shape === SHAPE.Wave && color === COLOR.Purple
+          ? styles.titleRainbow
+          : ''
+      }`}
       style={{ color: COLOR_HEX[color] }}
     >
       {getArtName({ color, shape }).toLowerCase()}
@@ -57,39 +57,47 @@ const ArtTitle = ({ color, shape }: { color: number; shape: number }) => {
 }
 
 const ArtCard = ({ className, art = {} }: any) => {
-  const { getArtOwner } = useArts();
+  const { getArtOwner } = useArts()
   const {
     attributes: { color, color_rarity, shape_rarity, image_url, shape },
   } = art
 
-  const [imageSrc, setImageSrc] = useState(null);
-  const [loadingImage, setLoadingImage] = useState(false);
-  const [ownerAddress, setOwnerAddress] = useState(null);
-  const [loadingOwnerAddress, setLoadingOwnerAddress] = useState(false);
+  const [imageSrc, setImageSrc] = useState(null)
+  const [loadingImage, setLoadingImage] = useState(false)
+  const [ownerAddress, setOwnerAddress] = useState(null)
+  const [loadingOwnerAddress, setLoadingOwnerAddress] = useState(false)
   const loadImage = async () => {
-    setLoadingImage(true);
-    const token = await (await fetch(ipfsUriToGatewayUrl(image_url))).json();
-    setImageSrc(ipfsUriToGatewayUrl(token.image));
-    setLoadingImage(false);
+    setLoadingImage(true)
+    const token = await (await fetch(ipfsUriToGatewayUrl(image_url))).json()
+    setImageSrc(ipfsUriToGatewayUrl(token.image))
+    setLoadingImage(false)
   }
 
   const loadOwnerAddress = async () => {
-    setLoadingOwnerAddress(true);
-    const ownerAddress: PublicKey = await getArtOwner(new PublicKey(art.metadata.minted_token_pubkey));
+    setLoadingOwnerAddress(true)
+    const ownerAddress: PublicKey = await getArtOwner(
+      new PublicKey(art.metadata.minted_token_pubkey)
+    )
     console.log({ ownerAddress })
-    setOwnerAddress(`${ownerAddress}`);
-    setLoadingOwnerAddress(false);
+    setOwnerAddress(`${ownerAddress}`)
+    setLoadingOwnerAddress(false)
   }
 
   useEffect(() => {
-    loadImage();
+    loadImage()
     // loadOwnerAddress();
   }, [])
 
   return (
     <div className={`${styles.root} ${className || ''}`}>
       <ArtTitle color={color} shape={shape} />
-      {imageSrc ? <img className={styles.image} src={imageSrc} alt='Art' /> : <Preloader width="100%" />}
+      {imageSrc ? (
+        <img className={styles.image} src={imageSrc} alt='Art' />
+      ) : (
+        <div className={styles.preloaderWrapper}>
+          <Preloader size='md' />
+        </div>
+      )}
       <InfoTable
         ownerAddress={ownerAddress}
         rarity={`${art.rarity.toFixed(2)}%`}

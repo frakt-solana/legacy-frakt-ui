@@ -81,3 +81,16 @@
   right: 0;
   opacity: 0;
 }
+
+.preloaderWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+}
