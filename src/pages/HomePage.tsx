@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import AppLayout from '../components/AppLayout'
 import styles from './HomePage.module.scss'
 import { ArrowRightIcon } from '../components/icons'
 import TextScramble from '@twistezo/react-text-scramble'
-import PORTAL from '../mocks/images/Portal.png'
 import WAVE_RAINBOW from '../images/waveRainbow.png'
 import STAR_WHITE from '../images/starWhite.png'
 import PORTAL_ORANGE from '../images/portalOrange.png'
@@ -30,7 +29,7 @@ const HeroSection = () => (
     />
     {/* <h1>Frakt</h1> */}
     <p>
-      Fractal NFT's on Solana
+      Touch a fractal art
       <Link smooth to='#introTextSection' className={styles.scrollBottomButton}>
         <ArrowRightIcon />
       </Link>
@@ -54,7 +53,43 @@ const IntroTextSection = () => (
   </div>
 )
 
-const ArtExample = ({ src }: any) => (
+const ArtExample = ({
+  srcs,
+  changeInterval,
+  delayBeforeFirstChange = 0,
+}: {
+  srcs: Array<string>
+  changeInterval: number
+  delayBeforeFirstChange: number
+}) => {
+  const [visibleImageIdx, setVisibleImageIdx] = useState(0)
+
+  useEffect(() => {
+    setTimeout(
+      () =>
+        setInterval(() => {
+          setVisibleImageIdx((prev) =>
+            prev === srcs.length - 1 ? 0 : prev + 1
+          )
+        }, changeInterval),
+      delayBeforeFirstChange
+    )
+  }, [])
+
+  return (
+    <div className={styles.artExample}>
+      {srcs.map((src, idx) => (
+        <img
+          src={src}
+          alt='art'
+          style={{ display: visibleImageIdx === idx ? 'block' : 'none' }}
+        />
+      ))}
+    </div>
+  )
+}
+
+const ArtExampleOld = ({ src }: any) => (
   <div className={styles.artExample}>
     <img src={src} alt='art' />
   </div>
@@ -62,12 +97,36 @@ const ArtExample = ({ src }: any) => (
 
 const ArtExamplesSection = () => (
   <div className={styles.artExamples}>
-    <ArtExample src={STAR_WHITE} />
-    <ArtExample src={PORTAL_ORANGE} />
-    <ArtExample src={EYE_MAGENTA} />
-    <ArtExample src={NET_RED} />
-    <ArtExample src={WAVE_RAINBOW} />
-    <ArtExample src={EYE_WHITE} />
+    <ArtExample
+      srcs={[PORTAL_ORANGE, EYE_MAGENTA, NET_RED]}
+      changeInterval={1000}
+      delayBeforeFirstChange={0}
+    />
+    <ArtExample
+      srcs={[EYE_MAGENTA, PORTAL_ORANGE]}
+      changeInterval={1200}
+      delayBeforeFirstChange={300}
+    />
+    <ArtExample
+      srcs={[EYE_WHITE, NET_RED, WAVE_RAINBOW]}
+      changeInterval={800}
+      delayBeforeFirstChange={500}
+    />
+    <ArtExample
+      srcs={[PORTAL_ORANGE, EYE_MAGENTA, NET_RED]}
+      changeInterval={1000}
+      delayBeforeFirstChange={0}
+    />
+    <ArtExample
+      srcs={[STAR_WHITE, PORTAL_ORANGE, WAVE_RAINBOW]}
+      changeInterval={1200}
+      delayBeforeFirstChange={800}
+    />
+    <ArtExample
+      srcs={[PORTAL_ORANGE, EYE_MAGENTA, NET_RED]}
+      changeInterval={1000}
+      delayBeforeFirstChange={0}
+    />
   </div>
 )
 
