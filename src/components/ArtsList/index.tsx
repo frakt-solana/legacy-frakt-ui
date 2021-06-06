@@ -18,9 +18,7 @@ const ArtsList = ({ className, arts }: any) => {
     <InfiniteScroll
       className={`${styles.root} ${className || ''}`}
       dataLength={artsToShow}
-      next={() => {
-        console.log("trigger")
-        setArtsToShow((prev) => prev + ARTS_PER_SCROLL)}}
+      next={() => setArtsToShow((prev) => prev + ARTS_PER_SCROLL)}
       hasMore={true}
       scrollableTarget='mainContent'
       loader={false}
