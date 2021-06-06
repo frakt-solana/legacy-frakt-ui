@@ -75,3 +75,19 @@
   justify-content: center;
   align-items: center;
 }
+
+.questionIcon {
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.tooptip {
+  
+
+  :global {
+    .ant-tooltip-inner {
+      font-size: 1rem;
+    }
+  }
+}
