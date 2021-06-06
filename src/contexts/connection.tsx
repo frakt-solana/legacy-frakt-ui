@@ -9,7 +9,6 @@ import {
 } from "@solana/web3.js";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { notify } from "./../utils/notifications";
-import { ExplorerLink } from "../components/_legacy/_ExplorerLink";
 import { setProgramIds } from "../utils/ids";
 import { WalletAdapter } from "./wallet";
 import { cache, getMultipleAccounts, MintParser } from "./accounts";
@@ -280,7 +279,6 @@ export const sendTransaction = async (
             {errors.map((err) => (
               <div>{err}</div>
             ))}
-            <ExplorerLink address={txid} type="transaction" />
           </>
         ),
         type: "error",

@@ -24,7 +24,10 @@ interface IArtsContext {
   getCurrentUserArts: any
   getUserArts: any
   buyArt: any
-  getArtOwner: any
+  getArtOwner: any,
+  getArtTokenPubkey: any,
+  updateCounter: any,
+  counter: number
 }
 
 export const getArtRarity = ({
@@ -38,15 +41,17 @@ export const getArtRarity = ({
 export const ArtsContext = React.createContext({
   currentUserArts: [],
   arts: [],
-  getArts: () => {},
-  getCurrentUserArts: () => {},
-  getUserArts: () => {},
-  buyArt: () => {},
+  counter: 0,
+  getArts: () => { },
+  getCurrentUserArts: () => { },
+  getUserArts: () => { },
+  buyArt: () => { },
 })
 
 export const ArtsProvider = ({ children = null as any }) => {
   const [arts, setArts] = useState([])
   const [currentUserArts, setCurrentUserArts] = useState([])
+  const [counter, setCounter] = useState(0);
 
   const { wallet } = useWallet()
   const connection = useConnection()
@@ -113,7 +118,6 @@ export const ArtsProvider = ({ children = null as any }) => {
       })
     )
 
-    console.log({ arts })
     setArts(arts)
     return arts
   }
@@ -132,6 +136,17 @@ export const ArtsProvider = ({ children = null as any }) => {
     return userArts
   }
 
+  const getArtTokenPubkey = async (ownerPubkey: String, minted_token_pubkey: String): Promise<PublicKey> => {
+    const tokenPubkey = await contract.getTokenAddressFromMintAndUser(ownerPubkey, minted_token_pubkey);
+    return tokenPubkey
+  }
+
+  const updateCounter = async () => {
+    const counter = await contract.getCounter(programPubKey, { connection });
+    setCounter(counter.count as number);
+    return counter.count
+  }
+
   return (
     <ArtsContext.Provider
       value={
@@ -141,8 +156,11 @@ export const ArtsProvider = ({ children = null as any }) => {
           getUserArts,
           arts,
           currentUserArts,
+          counter,
           buyArt,
           getArtOwner,
+          getArtTokenPubkey,
+          updateCounter,
         } as IArtsContext
       }
     >
@@ -160,6 +178,9 @@ export const useArts = () => {
     arts,
     buyArt,
     getArtOwner,
+    getArtTokenPubkey,
+    updateCounter,
+    counter
   } = useContext(ArtsContext) as IArtsContext
   return {
     getArts,
@@ -169,5 +190,8 @@ export const useArts = () => {
     arts,
     buyArt,
     getArtOwner,
+    getArtTokenPubkey,
+    updateCounter,
+    counter
   }
 }

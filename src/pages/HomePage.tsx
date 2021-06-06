@@ -13,6 +13,7 @@ import EYE_WHITE from '../images/eyeWhite.png'
 import HERO_BG from '../images/heroImage.svg'
 import { HashLink as Link } from 'react-router-hash-link'
 import { BuyButton } from '../components/BuyButton'
+import { useArts } from '../contexts/artDetails'
 
 const HeroSection = () => (
   <div
@@ -130,13 +131,15 @@ const ArtExamplesSection = () => (
   </div>
 )
 
-const BuySection = () => (
+const BuySection = () => {
+  const { counter, arts } = useArts();
+  return (
   <div className={styles.buySection}>
     <div className={styles.buySectionContainer}>
       <div className={styles.buySectionTable}>
         <div>
           <p>Generated</p>
-          <p>45 / 10 000</p>
+          <p>{`${counter || arts?.length || 0} / 10 000`}</p>
         </div>
         <div>
           <p>Price </p>
@@ -146,7 +149,7 @@ const BuySection = () => (
       <BuyButton className={styles.buySectionButton} />
     </div>
   </div>
-)
+)}
 
 const HowItWorksSection = () => (
   <div className={styles.textSection}>

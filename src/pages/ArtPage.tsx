@@ -17,13 +17,13 @@ import { QuestionCircleOutlined } from '@ant-design/icons'
 
 const ArtInfo = ({
   owner,
+  tokenPubkey,
   figure,
   color,
   rarity,
   lambda,
-  mu,
   circles,
-  distortion,
+  attributes
 }: any) => {
   const TooltipIcon = ({ text }) => (
     <Tooltip
@@ -38,7 +38,7 @@ const ArtInfo = ({
   return (
     <div className={styles.info}>
       <div>
-        <p>Owner <TooltipIcon text="Some text" /></p>
+        <p>Owner</p>
         <p>
           {owner ? (
             <Link to={`${URLS.USER}/${owner}`} className={styles.infoLink}>
@@ -50,32 +50,28 @@ const ArtInfo = ({
         </p>
       </div>
       <div>
-        <p>Figure <TooltipIcon text="Some text" /></p>
+        <p>Token <TooltipIcon text={`Token public key. Handy for transfer`} /></p>
+        <p>{tokenPubkey ? shortenAddress(tokenPubkey) : 'Loading...'}</p>
+      </div>
+      <div>
+        <p>Figure <TooltipIcon text={`Rarity of ${figure} figure shape is ${attributes.shape_rarity.toFixed(2)}%`} /></p>
         <p>{figure}</p>
       </div>
       <div>
-        <p>Color <TooltipIcon text="Some text" /></p>
+        <p>Color <TooltipIcon text={`Rarity of ${color} color is ${attributes.color_rarity.toFixed(2)}%`} /></p>
         <p>{color}</p>
       </div>
       <div>
-        <p>Rarity <TooltipIcon text="Some text" /></p>
+        <p>Rarity <TooltipIcon text="Chances to get this frakt" /></p>
         <p>{rarity}</p>
       </div>
       <div>
-        <p>λ <TooltipIcon text="Some text" /></p>
-        <p>{lambda}</p>
-      </div>
-      <div>
-        <p>μ <TooltipIcon text="Some text" /></p>
-        <p>{mu}</p>
-      </div>
-      <div>
-        <p>Circles <TooltipIcon text="Some text" /></p>
+        <p>Circles <TooltipIcon text="Circles is number of lines in figure" /></p>
         <p>{circles}</p>
       </div>
       <div>
-        <p>Distortion <TooltipIcon text="Some text" /></p>
-        <p>{distortion}</p>
+        <p>λ <TooltipIcon text="λ determines how many times fraction function was called per line" /></p>
+        <p>{lambda}</p>
       </div>
     </div>
   )
@@ -84,7 +80,7 @@ const ArtInfo = ({
 const ArtPage = (props: any) => {
   const { artAccountPubkey } = useParams<{ artAccountPubkey: string }>()
   const history = useHistory()
-  const { arts, getArts, getArtOwner } = useArts()
+  const { arts, getArts, getArtOwner, getArtTokenPubkey } = useArts()
   const [loadingImage, setLoadingImage] = useState(true)
   const [imageSrc, setImageSrc] = useState(null)
   const [art, setArt] = useState({
@@ -94,6 +90,7 @@ const ArtPage = (props: any) => {
   })
   const [ownerAddress, setOwnerAddress] = useState(null)
   const [loadingOwnerAddress, setLoadingOwnerAddress] = useState(false)
+  const [tokenPubkey, setTokenPubkey] = useState(null);
 
   const loadImage = async (image_url) => {
     setLoadingImage(true)
@@ -107,10 +104,12 @@ const ArtPage = (props: any) => {
     const ownerAddress: PublicKey = await getArtOwner(
       new PublicKey(art.metadata.minted_token_pubkey)
     )
-    console.log({ ownerAddress })
-    setOwnerAddress(`${ownerAddress}`)
+    setOwnerAddress(ownerAddress.toString())
     setLoadingOwnerAddress(false)
+    const tokenPubkey = await getArtTokenPubkey(ownerAddress.toString(), art.metadata.minted_token_pubkey);
+    setTokenPubkey(tokenPubkey.toString());
   }
+
 
   const loadArt = async () => {
     const data = arts.find(
@@ -148,27 +147,25 @@ const ArtPage = (props: any) => {
         Back
       </Button>
       <div className={styles.title}>
-        {`${
-          art.attributes?.color && art.attributes?.shape
-            ? getArtName({
-                color: art.attributes?.color,
-                shape: art.attributes?.shape,
-              })
-            : ''
-        } #${art?.attributes?.art_hash ? art.attributes.art_hash : ''}`}
+        {`${art.attributes?.color && art.attributes?.shape
+          ? getArtName({
+            color: art.attributes?.color,
+            shape: art.attributes?.shape,
+          })
+          : ''
+          } ${art?.attributes?.art_hash ? `#${art.attributes.art_hash}` : 'Loading...'}`}
       </div>
     </div>
   )
 
   const artInfoData = {
     owner: ownerAddress || null,
+    tokenPubkey: tokenPubkey || null,
     figure: SHAPE[art.attributes?.shape],
     color: COLOR[art.attributes?.color],
     rarity: `${art.rarity.toFixed(2)}%`,
     lambda: art?.attributes?.fractial_iterations,
-    mu: 'Calculate it',
     circles: art.attributes?.circles_amount,
-    distortion: 'Calculate it',
   }
 
   return (
@@ -193,13 +190,13 @@ const ArtPage = (props: any) => {
             {art.metadata && art.attributes && (
               <ArtInfo
                 owner={artInfoData.owner}
+                tokenPubkey={artInfoData.tokenPubkey}
                 figure={artInfoData.figure}
                 color={artInfoData.color}
                 rarity={artInfoData.rarity}
                 lambda={artInfoData.lambda}
-                mu={artInfoData.mu}
                 circles={artInfoData.circles}
-                distortion={artInfoData.distortion}
+                attributes={art?.attributes}
               />
             )}
           </>
