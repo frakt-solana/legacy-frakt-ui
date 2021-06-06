@@ -30,7 +30,7 @@ export const BuyButton = ({ className }: BuyButtonProps) => {
 
   return (
     <Button
-      showArrow={false}
+      // showArrow={false}
       className={className}
       onClick={connected ? onBuy : select}
     >
