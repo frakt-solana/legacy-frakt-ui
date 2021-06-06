@@ -113,7 +113,7 @@ const ArtExamplesSection = () => (
       delayBeforeFirstChange={500}
     />
     <ArtExample
-      srcs={[PORTAL_ORANGE, EYE_MAGENTA, NET_RED]}
+      srcs={[PORTAL_ORANGE, NET_RED]}
       changeInterval={1000}
       delayBeforeFirstChange={0}
     />
@@ -123,7 +123,7 @@ const ArtExamplesSection = () => (
       delayBeforeFirstChange={800}
     />
     <ArtExample
-      srcs={[PORTAL_ORANGE, EYE_MAGENTA, NET_RED]}
+      srcs={[PORTAL_ORANGE, NET_RED]}
       changeInterval={1000}
       delayBeforeFirstChange={0}
     />
@@ -209,6 +209,25 @@ const RoadMap = ({}: any) => (
   </div>
 )
 
+const FooterSection = () => (
+  <div className={styles.footerSection}>
+    <p className={styles.footerDisclaimer}>
+      Disclaimer: FRAKT is an art experiment with an unaudited smart contract
+      aimed at showcasing possibilities of Solana
+    </p>
+    <p className={styles.footerHosted}>
+      Hosted on{' '}
+      <a
+        href='https://akash.network/'
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        Akash
+      </a>
+    </p>
+  </div>
+)
+
 const HomePage = (props: any) => {
   return (
     <AppLayout>
@@ -218,6 +237,7 @@ const HomePage = (props: any) => {
       <BuySection />
       <HowItWorksSection />
       <RoadMap />
+      <FooterSection />
     </AppLayout>
   )
 }
