@@ -17,14 +17,14 @@ export enum SHAPE {
 }
 
 export enum COLOR {
-  Purple = 1,
+  Magenta = 1,
   Red = 2,
   Orange = 3,
   White = 4,
 }
 
 export enum COLOR_HEX {
-  '#ff00ff' = COLOR.Purple,
+  '#ff00ff' = COLOR.Magenta,
   '#ff0000' = COLOR.Red,
   '#ff6600' = COLOR.Orange,
   '#ffffff' = COLOR.White,
@@ -37,7 +37,7 @@ export const getArtName = ({
   color: number
   shape: number
 }): string =>
-  shape === SHAPE.Wave && color === COLOR.Purple
+  shape === SHAPE.Wave && color === COLOR.Magenta
     ? `Rainbow ${SHAPE[shape]}`
     : `${COLOR[color]} ${SHAPE[shape]}`
 
@@ -45,7 +45,7 @@ const ArtTitle = ({ color, shape }: { color: number; shape: number }) => {
   return (
     <p
       className={`${styles.title} ${
-        shape === SHAPE.Wave && color === COLOR.Purple
+        shape === SHAPE.Wave && color === COLOR.Magenta
           ? styles.titleRainbow
           : ''
       }`}
