@@ -27,7 +27,7 @@ const getHeaderText = ({ walletKey, userAddress }) => {
 const sortArts = (sortBy: 'created_at' | 'rarity', arts) => {
   const newArts = [...arts];
   if (sortBy === 'rarity') {
-    newArts.sort((a, b) => (-(a.rarity - b.rarity)))
+    newArts.sort((a, b) => (a.rarity - b.rarity))
     return newArts
   }
 
@@ -41,8 +41,8 @@ const NoFraktsBlock = ({ type = 'explore', myFracts = false }: any) => {
   const message = myFracts
     ? "Unfortunately, you don't have any frakt's yet"
     : type === 'user'
-    ? "This account doesn't have any frakt's yet"
-    : ''
+      ? "This account doesn't have any frakt's yet"
+      : ''
 
   return (
     <div className={styles.noFractsBlock}>
@@ -94,7 +94,6 @@ const ExplorePage = (props: any) => {
       {!loading && arts.length && (
         <>
           <ArtsSort onChange={onSortChange} />
-          <ArtsList arts={arts} />
           <ArtsList arts={arts} />
         </>
       )}

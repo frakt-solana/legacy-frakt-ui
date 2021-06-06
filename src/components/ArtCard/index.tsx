@@ -6,6 +6,7 @@ import MOCK_IMAGE from '../../mocks/images/Portal.png'
 import { ipfsUriToGatewayUrl } from '../../utils/ipfs'
 import { useArts } from '../../contexts/artDetails'
 import { PublicKey } from '@solana/web3.js'
+import Preloader from '../Preloader'
 
 export enum SHAPE {
   Wave = 1,
@@ -82,13 +83,13 @@ const ArtCard = ({ className, art = {} }: any) => {
 
   useEffect(() => {
     loadImage();
-    loadOwnerAddress();
+    // loadOwnerAddress();
   }, [])
 
   return (
     <div className={`${styles.root} ${className || ''}`}>
       <ArtTitle color={color} shape={shape} />
-      {imageSrc ? <img className={styles.image} src={imageSrc} alt='Art' /> : <p>Loading...</p>}
+      {imageSrc ? <img className={styles.image} src={imageSrc} alt='Art' /> : <Preloader width="100%" />}
       <InfoTable
         ownerAddress={ownerAddress}
         rarity={`${art.rarity.toFixed(2)}%`}
@@ -100,10 +101,6 @@ const ArtCard = ({ className, art = {} }: any) => {
 const InfoTable = ({ ownerAddress, rarity }: any) => {
   return (
     <div className={styles.infoTable}>
-      <div>
-        <p>Owner</p>
-        {!ownerAddress ? <p>Loading...</p> : <p>{shortenAddress(ownerAddress)}</p>}
-      </div>
       <div>
         <p>Rarity</p>
         <p>{rarity}</p>
