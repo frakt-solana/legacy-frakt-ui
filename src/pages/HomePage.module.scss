@@ -24,7 +24,7 @@
 
 .heroSectionTitle {
   font-size: 8rem;
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .scrollBottomButton {
@@ -87,5 +87,145 @@
   &:nth-child(5),
   &:nth-child(6) {
     border-bottom: none;
+  }
+}
+
+.buySection {
+  border: {
+    top: 1px solid $color-gray-1;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buySectionContainer {
+  padding: 7rem;
+  width: 50%;
+  border: {
+    left: 1px solid $color-gray-1;
+    right: 1px solid $color-gray-1;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buySectionTable {
+  margin-bottom: 2rem;
+  width: 100%;
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-gray-1;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    color: $color-gray-2;
+    font-size: 1.5rem;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
+}
+
+.buySectionButton {
+  font-size: 2.5rem;
+}
+
+.roadMap {
+  padding: 5rem;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 0.05rem;
+    background-color: $color-gray-3;
+    top: 3rem;
+    bottom: 3rem;
+    left: 50%;
+    margin-left: -0.05rem;
+  }
+}
+
+.roadMapContainer {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    right: -1rem;
+    background-color: $color-black;
+    border: 0.15rem solid $color-gray-3;
+    top: 1rem;
+    border-radius: 50%;
+    z-index: 1;
+  }
+}
+
+.roadMapContainerChecked {
+  &::after {
+    background-color: $color-gray-4;
+  }
+}
+
+.roadMapContainerLeft {
+  left: 0;
+
+  &::before {
+    content: ' ';
+    height: 0;
+    position: absolute;
+    top: 2rem;
+    width: 0;
+    z-index: 1;
+    right: 0.5rem;
+    background: $color-gray-3;
+    width: 2rem;
+    height: 0.1rem;
+  }
+}
+
+.roadMapContainerRight {
+  left: 50%;
+
+  &::before {
+    content: ' ';
+    height: 0;
+    position: absolute;
+    top: 2rem;
+    width: 0;
+    z-index: 1;
+    left: 0.5rem;
+    background: $color-gray-3;
+    width: 2rem;
+    height: 0.1rem;
+  }
+
+  &::after {
+    left: -16px;
+  }
+}
+
+.roadMapContent {
+  padding: 20px 30px;
+  background-color: $color-black;
+  border: 0.15rem solid $color-gray-3;
+  position: relative;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
   }
 }
