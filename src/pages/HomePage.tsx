@@ -13,6 +13,7 @@ import NET_RED from '../images/netRed.png'
 import EYE_WHITE from '../images/eyeWhite.png'
 import HERO_BG from '../images/heroImage.svg'
 import { HashLink as Link } from 'react-router-hash-link'
+import { BuyButton } from '../components/BuyButton'
 
 const HeroSection = () => (
   <div
@@ -53,7 +54,7 @@ const IntroTextSection = () => (
   </div>
 )
 
-const ArtExample = ({src}: any) => (
+const ArtExample = ({ src }: any) => (
   <div className={styles.artExample}>
     <img src={src} alt='art' />
   </div>
@@ -67,6 +68,24 @@ const ArtExamplesSection = () => (
     <ArtExample src={NET_RED} />
     <ArtExample src={WAVE_RAINBOW} />
     <ArtExample src={EYE_WHITE} />
+  </div>
+)
+
+const BuySection = () => (
+  <div className={styles.buySection}>
+    <div className={styles.buySectionContainer}>
+      <div className={styles.buySectionTable}>
+        <div>
+          <p>Generated</p>
+          <p>45 / 10 000</p>
+        </div>
+        <div>
+          <p>Price </p>
+          <p>0.5 SOL</p>
+        </div>
+      </div>
+      <BuyButton className={styles.buySectionButton} />
+    </div>
   </div>
 )
 
@@ -91,13 +110,55 @@ const HowItWorksSection = () => (
   </div>
 )
 
+const RoadMap = ({}: any) => (
+  <div className={styles.roadMap}>
+    <div
+      className={`${styles.roadMapContainer} ${styles.roadMapContainerChecked} ${styles.roadMapContainerLeft}`}
+    >
+      <div className={styles.roadMapContent}>
+        <h2>VRF ORACLE</h2>
+        <p>
+          Currently there's no oracle for Solana providing VRF. But that's not a
+          problem for us, we can build one. It should provide decentralization
+          for dapp relying on random, like us
+        </p>
+      </div>
+    </div>
+    <div
+      className={`${styles.roadMapContainer} ${styles.roadMapContainerChecked} ${styles.roadMapContainerRight}`}
+    >
+      <div className={styles.roadMapContent}>
+        <h2>AIRDROPS</h2>
+        <p>
+          More value through collaboration with new projects and airdrops to
+          holders.
+        </p>
+      </div>
+    </div>
+    <div
+      className={`${styles.roadMapContainer} ${styles.roadMapContainerLeft}`}
+    >
+      <div className={styles.roadMapContent}>
+        <h2>NFT MARKETPLACE</h2>
+        <p>
+          We believe we can do much better than solible and create stunning
+          NFT-marketplace with different types of auctions and royalties as soon
+          as NFT standard is established on Solana
+        </p>
+      </div>
+    </div>
+  </div>
+)
+
 const HomePage = (props: any) => {
   return (
     <AppLayout>
       <HeroSection />
       <IntroTextSection />
       <ArtExamplesSection />
+      <BuySection />
       <HowItWorksSection />
+      <RoadMap />
     </AppLayout>
   )
 }
