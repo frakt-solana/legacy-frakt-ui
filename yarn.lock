@@ -1758,6 +1758,11 @@
     "@testing-library/dom" "^6.15.0"
     "@types/testing-library__react" "^9.1.2"
 
+"@twistezo/react-text-scramble@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@twistezo/react-text-scramble/-/react-text-scramble-1.0.6.tgz#34064d86249c7fdfbb84c00e2776beee122db79e"
+  integrity sha512-DOCy9Bt0sXXpLIDRzHcAv9yDd4yOYrf1I9hNMLjykKHQKQ2zdP8w4A+mHh0VP0cy/PjJSTeo3NWCY6ptNcR0YA==
+
 "@types/aria-query@^4.2.0":
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@types/aria-query/-/aria-query-4.2.1.tgz#78b5433344e2f92e8b306c06a5622c50c245bf6b"
