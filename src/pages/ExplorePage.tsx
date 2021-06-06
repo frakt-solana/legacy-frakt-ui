@@ -95,7 +95,6 @@ const ExplorePage = (props: any) => {
         <>
           <ArtsSort onChange={onSortChange} />
           <ArtsList arts={arts} />
-          <ArtsList arts={arts} />
         </>
       )}
     </AppLayout>

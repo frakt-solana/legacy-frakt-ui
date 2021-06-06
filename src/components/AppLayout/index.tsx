@@ -43,7 +43,7 @@ const AppLayout = ({
           <AppFooter className={styles.footer} />
         </div>
       </Sidebar>
-      <div className={`${styles.main} ${mainClassName || ''}`}>
+      <div className={`${styles.main} ${mainClassName || ''}`} id="mainContent">
         {isModalVisible ? (
           <WalletContent />
         ) : (
