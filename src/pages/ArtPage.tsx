@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory, Link } from 'react-router-dom'
 import AppLayout from '../components/AppLayout'
 import Button from '../components/Button'
 import styles from './ArtPage.module.scss'
@@ -13,15 +13,56 @@ import { ipfsUriToGatewayUrl } from '../utils/ipfs'
 import { PublicKey } from '@solana/web3.js'
 import Preloader from '../components/Preloader'
 
-const ArtInfo = ({ data }: any) => {
+const ArtInfo = ({
+  owner,
+  figure,
+  color,
+  rarity,
+  lambda,
+  mu,
+  circles,
+  distortion,
+}: any) => {
   return (
     <div className={styles.info}>
-      {Object.entries(data).map(([name, value], idx) => (
-        <div key={idx}>
-          <p>{name}</p>
-          <p>{value}</p>
-        </div>
-      ))}
+      <div>
+        <p>Owner</p>
+        <p>
+          {owner ? (
+            <Link to={`${URLS.USER}/${owner}`} className={styles.infoLink}>{shortenAddress(owner)}</Link>
+          ) : (
+            'Loading...'
+          )}
+        </p>
+      </div>
+      <div>
+        <p>Figure</p>
+        <p>{figure}</p>
+      </div>
+      <div>
+        <p>Color</p>
+        <p>{color}</p>
+      </div>
+      <div>
+        <p>Rarity</p>
+        <p>{rarity}</p>
+      </div>
+      <div>
+        <p>λ</p>
+        <p>{lambda}</p>
+      </div>
+      <div>
+        <p>μ</p>
+        <p>{mu}</p>
+      </div>
+      <div>
+        <p>Circles</p>
+        <p>{circles}</p>
+      </div>
+      <div>
+        <p>Distortion</p>
+        <p>{distortion}</p>
+      </div>
     </div>
   )
 }
@@ -105,19 +146,22 @@ const ArtPage = (props: any) => {
     </div>
   )
 
-  const ArtInfoData = {
-    Owner: ownerAddress ? shortenAddress(ownerAddress) : 'Loading...',
-    Figure: SHAPE[art.attributes?.shape],
-    Color: COLOR[art.attributes?.color],
-    Rarity: `${art.rarity.toFixed(2)}%`,
-    λ: art?.attributes?.fractial_iterations,
-    μ: 'Calculate it',
-    Circles: art.attributes?.circles_amount,
-    Distortion: 'Calculate it',
+  const artInfoData = {
+    owner: ownerAddress || null,
+    figure: SHAPE[art.attributes?.shape],
+    color: COLOR[art.attributes?.color],
+    rarity: `${art.rarity.toFixed(2)}%`,
+    lambda: art?.attributes?.fractial_iterations,
+    mu: 'Calculate it',
+    circles: art.attributes?.circles_amount,
+    distortion: 'Calculate it',
   }
 
   return (
-    <AppLayout CustomHeader={ArtHeader} mainClassName={loadingImage ? styles.appLayoutMain : ''}>
+    <AppLayout
+      CustomHeader={ArtHeader}
+      mainClassName={loadingImage ? styles.appLayoutMain : ''}
+    >
       <div className={styles.artContainer}>
         {/* TODO: consider d3 animation */}
 
@@ -132,7 +176,18 @@ const ArtPage = (props: any) => {
               src={imageSrc || MOCK_IMAGE}
               alt='Art'
             />
-            {art.metadata && art.attributes && <ArtInfo data={ArtInfoData} />}
+            {art.metadata && art.attributes && (
+              <ArtInfo
+                owner={artInfoData.owner}
+                figure={artInfoData.figure}
+                color={artInfoData.color}
+                rarity={artInfoData.rarity}
+                lambda={artInfoData.lambda}
+                mu={artInfoData.mu}
+                circles={artInfoData.circles}
+                distortion={artInfoData.distortion}
+              />
+            )}
           </>
         )}
       </div>

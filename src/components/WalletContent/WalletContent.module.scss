@@ -11,11 +11,11 @@
 
 .itemsContainer {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .walletItem {
-  padding: 3rem;
+  padding: 5rem 3rem;
   color: $color-white;
   font-size: 1.5rem;
   display: flex;

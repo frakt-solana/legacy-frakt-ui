@@ -54,6 +54,16 @@
   }
 }
 
+.infoLink {
+  color: $color-white;
+  text-decoration: underline;
+
+  &:hover {
+    color: $color-gray-4;
+    text-decoration: underline;
+  }
+}
+
 .appLayoutMain {
   display: flex;
   flex-direction: column;
