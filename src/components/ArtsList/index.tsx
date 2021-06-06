@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ArtCard from '../ArtCard'
 import styles from './ArtsList.module.scss'
 import { Link } from 'react-router-dom'
@@ -13,6 +13,10 @@ const ARTS_PER_SCROLL = 6
 
 const ArtsList = ({ className, arts }: any) => {
   const [artsToShow, setArtsToShow] = useState(ARTS_PER_SCROLL)
+
+  useEffect(() => {
+    setArtsToShow(ARTS_PER_SCROLL)
+  }, [arts])
 
   return (
     <InfiniteScroll
