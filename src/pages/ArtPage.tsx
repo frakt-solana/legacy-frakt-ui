@@ -12,6 +12,8 @@ import { useArts } from '../contexts/artDetails'
 import { ipfsUriToGatewayUrl } from '../utils/ipfs'
 import { PublicKey } from '@solana/web3.js'
 import Preloader from '../components/Preloader'
+import { Tooltip } from 'antd'
+import { QuestionCircleOutlined } from '@ant-design/icons'
 
 const ArtInfo = ({
   owner,
@@ -23,44 +25,56 @@ const ArtInfo = ({
   circles,
   distortion,
 }: any) => {
+  const TooltipIcon = ({ text }) => (
+    <Tooltip
+      color={'#1e1e1e'}
+      overlayClassName={styles.tooptip}
+      title={text}
+    >
+      <QuestionCircleOutlined className={styles.questionIcon} />
+    </Tooltip>
+  )
+
   return (
     <div className={styles.info}>
       <div>
-        <p>Owner</p>
+        <p>Owner <TooltipIcon text="Some text" /></p>
         <p>
           {owner ? (
-            <Link to={`${URLS.USER}/${owner}`} className={styles.infoLink}>{shortenAddress(owner)}</Link>
+            <Link to={`${URLS.USER}/${owner}`} className={styles.infoLink}>
+              {shortenAddress(owner)}
+            </Link>
           ) : (
             'Loading...'
           )}
         </p>
       </div>
       <div>
-        <p>Figure</p>
+        <p>Figure <TooltipIcon text="Some text" /></p>
         <p>{figure}</p>
       </div>
       <div>
-        <p>Color</p>
+        <p>Color <TooltipIcon text="Some text" /></p>
         <p>{color}</p>
       </div>
       <div>
-        <p>Rarity</p>
+        <p>Rarity <TooltipIcon text="Some text" /></p>
         <p>{rarity}</p>
       </div>
       <div>
-        <p>λ</p>
+        <p>λ <TooltipIcon text="Some text" /></p>
         <p>{lambda}</p>
       </div>
       <div>
-        <p>μ</p>
+        <p>μ <TooltipIcon text="Some text" /></p>
         <p>{mu}</p>
       </div>
       <div>
-        <p>Circles</p>
+        <p>Circles <TooltipIcon text="Some text" /></p>
         <p>{circles}</p>
       </div>
       <div>
-        <p>Distortion</p>
+        <p>Distortion <TooltipIcon text="Some text" /></p>
         <p>{distortion}</p>
       </div>
     </div>
