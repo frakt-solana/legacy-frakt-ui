@@ -14,6 +14,7 @@ import { PublicKey } from '@solana/web3.js'
 import Preloader from '../components/Preloader'
 import { Tooltip } from 'antd'
 import { QuestionCircleOutlined } from '@ant-design/icons'
+import { Helmet } from 'react-helmet';
 
 const ArtInfo = ({
   owner,
@@ -173,6 +174,9 @@ const ArtPage = (props: any) => {
       CustomHeader={ArtHeader}
       mainClassName={loadingImage ? styles.appLayoutMain : ''}
     >
+      <Helmet>
+        <title>{`Art ${art?.metadata?.art_hash ? `#${art.metadata.hash}` : ''} | FRAKT: Generative Art NFT Collection on Solana`}</title>
+      </Helmet>
       <div className={styles.artContainer}>
         {/* TODO: consider d3 animation */}
 

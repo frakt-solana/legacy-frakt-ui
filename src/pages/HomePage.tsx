@@ -4,6 +4,7 @@ import AppLayout from '../components/AppLayout'
 import styles from './HomePage.module.scss'
 import { ArrowRightIcon } from '../components/icons'
 import TextScramble from '@twistezo/react-text-scramble'
+import {Helmet} from "react-helmet";
 import WAVE_RAINBOW from '../images/waveRainbow.png'
 import STAR_WHITE from '../images/starWhite.png'
 import PORTAL_ORANGE from '../images/portalOrange.png'

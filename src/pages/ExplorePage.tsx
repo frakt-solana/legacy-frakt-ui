@@ -1,7 +1,7 @@
 import { PublicKey } from '@solana/web3.js'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-
+import { Helmet } from 'react-helmet';
 import styles from './ExplorePage.module.scss'
 import AppLayout from '../components/AppLayout'
 import ArtsList from '../components/ArtsList'
@@ -84,6 +84,9 @@ const ExplorePage = (props: any) => {
 
   return (
     <AppLayout headerText={headerText} mainClassName={styles.appMain}>
+      <Helmet>
+        <title>{`Explore ${userAddress ? `User's frakts` : ''} | FRAKT: Generative Art NFT Collection on Solana`}</title>
+      </Helmet>
       {loading && <Preloader size='lg' className={styles.preloader} />}
       {!loading && !arts.length && (
         <NoFraktsBlock
