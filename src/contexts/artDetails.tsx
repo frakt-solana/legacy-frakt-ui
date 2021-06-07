@@ -14,7 +14,7 @@ const programPubKey = new PublicKey(
   '6zcw5qXiCjScAxYLhxhuPgAo69PSoDijpnWTDGmDVDbv'
 )
 const adminPubKey = new PublicKey(
-  'DQfi54Fspjfi6VyMH1iSDyYAcui2hUF1QRbQ1GM7N1uo'
+  '6wPYbuGRXZjVw2tCeTxwRiQU7AzFDTeFEKuUFpJZpcix'
 )
 
 interface IArtsContext {
