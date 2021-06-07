@@ -47,7 +47,7 @@
     "deploy": "gh-pages -d build",
     "deploy:ar": "arweave deploy-dir build --key-file ",
     "format:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\"",
-    "image:build": "docker build -f Dockerfile -t frakt-web:latest .",
+    "image:build": "docker build -f Dockerfile -t timikcool/frakt-web:latest .",
     "image:run": "docker run -it --rm -p 1337:80 frakt-web:latest",
     "image:push": "docker push timikcool/frakt-web:latest"
   },
