@@ -19,6 +19,14 @@
   align-items: center;
 }
 
+.shareButtonsWrapper {
+  display: flex;
+
+  & :first-child {
+    margin-right: 12px;
+  }
+}
+
 .artContainer {
   flex-grow: 1;
   display: grid;

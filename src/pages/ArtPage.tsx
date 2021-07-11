@@ -17,6 +17,7 @@ import { QuestionCircleOutlined } from '@ant-design/icons'
 import { Helmet } from 'react-helmet'
 
 import TwitterShareButton from '../components/TwitterShareButton'
+import CopyURLButton from '../components/CopyURLButton'
 
 const ArtInfo = ({
   owner,
@@ -186,7 +187,8 @@ const ArtPage = (props: any) => {
                 : 'Loading...'
             }`}
           </div>
-          <div>
+          <div className={styles.shareButtonsWrapper}>
+            <CopyURLButton size='md' />
             <TwitterShareButton size='md' />
           </div>
         </div>
