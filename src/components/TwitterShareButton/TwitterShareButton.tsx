@@ -2,28 +2,32 @@ import React, { useMemo } from 'react'
 import ButtonRegular from '../ButtonRegular'
 import { TwitterIcon2 } from '../icons'
 
-const DEFAULT_TWEET_TEXT = 'Look at my FRAKT'
+const DEFAULT_TWEET_TEXT =
+  'Look at this awesome fractal art #NFT that I just minted!\n\nMint your own unique FRAKT for 0.5 SOL'
 
+const HASHTAGS = ['NFTcollectibles', 'NFTCommunity', 'nftart', 'NFTs']
 interface ITwitterShareButtonProps {
   className?: string
   size?: string
   url?: string
   tweetText?: string
+  hashtags?: Array<string>
 }
 const TwitterShareButton = ({
   className,
   tweetText = DEFAULT_TWEET_TEXT,
   url = window.location.href,
+  hashtags = HASHTAGS,
   size = 'md',
 }: ITwitterShareButtonProps) => {
   const searchParams = useMemo(
     () =>
       new URLSearchParams({
-        hashtags: 'Solana,Tweeter,Frakt',
+        hashtags: hashtags.join(','),
         text: `${tweetText}\n`,
         url: url,
       }).toString(),
-    [tweetText, url]
+    [tweetText, url, hashtags]
   )
 
   return (
