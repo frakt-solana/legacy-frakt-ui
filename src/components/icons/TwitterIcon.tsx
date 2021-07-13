@@ -13,12 +13,7 @@ const icon = (
     </g>
     <defs>
       <clipPath id='clip0'>
-        <rect
-          width='32'
-          height='32'
-          fill='white'
-          transform='translate(0.0767822)'
-        />
+        <rect width='32' height='32' transform='translate(0.0767822)' />
       </clipPath>
     </defs>
   </>
