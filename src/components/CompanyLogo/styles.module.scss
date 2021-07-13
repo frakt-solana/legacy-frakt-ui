@@ -1,7 +1,7 @@
 @import '../../scss/abstracts/variables.scss';
 
 .root {
-  font-size: 4rem;
+  font-size: 64px;
   font-weight: 400;
   text-transform: uppercase;
   text-decoration: none;
@@ -13,6 +13,5 @@
 }
 
 .generatedCounter {
-  display: flex;
-  font-size: 1.5rem;
+  font-size: 18px;
 }
