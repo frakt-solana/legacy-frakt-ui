@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import ButtonRegular from '../ButtonRegular'
-import { TwitterIcon2 } from '../icons'
+import { TwitterIcon2 } from '../../icons'
 
 const DEFAULT_TWEET_TEXT =
   'Look at this awesome fractal art #NFT that I just minted!\n\nMint your own unique FRAKT for 0.5 SOL'

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import AppLayout from '../components/AppLayout'
 import styles from './HomePage.module.scss'
-import { ArrowRightIcon } from '../components/icons'
+import { ArrowRightIcon } from '../icons'
 import TextScramble from '@twistezo/react-text-scramble'
 import {Helmet} from "react-helmet";
 import WAVE_RAINBOW from '../images/waveRainbow.png'
