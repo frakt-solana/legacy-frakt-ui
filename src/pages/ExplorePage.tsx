@@ -1,7 +1,7 @@
 import { PublicKey } from '@solana/web3.js'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet'
 import styles from './ExplorePage.module.scss'
 import AppLayout from '../components/AppLayout'
 import ArtsList from '../components/ArtsList'
@@ -14,26 +14,26 @@ import { useWallet } from '../contexts/wallet'
 //   getAllUserMintedArts,
 // } from '../mocks/mock_functions'
 import { shortenAddress } from '../utils/utils'
-import { BuyButton } from '../components/BuyButton'
+import BuyButton from '../components/BuyButton'
 
 const getHeaderText = ({ walletKey, userAddress }) => {
   return `${walletKey}` === userAddress
     ? "My Fract's"
     : userAddress
-      ? `Collection of ${shortenAddress(userAddress)}`
-      : 'Explore'
+    ? `Collection of ${shortenAddress(userAddress)}`
+    : 'Explore'
 }
 
 const sortArts = (sortBy: 'created_at' | 'rarity', arts) => {
-  const newArts = [...arts];
+  const newArts = [...arts]
   if (sortBy === 'rarity') {
-    newArts.sort((a, b) => (a.rarity - b.rarity))
+    newArts.sort((a, b) => a.rarity - b.rarity)
     return newArts
   }
 
   if (sortBy === 'created_at') {
-    newArts.sort((a, b) => (a.metadata.created_at - b.metadata.created_at))
-    return newArts;
+    newArts.sort((a, b) => a.metadata.created_at - b.metadata.created_at)
+    return newArts
   }
 }
 
@@ -41,8 +41,8 @@ const NoFraktsBlock = ({ type = 'explore', myFracts = false }: any) => {
   const message = myFracts
     ? "Unfortunately, you don't have any frakt's yet"
     : type === 'user'
-      ? "This account doesn't have any frakt's yet"
-      : ''
+    ? "This account doesn't have any frakt's yet"
+    : ''
 
   return (
     <div className={styles.noFractsBlock}>
@@ -69,13 +69,18 @@ const ExplorePage = (props: any) => {
   }, [userAddress, wallet])
 
   const loadArts = async () => {
-    setLoading(true);
-    setArts(sortArts('created_at', `${wallet?.publicKey}` === userAddress
-      ? await getUserArts(wallet?.publicKey)
-      : userAddress
-        ? await getUserArts(new PublicKey(userAddress))
-        : await getArts()));
-    setLoading(false);
+    setLoading(true)
+    setArts(
+      sortArts(
+        'created_at',
+        `${wallet?.publicKey}` === userAddress
+          ? await getUserArts(wallet?.publicKey)
+          : userAddress
+          ? await getUserArts(new PublicKey(userAddress))
+          : await getArts()
+      )
+    )
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -85,7 +90,9 @@ const ExplorePage = (props: any) => {
   return (
     <AppLayout headerText={headerText} mainClassName={styles.appMain}>
       <Helmet>
-        <title>{`Explore ${userAddress ? `User's frakts` : ''} | FRAKT: Generative Art NFT Collection on Solana`}</title>
+        <title>{`Explore ${
+          userAddress ? `User's frakts` : ''
+        } | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>
       {loading && <Preloader size='lg' className={styles.preloader} />}
       {!loading && !arts.length && (

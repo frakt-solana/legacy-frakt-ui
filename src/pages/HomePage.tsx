@@ -4,7 +4,7 @@ import AppLayout from '../components/AppLayout'
 import styles from './HomePage.module.scss'
 import { ArrowRightIcon } from '../icons'
 import TextScramble from '@twistezo/react-text-scramble'
-import {Helmet} from "react-helmet";
+import { Helmet } from 'react-helmet'
 import WAVE_RAINBOW from '../images/waveRainbow.png'
 import STAR_WHITE from '../images/starWhite.png'
 import PORTAL_ORANGE from '../images/portalOrange.png'
@@ -13,7 +13,7 @@ import NET_RED from '../images/netRed.png'
 import EYE_WHITE from '../images/eyeWhite.png'
 import HERO_BG from '../images/heroImage.svg'
 import { HashLink as Link } from 'react-router-hash-link'
-import { BuyButton } from '../components/BuyButton'
+import BuyButton from '../components/BuyButton'
 import { useArts } from '../contexts/artDetails'
 
 const HeroSection = () => (
@@ -49,7 +49,9 @@ const IntroTextSection = () => (
     >
       fractal art
     </a>{' '}
-    NFT collection. We use the mathematical beauty of fractals to generate stunning art and Solana blockchain to make every piece of it unique, decentralized and fun to interact as NFT
+    NFT collection. We use the mathematical beauty of fractals to generate
+    stunning art and Solana blockchain to make every piece of it unique,
+    decentralized and fun to interact as NFT
   </div>
 )
 
@@ -131,57 +133,63 @@ const ArtExamplesSection = () => (
 )
 
 const BuySection = () => {
-  const { counter, arts } = useArts();
+  const { counter, arts } = useArts()
   return (
-  <div className={styles.buySection}>
-    <div className={styles.buySectionContainer}>
-
-      <div className={styles.buySectionTable}>
-        <div>
-          <p>Generated</p>
-          <p>{`${counter || arts?.length || 0} / 10 000`}</p>
+    <div className={styles.buySection}>
+      <div className={styles.buySectionContainer}>
+        <div className={styles.buySectionTable}>
+          <div>
+            <p>Generated</p>
+            <p>{`${counter || arts?.length || 0} / 10 000`}</p>
+          </div>
+          <div>
+            <p>Price </p>
+            <p>0.5 SOL</p>
+          </div>
         </div>
-        <div>
-          <p>Price </p>
-          <p>0.5 SOL</p>
-        </div>
+        <BuyButton className={styles.buySectionButton} />
       </div>
-      <BuyButton className={styles.buySectionButton} />
-
     </div>
-  </div>
-)}
+  )
+}
 
 const HowItWorksSection = () => (
   <div className={styles.textSection}>
     Each frakt represents one piece of art. With total supply of 10 000 frakts,
     there are 5 different figures types and 4 different colors with{' '}
-    <Link to="/rarity">
-      specific chances of generation
-    </Link>
-    .<br/><br/> Other than that, every generation uses token hash which makes
-    it really unique. No one knows how it will look like, and
-    how rare it would be. Rarity determines by cryptographically secure random generator, all Frakts tokens are stored on Solana's{' '}
+    <Link to='/rarity'>specific chances of generation</Link>
+    .<br />
+    <br /> Other than that, every generation uses token hash which makes it
+    really unique. No one knows how it will look like, and how rare it would be.
+    Rarity determines by cryptographically secure random generator, all Frakts
+    tokens are stored on Solana's{' '}
     <a href='https://solana.com/' target='_blank' rel='noopener noreferrer'>
       smart contract
     </a>{' '}
-    and after generation art is stored on IPFS. All of that makes this project trustless and decentralized. Oh, and whole codebase is{' '}
-    <a href='https://github.com/frakt-solana' target='_blank' rel='noopener noreferrer'>
+    and after generation art is stored on IPFS. All of that makes this project
+    trustless and decentralized. Oh, and whole codebase is{' '}
+    <a
+      href='https://github.com/frakt-solana'
+      target='_blank'
+      rel='noopener noreferrer'
+    >
       opensourced
-    </a>.
+    </a>
+    .
   </div>
 )
 
 const RoadMap = ({}: any) => (
   <div className={styles.roadMap}>
-    
     <div
       className={`${styles.roadMapContainer}  ${styles.roadMapContainerLeft}`}
     >
       <div className={styles.roadMapContent}>
         <h2>VRF ORACLE</h2>
         <p>
-        Lacking of oracle with Verified Random Function on Solana. But we for sure can build such oracle. It definetly needed for games, gambling and other projects needed random just like ours
+          Lacking of oracle with Verified Random Function on Solana. But we for
+          sure can build such oracle. It definetly needed for games, gambling
+          and other projects needed random just like ours
         </p>
       </div>
     </div>
@@ -191,7 +199,9 @@ const RoadMap = ({}: any) => (
       <div className={styles.roadMapContent}>
         <h2>AIRDROPS</h2>
         <p>
-          We would be thrilled to collaborate with interesting projects from this hackathon or ecosystem in general to provide more liquidity for collection holders
+          We would be thrilled to collaborate with interesting projects from
+          this hackathon or ecosystem in general to provide more liquidity for
+          collection holders
         </p>
       </div>
     </div>
@@ -201,7 +211,9 @@ const RoadMap = ({}: any) => (
       <div className={styles.roadMapContent}>
         <h2>NFT MARKETPLACE</h2>
         <p>
-          All frakts can be traded p2p since day one, but we believe that we can build some better marketplace than solible.io. It will be with verified artists, royalties and more
+          All frakts can be traded p2p since day one, but we believe that we can
+          build some better marketplace than solible.io. It will be with
+          verified artists, royalties and more
         </p>
       </div>
     </div>
@@ -210,7 +222,7 @@ const RoadMap = ({}: any) => (
 
 const FooterSection = () => (
   <div className={styles.footerSection}>
-        <p className={styles.footerDisclaimer}>
+    <p className={styles.footerDisclaimer}>
       Developed as a part of{' '}
       <a
         href='https://solana.com/solanaszn'
@@ -243,27 +255,27 @@ const HomePage = (props: any) => {
       <HeroSection />
       <IntroTextSection />
       <ArtExamplesSection />
-      <div  className={styles.textSection}>
+      <div className={styles.textSection}>
         <TextScramble
-        nextLetterSpeed={100}
-        className={styles.roadMapTitle}
-        texts={['No price increase', 'Forever']}
-        pauseTime={2500}
-        paused={false}
-        letterSpeed={20}
-      />
+          nextLetterSpeed={100}
+          className={styles.roadMapTitle}
+          texts={['No price increase', 'Forever']}
+          pauseTime={2500}
+          paused={false}
+          letterSpeed={20}
+        />
       </div>
       <BuySection />
       <HowItWorksSection />
-      <div  className={styles.textSection}>
+      <div className={styles.textSection}>
         <TextScramble
-        nextLetterSpeed={100}
-        className={styles.roadMapTitle}
-        texts={['Roadmap', 'ROADMAP']}
-        pauseTime={2500}
-        paused={false}
-        letterSpeed={20}
-      />
+          nextLetterSpeed={100}
+          className={styles.roadMapTitle}
+          texts={['Roadmap', 'ROADMAP']}
+          pauseTime={2500}
+          paused={false}
+          letterSpeed={20}
+        />
       </div>
       <RoadMap />
       <FooterSection />
