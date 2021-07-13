@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { shortenAddress } from '../../utils/utils'
-import Button from '../Button'
+import ButtonArrow from '../ButtonArrow'
 import styles from './ArtCard.module.scss'
 import MOCK_IMAGE from '../../mocks/images/Portal.png'
 import { ipfsUriToGatewayUrl } from '../../utils/ipfs'
@@ -113,9 +113,9 @@ const InfoTable = ({ ownerAddress, rarity }: any) => {
         <p>Rarity</p>
         <p>{rarity}</p>
       </div>
-      <Button size='sm' className={styles.exploreButton}>
+      <ButtonArrow size='sm' className={styles.exploreButton}>
         Explore
-      </Button>
+      </ButtonArrow>
     </div>
   )
 }

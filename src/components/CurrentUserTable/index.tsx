@@ -4,11 +4,11 @@ import { useWallet } from '../../contexts/wallet'
 import { formatNumber, shortenAddress } from '../../utils/utils'
 import { useNativeAccount } from '../../contexts/accounts'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
-import Button from '../Button'
+import Button from '../ButtonRegular'
 import { BuyButton } from '../BuyButton'
 
 const DisconnectButton = ({ onClick }: any) => (
-  <Button className={styles.disconnectButton} onClick={onClick} size='sm' showArrow={false}>
+  <Button className={styles.disconnectButton} onClick={onClick} size='sm'>
     Disconnect wallet
   </Button>
 )

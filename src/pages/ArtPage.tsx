@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useHistory, Link } from 'react-router-dom'
 import AppLayout from '../components/AppLayout'
-import Button from '../components/Button'
+import ButtonArrow from '../components/ButtonArrow'
 import styles from './ArtPage.module.scss'
 import { shortenAddress } from '../utils/utils'
 import { URLS } from '../constants'
@@ -162,15 +162,16 @@ const ArtPage = (props: any) => {
 
   const ArtHeader = () => (
     <div className={styles.ArtHeader}>
-      <Button
+      <ButtonArrow
         arrowLeft
+        size='lg'
         className={styles.backButton}
         onClick={() =>
           history.length <= 2 ? history.replace(URLS.ROOT) : history.goBack()
         }
       >
         Back
-      </Button>
+      </ButtonArrow>
       <>
         <div className={styles.title}>
           <div>

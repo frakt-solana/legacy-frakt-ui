@@ -3,7 +3,7 @@ import React from 'react'
 import { useArts } from '../../contexts/artDetails'
 import { useWallet } from '../../contexts/wallet'
 import { notify } from '../../utils/notifications'
-import Button from '../Button'
+import ButtonArrow from '../ButtonArrow'
 
 export interface BuyButtonProps
   extends ButtonProps,
@@ -29,12 +29,12 @@ export const BuyButton = ({ className }: BuyButtonProps) => {
   }
 
   return (
-    <Button
+    <ButtonArrow
       // showArrow={false}
       className={className}
       onClick={connected ? onBuy : select}
     >
       Buy frakt
-    </Button>
+    </ButtonArrow>
   )
 }

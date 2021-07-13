@@ -1,7 +1,7 @@
 // import { Modal } from 'antd'
 import React from 'react'
 import { useWallet, WALLET_PROVIDERS } from '../../contexts/wallet'
-import Button from '../Button'
+import ButtonArrow from '../ButtonArrow'
 import styles from './WalletContent.module.scss'
 
 const WalletContent = ({ className }: any) => {
@@ -10,9 +10,14 @@ const WalletContent = ({ className }: any) => {
   return (
     <div className={`${styles.root} ${className || ''}`}>
       <div className={styles.backButtonContainer}>
-        <Button arrowLeft className={styles.backButton} onClick={closeModal}>
+        <ButtonArrow
+          size='lg'
+          arrowLeft
+          className={styles.backButton}
+          onClick={closeModal}
+        >
           Back
-        </Button>
+        </ButtonArrow>
       </div>
       <div className={styles.title}>Select wallet</div>
       <div className={styles.itemsContainer}>
