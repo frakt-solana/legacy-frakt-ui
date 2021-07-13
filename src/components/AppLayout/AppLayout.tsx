@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 
 import CompanyLogo from '../CompanyLogo'
 import AppNavigation from '../AppNavigation'
-import { ConnectButton } from '../ConnectButton'
+import ConnectButton from '../ConnectButton'
 import AppFooter from '../AppFooter'
 import CurrentUserTable from '../CurrentUserTable'
 import { useWallet } from '../../contexts/wallet'
