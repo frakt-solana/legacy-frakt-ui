@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import styles from './AppLayout.module.scss'
+import styles from './styles.module.scss'
 
 import CompanyLogo from '../CompanyLogo'
 import AppNavigation from '../AppNavigation'
@@ -10,13 +10,21 @@ import { useWallet } from '../../contexts/wallet'
 import WalletContent from '../WalletContent'
 import { useLocation } from 'react-router-dom'
 
+interface IAppLayoutProps {
+  CustomHeader?: React.FunctionComponent
+  headerText?: string
+  children: any
+  className?: string
+  mainClassName?: string
+}
+
 const AppLayout = ({
   CustomHeader,
   headerText = '',
   children,
   className,
   mainClassName,
-}: any) => {
+}: IAppLayoutProps) => {
   const { connected, isModalVisible, closeModal } = useWallet()
   const location = useLocation()
 
@@ -27,7 +35,7 @@ const AppLayout = ({
 
   return (
     <div className={`${styles.root} ${className || ''}`}>
-      <Sidebar>
+      <div className={styles.sideBar}>
         <div className={styles.logoWrapper}>
           <CompanyLogo />
         </div>
@@ -42,14 +50,14 @@ const AppLayout = ({
           <AppNavigation />
           <AppFooter className={styles.footer} />
         </div>
-      </Sidebar>
-      <div className={`${styles.main} ${mainClassName || ''}`} id="mainContent">
+      </div>
+      <div className={`${styles.main} ${mainClassName || ''}`} id='mainContent'>
         {isModalVisible ? (
           <WalletContent />
         ) : (
           <>
             {CustomHeader && <CustomHeader />}
-            {headerText && <Header>{headerText}</Header>}
+            {headerText && <div className={styles.header}>{headerText}</div>}
             {children}
           </>
         )}
@@ -59,13 +67,3 @@ const AppLayout = ({
 }
 
 export default AppLayout
-
-const Sidebar = ({ children, className }: any) => {
-  return (
-    <div className={`${styles.sideBar} ${className || ''}`}>{children}</div>
-  )
-}
-
-const Header = ({ children, className }: any) => {
-  return <div className={`${styles.header} ${className || ''}`}>{children}</div>
-}

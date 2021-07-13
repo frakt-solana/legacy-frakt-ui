@@ -3,7 +3,7 @@
 .root {
   display: grid;
   height: 100vh;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 400px auto;
   overflow-y: hidden;
 }
 
@@ -19,24 +19,25 @@
 
 .logoWrapper {
   border-bottom: 1px solid $color-gray-1;
-  padding: 3rem;
+  padding: 40px;
 }
 
 .profileWrapper {
-  padding: 3rem;
+  padding: 40px;
 }
 
 .navigationWrapper {
   border-top: 1px solid $color-gray-1;
-  padding: 3rem;
+  padding: 40px;
 }
 
 .footer {
-  padding-top: 2rem;
+  padding-top: 30px;
 }
 
 .header {
-  padding: 3rem;
+  padding: 40px;
   border-bottom: 1px solid $color-gray-1;
-  font-size: 2.5rem;
+  font-size: 36px;
+  text-transform: uppercase;
 }
