@@ -1,6 +1,6 @@
 import React from 'react'
 import { notify } from '../../utils/notifications'
-import ButtonRegular from '../ButtonRegular'
+import ButtonRegular from '../Button'
 import { CopyClipboardIcon } from '../../icons'
 
 const LINK_COPIED_NOTIFICATION_TEXT = 'Link copied successfully!'

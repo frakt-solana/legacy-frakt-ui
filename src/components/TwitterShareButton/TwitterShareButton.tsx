@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import ButtonRegular from '../ButtonRegular'
+import ButtonRegular from '../Button'
 import { TwitterIcon2 } from '../../icons'
 
 const DEFAULT_TWEET_TEXT =

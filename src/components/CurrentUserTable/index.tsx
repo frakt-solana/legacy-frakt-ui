@@ -4,7 +4,7 @@ import { useWallet } from '../../contexts/wallet'
 import { formatNumber, shortenAddress } from '../../utils/utils'
 import { useNativeAccount } from '../../contexts/accounts'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
-import Button from '../ButtonRegular'
+import Button from '../Button'
 import { BuyButton } from '../BuyButton'
 
 const DisconnectButton = ({ onClick }: any) => (

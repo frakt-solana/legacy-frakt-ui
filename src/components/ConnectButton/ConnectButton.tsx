@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useWallet } from '../../contexts/wallet'
-import Button from '../ButtonRegular'
+import Button from '../Button'
 
 export interface IConnectButtonProps {
   className?: string
