@@ -1,41 +1,32 @@
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { useParams, useHistory } from 'react-router-dom'
-import AppLayout from '../../components/AppLayout'
 
+import AppLayout from '../../components/AppLayout'
 import styles from './styles.module.scss'
 import { URLS } from '../../constants'
 import { useArts } from '../../contexts/artDetails'
-import { ipfsUriToGatewayUrl } from '../../utils/ipfs'
 import { PublicKey } from '@solana/web3.js'
 import Preloader from '../../components/Preloader'
-import { Helmet } from 'react-helmet'
-
 import ArtHeader from './components/ArtHeader'
 import { getHeaderTitle, getArtInfoData } from './helpers'
 import Table from '../../components/Table'
 import ArtImage from '../../components/ArtImage'
+import { useLazyArtImageSrc } from '../../hooks'
 
 const ArtPage = () => {
   const { artAccountPubkey } = useParams<{ artAccountPubkey: string }>()
   const history = useHistory()
   const { arts, getArts, getArtOwner, getArtTokenPubkey } = useArts()
-  const [loadingImage, setLoadingImage] = useState(true)
-  const [imageSrc, setImageSrc] = useState(null)
   const [art, setArt] = useState({
     attributes: null,
     metadata: null,
     rarity: 0,
   })
+  const { getSrc: getImageSrc, src: imageSrc } = useLazyArtImageSrc()
   const [ownerAddress, setOwnerAddress] = useState(null)
   const [, setLoadingOwnerAddress] = useState(false)
   const [tokenPubkey, setTokenPubkey] = useState(null)
-
-  const loadImage = async (image_url) => {
-    setLoadingImage(true)
-    const token = await (await fetch(ipfsUriToGatewayUrl(image_url))).json()
-    setImageSrc(ipfsUriToGatewayUrl(token.image))
-    setLoadingImage(false)
-  }
 
   const loadOwnerAddress = async (art) => {
     setLoadingOwnerAddress(true)
@@ -62,12 +53,12 @@ const ArtPage = () => {
         (art) => art.metadata.artAccountPubkey === artAccountPubkey
       )
       loadOwnerAddress(data)
-      loadImage(data.attributes?.image_url)
+      getImageSrc(data.attributes?.image_url)
       return setArt(data)
     }
 
     loadOwnerAddress(data)
-    loadImage(data.attributes?.image_url)
+    getImageSrc(data.attributes?.image_url)
     setArt(data)
   }
 
@@ -87,7 +78,7 @@ const ArtPage = () => {
           onBackButtonClick={onBackButtonHandler}
         />
       )}
-      mainClassName={!!loadingImage && styles.appLayoutMain}
+      mainClassName={!imageSrc && styles.appLayoutMain}
     >
       <Helmet>
         <title>{`Art ${
@@ -95,7 +86,7 @@ const ArtPage = () => {
         } | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>
       <div className={styles.artContainer}>
-        {loadingImage ? (
+        {!imageSrc ? (
           <div className={styles.preloaderWrapper}>
             <Preloader size='lg' />
           </div>
