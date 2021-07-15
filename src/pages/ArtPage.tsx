@@ -14,7 +14,10 @@ import { PublicKey } from '@solana/web3.js'
 import Preloader from '../components/Preloader'
 import { Tooltip } from 'antd'
 import { QuestionCircleOutlined } from '@ant-design/icons'
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet'
+
+import TwitterShareButton from '../components/TwitterShareButton'
+import CopyURLButton from '../components/CopyURLButton'
 
 const ArtInfo = ({
   owner,
@@ -24,14 +27,10 @@ const ArtInfo = ({
   rarity,
   lambda,
   circles,
-  attributes
+  attributes,
 }: any) => {
   const TooltipIcon = ({ text }) => (
-    <Tooltip
-      color={'#1e1e1e'}
-      overlayClassName={styles.tooptip}
-      title={text}
-    >
+    <Tooltip color={'#1e1e1e'} overlayClassName={styles.tooptip} title={text}>
       <QuestionCircleOutlined className={styles.questionIcon} />
     </Tooltip>
   )
@@ -51,27 +50,50 @@ const ArtInfo = ({
         </p>
       </div>
       <div>
-        <p>Token <TooltipIcon text={`Token public key. Handy for transfer`} /></p>
+        <p>
+          Token <TooltipIcon text={`Token public key. Handy for transfer`} />
+        </p>
         <p>{tokenPubkey ? shortenAddress(tokenPubkey) : 'Loading...'}</p>
       </div>
       <div>
-        <p>Figure <TooltipIcon text={`Rarity of ${figure} figure shape is ${attributes.shape_rarity.toFixed(2)}%`} /></p>
+        <p>
+          Figure{' '}
+          <TooltipIcon
+            text={`Rarity of ${figure} figure shape is ${attributes.shape_rarity.toFixed(
+              2
+            )}%`}
+          />
+        </p>
         <p>{figure}</p>
       </div>
       <div>
-        <p>Color <TooltipIcon text={`Rarity of ${color} color is ${attributes.color_rarity.toFixed(2)}%`} /></p>
+        <p>
+          Color{' '}
+          <TooltipIcon
+            text={`Rarity of ${color} color is ${attributes.color_rarity.toFixed(
+              2
+            )}%`}
+          />
+        </p>
         <p>{color}</p>
       </div>
       <div>
-        <p>Rarity <TooltipIcon text="Chances to get this frakt" /></p>
+        <p>
+          Rarity <TooltipIcon text='Chances to get this frakt' />
+        </p>
         <p>{rarity}</p>
       </div>
       <div>
-        <p>Circles <TooltipIcon text="Circles is number of lines in figure" /></p>
+        <p>
+          Circles <TooltipIcon text='Circles is number of lines in figure' />
+        </p>
         <p>{circles}</p>
       </div>
       <div>
-        <p>λ <TooltipIcon text="λ determines how many times fraction function was called per line" /></p>
+        <p>
+          λ{' '}
+          <TooltipIcon text='λ determines how many times fraction function was called per line' />
+        </p>
         <p>{lambda}</p>
       </div>
     </div>
@@ -91,7 +113,7 @@ const ArtPage = (props: any) => {
   })
   const [ownerAddress, setOwnerAddress] = useState(null)
   const [loadingOwnerAddress, setLoadingOwnerAddress] = useState(false)
-  const [tokenPubkey, setTokenPubkey] = useState(null);
+  const [tokenPubkey, setTokenPubkey] = useState(null)
 
   const loadImage = async (image_url) => {
     setLoadingImage(true)
@@ -107,10 +129,12 @@ const ArtPage = (props: any) => {
     )
     setOwnerAddress(ownerAddress.toString())
     setLoadingOwnerAddress(false)
-    const tokenPubkey = await getArtTokenPubkey(ownerAddress.toString(), art.metadata.minted_token_pubkey);
-    setTokenPubkey(tokenPubkey.toString());
+    const tokenPubkey = await getArtTokenPubkey(
+      ownerAddress.toString(),
+      art.metadata.minted_token_pubkey
+    )
+    setTokenPubkey(tokenPubkey.toString())
   }
-
 
   const loadArt = async () => {
     const data = arts.find(
@@ -147,15 +171,28 @@ const ArtPage = (props: any) => {
       >
         Back
       </Button>
-      <div className={styles.title}>
-        {`${art.attributes?.color && art.attributes?.shape
-          ? getArtName({
-            color: art.attributes?.color,
-            shape: art.attributes?.shape,
-          })
-          : ''
-          } ${art?.attributes?.art_hash ? `#${art.attributes.art_hash}` : 'Loading...'}`}
-      </div>
+      <>
+        <div className={styles.title}>
+          <div>
+            {`${
+              art.attributes?.color && art.attributes?.shape
+                ? getArtName({
+                    color: art.attributes?.color,
+                    shape: art.attributes?.shape,
+                  })
+                : ''
+            } ${
+              art?.attributes?.art_hash
+                ? `#${art.attributes.art_hash}`
+                : 'Loading...'
+            }`}
+          </div>
+          <div className={styles.shareButtonsWrapper}>
+            <CopyURLButton size='md' />
+            <TwitterShareButton size='md' />
+          </div>
+        </div>
+      </>
     </div>
   )
 
@@ -175,7 +212,9 @@ const ArtPage = (props: any) => {
       mainClassName={loadingImage ? styles.appLayoutMain : ''}
     >
       <Helmet>
-        <title>{`Art ${art?.metadata?.art_hash ? `#${art.metadata.hash}` : ''} | FRAKT: Generative Art NFT Collection on Solana`}</title>
+        <title>{`Art ${
+          art?.metadata?.art_hash ? `#${art.metadata.hash}` : ''
+        } | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>
       <div className={styles.artContainer}>
         {/* TODO: consider d3 animation */}
@@ -206,6 +245,13 @@ const ArtPage = (props: any) => {
           </>
         )}
       </div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+        }}
+      ></div>
     </AppLayout>
   )
 }
