@@ -42,6 +42,7 @@ const ArtPage = () => {
     setTokenPubkey(tokenPubkey.toString())
   }
 
+  //TODO: understand WTF is this
   const loadArt = async () => {
     const data = arts.find(
       (art) => art.metadata.artAccountPubkey === artAccountPubkey
@@ -65,7 +66,7 @@ const ArtPage = () => {
   useEffect(() => {
     loadArt()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [artAccountPubkey])
+  }, [])
 
   const onBackButtonHandler = () =>
     history.length <= 2 ? history.replace(URLS.ROOT) : history.goBack()
