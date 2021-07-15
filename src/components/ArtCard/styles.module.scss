@@ -1,0 +1,60 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  border-right: 1px solid $color-gray-1;
+  border-bottom: 1px solid $color-gray-1;
+  cursor: pointer;
+  color: $color-white;
+
+  &:hover {
+    .exploreButton {
+      opacity: 1;
+    }
+    .title,
+    .rarity {
+      opacity: 0;
+    }
+  }
+}
+
+.infoWrapper {
+  position: relative;
+  padding: 32px 40px;
+}
+
+.title {
+  font-size: 24px;
+  display: inline-block;
+  margin-bottom: 4px;
+  transition: opacity 0.4s ease-in;
+}
+
+.rarity {
+  color: $color-gray-6;
+  font-size: 14px;
+  transition: opacity 0.4s ease-in;
+}
+
+.exploreButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 40px;
+  opacity: 0;
+  transition: opacity 0.4s ease-in;
+}
+
+.rainbowColor {
+  background: linear-gradient(
+    90deg,
+    #ff0000,
+    #ffa500,
+    #ffff00,
+    #00e1ff,
+    #0000ff,
+    #800080
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

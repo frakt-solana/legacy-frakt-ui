@@ -1,5 +1,6 @@
 import { shortenAddress } from '../../utils/utils'
-import { COLOR, SHAPE, getArtName } from '../../components/ArtCard'
+import { COLOR, SHAPE } from '../../components/ArtCard/constants'
+import { getArtName } from '../../components/ArtCard/helpers'
 import { URLS } from '../../constants'
 
 export const getHeaderTitle = (artData) => {
