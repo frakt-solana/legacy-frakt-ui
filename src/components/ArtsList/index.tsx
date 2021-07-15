@@ -5,11 +5,7 @@ import { Link } from 'react-router-dom'
 import { URLS } from '../../constants'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-const MOCK_OWNER_ADDRESS = '4FQEivpqXX2SN4nFR9k8uuawGdcwDQ6GQpBjEXsvXLTw'
-
-//TODO Fix MOCK_OWNER_ADDRESS
-
-const ARTS_PER_SCROLL = 6
+const ARTS_PER_SCROLL = 12
 
 const ArtsList = ({ className, arts }: any) => {
   const [artsToShow, setArtsToShow] = useState(ARTS_PER_SCROLL)
@@ -32,7 +28,7 @@ const ArtsList = ({ className, arts }: any) => {
           to={`${URLS.EXPLORE}/${art.metadata.artAccountPubkey}`}
           key={art.metadata.artAccountPubkey}
         >
-          <ArtCard art={art} ownerAddress={MOCK_OWNER_ADDRESS} />
+          <ArtCard art={art} />
         </Link>
       ))}
     </InfiniteScroll>
