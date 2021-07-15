@@ -36,24 +36,24 @@ export const WALLET_PROVIDERS = [
     url: 'https://solflare.com/access-wallet',
     icon: `${ASSETS_URL}solflare.svg`,
   },
-  // {
-  //   name: 'MathWallet',
-  //   url: 'https://mathwallet.org',
-  //   icon: `${ASSETS_URL}mathwallet.svg`,
-  // },
-  // {
-  //   name: 'Ledger',
-  //   url: 'https://www.ledger.com',
-  //   icon: `${ASSETS_URL}ledger.svg`,
-  //   adapter: LedgerWalletAdapter,
-  // },
-  // {
-  //   name: 'Phantom',
-  //   url: 'https://phantom.app/',
-  //   icon: `https://raydium.io/_nuxt/img/phantom.d9e3c61.png`,
-  //   adapter: PhantomWalletAdapter,
-  // },
+  {
+    name: 'Phantom',
+    url: 'https://phantom.app/',
+    icon: `https://raydium.io/_nuxt/img/phantom.d9e3c61.png`,
+    adapter: PhantomWalletAdapter,
+  },
 ]
+// {
+//   name: 'MathWallet',
+//   url: 'https://mathwallet.org',
+//   icon: `${ASSETS_URL}mathwallet.svg`,
+// },
+// {
+//   name: 'Ledger',
+//   url: 'https://www.ledger.com',
+//   icon: `${ASSETS_URL}ledger.svg`,
+//   adapter: LedgerWalletAdapter,
+// },
 
 export interface WalletAdapter extends EventEmitter {
   publicKey: PublicKey | null
@@ -75,12 +75,12 @@ export const WalletContext = React.createContext<{
 }>({
   wallet: undefined,
   connected: false,
-  select() {},
+  select() { },
   provider: undefined,
   isModalVisible: false,
-  closeModal() {},
+  closeModal() { },
   providerUrl: null,
-  setProviderUrl() {},
+  setProviderUrl() { },
   setAutoConnect: null,
 })
 
@@ -118,12 +118,12 @@ export function WalletProvider({ children = null as any }) {
           const keyToDisplay =
             walletPublicKey.length > 20
               ? `${walletPublicKey.substring(
-                  0,
-                  7
-                )}.....${walletPublicKey.substring(
-                  walletPublicKey.length - 7,
-                  walletPublicKey.length
-                )}`
+                0,
+                7
+              )}.....${walletPublicKey.substring(
+                walletPublicKey.length - 7,
+                walletPublicKey.length
+              )}`
               : walletPublicKey
 
           notify({
@@ -156,7 +156,7 @@ export function WalletProvider({ children = null as any }) {
       setAutoConnect(false)
     }
 
-    return () => {}
+    return () => { }
   }, [wallet, autoConnect])
 
   const [isModalVisible, setIsModalVisible] = useState(false)

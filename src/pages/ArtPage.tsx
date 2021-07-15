@@ -198,7 +198,7 @@ const ArtPage = (props: any) => {
 
   const artInfoData = {
     owner: ownerAddress || null,
-    tokenPubkey: tokenPubkey || null,
+    tokenPubkey: art?.metadata?.minted_token_pubkey || null,
     figure: SHAPE[art.attributes?.shape],
     color: COLOR[art.attributes?.color],
     rarity: `${art.rarity.toFixed(2)}%`,
