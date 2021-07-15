@@ -1,0 +1,28 @@
+@import '../../../../scss/abstracts/variables.scss';
+
+.root {
+  padding: 40px 0 0;
+}
+
+.title {
+  font-size: 2.5rem;
+  padding: 0 3rem 3rem;
+  border-bottom: 1px solid $color-gray-1;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.backButton {
+  padding: 0 3rem 3rem;
+  color: $color-gray-3;
+}
+
+.shareButtonsWrapper {
+  display: flex;
+
+  & :first-child {
+    margin-right: 12px;
+  }
+}

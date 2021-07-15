@@ -1,31 +1,4 @@
-@import '../scss/abstracts/variables.scss';
-
-.ArtHeader {
-  padding: 3rem 0 0;
-}
-
-.backButton {
-  padding: 0 3rem 3rem;
-  color: $color-gray-3;
-}
-
-.title {
-  font-size: 2.5rem;
-  padding: 0 3rem 3rem;
-  border-bottom: 1px solid $color-gray-1;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.shareButtonsWrapper {
-  display: flex;
-
-  & :first-child {
-    margin-right: 12px;
-  }
-}
+@import '../../scss/abstracts/variables.scss';
 
 .artContainer {
   flex-grow: 1;
