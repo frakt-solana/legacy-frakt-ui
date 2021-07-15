@@ -22,7 +22,7 @@ const AppNavigation = ({ className }: IAppNavigation) => {
         notLink={!connected}
         onClick={select}
       />
-      <NavigationLink to={URLS.RARITY} text='Rarity' />
+      <NavigationLink to={URLS.RARITY} text='Rarity hdbk' />
     </ul>
   )
 }
