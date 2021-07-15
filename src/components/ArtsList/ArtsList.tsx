@@ -1,32 +1,39 @@
 import React, { useEffect, useState } from 'react'
-import ArtCard from '../ArtCard'
-import styles from './ArtsList.module.scss'
 import { Link } from 'react-router-dom'
-import { URLS } from '../../constants'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-const ARTS_PER_SCROLL = 12
+import styles from './styles.module.scss'
+import { ARTS_PER_SCROLL } from './constants'
+import { URLS } from '../../constants'
+import ArtCard from '../ArtCard'
 
-const ArtsList = ({ className, arts }: any) => {
+interface IArtsListProps {
+  className?: string
+  arts: any
+}
+
+const ArtsList = ({ className = '', arts }: IArtsListProps) => {
   const [artsToShow, setArtsToShow] = useState(ARTS_PER_SCROLL)
 
   useEffect(() => {
     setArtsToShow(ARTS_PER_SCROLL)
   }, [arts])
 
+  const onScrollHandler = () => setArtsToShow((prev) => prev + ARTS_PER_SCROLL)
+
   return (
     <InfiniteScroll
-      className={`${styles.root} ${className || ''}`}
+      className={`${styles.root} ${className}`}
       dataLength={artsToShow}
-      next={() => setArtsToShow((prev) => prev + ARTS_PER_SCROLL)}
+      next={onScrollHandler}
       hasMore={true}
       scrollableTarget='mainContent'
       loader={false}
     >
       {arts.slice(0, artsToShow).map((art) => (
         <Link
-          to={`${URLS.EXPLORE}/${art.metadata.artAccountPubkey}`}
-          key={art.metadata.artAccountPubkey}
+          to={`${URLS.EXPLORE}/${art?.metadata?.artAccountPubkey}`}
+          key={art?.metadata?.artAccountPubkey}
         >
           <ArtCard art={art} />
         </Link>
