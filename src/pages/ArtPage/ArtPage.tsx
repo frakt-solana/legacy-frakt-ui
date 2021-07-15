@@ -13,6 +13,7 @@ import { Helmet } from 'react-helmet'
 import ArtHeader from './components/ArtHeader'
 import { getHeaderTitle, getArtInfoData } from './helpers'
 import Table from '../../components/Table'
+import ArtImage from '../../components/ArtImage'
 
 const ArtPage = () => {
   const { artAccountPubkey } = useParams<{ artAccountPubkey: string }>()
@@ -100,7 +101,7 @@ const ArtPage = () => {
           </div>
         ) : (
           <>
-            <img className={styles.image} src={imageSrc} alt='Art' />
+            <ArtImage src={imageSrc} preloaderSize='md' />
             {art && (
               <div className={styles.info}>
                 <Table
