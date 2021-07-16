@@ -1,4 +1,4 @@
-@import '../scss/abstracts/variables.scss';
+@import '../../scss/abstracts/variables.scss';
 
 .root {
   height: 100%;
@@ -9,11 +9,11 @@
 }
 
 .title {
-  font-size: 10rem;
+  font-size: 140px;
   text-transform: uppercase;
 }
 
 .subtitle {
-  font-size: 1.5rem;
+  font-size: 20px;
   color: $color-gray-2;
 }
