@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useArts } from '../contexts/artDetails'
 import { ipfsUriToGatewayUrl } from '../utils/ipfs'
 
 export * from './useUserAccounts'
@@ -24,4 +25,21 @@ export const useLazyArtImageSrc = () => {
   }
 
   return { src, loading, error, getSrc }
+}
+
+export const useLazyArtsData = () => {
+  const { getUserArts, getArts: getAllArts } = useArts()
+  const [arts, setArts] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+
+  const getArts = (publicKey?) => {
+    setLoading(true)
+    ;(publicKey ? getUserArts(publicKey) : getAllArts())
+      .then((resArts) => setArts(resArts))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false))
+  }
+
+  return { arts, loading, error, getArts }
 }
