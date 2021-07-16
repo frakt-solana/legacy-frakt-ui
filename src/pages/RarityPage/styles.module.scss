@@ -1,0 +1,22 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  height: calc(100% - 120px);
+}
+
+.tableContainer {
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &:first-child {
+    border-bottom: 1px solid $color-gray-1;
+  }
+}
+
+.label {
+  max-width: 720px;
+}
