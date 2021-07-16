@@ -1,0 +1,41 @@
+@import '../../../../scss/abstracts/variables.scss';
+
+.root {
+  padding: 40px;
+  border-top: 1px solid $color-gray-1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 18px;
+}
+
+.disclaimer {
+  color: $color-gray-2;
+  margin-bottom: 22px;
+  font-size: 18px;
+}
+
+.solanaLink {
+  color: $color-solana-green;
+  transition: opacity 0.2s ease-in;
+
+  &:hover {
+    color: $color-solana-green;
+    opacity: 0.75;
+  }
+}
+
+.hosted {
+  text-transform: uppercase;
+  font-size: 22px;
+
+  a {
+    color: $color-akash-red;
+    transition: opacity 0.2s ease-in;
+
+    &:hover {
+      color: $color-akash-red;
+      opacity: 0.75;
+    }
+  }
+}

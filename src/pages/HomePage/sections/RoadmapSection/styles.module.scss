@@ -1,0 +1,89 @@
+@import '../../../../scss/abstracts/variables.scss';
+
+.root {
+  padding: 40px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: $color-gray-3;
+    top: 32px;
+    bottom: 32px;
+    left: 50%;
+    margin-left: -1px;
+  }
+}
+
+.roadMapContainer {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+  left: calc(50% + 2px);
+
+  // Circle
+  &::after {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    background-color: $color-black;
+    border: 2px solid $color-gray-3;
+    top: 14px;
+    border-radius: 50%;
+    z-index: 1;
+    left: -16px;
+  }
+
+  // Dash
+  &::before {
+    content: '';
+    height: 0;
+    position: absolute;
+    top: 28px;
+    width: 0;
+    z-index: 1;
+    left: 10px;
+    background: $color-gray-3;
+    width: 32px;
+    height: 2px;
+  }
+
+  &:nth-child(odd) {
+    left: 0;
+
+    // Circle
+    &::after {
+      left: unset;
+      right: -14px;
+    }
+
+    // Dash
+    &::before {
+      left: unset;
+      right: 10px;
+    }
+  }
+}
+
+.roadMapContent {
+  padding: 20px 30px;
+  background-color: $color-black;
+  border: 2px solid $color-gray-3;
+  position: relative;
+  font-size: 14px;
+  line-height: 1.5;
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+}
+
+.roadMapContainerChecked {
+  &::after {
+    background-color: $color-gray-4;
+  }
+}
