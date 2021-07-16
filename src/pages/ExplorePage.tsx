@@ -9,10 +9,6 @@ import ArtsSort from '../components/ArtsSort'
 import Preloader from '../components/Preloader'
 import { useArts } from '../contexts/artDetails'
 import { useWallet } from '../contexts/wallet'
-// import {
-//   getAllMintedArts,
-//   getAllUserMintedArts,
-// } from '../mocks/mock_functions'
 import { shortenAddress } from '../utils/utils'
 import BuyButton from '../components/BuyButton'
 
@@ -32,7 +28,7 @@ const sortArts = (sortBy: 'created_at' | 'rarity', arts) => {
   }
 
   if (sortBy === 'created_at') {
-    newArts.sort((a, b) => a.metadata.created_at - b.metadata.created_at)
+    newArts.sort((a, b) => b.metadata.created_at - a.metadata.created_at)
     return newArts
   }
 }
