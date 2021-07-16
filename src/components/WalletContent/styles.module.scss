@@ -1,0 +1,61 @@
+@import '../../scss/abstracts/variables.scss';
+
+.backButtonContainer {
+  padding: 40px 0 0;
+}
+
+.backButton {
+  padding: 0 40px 40px;
+  color: $color-gray-3;
+}
+
+.title {
+  font-size: 36px;
+  padding: 0 40px 40px;
+  border-bottom: 1px solid $color-gray-1;
+}
+
+.itemsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.walletItemContainer {
+  width: 100%;
+  height: 0;
+  padding-top: 100%;
+  position: relative;
+}
+
+.walletItem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: {
+    bottom: 1px solid $color-gray-1;
+    right: 1px solid $color-gray-1;
+  }
+  font-size: 24px;
+  color: transparentize($color-white, 0.5);
+  transition: color 0.2s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-white;
+  }
+
+  &:nth-child(4n + 4) {
+    border-right: none;
+  }
+
+  img {
+    margin-bottom: 32px;
+    width: 25%;
+  }
+}
