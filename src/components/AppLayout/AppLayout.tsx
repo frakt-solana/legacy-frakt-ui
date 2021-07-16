@@ -20,7 +20,7 @@ interface IAppLayoutProps {
 
 const AppLayout = ({
   CustomHeader,
-  headerText = '',
+  headerText,
   children,
   className,
   mainClassName,
