@@ -5,8 +5,14 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1023px) {
   .root {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  .root {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }

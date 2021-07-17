@@ -86,7 +86,23 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .root {
+    padding: 24px;
+  }
+
+  .roadMapContent {
+    padding: 10px 15px;
+    font-size: 12px;
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
   .root {
     padding: 24px;
 

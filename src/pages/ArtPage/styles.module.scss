@@ -31,12 +31,15 @@
   align-items: center;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1023px) {
   .artContainer {
     display: flex;
     flex-direction: column;
   }
   .info {
     padding: 24px;
+  }
+  .preloaderWrapper {
+    min-height: calc(100vh - 206px);
   }
 }
