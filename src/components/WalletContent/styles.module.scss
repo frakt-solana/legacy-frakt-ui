@@ -59,3 +59,26 @@
     width: 25%;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .backButtonContainer {
+    padding: 24px 0 0;
+  }
+  .backButton {
+    padding: 0 24px 24px;
+  }
+
+  .title {
+    font-size: 24px;
+    padding: 0 24px 24px;
+  }
+
+  .walletItem {
+    color: $color-white;
+    font-size: 18px;
+    img {
+      margin-bottom: 18px;
+      width: 40%;
+    }
+  }
+}
