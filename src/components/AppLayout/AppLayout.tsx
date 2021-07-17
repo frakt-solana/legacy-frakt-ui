@@ -4,6 +4,7 @@ import styles from './styles.module.scss'
 import CompanyLogo from '../CompanyLogo'
 import AppNavigation from '../AppNavigation'
 import ConnectButton from '../ConnectButton'
+import BurgerMenu from '../BurgerMenu'
 import AppFooter from '../AppFooter'
 import CurrentUserTable from '../CurrentUserTable'
 import { useWallet } from '../../contexts/wallet'
@@ -38,6 +39,7 @@ const AppLayout = ({
       <div className={styles.sideBar}>
         <div className={styles.logoWrapper}>
           <CompanyLogo />
+          <BurgerMenu className={styles.burgerMenu} />
         </div>
         <div className={styles.profileWrapper}>
           {connected ? (

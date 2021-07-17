@@ -13,7 +13,7 @@
 }
 
 .info {
-  padding: 3rem;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,16 +31,12 @@
   align-items: center;
 }
 
-.questionIcon {
-  margin-left: 0.5rem;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-.tooptip {
-  :global {
-    .ant-tooltip-inner {
-      font-size: 1rem;
-    }
+@media screen and (max-width: 768px) {
+  .artContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  .info {
+    padding: 24px;
   }
 }

@@ -20,3 +20,15 @@
 .table {
   max-width: 720px;
 }
+
+@media screen and (max-width: 768px) {
+  .root {
+    display: flex;
+    flex-direction: column;
+    height: unset;
+  }
+
+  .tableContainer {
+    padding: 24px 24px;
+  }
+}

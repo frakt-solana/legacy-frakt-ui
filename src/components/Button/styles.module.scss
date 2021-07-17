@@ -45,3 +45,26 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .root {
+    &.sm {
+      font-size: 12px;
+      padding: 2px 5px;
+
+      & svg {
+        margin-right: 2px;
+      }
+    }
+
+    &.md {
+      font-size: 14px;
+      padding: 3px 7px;
+    }
+
+    &.lg {
+      font-size: 20px;
+      padding: 5px 12px;
+    }
+  }
+}

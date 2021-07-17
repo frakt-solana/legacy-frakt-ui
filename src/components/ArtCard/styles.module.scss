@@ -59,3 +59,36 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+@media screen and (max-width: 768px) {
+  .root {
+    cursor: pointer;
+    color: $color-white;
+
+    &:nth-child(2n + 2) {
+      border-right: none;
+    }
+
+    &:hover {
+      .exploreButton {
+        opacity: 0;
+      }
+      .title,
+      .rarity {
+        opacity: 1;
+      }
+    }
+  }
+
+  .infoWrapper {
+    padding: 18px 22px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .rarity {
+    font-size: 12px;
+  }
+}

@@ -56,3 +56,50 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .root {
+    font-size: 16px;
+
+    svg {
+      margin-left: 14px;
+      height: 8px;
+    }
+
+    &.arrowLeft {
+      svg {
+        margin-left: 0;
+        margin-right: 14px;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .sm {
+    font-size: 12px;
+    svg {
+      margin-left: 12px;
+      height: 6px;
+    }
+
+    &.arrowLeft {
+      svg {
+        margin-right: 12px;
+      }
+    }
+  }
+
+  .lg {
+    font-size: 20px;
+    svg {
+      margin-left: 16px;
+      height: 10px;
+    }
+
+    &.arrowLeft {
+      svg {
+        margin-right: 16px;
+      }
+    }
+  }
+}

@@ -27,7 +27,7 @@ const ArtsList = ({ className = '', arts }: IArtsListProps) => {
       dataLength={artsToShow}
       next={onScrollHandler}
       hasMore={true}
-      scrollableTarget='mainContent'
+      scrollableTarget={window.innerWidth < 1024 ? '#root' : 'mainContent'}
       loader={false}
     >
       {arts.slice(0, artsToShow).map((art) => (
