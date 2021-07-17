@@ -17,7 +17,7 @@ const AppNavigation = ({ className }: IAppNavigation) => {
       <NavigationLink to={URLS.EXPLORE} text='Explore' />
 
       <NavigationLink
-        to={`${URLS.USER}/${wallet.publicKey}`}
+        to={`${URLS.USER}/${wallet?.publicKey}`}
         text="My Frakt's"
         notLink={!connected}
         onClick={select}
