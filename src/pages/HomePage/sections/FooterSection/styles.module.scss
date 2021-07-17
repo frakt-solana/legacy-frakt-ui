@@ -39,3 +39,21 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .root {
+    padding: 24px;
+    font-size: 14px;
+  }
+
+  .disclaimer {
+    margin-bottom: 12px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .hosted {
+    text-transform: uppercase;
+    font-size: 18px;
+  }
+}

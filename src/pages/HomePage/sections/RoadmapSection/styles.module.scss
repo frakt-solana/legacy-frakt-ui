@@ -40,10 +40,8 @@
   // Dash
   &::before {
     content: '';
-    height: 0;
     position: absolute;
     top: 28px;
-    width: 0;
     z-index: 1;
     left: 10px;
     background: $color-gray-3;
@@ -85,5 +83,64 @@
 .roadMapContainerChecked {
   &::after {
     background-color: $color-gray-4;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .root {
+    padding: 24px;
+
+    &::after {
+      top: 18px;
+      bottom: 18px;
+      left: 32px;
+      margin-left: -1px;
+    }
+  }
+
+  .roadMapContainer {
+    padding: 12px 0 12px 32px;
+    width: 100%;
+    left: unset;
+
+    &::after {
+      width: 20px;
+      height: 20px;
+      top: 20px;
+      left: -2px;
+      right: unset;
+    }
+
+    &::before {
+      top: 29px;
+      left: 10px;
+      width: 22px;
+    }
+
+    &:nth-child(odd) {
+      left: 0;
+
+      // Circle
+      &::after {
+        left: -2px;
+        right: unset;
+      }
+
+      // Dash
+      &::before {
+        left: 10px;
+        right: unset;
+      }
+    }
+  }
+
+  .roadMapContent {
+    padding: 10px 15px;
+    font-size: 12px;
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 0;
+    }
   }
 }

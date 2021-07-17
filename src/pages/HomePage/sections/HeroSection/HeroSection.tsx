@@ -8,10 +8,7 @@ import ScrambleText from '../../components/ScrambleText'
 import { INFO_TEXT_ID } from '../../constants'
 
 const HeroSection = () => (
-  <div
-    className={styles.root}
-    style={{ backgroundImage: `url('${HERO_BG}')`, backgroundSize: '80%' }}
-  >
+  <div className={styles.root} style={{ backgroundImage: `url('${HERO_BG}')` }}>
     <ScrambleText texts={['Frakt', 'Frakt ']} className={styles.title} />
     <p>
       Touch a fractal art

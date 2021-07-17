@@ -20,3 +20,10 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .root {
+    padding: 32px 24px;
+    font-size: 18px;
+  }
+}

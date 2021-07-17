@@ -26,3 +26,18 @@
 .buyButton {
   margin: 0 auto;
 }
+
+@media screen and (max-width: 768px) {
+  .content {
+    border: none;
+    padding: 48px;
+    width: 100%;
+    min-width: unset;
+  }
+  .table {
+    margin-bottom: 12px;
+  }
+  .buyButton {
+    margin: none;
+  }
+}
