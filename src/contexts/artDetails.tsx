@@ -66,8 +66,6 @@ export const ArtsProvider = ({ children = null as any }) => {
   // * optional, might be deleted
   useEffect(() => {
     if (wallet?.publicKey) {
-      console.log({ wallet })
-
       getCurrentUserArts()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
