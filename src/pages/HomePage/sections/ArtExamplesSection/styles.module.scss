@@ -17,3 +17,26 @@
     border-bottom: none;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .root {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .artExample {
+    border: {
+      right: 1px solid $color-gray-1;
+      bottom: 1px solid $color-gray-1;
+    }
+    &:nth-child(7),
+    &:nth-child(8) {
+      display: none;
+    }
+
+    &:nth-child(3n + 3) {
+      border-right: none;
+    }
+    &:nth-child(n + 4) {
+      border-bottom: none;
+    }
+  }
+}
