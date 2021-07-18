@@ -1,0 +1,24 @@
+.root {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.message {
+  font-size: 36px;
+  margin-bottom: 24px;
+}
+
+@media screen and (max-width: 1023px) {
+  .root {
+    height: calc(100vh - 73px);
+    padding: 0 32px;
+  }
+
+  .message {
+    font-size: 24px;
+  }
+}

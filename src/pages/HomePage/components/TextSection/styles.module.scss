@@ -1,0 +1,29 @@
+@import '../../../../scss/abstracts/variables.scss';
+
+.root {
+  padding: 60px 40px;
+  color: $color-gray-5;
+  font-size: 24px;
+  line-height: 1.3;
+  border: {
+    top: 1px solid $color-gray-1;
+    bottom: 1px solid $color-gray-1;
+  }
+  text-align: justify;
+
+  a {
+    color: $color-white;
+    text-decoration: underline;
+
+    &:hover {
+      color: $color-white;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .root {
+    padding: 32px 24px;
+    font-size: 18px;
+  }
+}

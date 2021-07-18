@@ -1,11 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import {
-  Connection,
-  SystemProgram,
-  Transaction,
-  PublicKey,
-} from '@solana/web3.js'
-import camelcaseKeysDeep from 'camelcase-keys-deep'
+import { PublicKey } from '@solana/web3.js'
 import * as contract from 'frakt-client'
 import { useWallet } from './wallet'
 import { useConnection } from './connection'
@@ -72,10 +66,9 @@ export const ArtsProvider = ({ children = null as any }) => {
   // * optional, might be deleted
   useEffect(() => {
     if (wallet?.publicKey) {
-      console.log({ wallet })
-
       getCurrentUserArts()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wallet?.publicKey])
 
   const buyArt = async () => {

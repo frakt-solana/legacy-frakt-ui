@@ -1,0 +1,70 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  background-color: $color-white;
+  color: $color-black;
+  transition: 0.2s ease-in;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-gray-2;
+    color: $color-black;
+  }
+
+  & svg {
+    fill: $color-black;
+  }
+
+  &.sm {
+    font-size: 14px;
+    padding: 3px 6px;
+
+    & svg {
+      margin-right: 3px;
+    }
+  }
+
+  &.md {
+    font-size: 18px;
+    padding: 5px 10px;
+
+    & svg {
+      margin-right: 5px;
+    }
+  }
+
+  &.lg {
+    font-size: 24px;
+    padding: 7px 14px;
+
+    & svg {
+      margin-right: 7px;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .root {
+    &.sm {
+      font-size: 12px;
+      padding: 2px 5px;
+
+      & svg {
+        margin-right: 2px;
+      }
+    }
+
+    &.md {
+      font-size: 14px;
+      padding: 3px 7px;
+    }
+
+    &.lg {
+      font-size: 20px;
+      padding: 5px 12px;
+    }
+  }
+}
