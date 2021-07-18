@@ -17,7 +17,7 @@
 
 .itemsContainer {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .walletItemContainer {
@@ -57,6 +57,12 @@
   img {
     margin-bottom: 32px;
     width: 25%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .itemsContainer {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
