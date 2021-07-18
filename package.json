@@ -21,7 +21,7 @@
     "buffer-layout": "^1.2.0",
     "camelcase-keys-deep": "^0.1.0",
     "eventemitter3": "^4.0.7",
-    "frakt-client": "^1.1.1",
+    "frakt-client": "^1.1.2",
     "jazzicon": "^1.5.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
