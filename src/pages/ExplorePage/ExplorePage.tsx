@@ -23,15 +23,14 @@ const ExplorePage = () => {
   const arts = useMemo(() => sortArts(rawArts, sortBy), [rawArts, sortBy])
 
   useEffect(() => {
-    if (wallet) {
-      const publicKey =
-        `${wallet?.publicKey}` === userAddress
-          ? wallet.publicKey
-          : userAddress
-          ? new PublicKey(userAddress)
-          : null
-      getArts(publicKey)
-    }
+    const publicKey =
+      `${wallet?.publicKey}` === userAddress
+        ? wallet.publicKey
+        : userAddress
+        ? new PublicKey(userAddress)
+        : null
+    getArts(publicKey)
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wallet])
 
