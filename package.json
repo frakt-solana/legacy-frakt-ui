@@ -14,7 +14,6 @@
     "@solana/web3.js": "^1.7.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
-    "@twistezo/react-text-scramble": "^1.0.6",
     "@types/react-router-dom": "^5.1.6",
     "antd": "^4.6.6",
     "bn.js": "^5.1.3",

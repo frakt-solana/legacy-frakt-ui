@@ -1,0 +1,27 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  & li {
+    margin-right: 12px;
+    opacity: 1;
+    transition: opacity 0.2s ease-in;
+    &:hover {
+      opacity: 0.75;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+    & svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}

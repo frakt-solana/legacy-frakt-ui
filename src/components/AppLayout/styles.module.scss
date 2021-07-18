@@ -1,0 +1,90 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 400px auto;
+  overflow-y: hidden;
+}
+
+.sideBar {
+  border-right: 1px solid $color-gray-1;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.main {
+  overflow-y: scroll;
+}
+
+.logoWrapper {
+  border-bottom: 1px solid $color-gray-1;
+  padding: 40px;
+}
+
+.profileWrapper {
+  padding: 40px;
+}
+
+.navigationWrapper {
+  border-top: 1px solid $color-gray-1;
+  padding: 40px;
+}
+
+.footer {
+  padding-top: 30px;
+}
+
+.header {
+  padding: 40px;
+  border-bottom: 1px solid $color-gray-1;
+  font-size: 36px;
+  text-transform: uppercase;
+}
+
+.burgerMenu {
+  display: none;
+}
+
+@media screen and (max-width: 1023px) {
+  .root {
+    display: block;
+    height: unset;
+    overflow-y: unset;
+  }
+
+  .burgerMenu {
+    display: block;
+  }
+
+  .profileWrapper {
+    display: none;
+  }
+
+  .logoWrapper {
+    padding: 18px 24px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navigationWrapper {
+    display: none;
+  }
+
+  .header {
+    // padding: 24px 24px 20px;
+    // font-size: 20px;
+    display: none;
+  }
+
+  .main {
+    overflow-y: unset;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
+  .root {
+    grid-template-columns: 300px auto;
+  }
+}

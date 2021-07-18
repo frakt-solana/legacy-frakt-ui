@@ -1,0 +1,17 @@
+@import '../../scss/abstracts/variables.scss';
+
+.disconnectButton {
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.table {
+  margin-bottom: 12px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
