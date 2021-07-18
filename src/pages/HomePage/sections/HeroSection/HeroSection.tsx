@@ -11,7 +11,7 @@ const HeroSection = () => (
   <div className={styles.root} style={{ backgroundImage: `url('${HERO_BG}')` }}>
     <ScrambleText texts={['Frakt', 'Frakt ']} className={styles.title} />
     <p>
-      Touch a fractal art
+      Discover fractal art
       <Link
         smooth
         to={`#${INFO_TEXT_ID}`}

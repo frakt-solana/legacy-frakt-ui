@@ -1758,11 +1758,6 @@
     "@testing-library/dom" "^6.15.0"
     "@types/testing-library__react" "^9.1.2"
 
-"@twistezo/react-text-scramble@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@twistezo/react-text-scramble/-/react-text-scramble-1.0.6.tgz#34064d86249c7fdfbb84c00e2776beee122db79e"
-  integrity sha512-DOCy9Bt0sXXpLIDRzHcAv9yDd4yOYrf1I9hNMLjykKHQKQ2zdP8w4A+mHh0VP0cy/PjJSTeo3NWCY6ptNcR0YA==
-
 "@types/aria-query@^4.2.0":
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@types/aria-query/-/aria-query-4.2.1.tgz#78b5433344e2f92e8b306c06a5622c50c245bf6b"
@@ -5561,10 +5556,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-frakt-client@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/frakt-client/-/frakt-client-1.1.1.tgz#857e4cf716914b718bf2c5e2309eafe13538c482"
-  integrity sha512-vu4ZHBIc4IsbbD21O8gK4igVScRNYtPExA3VpltP2ExoWxDecwv6Cc3tQzNclDArdBC1yXrn0D1++YnlnyQvig==
+frakt-client@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/frakt-client/-/frakt-client-1.1.2.tgz#853ad63da6ffe100e4559240bf36392ddf1c3d84"
+  integrity sha512-5+D0p6/6pJlm4hklFGZHbivoarnTJde164GQ+vre8RaZrRKG2AIcqn5y92Nsxv60Tb2qTmclfTb70nm3EX3UPQ==
   dependencies:
     "@solana/spl-token" latest
     "@solana/web3.js" latest

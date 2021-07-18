@@ -8,9 +8,7 @@ const RoadmapSection = () => (
       <div className={styles.roadMapContent}>
         <h2>VRF ORACLE</h2>
         <p>
-          Lacking of oracle with Verified Random Function on Solana. But we for
-          sure can build such oracle. It definetly needed for games, gambling
-          and other projects needed random just like ours
+          We plan to build a Verified Random Function on Solana. The chain currently does not have such a function, but will be necessary for gaming, gambling and other NFT projects that require an independent random function.
         </p>
       </div>
     </div>
@@ -18,9 +16,7 @@ const RoadmapSection = () => (
       <div className={styles.roadMapContent}>
         <h2>AIRDROPS</h2>
         <p>
-          We would be thrilled to collaborate with interesting projects from
-          this hackathon or ecosystem in general to provide more liquidity for
-          collection holders
+          We are working with other projects in the Solana ecosystem to provide incentives for Frakt holders.
         </p>
       </div>
     </div>
@@ -28,9 +24,7 @@ const RoadmapSection = () => (
       <div className={styles.roadMapContent}>
         <h2>NFT MARKETPLACE</h2>
         <p>
-          All frakts can be traded p2p since day one, but we believe that we can
-          build some better marketplace than solible.io. It will be with
-          verified artists, royalties and more
+          We plan to build a secondary marketplace to buy, sell and trade Frakts. We plan to expand this to other projects in the Solana ecosystem to provide a much-needed secondary marketplace like the ones present on other blockchains.
         </p>
       </div>
     </div>

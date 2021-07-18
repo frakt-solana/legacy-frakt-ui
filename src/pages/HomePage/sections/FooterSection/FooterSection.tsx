@@ -4,20 +4,10 @@ import styles from './styles.module.scss'
 
 const FooterSection = () => (
   <div className={styles.root}>
-    <p className={styles.disclaimer}>
-      Developed as a part of{' '}
-      <a
-        className={styles.solanaLink}
-        href='https://solana.com/solanaszn'
-        target='_blank'
-        rel='noopener noreferrer'
-      >
-        Solana Season
-      </a>
-    </p>
+
     <p className={styles.disclaimer}>
       Disclaimer: FRAKT is an art experiment with an unaudited smart contract
-      aimed at showcasing possibilities of Solana
+      aimed at showcasing the nature of fractals and power of the Solana blockchain.
     </p>
     <p className={styles.hosted}>
       Hosted on{' '}
