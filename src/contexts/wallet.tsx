@@ -1,5 +1,4 @@
 import type { PublicKey } from '@solana/web3.js'
-
 import Wallet from '@project-serum/sol-wallet-adapter'
 import { Transaction } from '@solana/web3.js'
 import EventEmitter from 'eventemitter3'
@@ -14,6 +13,7 @@ import { notify } from './../utils/notifications'
 import { useConnectionConfig } from './connection'
 import { useLocalStorageState } from './../utils/utils'
 import { SolongWalletAdapter } from '../wallet-adapters/solong'
+import { PhantomWalletAdapter } from '../wallet-adapters/phantom'
 
 const ASSETS_URL =
   'https://raw.githubusercontent.com/solana-labs/oyster/main/assets/wallets/'
