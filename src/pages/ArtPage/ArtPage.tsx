@@ -17,7 +17,7 @@ import { useLazyArtImageSrc } from '../../hooks'
 const ArtPage = () => {
   const { artAccountPubkey } = useParams<{ artAccountPubkey: string }>()
   const history = useHistory()
-  const { arts, getArts, getArtOwner, getArtTokenPubkey } = useArts()
+  const { arts, getArts, getArtOwner } = useArts()
   const [art, setArt] = useState({
     attributes: null,
     metadata: null,
@@ -35,10 +35,7 @@ const ArtPage = () => {
     )
     setOwnerAddress(ownerAddress.toString())
     setLoadingOwnerAddress(false)
-    const tokenPubkey = await getArtTokenPubkey(
-      ownerAddress.toString(),
-      art.metadata.minted_token_pubkey
-    )
+    const tokenPubkey = art?.metadata?.minted_token_pubkey
     setTokenPubkey(tokenPubkey.toString())
   }
 
