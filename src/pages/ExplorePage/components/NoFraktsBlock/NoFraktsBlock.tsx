@@ -13,9 +13,9 @@ const NoFraktsBlock = ({
   myFracts = false,
 }: INoFraktsBlockProps) => {
   const message = myFracts
-    ? "Unfortunately, you don't have any frakt's yet"
+    ? "Unfortunately, you don't have any frakts yet"
     : type === 'user'
-    ? "This account doesn't have any frakt's yet"
+    ? "This account doesn't have any frakts yet"
     : ''
 
   return (

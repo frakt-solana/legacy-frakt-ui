@@ -16,7 +16,7 @@ export const ArtTitle = ({ color = '', shape = '' }: IArtTitleProps) => {
   return (
     <p
       className={`${styles.title} ${
-        isRainbow({ shape, color }) && styles.titleRainbow
+        isRainbow({ shape, color }) && styles.rainbowColor
       }`}
       style={{ color: COLOR_HEX[color] }}
     >

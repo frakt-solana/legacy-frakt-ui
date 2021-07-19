@@ -12,8 +12,7 @@ const HowItWorksSection = () => (
     Every fractal generation uses a token hash, making it unique. They are randomly generated, with the rarity determined by a cryptographically secure random generator. All Frakts are stored on Solana's{' '}
     <a href='https://solana.com/' target='_blank' rel='noopener noreferrer'>
       smart contract
-    </a>{' '}
-    , and after generation the art is stored on IPFS. All of this makes the project trustless and decentralised, and the whole codebase is{' '}
+    </a>, and after generation the art is stored on IPFS. All of this makes the project trustless and decentralised, and the whole codebase is{' '}
     <a
       href='https://github.com/frakt-solana'
       target='_blank'
