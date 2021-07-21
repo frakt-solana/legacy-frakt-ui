@@ -31,6 +31,7 @@ const CurrentUserTable = ({ className = '' }: ICurrentUserTableProps) => {
         data={[
           ['Address', shortenAddress(`${wallet.publicKey || ''}`)],
           ['Balance', getBalanceValue()],
+          ['Price', '0.5 SOL'],
         ]}
       />
       <div className={styles.buttonsWrapper}>
