@@ -3,6 +3,7 @@ import styles from './styles.module.scss'
 
 interface IButtonRegularProps {
   className?: string
+  disabled?: boolean
   isLink?: boolean
   linkAttrs?: Object
   onClick?: (args: any) => any
@@ -18,6 +19,7 @@ const getIcon = ({ Icon, size = 'md' }) => {
 
 const ButtonRegular = ({
   className,
+  disabled = false,
   isLink = false,
   linkAttrs,
   onClick = () => {},
@@ -28,7 +30,9 @@ const ButtonRegular = ({
   if (isLink) {
     return (
       <a
-        className={`${styles.root} ${className || ''} ${styles[size]}`}
+        className={`${styles.root} ${className || ''} ${
+          disabled ? styles.disabled : ''
+        } ${styles[size]}`}
         {...linkAttrs}
       >
         {getIcon({ Icon, size })}
@@ -40,7 +44,9 @@ const ButtonRegular = ({
   return (
     <button
       type='button'
-      className={`${styles.root} ${className || ''} ${styles[size]}`}
+      className={`${styles.root} ${className || ''} ${
+        disabled ? styles.disabled : ''
+      } ${styles[size]}`}
       onClick={onClick}
     >
       {getIcon({ Icon, size })}
