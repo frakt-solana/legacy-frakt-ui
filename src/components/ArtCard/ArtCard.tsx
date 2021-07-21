@@ -30,7 +30,7 @@ const ArtCard = ({ className = '', art = {} }: IArtCardProps) => {
       <div className={styles.infoWrapper}>
         <ArtTitle color={color} shape={shape} />
         <p className={styles.rarity}>
-          {art?.rarity ? `${art.rarity.toFixed(2)}%` : ''}
+          {art?.rarity ? `${art.rarity.toFixed(2)}% rarity` : ''}
         </p>
         <ButtonArrow size='lg' className={styles.exploreButton}>
           Explore
