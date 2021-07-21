@@ -16,7 +16,7 @@ const TWEET_TEXT =
 const HASHTAGS = ['NFTs', 'digitalart', 'NFTcollector', 'NFTart']
 
 const ExploreHeader = ({ userAddress, walletKey }: IExploreHeaderProps) => (
-  <div className={styles.root}>
+  <div className={`${styles.root} ${userAddress ? '' : styles.hiddenOnMobile}`}>
     <p className={styles.text}>{getHeaderText({ userAddress, walletKey })}</p>
     {!!userAddress && (
       <div className={styles.buttonsWrapper}>
