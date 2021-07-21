@@ -2,7 +2,7 @@ import { shortenAddress } from '../../utils/utils'
 
 export const getHeaderText = ({ walletKey, userAddress }) =>
   `${walletKey}` === userAddress
-    ? "My Frakts"
+    ? 'My Frakts'
     : userAddress
     ? `Collection of ${shortenAddress(userAddress)}`
     : 'Explore'

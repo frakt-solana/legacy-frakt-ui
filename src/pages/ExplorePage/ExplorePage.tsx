@@ -4,7 +4,7 @@ import { useParams } from 'react-router'
 import { Helmet } from 'react-helmet'
 
 import styles from './styles.module.scss'
-import { getHeaderText, sortArts } from './helpers'
+import { sortArts } from './helpers'
 import AppLayout from '../../components/AppLayout'
 import ArtsList from '../../components/ArtsList'
 import ArtsSort from '../../components/ArtsSort'
@@ -12,6 +12,7 @@ import Preloader from '../../components/Preloader'
 import { useLazyArtsData } from '../../hooks'
 import { useWallet } from '../../contexts/wallet'
 import NoFraktsBlock from './components/NoFraktsBlock'
+import ExploreHeader from './components/ExploreHeader'
 
 const ExplorePage = () => {
   const { userAddress } = useParams<{ userAddress: string }>()
@@ -38,7 +39,12 @@ const ExplorePage = () => {
 
   return (
     <AppLayout
-      headerText={getHeaderText({ walletKey: wallet?.publicKey, userAddress })}
+      CustomHeader={() => (
+        <ExploreHeader
+          walletKey={wallet?.publicKey}
+          userAddress={userAddress}
+        />
+      )}
       mainClassName={styles.appMain}
     >
       <Helmet>
