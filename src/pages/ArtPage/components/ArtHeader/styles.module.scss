@@ -12,6 +12,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .backButton {
@@ -19,10 +20,11 @@
   color: $color-gray-3;
 }
 
-.shareButtonsWrapper {
+.buttonsWrapper {
   display: flex;
 
-  & :first-child {
+  & :nth-child(1),
+  & :nth-child(2) {
     margin-right: 12px;
   }
 }
@@ -46,7 +48,7 @@
     color: $color-gray-3;
   }
 
-  .shareButtonsWrapper {
+  .buttonsWrapper {
     margin-top: 8px;
   }
 }
