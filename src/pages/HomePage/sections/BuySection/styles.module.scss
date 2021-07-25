@@ -1,0 +1,43 @@
+@import '../../../../scss/abstracts/variables.scss';
+
+.root {
+  border: {
+    top: 1px solid $color-gray-1;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  padding: 80px;
+  min-width: 480px;
+  width: 40%;
+  border: {
+    left: 1px solid $color-gray-1;
+    right: 1px solid $color-gray-1;
+  }
+}
+
+.table {
+  margin-bottom: 24px;
+}
+
+.buyButton {
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1023px) {
+  .content {
+    border: none;
+    padding: 48px;
+    width: 100%;
+    min-width: unset;
+  }
+  .table {
+    margin-bottom: 12px;
+  }
+  .buyButton {
+    margin: none;
+  }
+}

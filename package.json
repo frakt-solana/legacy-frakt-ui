@@ -1,5 +1,5 @@
 {
-  "name": "dapp-scaffold",
+  "name": "frakt-web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,15 +14,15 @@
     "@solana/web3.js": "^1.7.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
-    "@twistezo/react-text-scramble": "^1.0.6",
     "@types/react-router-dom": "^5.1.6",
     "antd": "^4.6.6",
+    "arweave": "^1.10.16",
     "bn.js": "^5.1.3",
     "bs58": "^4.0.1",
     "buffer-layout": "^1.2.0",
     "camelcase-keys-deep": "^0.1.0",
     "eventemitter3": "^4.0.7",
-    "frakt-client": "1.1.0",
+    "frakt-client": "^1.1.3",
     "jazzicon": "^1.5.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
@@ -47,7 +47,7 @@
     "deploy": "gh-pages -d build",
     "deploy:ar": "arweave deploy-dir build --key-file ",
     "format:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\"",
-    "image:build": "docker build -f Dockerfile -t frakt-web:latest .",
+    "image:build": "docker build -f Dockerfile -t timikcool/frakt-web:latest .",
     "image:run": "docker run -it --rm -p 1337:80 frakt-web:latest",
     "image:push": "docker push timikcool/frakt-web:latest"
   },
@@ -68,9 +68,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/solana-labs/dapp-scaffold"
+    "url": "https://github.com/frakt-solana/frakt-web"
   },
-  "homepage": ".",
   "devDependencies": {
     "@types/bn.js": "^4.11.6",
     "@types/bs58": "^4.0.1",

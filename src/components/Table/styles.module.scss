@@ -1,0 +1,157 @@
+@import '../../scss/abstracts/variables.scss';
+
+@mixin row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.root {
+  &.sm {
+    font-size: 14px;
+
+    .header {
+      padding-bottom: 6px;
+    }
+
+    .row {
+      padding-bottom: 6px;
+      padding-top: 6px;
+    }
+
+    .questionIcon {
+      font-size: 12px;
+      margin-left: 2px;
+    }
+  }
+
+  &.md {
+    font-size: 18px;
+
+    .header {
+      padding-bottom: 10px;
+    }
+
+    .row {
+      padding-bottom: 10px;
+      padding-top: 10px;
+    }
+
+    .questionIcon {
+      font-size: 14px;
+      margin-left: 4px;
+    }
+  }
+
+  &.lg {
+    font-size: 24px;
+
+    .header {
+      padding-bottom: 14px;
+    }
+
+    .row {
+      padding-bottom: 14px;
+      padding-top: 14px;
+    }
+
+    .questionIcon {
+      font-size: 20px;
+      margin-left: 8px;
+    }
+  }
+}
+
+.header {
+  @include row;
+  border-bottom: 1px solid $color-white;
+  color: $color-white;
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
+.row {
+  @include row;
+  border-bottom: 1px solid $color-gray-1;
+  color: $color-gray-2;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+.questionIcon {
+  cursor: pointer;
+}
+
+.link {
+  color: $color-white;
+  text-decoration: underline;
+
+  &:hover {
+    color: $color-gray-4;
+    text-decoration: underline;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .root {
+    &.sm {
+      font-size: 12px;
+
+      .header {
+        padding-bottom: 5px;
+      }
+
+      .row {
+        padding-bottom: 5px;
+        padding-top: 5px;
+      }
+
+      .questionIcon {
+        font-size: 10px;
+        margin-left: 2px;
+      }
+    }
+
+    &.md {
+      font-size: 16px;
+
+      .header {
+        padding-bottom: 8px;
+      }
+
+      .row {
+        padding-bottom: 8px;
+        padding-top: 8px;
+      }
+
+      .questionIcon {
+        font-size: 12px;
+        margin-left: 3px;
+      }
+    }
+
+    &.lg {
+      font-size: 20px;
+
+      .header {
+        padding-bottom: 12px;
+      }
+
+      .row {
+        padding-bottom: 12px;
+        padding-top: 12px;
+      }
+
+      .questionIcon {
+        font-size: 16px;
+        margin-left: 6px;
+      }
+    }
+  }
+}

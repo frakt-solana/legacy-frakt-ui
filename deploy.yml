@@ -2,7 +2,7 @@ version: "2.0"
 
 services:
   web:
-    image: timikcool/frakt-web:latest
+    image: timikcool/frakt-web:fix-token-pubkey
     expose:
       - port: 80
         as: 80
@@ -24,11 +24,14 @@ profiles:
   placement:
     westcoast:
       attributes:
-        host: akash
+        organization: ovrclk.com
+      signedBy:
+        anyOf:
+          - "akash1vz375dkt0c60annyp6mkzeejfq0qpyevhseu05"
       pricing:
         web:
           denom: uakt
-          amount: 1
+          amount: 500
 
 deployment:
   web:

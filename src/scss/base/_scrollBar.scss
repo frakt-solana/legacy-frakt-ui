@@ -19,3 +19,9 @@
 ::-webkit-scrollbar-thumb:hover {
   background: $color-white;
 }
+
+@media screen and (max-width: 1024px) {
+  ::-webkit-scrollbar {
+    width: unset;
+  }
+}

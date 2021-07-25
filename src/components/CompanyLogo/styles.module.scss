@@ -1,0 +1,26 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  font-size: 64px;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $color-white;
+
+  &:hover {
+    color: $color-white;
+  }
+}
+
+.generatedCounter {
+  font-size: 18px;
+}
+
+@media screen and (max-width: 1023px) {
+  .root {
+    font-size: 28px;
+  }
+  .generatedCounter {
+    display: none;
+  }
+}

@@ -1,0 +1,45 @@
+@import '../../scss/abstracts/variables.scss';
+
+.artContainer {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid $color-gray-1;
+}
+
+.image {
+  width: 100%;
+  border-right: 1px solid $color-gray-1;
+}
+
+.info {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.appLayoutMain {
+  display: flex;
+  flex-direction: column;
+}
+
+.preloaderWrapper {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1023px) {
+  .artContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  .info {
+    padding: 24px;
+  }
+  .preloaderWrapper {
+    height: calc(100vh - 218px);
+  }
+}

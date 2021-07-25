@@ -1,0 +1,62 @@
+@import '../../../../scss/abstracts/variables.scss';
+
+.root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: no-repeat center;
+  background-size: 80%;
+
+  p {
+    position: relative;
+    font-size: 24px;
+    color: $color-gray-2;
+  }
+}
+
+.title {
+  font-size: 120px;
+  text-transform: uppercase;
+}
+
+.scrollBottomButton {
+  position: absolute;
+  bottom: -72px;
+  left: calc(50% - 36px);
+  transform: rotate(90deg);
+  color: $color-gray-1;
+  svg {
+    width: 72px;
+  }
+
+  &:hover {
+    color: $color-gray-2;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .root {
+    height: calc(100vh - 73px);
+    background-size: 120%;
+
+    p {
+      font-size: 16px;
+    }
+  }
+
+  .title {
+    font-size: 72px;
+  }
+
+  .scrollBottomButton {
+    bottom: -48px;
+    left: calc(50% - 24px);
+    transform: rotate(90deg);
+    color: $color-gray-2;
+    svg {
+      width: 48px;
+    }
+  }
+}

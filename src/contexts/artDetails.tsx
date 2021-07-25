@@ -1,11 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import {
-  Connection,
-  SystemProgram,
-  Transaction,
-  PublicKey,
-} from '@solana/web3.js'
-import camelcaseKeysDeep from 'camelcase-keys-deep'
+import { PublicKey } from '@solana/web3.js'
 import * as contract from 'frakt-client'
 import { useWallet } from './wallet'
 import { useConnection } from './connection'
@@ -24,9 +18,9 @@ interface IArtsContext {
   getCurrentUserArts: any
   getUserArts: any
   buyArt: any
-  getArtOwner: any,
-  getArtTokenPubkey: any,
-  updateCounter: any,
+  getArtOwner: any
+  getArtTokenPubkey: any
+  updateCounter: any
   counter: number
 }
 
@@ -51,7 +45,7 @@ export const ArtsContext = React.createContext({
 export const ArtsProvider = ({ children = null as any }) => {
   const [arts, setArts] = useState([])
   const [currentUserArts, setCurrentUserArts] = useState([])
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(0)
 
   const { wallet } = useWallet()
   const connection = useConnection()
@@ -72,10 +66,9 @@ export const ArtsProvider = ({ children = null as any }) => {
   // * optional, might be deleted
   useEffect(() => {
     if (wallet?.publicKey) {
-      console.log({ wallet })
-
       getCurrentUserArts()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wallet?.publicKey])
 
   const buyArt = async () => {
@@ -136,15 +129,21 @@ export const ArtsProvider = ({ children = null as any }) => {
     return userArts
   }
 
-  const getArtTokenPubkey = async (ownerPubkey: String, minted_token_pubkey: String): Promise<PublicKey> => {
-    const tokenPubkey = await contract.getTokenAddressFromMintAndUser(ownerPubkey, minted_token_pubkey);
+  const getArtTokenPubkey = async (
+    ownerPubkey: String,
+    minted_token_pubkey: String
+  ): Promise<PublicKey> => {
+    const tokenPubkey = await contract.getTokenAddressFromMintAndUser(
+      ownerPubkey,
+      minted_token_pubkey
+    )
     return tokenPubkey
   }
 
   const updateCounter = async () => {
-    const counter = await contract.getCounter(programPubKey, { connection });
-    setCounter(counter.count as number);
-    return counter.count
+    const counter = await contract.getCounter(programPubKey, { connection })
+    counter?.count && setCounter(counter.count as number)
+    return counter?.count
   }
 
   return (
@@ -180,7 +179,7 @@ export const useArts = () => {
     getArtOwner,
     getArtTokenPubkey,
     updateCounter,
-    counter
+    counter,
   } = useContext(ArtsContext) as IArtsContext
   return {
     getArts,
@@ -192,6 +191,6 @@ export const useArts = () => {
     getArtOwner,
     getArtTokenPubkey,
     updateCounter,
-    counter
+    counter,
   }
 }

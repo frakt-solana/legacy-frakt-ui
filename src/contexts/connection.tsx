@@ -63,8 +63,8 @@ const ConnectionContext = React.createContext<ConnectionConfig>({
   setEndpoint: () => { },
   slippage: DEFAULT_SLIPPAGE,
   setSlippage: (val: number) => { },
-  connection: new Connection(DEFAULT, "processed"),
-  sendConnection: new Connection(DEFAULT, "processed"),
+  connection: new Connection(DEFAULT, "confirmed"),
+  sendConnection: new Connection(DEFAULT, "confirmed"),
   env: ENDPOINTS[2].name,
   tokens: [],
   tokenMap: new Map<string, TokenInfo>(),
@@ -81,10 +81,10 @@ export function ConnectionProvider({ children = undefined as any }) {
     DEFAULT_SLIPPAGE.toString()
   );
 
-  const connection = useMemo(() => new Connection(endpoint, "processed"), [
+  const connection = useMemo(() => new Connection(endpoint, "confirmed"), [
     endpoint,
   ]);
-  const sendConnection = useMemo(() => new Connection(endpoint, "processed"), [
+  const sendConnection = useMemo(() => new Connection(endpoint, "confirmed"), [
     endpoint,
   ]);
 
