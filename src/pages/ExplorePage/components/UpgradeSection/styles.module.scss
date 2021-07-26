@@ -1,0 +1,26 @@
+@import '../../../../scss/abstracts/variables.scss';
+
+.root {
+  padding: 22px 40px;
+  border-bottom: 1px solid $color-gray-1;
+  font-size: 18px;
+}
+
+.upgradeButton {
+  display: inline-block;
+}
+
+.boldText {
+  font-weight: 600;
+}
+
+.questionText {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1023px) {
+  .root {
+    display: none;
+  }
+}
