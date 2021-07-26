@@ -17,6 +17,7 @@ interface IArtsContext {
   getArts: any
   getCurrentUserArts: any
   getUserArts: any
+  upgradeArts: any
   buyArt: any
   getArtOwner: any
   getArtTokenPubkey: any
@@ -39,6 +40,7 @@ export const ArtsContext = React.createContext({
   getArts: () => { },
   getCurrentUserArts: () => { },
   getUserArts: () => { },
+  upgradeArts: () => { },
   buyArt: () => { },
 })
 
@@ -146,6 +148,23 @@ export const ArtsProvider = ({ children = null as any }) => {
     return counter?.count
   }
 
+  const upgradeArts = async (arts) => {
+    try {
+      void (await contract.migrateArtsToNewTokens(arts, wallet.publicKey, programPubKey, async (txn) => {
+        let { blockhash } = await connection.getRecentBlockhash()
+
+        txn.recentBlockhash = blockhash
+        txn.feePayer = wallet.publicKey
+        let signed = await wallet.signTransaction(txn)
+        let txid = await connection.sendRawTransaction(signed.serialize())
+        return void connection.confirmTransaction(txid)
+      }, { connection }))
+      return true
+    } catch (error) {
+
+    }
+  }
+
   return (
     <ArtsContext.Provider
       value={
@@ -153,6 +172,7 @@ export const ArtsProvider = ({ children = null as any }) => {
           getCurrentUserArts,
           getArts,
           getUserArts,
+          upgradeArts,
           arts,
           currentUserArts,
           counter,
@@ -173,6 +193,7 @@ export const useArts = () => {
     getArts,
     getCurrentUserArts,
     getUserArts,
+    upgradeArts,
     currentUserArts,
     arts,
     buyArt,
@@ -184,6 +205,7 @@ export const useArts = () => {
   return {
     getArts,
     getCurrentUserArts,
+    upgradeArts,
     getUserArts,
     currentUserArts,
     arts,

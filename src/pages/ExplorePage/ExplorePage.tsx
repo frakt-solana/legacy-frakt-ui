@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { PublicKey } from '@solana/web3.js'
 import { useParams } from 'react-router'
 import { Helmet } from 'react-helmet'
@@ -14,27 +14,44 @@ import { useWallet } from '../../contexts/wallet'
 import NoFraktsBlock from './components/NoFraktsBlock'
 import ExploreHeader from './components/ExploreHeader'
 import UpgradeSection from './components/UpgradeSection'
+import { useArts } from '../../contexts/artDetails'
+import { notify } from '../../utils/notifications'
 
 const ExplorePage = () => {
   const { userAddress } = useParams<{ userAddress: string }>()
   const { wallet } = useWallet()
   const { arts: rawArts, getArts, loading } = useLazyArtsData()
-
+  const { upgradeArts } = useArts();
   const [sortBy, setSortBy] = useState('created_at')
 
   const arts = useMemo(() => sortArts(rawArts, sortBy), [rawArts, sortBy])
+  const artsToUpgrade = useMemo(() => arts.filter(art => art.metadata.is_old_version), [arts])
 
   useEffect(() => {
     const publicKey =
       `${wallet?.publicKey}` === userAddress
         ? wallet.publicKey
         : userAddress
-        ? new PublicKey(userAddress)
-        : null
+          ? new PublicKey(userAddress)
+          : null
     getArts(publicKey)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wallet])
+
+  const onUpgradeArts = useCallback(
+    async () => {
+      const success = await upgradeArts(artsToUpgrade.slice(0, 10))
+
+      success &&
+        notify({
+          message: 'Success',
+          description: 'Your frakts will be updated within seconds. If you have more to go, please wait for previos generation and repeat',
+          type: 'success',
+        })
+    },
+    [artsToUpgrade.length],
+  )
 
   const onSortChange = (sortBy: 'created_at' | 'rarity') => setSortBy(sortBy)
 
@@ -49,9 +66,8 @@ const ExplorePage = () => {
       mainClassName={styles.appMain}
     >
       <Helmet>
-        <title>{`Explore ${
-          userAddress ? `User's frakts` : ''
-        } | FRAKT: Generative Art NFT Collection on Solana`}</title>
+        <title>{`Explore ${userAddress ? `User's frakts` : ''
+          } | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>
       {loading && <Preloader size='lg' className={styles.preloader} />}
       {!loading && !arts.length && (
@@ -62,11 +78,11 @@ const ExplorePage = () => {
       )}
       {!loading && !!arts.length && (
         <>
-          {`${wallet?.publicKey}` === userAddress && OLD_FRAKTS_AMOUNT && (
+          {`${wallet?.publicKey}` === userAddress && artsToUpgrade.length && (
             <UpgradeSection
-              oldFraktsAmount={OLD_FRAKTS_AMOUNT}
+              oldFraktsAmount={artsToUpgrade.length}
               tooltipText={TOOLTIP_TEXT}
-              onUpgradeClick={() => console.log('TODO: add logic here')}
+              onUpgradeClick={onUpgradeArts}
             />
           )}
           <ArtsSort onChange={onSortChange} />
@@ -78,7 +94,7 @@ const ExplorePage = () => {
 }
 
 const TOOLTIP_TEXT =
-  "Go into a room to decide you didn't want to be in there anyway be superior. Run outside as soon as door open what a cat-ass-trophy! meowing chowing and wowing meow meow mama head nudges and cats go for world domination. Stand with legs in litter box, but poop outside while happily ignoring when being called yet good morning sunshine mouse scratch at the door then walk away. Push your water glass on the floor crusty butthole and chirp at birds for fight an alligator and win. Sniff all the things nap all day there's a forty year old lady there let us feast thug cat a nice warm laptop for me to sit on or please stop looking at your phone and pet me but sniff catnip and act crazy. Stare at ceiling toilet paper attack claws fluff everywhere meow miao french ciao litterbox look at dog hiiiiiisssss."
+  "This update is needed for full Phantom wallet support, high resolution image and ability to trade your frakt later on Marketplace. Please, if you have more than 10 old standard tokens, repeat this operation after transaction confirmation"
 const OLD_FRAKTS_AMOUNT = 10
 
 export default ExplorePage
