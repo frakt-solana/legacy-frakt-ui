@@ -2,7 +2,7 @@ import { shortenAddress } from '../../utils/utils'
 
 export const getHeaderText = ({ walletKey, userAddress }) =>
   `${walletKey}` === userAddress
-    ? "My Frakts"
+    ? 'My Frakts'
     : userAddress
     ? `Collection of ${shortenAddress(userAddress)}`
     : 'Explore'
@@ -19,3 +19,10 @@ export const sortArtsByRarity = (arts) =>
 
 export const sortArts = (arts, sortBy) =>
   (sortBy === 'rarity' ? sortArtsByRarity : sortArtsByNew)(arts)
+
+export const pluralize = (
+  count: number,
+  noun: string,
+  suffix: string = 's'
+): string =>
+  count ? `${count} ${noun}${count !== 1 ? suffix : ''}` : `0 ${noun}${suffix}`
