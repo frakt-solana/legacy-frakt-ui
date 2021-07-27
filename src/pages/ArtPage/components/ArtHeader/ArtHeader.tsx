@@ -4,7 +4,7 @@ import TwitterShareButton from '../../../../components/TwitterShareButton'
 import CopyURLButton from '../../../../components/CopyURLButton'
 import ButtonArrow from '../../../../components/ButtonArrow'
 import styles from './styles.module.scss'
-import DownloadButton from '../DownloadButton'
+// import DownloadButton from '../DownloadButton'
 
 interface IArtHeaderProps {
   title: string
@@ -25,7 +25,7 @@ const ArtHeader = ({ title, onBackButtonClick }: IArtHeaderProps) => (
       <div className={styles.title}>
         <div>{title}</div>
         <div className={styles.buttonsWrapper}>
-          <DownloadButton size='md' />
+          {/* <DownloadButton size='md' /> */}
           <CopyURLButton size='md' />
           <TwitterShareButton size='md' />
         </div>
