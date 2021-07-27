@@ -13,7 +13,7 @@ import { useLazyArtsData } from '../../hooks'
 import { useWallet } from '../../contexts/wallet'
 import NoFraktsBlock from './components/NoFraktsBlock'
 import ExploreHeader from './components/ExploreHeader'
-import UpgradeSection from './components/UpgradeSection'
+// import UpgradeSection from './components/UpgradeSection'
 
 const ExplorePage = () => {
   const { userAddress } = useParams<{ userAddress: string }>()
@@ -62,13 +62,13 @@ const ExplorePage = () => {
       )}
       {!loading && !!arts.length && (
         <>
-          {`${wallet?.publicKey}` === userAddress && OLD_FRAKTS_AMOUNT && (
+          {/* {`${wallet?.publicKey}` === userAddress && !!OLD_FRAKTS_AMOUNT && (
             <UpgradeSection
               oldFraktsAmount={OLD_FRAKTS_AMOUNT}
               tooltipText={TOOLTIP_TEXT}
               onUpgradeClick={() => console.log('TODO: add logic here')}
             />
-          )}
+          )} */}
           <ArtsSort onChange={onSortChange} />
           <ArtsList arts={arts} />
         </>
@@ -77,8 +77,8 @@ const ExplorePage = () => {
   )
 }
 
-const TOOLTIP_TEXT =
-  "Go into a room to decide you didn't want to be in there anyway be superior. Run outside as soon as door open what a cat-ass-trophy! meowing chowing and wowing meow meow mama head nudges and cats go for world domination. Stand with legs in litter box, but poop outside while happily ignoring when being called yet good morning sunshine mouse scratch at the door then walk away. Push your water glass on the floor crusty butthole and chirp at birds for fight an alligator and win. Sniff all the things nap all day there's a forty year old lady there let us feast thug cat a nice warm laptop for me to sit on or please stop looking at your phone and pet me but sniff catnip and act crazy. Stare at ceiling toilet paper attack claws fluff everywhere meow miao french ciao litterbox look at dog hiiiiiisssss."
-const OLD_FRAKTS_AMOUNT = 10
+// const TOOLTIP_TEXT =
+//   "Go into a room to decide you didn't want to be in there anyway be superior. Run outside as soon as door open what a cat-ass-trophy! meowing chowing and wowing meow meow mama head nudges and cats go for world domination. Stand with legs in litter box, but poop outside while happily ignoring when being called yet good morning sunshine mouse scratch at the door then walk away. Push your water glass on the floor crusty butthole and chirp at birds for fight an alligator and win. Sniff all the things nap all day there's a forty year old lady there let us feast thug cat a nice warm laptop for me to sit on or please stop looking at your phone and pet me but sniff catnip and act crazy. Stare at ceiling toilet paper attack claws fluff everywhere meow miao french ciao litterbox look at dog hiiiiiisssss."
+// const OLD_FRAKTS_AMOUNT = 10
 
 export default ExplorePage

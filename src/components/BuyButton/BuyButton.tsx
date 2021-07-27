@@ -28,8 +28,9 @@ const BuyButton = ({ className }: BuyButtonProps) => {
       className={className}
       size='lg'
       onClick={connected ? onBuy : select}
+      disabled
     >
-      Buy frakt
+      SOLD OUT
     </Button>
   )
 }
