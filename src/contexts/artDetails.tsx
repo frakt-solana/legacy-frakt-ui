@@ -161,7 +161,7 @@ export const ArtsProvider = ({ children = null as any }) => {
       }, { connection }))
       return true
     } catch (error) {
-
+      console.log(error)
     }
   }
 

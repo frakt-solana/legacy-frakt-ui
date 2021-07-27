@@ -41,7 +41,7 @@ const ExplorePage = () => {
 
   const onUpgradeArts = useCallback(
     async () => {
-      const success = await upgradeArts(artsToUpgrade.slice(0, 10))
+      const success = await upgradeArts(artsToUpgrade.slice(0, 5))
 
       success &&
         notify({

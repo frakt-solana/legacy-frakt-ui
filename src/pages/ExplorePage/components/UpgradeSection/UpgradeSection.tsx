@@ -26,7 +26,7 @@ const UpgradeSection = ({
       <Button className={styles.upgradeButton} onClick={onUpgradeClick}>
         Upgrade
       </Button>{' '}
-      {oldFraktsAmount > 10 ? '10 of ' : ''} them to the new standart.{' '}
+      {oldFraktsAmount > 5 ? '5 of ' : ''} them to the new standart.{' '}
       <Tooltip color={'#1e1e1e'} title={tooltipText}>
         <span className={styles.questionText}>Why do I need this?</span>
       </Tooltip>
