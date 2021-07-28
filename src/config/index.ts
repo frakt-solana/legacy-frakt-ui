@@ -26,16 +26,16 @@ export const ENDPOINTS = [
   },
 ]
 
-const dev = {
+const devnet = {
   PROGRAM_PUBLIC_KEY: '6zcw5qXiCjScAxYLhxhuPgAo69PSoDijpnWTDGmDVDbv',
   ADMIN_PUBLIC_KEY: 'DQfi54Fspjfi6VyMH1iSDyYAcui2hUF1QRbQ1GM7N1uo',
   ENDPOINT: ENDPOINTS[2],
 }
 
-const prod = {
+const mainnet = {
   PROGRAM_PUBLIC_KEY: '6zcw5qXiCjScAxYLhxhuPgAo69PSoDijpnWTDGmDVDbv',
   ADMIN_PUBLIC_KEY: '6wPYbuGRXZjVw2tCeTxwRiQU7AzFDTeFEKuUFpJZpcix',
   ENDPOINT: ENDPOINTS[0],
 }
 
-export default process.env.REACT_APP_STAGE === 'production' ? prod : dev
+export default process.env.REACT_APP_NETWORK === 'devnet' ? devnet : mainnet
