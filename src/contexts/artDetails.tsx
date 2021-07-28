@@ -1,16 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { keyBy } from 'lodash';
+import { keyBy } from 'lodash'
 import { PublicKey } from '@solana/web3.js'
 import * as contract from 'frakt-client'
 import { useWallet } from './wallet'
 import { useConnection } from './connection'
+import config from '../config'
 
-const programPubKey = new PublicKey(
-  '6zcw5qXiCjScAxYLhxhuPgAo69PSoDijpnWTDGmDVDbv'
-)
-const adminPubKey = new PublicKey(
-  'DQfi54Fspjfi6VyMH1iSDyYAcui2hUF1QRbQ1GM7N1uo'
-)
+const programPubKey = new PublicKey(config.PROGRAM_PUBLIC_KEY)
+const adminPubKey = new PublicKey(config.ADMIN_PUBLIC_KEY)
 
 interface IArtsContext {
   currentUserArts: any
@@ -43,12 +40,12 @@ export const ArtsContext = React.createContext({
   arts: [],
   artMetaByMintKey: {},
   counter: 0,
-  getUserArtsInMigration: () => { },
-  getArts: () => { },
-  getCurrentUserArts: () => { },
-  getUserArts: () => { },
-  upgradeArts: () => { },
-  buyArt: () => { },
+  getUserArtsInMigration: () => {},
+  getArts: () => {},
+  getCurrentUserArts: () => {},
+  getUserArts: () => {},
+  upgradeArts: () => {},
+  buyArt: () => {},
 })
 
 export const ArtsProvider = ({ children = null as any }) => {
@@ -75,7 +72,6 @@ export const ArtsProvider = ({ children = null as any }) => {
 
   // * optional, might be deleted
   useEffect(() => {
-
     if (wallet?.publicKey) {
       getCurrentUserArts()
     }
@@ -116,20 +112,26 @@ export const ArtsProvider = ({ children = null as any }) => {
   }
 
   const getArts = async () => {
-    const [rawArts, metadata] = await Promise.all([contract.getArts(programPubKey, {
-      connection,
-    }), getTokensMetadata()])
-    const arts = proccessArts(rawArts);
+    const [rawArts, metadata] = await Promise.all([
+      contract.getArts(programPubKey, {
+        connection,
+      }),
+      getTokensMetadata(),
+    ])
+    const arts = proccessArts(rawArts)
     setArts(arts)
     return arts
   }
 
   const getUserArts = async (userPubKey: PublicKey) => {
     const tokens = await contract.getAllUserTokens(userPubKey, { connection })
-    const [arts, metadata] = await Promise.all([contract.getArts(programPubKey, { connection }), getTokensMetadata()]);
+    const [arts, metadata] = await Promise.all([
+      contract.getArts(programPubKey, { connection }),
+      getTokensMetadata(),
+    ])
     setArts(proccessArts(arts))
     const userArts = contract.getArtTokensFromTokens(arts, tokens)
-    const artsInMigration = getUserArtsInMigration(arts, userPubKey);
+    const artsInMigration = getUserArtsInMigration(arts, userPubKey)
     return proccessArts([...userArts, ...artsInMigration])
   }
 
@@ -140,9 +142,14 @@ export const ArtsProvider = ({ children = null as any }) => {
   }
 
   const getUserArtsInMigration = (arts, userPubKey: PublicKey) => {
-    const artsInMigration = arts.filter(frakt => frakt.metadata.first_owner_pubkey === userPubKey.toString() && frakt.metadata.is_old_version === false
-      && frakt.metadata.is_minted === true
-      && frakt.metadata.minted_token_pubkey === '11111111111111111111111111111111')
+    const artsInMigration = arts.filter(
+      (frakt) =>
+        frakt.metadata.first_owner_pubkey === userPubKey.toString() &&
+        frakt.metadata.is_old_version === false &&
+        frakt.metadata.is_minted === true &&
+        frakt.metadata.minted_token_pubkey ===
+          '11111111111111111111111111111111'
+    )
     return artsInMigration
   }
 
@@ -165,15 +172,21 @@ export const ArtsProvider = ({ children = null as any }) => {
 
   const upgradeArts = async (arts) => {
     try {
-      void (await contract.migrateArtsToNewTokens(arts, wallet.publicKey, programPubKey, async (txn) => {
-        let { blockhash } = await connection.getRecentBlockhash()
+      void (await contract.migrateArtsToNewTokens(
+        arts,
+        wallet.publicKey,
+        programPubKey,
+        async (txn) => {
+          let { blockhash } = await connection.getRecentBlockhash()
 
-        txn.recentBlockhash = blockhash
-        txn.feePayer = wallet.publicKey
-        let signed = await wallet.signTransaction(txn)
-        let txid = await connection.sendRawTransaction(signed.serialize())
-        return void connection.confirmTransaction(txid)
-      }, { connection }))
+          txn.recentBlockhash = blockhash
+          txn.feePayer = wallet.publicKey
+          let signed = await wallet.signTransaction(txn)
+          let txid = await connection.sendRawTransaction(signed.serialize())
+          return void connection.confirmTransaction(txid)
+        },
+        { connection }
+      ))
       return true
     } catch (error) {
       console.log(error)
@@ -181,8 +194,11 @@ export const ArtsProvider = ({ children = null as any }) => {
   }
 
   const getTokensMetadata = async () => {
-    const creatorsMetas = await contract.getCreatorsMetadataTokens(adminPubKey, { connection })
-    setMetadata(keyBy(creatorsMetas, 'mintAddress'));
+    const creatorsMetas = await contract.getCreatorsMetadataTokens(
+      adminPubKey,
+      { connection }
+    )
+    setMetadata(keyBy(creatorsMetas, 'mintAddress'))
   }
 
   return (
