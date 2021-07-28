@@ -17,10 +17,10 @@ const ArtCard = ({ className = '', art = {} }: IArtCardProps) => {
     attributes: { color, image_url, shape },
   } = art
 
-  const { src, getSrc } = useLazyArtImageSrc()
+  const { src, getSrc, files } = useLazyArtImageSrc()
 
   useEffect(() => {
-    image_url && getSrc(image_url)
+    image_url && getSrc(art)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

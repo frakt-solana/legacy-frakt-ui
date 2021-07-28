@@ -13,5 +13,5 @@ export const downloadImageFromURL = (
     .then((image) => image.blob())
     .then((imageBlob) => {
       const imageURL = URL.createObjectURL(imageBlob)
-      openDownloadLink(imageURL, (imageName = 'image'))
+      openDownloadLink(imageURL, imageName)
     })

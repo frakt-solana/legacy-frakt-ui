@@ -8,10 +8,11 @@ import DownloadButton from '../DownloadButton'
 
 interface IArtHeaderProps {
   title: string
+  imageFile: string
   onBackButtonClick: () => void
 }
 
-const ArtHeader = ({ title, onBackButtonClick }: IArtHeaderProps) => (
+const ArtHeader = ({ title, onBackButtonClick, imageFile }: IArtHeaderProps) => (
   <div className={styles.root}>
     <ButtonArrow
       arrowLeft
@@ -25,7 +26,7 @@ const ArtHeader = ({ title, onBackButtonClick }: IArtHeaderProps) => (
       <div className={styles.title}>
         <div>{title}</div>
         <div className={styles.buttonsWrapper}>
-          <DownloadButton size='md' />
+          <DownloadButton size='md' imageFile={imageFile} title={title} />
           <CopyURLButton size='md' />
           <TwitterShareButton size='md' />
         </div>
