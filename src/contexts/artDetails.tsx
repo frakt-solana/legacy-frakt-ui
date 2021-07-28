@@ -25,6 +25,7 @@ interface IArtsContext {
   getArtOwner: any
   getArtTokenPubkey: any
   getTokensMetadata: any
+  getUserArtsInMigration: any
   updateCounter: any
   counter: number
 }
@@ -42,6 +43,7 @@ export const ArtsContext = React.createContext({
   arts: [],
   artMetaByMintKey: {},
   counter: 0,
+  getUserArtsInMigration: () => { },
   getArts: () => { },
   getCurrentUserArts: () => { },
   getUserArts: () => { },
@@ -127,13 +129,21 @@ export const ArtsProvider = ({ children = null as any }) => {
     const [arts, metadata] = await Promise.all([contract.getArts(programPubKey, { connection }), getTokensMetadata()]);
     setArts(proccessArts(arts))
     const userArts = contract.getArtTokensFromTokens(arts, tokens)
-    return proccessArts(userArts)
+    const artsInMigration = getUserArtsInMigration(arts, userPubKey);
+    return proccessArts([...userArts, ...artsInMigration])
   }
 
   const getCurrentUserArts = async () => {
     const userArts = await getUserArts(wallet.publicKey)
     setCurrentUserArts(userArts)
     return userArts
+  }
+
+  const getUserArtsInMigration = (arts, userPubKey: PublicKey) => {
+    const artsInMigration = arts.filter(frakt => frakt.metadata.first_owner_pubkey === userPubKey.toString() && frakt.metadata.is_old_version === false
+      && frakt.metadata.is_minted === true
+      && frakt.metadata.minted_token_pubkey === '11111111111111111111111111111111')
+    return artsInMigration
   }
 
   const getArtTokenPubkey = async (
@@ -179,6 +189,7 @@ export const ArtsProvider = ({ children = null as any }) => {
     <ArtsContext.Provider
       value={
         {
+          getUserArtsInMigration,
           artMetaByMintKey,
           getCurrentUserArts,
           getArts,
@@ -201,7 +212,7 @@ export const ArtsProvider = ({ children = null as any }) => {
 
 export const useArts = () => {
   const {
-
+    getUserArtsInMigration,
     getArts,
     getCurrentUserArts,
     getUserArts,
@@ -216,6 +227,7 @@ export const useArts = () => {
     counter,
   } = useContext(ArtsContext) as IArtsContext
   return {
+    getUserArtsInMigration,
     getArts,
     getCurrentUserArts,
     upgradeArts,

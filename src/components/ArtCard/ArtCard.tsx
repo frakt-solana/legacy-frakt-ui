@@ -24,6 +24,10 @@ const ArtCard = ({ className = '', art = {} }: IArtCardProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const isInMigration = art?.metadata.is_old_version === false
+    && art?.metadata.is_minted === true
+    && art?.metadata.minted_token_pubkey === '11111111111111111111111111111111'
+
   return (
     <div className={`${styles.root} ${className || ''}`}>
       <ArtImage src={src} />
@@ -32,8 +36,8 @@ const ArtCard = ({ className = '', art = {} }: IArtCardProps) => {
         <p className={styles.rarity}>
           {art?.rarity ? `${art.rarity.toFixed(2)}% rarity` : ''}
         </p>
-        <ButtonArrow size='lg' className={styles.exploreButton}>
-          Explore
+        <ButtonArrow size='lg' className={styles.exploreButton} >
+          {isInMigration ? 'DISABLED' : 'Explore'}
         </ButtonArrow>
       </div>
     </div>
