@@ -39,6 +39,7 @@
     "devnet": "REACT_APP_NETWORK=devnet craco start",
     "mainnet": "craco start",
     "build": "craco build",
+    "build:devnet": "REACT_APP_NETWORK=devnet craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
     "program:build": "cd program && cargo build-bpf",
