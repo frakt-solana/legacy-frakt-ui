@@ -4,7 +4,7 @@ import TwitterShareButton from '../../../../components/TwitterShareButton'
 import CopyURLButton from '../../../../components/CopyURLButton'
 import ButtonArrow from '../../../../components/ButtonArrow'
 import styles from './styles.module.scss'
-import DownloadButton from '../DownloadButton'
+// import DownloadButton from '../DownloadButton'
 
 interface IArtHeaderProps {
   title: string

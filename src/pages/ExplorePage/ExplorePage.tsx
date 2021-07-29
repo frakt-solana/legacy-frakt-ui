@@ -79,6 +79,7 @@ const ExplorePage = () => {
       {!loading && !!arts.length && (
         <>
           {`${wallet?.publicKey}` === userAddress && !!artsToUpgrade.length && (
+
             <UpgradeSection
               oldFraktsAmount={artsToUpgrade.length}
               tooltipText={TOOLTIP_TEXT}
@@ -93,8 +94,8 @@ const ExplorePage = () => {
   )
 }
 
+
 const TOOLTIP_TEXT =
   "This update is needed for full Phantom wallet support, high resolution image and ability to trade your frakt later on Marketplace. Please, if you have more than 5 old standard tokens, repeat this operation after transaction confirmation"
-const OLD_FRAKTS_AMOUNT = 10
 
 export default ExplorePage
