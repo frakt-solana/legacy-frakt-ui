@@ -10,21 +10,42 @@ export * from './useUserTotalBalance'
 
 export const useLazyArtImageSrc = () => {
   const [src, setSrc] = useState(null)
+  const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const {artMetaByMintKey} = useArts()
 
-  const getSrc = (imageUrl) => {
-    setLoading(true)
-    fetch(ipfsUriToGatewayUrl(imageUrl))
-      .then((res) => res.json())
-      .then(({ image }) => {
-        setSrc(ipfsUriToGatewayUrl(image))
-      })
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false))
+  const setImageFromIpfs = async (imageUrl) => {
+    const res = await fetch(ipfsUriToGatewayUrl(imageUrl));
+    const {image} = await res.json();
+    setSrc(ipfsUriToGatewayUrl(image))
   }
 
-  return { src, loading, error, getSrc }
+  const setImageFromArweave = async (metadata) => {
+    const res = await fetch(metadata.account.info.data.uri);
+    const data = await res.json()
+    setFiles(data.properties.files)
+    setSrc(data.image)
+  }
+
+  const getSrc = async (art) => {
+    setLoading(true)
+    const metadata = artMetaByMintKey[art.metadata.minted_token_pubkey]
+
+    try {
+      if (!metadata) {
+        await setImageFromIpfs(art.attributes?.image_url)
+      } else {
+        await setImageFromArweave(metadata);
+      }
+    } catch (error) {
+      setError(error);
+    }
+    
+    setLoading(false)
+  }
+
+  return { src, loading, error, getSrc, files }
 }
 
 export const useLazyArtsData = () => {

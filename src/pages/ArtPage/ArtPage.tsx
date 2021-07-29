@@ -17,13 +17,13 @@ import { useLazyArtImageSrc } from '../../hooks'
 const ArtPage = () => {
   const { artAccountPubkey } = useParams<{ artAccountPubkey: string }>()
   const history = useHistory()
-  const { arts, getArts, getArtOwner } = useArts()
+  const { arts, getArts, getArtOwner, artMetaByMintKey } = useArts()
   const [art, setArt] = useState({
     attributes: null,
     metadata: null,
     rarity: 0,
   })
-  const { getSrc: getImageSrc, src: imageSrc } = useLazyArtImageSrc()
+  const { getSrc: getImageSrc, src: imageSrc, files } = useLazyArtImageSrc()
   const [ownerAddress, setOwnerAddress] = useState(null)
   const [, setLoadingOwnerAddress] = useState(false)
   const [tokenPubkey, setTokenPubkey] = useState(null)
@@ -51,12 +51,12 @@ const ArtPage = () => {
         (art) => art.metadata.artAccountPubkey === artAccountPubkey
       )
       loadOwnerAddress(data)
-      getImageSrc(data.attributes?.image_url)
+      getImageSrc(data)
       return setArt(data)
     }
 
     loadOwnerAddress(data)
-    getImageSrc(data.attributes?.image_url)
+    getImageSrc(data)
     setArt(data)
   }
 
@@ -64,6 +64,12 @@ const ArtPage = () => {
     loadArt()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (art.metadata) {
+      getImageSrc(art)
+    }
+  }, [artMetaByMintKey, art.metadata])
 
   const onBackButtonHandler = () =>
     history.length <= 2 ? history.replace(URLS.ROOT) : history.goBack()
@@ -74,14 +80,14 @@ const ArtPage = () => {
         <ArtHeader
           title={getHeaderTitle(art)}
           onBackButtonClick={onBackButtonHandler}
+          imageFile={files[2]}
         />
       )}
       mainClassName={!imageSrc && styles.appLayoutMain}
     >
       <Helmet>
-        <title>{`Art ${
-          art?.metadata?.art_hash ? `#${art.metadata.hash}` : ''
-        } | FRAKT: Generative Art NFT Collection on Solana`}</title>
+        <title>{`Art ${art?.metadata?.art_hash ? `#${art.metadata.hash}` : ''
+          } | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>
       <div className={styles.artContainer}>
         {!imageSrc ? (
@@ -90,7 +96,7 @@ const ArtPage = () => {
           </div>
         ) : (
           <>
-            <ArtImage src={imageSrc} preloaderSize='md' />
+            <ArtImage src={files[1] || imageSrc} preloaderSize='md' />
             {art && (
               <div className={styles.info}>
                 <Table

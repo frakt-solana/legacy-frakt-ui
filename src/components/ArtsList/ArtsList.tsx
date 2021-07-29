@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import styles from './styles.module.scss'
+import { checkIsArtInMigration } from './helpers'
 import { ARTS_PER_SCROLL } from './constants'
 import { URLS } from '../../constants'
 import ArtCard from '../ArtCard'
@@ -30,14 +31,18 @@ const ArtsList = ({ className = '', arts }: IArtsListProps) => {
       scrollableTarget={window.innerWidth < 1024 ? '#root' : 'mainContent'}
       loader={false}
     >
-      {arts.slice(0, artsToShow).map((art) => (
-        <Link
-          to={`${URLS.EXPLORE}/${art?.metadata?.artAccountPubkey}`}
-          key={art?.metadata?.artAccountPubkey}
-        >
-          <ArtCard art={art} />
-        </Link>
-      ))}
+      {arts.slice(0, artsToShow).map((art) => {
+        const isMigrating = checkIsArtInMigration(art)
+        return (
+          <Link
+            to={`${URLS.EXPLORE}/${art?.metadata?.artAccountPubkey}`}
+            key={art?.metadata?.artAccountPubkey}
+            className={isMigrating ? styles.migratingArt : ''}
+          >
+            <ArtCard art={art} />
+          </Link>
+        )
+      })}
     </InfiniteScroll>
   )
 }

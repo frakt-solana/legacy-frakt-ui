@@ -1,25 +1,28 @@
 import React, { useEffect, useState, useContext } from 'react'
+import { keyBy } from 'lodash'
 import { PublicKey } from '@solana/web3.js'
 import * as contract from 'frakt-client'
 import { useWallet } from './wallet'
 import { useConnection } from './connection'
+import config from '../config'
 
-const programPubKey = new PublicKey(
-  '6zcw5qXiCjScAxYLhxhuPgAo69PSoDijpnWTDGmDVDbv'
-)
-const adminPubKey = new PublicKey(
-  '6wPYbuGRXZjVw2tCeTxwRiQU7AzFDTeFEKuUFpJZpcix'
-)
+const programPubKey = new PublicKey(config.PROGRAM_PUBLIC_KEY)
+const adminPubKey = new PublicKey(config.ADMIN_PUBLIC_KEY)
 
 interface IArtsContext {
   currentUserArts: any
   arts: any
   getArts: any
+  metadataByMintKey: any
   getCurrentUserArts: any
   getUserArts: any
+  upgradeArts: any
+  artMetaByMintKey: any
   buyArt: any
   getArtOwner: any
   getArtTokenPubkey: any
+  getTokensMetadata: any
+  getUserArtsInMigration: any
   updateCounter: any
   counter: number
 }
@@ -35,16 +38,20 @@ export const getArtRarity = ({
 export const ArtsContext = React.createContext({
   currentUserArts: [],
   arts: [],
+  artMetaByMintKey: {},
   counter: 0,
+  getUserArtsInMigration: () => {},
   getArts: () => {},
   getCurrentUserArts: () => {},
   getUserArts: () => {},
+  upgradeArts: () => {},
   buyArt: () => {},
 })
 
 export const ArtsProvider = ({ children = null as any }) => {
   const [arts, setArts] = useState([])
   const [currentUserArts, setCurrentUserArts] = useState([])
+  const [artMetaByMintKey, setMetadata] = useState({})
   const [counter, setCounter] = useState(0)
 
   const { wallet } = useWallet()
@@ -105,28 +112,45 @@ export const ArtsProvider = ({ children = null as any }) => {
   }
 
   const getArts = async () => {
-    const arts = proccessArts(
-      await contract.getArts(programPubKey, {
+    const [rawArts, metadata] = await Promise.all([
+      contract.getArts(programPubKey, {
         connection,
-      })
-    )
-
+      }),
+      getTokensMetadata(),
+    ])
+    const arts = proccessArts(rawArts)
     setArts(arts)
     return arts
   }
 
   const getUserArts = async (userPubKey: PublicKey) => {
     const tokens = await contract.getAllUserTokens(userPubKey, { connection })
-    const arts = await contract.getArts(programPubKey, { connection })
+    const [arts, metadata] = await Promise.all([
+      contract.getArts(programPubKey, { connection }),
+      getTokensMetadata(),
+    ])
     setArts(proccessArts(arts))
     const userArts = contract.getArtTokensFromTokens(arts, tokens)
-    return proccessArts(userArts)
+    const artsInMigration = getUserArtsInMigration(arts, userPubKey)
+    return proccessArts([...userArts, ...artsInMigration])
   }
 
   const getCurrentUserArts = async () => {
     const userArts = await getUserArts(wallet.publicKey)
     setCurrentUserArts(userArts)
     return userArts
+  }
+
+  const getUserArtsInMigration = (arts, userPubKey: PublicKey) => {
+    const artsInMigration = arts.filter(
+      (frakt) =>
+        frakt.metadata.first_owner_pubkey === userPubKey.toString() &&
+        frakt.metadata.is_old_version === false &&
+        frakt.metadata.is_minted === true &&
+        frakt.metadata.minted_token_pubkey ===
+          '11111111111111111111111111111111'
+    )
+    return artsInMigration
   }
 
   const getArtTokenPubkey = async (
@@ -146,13 +170,47 @@ export const ArtsProvider = ({ children = null as any }) => {
     return counter?.count
   }
 
+  const upgradeArts = async (arts) => {
+    try {
+      void (await contract.migrateArtsToNewTokens(
+        arts,
+        wallet.publicKey,
+        programPubKey,
+        async (txn) => {
+          let { blockhash } = await connection.getRecentBlockhash()
+
+          txn.recentBlockhash = blockhash
+          txn.feePayer = wallet.publicKey
+          let signed = await wallet.signTransaction(txn)
+          let txid = await connection.sendRawTransaction(signed.serialize())
+          return void connection.confirmTransaction(txid)
+        },
+        { connection }
+      ))
+      return true
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getTokensMetadata = async () => {
+    const creatorsMetas = await contract.getCreatorsMetadataTokens(
+      adminPubKey,
+      { connection }
+    )
+    setMetadata(keyBy(creatorsMetas, 'mintAddress'))
+  }
+
   return (
     <ArtsContext.Provider
       value={
         {
+          getUserArtsInMigration,
+          artMetaByMintKey,
           getCurrentUserArts,
           getArts,
           getUserArts,
+          upgradeArts,
           arts,
           currentUserArts,
           counter,
@@ -170,11 +228,14 @@ export const ArtsProvider = ({ children = null as any }) => {
 
 export const useArts = () => {
   const {
+    getUserArtsInMigration,
     getArts,
     getCurrentUserArts,
     getUserArts,
+    upgradeArts,
     currentUserArts,
     arts,
+    artMetaByMintKey,
     buyArt,
     getArtOwner,
     getArtTokenPubkey,
@@ -182,11 +243,14 @@ export const useArts = () => {
     counter,
   } = useContext(ArtsContext) as IArtsContext
   return {
+    getUserArtsInMigration,
     getArts,
     getCurrentUserArts,
+    upgradeArts,
     getUserArts,
     currentUserArts,
     arts,
+    artMetaByMintKey,
     buyArt,
     getArtOwner,
     getArtTokenPubkey,
