@@ -17,7 +17,9 @@ const CompanyLogo = ({ className }: ICompanyLogoProps) => {
       <NavLink to={URLS.ROOT} className={`${styles.root} ${className || ''}`}>
         Frakt
       </NavLink>
-      <div className={styles.generatedCounter}>{`10 0000 / 10 000 sold`}</div>
+      <div
+        className={styles.generatedCounter}
+      >{`10 000 / 10 000 sold`}</div>
     </>
   )
 }
