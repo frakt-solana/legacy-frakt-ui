@@ -6,7 +6,7 @@ export type ENV = 'mainnet-beta' | 'testnet' | 'devnet' | 'localnet'
 export const ENDPOINTS = [
   {
     name: 'mainnet-beta' as ENV,
-    endpoint: 'https://solana-api.projectserum.com/',
+    endpoint: 'https://api.mainnet-beta.solana.com/',
     chainID: ChainID.MainnetBeta,
   },
   {

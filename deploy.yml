@@ -2,7 +2,7 @@ version: "2.0"
 
 services:
   web:
-    image: timikcool/frakt-web:fix-token-pubkey
+    image: timikcool/frakt-web:node-update
     expose:
       - port: 80
         as: 80
