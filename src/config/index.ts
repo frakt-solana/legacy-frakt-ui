@@ -38,4 +38,6 @@ const mainnet = {
   ENDPOINT: ENDPOINTS[0],
 }
 
+export const CACHE_URL = 'https://194.135.22.32';
+
 export default process.env.REACT_APP_NETWORK === 'devnet' ? devnet : mainnet
