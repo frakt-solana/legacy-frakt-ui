@@ -4,7 +4,7 @@ import { PublicKey } from '@solana/web3.js'
 import * as contract from 'frakt-client'
 import { useWallet } from './wallet'
 import { useConnection } from './connection'
-import config from '../config'
+import config, { CACHE_URL } from '../config'
 
 const programPubKey = new PublicKey(config.PROGRAM_PUBLIC_KEY)
 const adminPubKey = new PublicKey(config.ADMIN_PUBLIC_KEY)
@@ -40,12 +40,12 @@ export const ArtsContext = React.createContext({
   arts: [],
   artMetaByMintKey: {},
   counter: 0,
-  getUserArtsInMigration: () => {},
-  getArts: () => {},
-  getCurrentUserArts: () => {},
-  getUserArts: () => {},
-  upgradeArts: () => {},
-  buyArt: () => {},
+  getUserArtsInMigration: () => { },
+  getArts: () => { },
+  getCurrentUserArts: () => { },
+  getUserArts: () => { },
+  upgradeArts: () => { },
+  buyArt: () => { },
 })
 
 export const ArtsProvider = ({ children = null as any }) => {
@@ -113,12 +113,10 @@ export const ArtsProvider = ({ children = null as any }) => {
 
   const getArts = async () => {
     const [rawArts, metadata] = await Promise.all([
-      contract.getArts(programPubKey, {
-        connection,
-      }),
+      fetch(`${CACHE_URL}/arts.json`, { headers: { "Accept-Encoding": "gzip" } }),
       getTokensMetadata(),
     ])
-    const arts = proccessArts(rawArts)
+    const arts = proccessArts(Object.values(await rawArts.json()))
     setArts(arts)
     return arts
   }
@@ -126,11 +124,11 @@ export const ArtsProvider = ({ children = null as any }) => {
   const getUserArts = async (userPubKey: PublicKey) => {
     const tokens = await contract.getAllUserTokens(userPubKey, { connection })
     const [arts, metadata] = await Promise.all([
-      contract.getArts(programPubKey, { connection }),
+      fetch(`${CACHE_URL}/arts.json`, { headers: { "Accept-Encoding": "gzip" } }),
       getTokensMetadata(),
     ])
-    setArts(proccessArts(arts))
-    const userArts = contract.getArtTokensFromTokens(arts, tokens)
+    setArts(Object.values(proccessArts(arts)))
+    const userArts = contract.getArtTokensFromTokens(Object.values(arts), tokens)
     const artsInMigration = getUserArtsInMigration(arts, userPubKey)
     return proccessArts([...userArts, ...artsInMigration])
   }
@@ -148,7 +146,7 @@ export const ArtsProvider = ({ children = null as any }) => {
         frakt.metadata.is_old_version === false &&
         frakt.metadata.is_minted === true &&
         frakt.metadata.minted_token_pubkey ===
-          '11111111111111111111111111111111'
+        '11111111111111111111111111111111'
     )
     return artsInMigration
   }
@@ -194,11 +192,18 @@ export const ArtsProvider = ({ children = null as any }) => {
   }
 
   const getTokensMetadata = async () => {
-    const creatorsMetas = await contract.getCreatorsMetadataTokens(
-      adminPubKey,
-      { connection }
-    )
-    setMetadata(keyBy(creatorsMetas, 'mintAddress'))
+    // const creatorsMetas = await contract.getCreatorsMetadataTokens(
+    //   adminPubKey,
+    //   { connection }
+    // )
+    try {
+      const r = await fetch(`${CACHE_URL}/meta.json`, { headers: { "Accept-Encoding": "gzip" } })
+      const meta = await r.json();
+      setMetadata(meta);
+    } catch (error) {
+
+    }
+    // setMetadata(keyBy(creatorsMetas, 'mintAddress'))
   }
 
   return (
