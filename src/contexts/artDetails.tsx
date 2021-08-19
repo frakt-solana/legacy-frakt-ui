@@ -123,13 +123,14 @@ export const ArtsProvider = ({ children = null as any }) => {
 
   const getUserArts = async (userPubKey: PublicKey) => {
     const tokens = await contract.getAllUserTokens(userPubKey, { connection })
-    const [arts, metadata] = await Promise.all([
+    const [rawArts, metadata] = await Promise.all([
       fetch(`${CACHE_URL}/arts.json`, { headers: { "Accept-Encoding": "gzip" } }),
       getTokensMetadata(),
     ])
-    setArts(Object.values(proccessArts(arts)))
+    const arts = await rawArts.json();
+    setArts(proccessArts(Object.values(arts)));
     const userArts = contract.getArtTokensFromTokens(Object.values(arts), tokens)
-    const artsInMigration = getUserArtsInMigration(arts, userPubKey)
+    const artsInMigration = getUserArtsInMigration(Object.values(arts), userPubKey)
     return proccessArts([...userArts, ...artsInMigration])
   }
 
