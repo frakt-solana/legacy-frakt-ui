@@ -20,7 +20,7 @@ const RoadmapSection = () => (
         </p>
       </div>
     </div>
-    <div className={styles.roadMapContainer}>
+    <div className={`${styles.roadMapContainer} ${styles.roadMapContainerChecked}`}>
       <div className={styles.roadMapContent}>
         <h2>NFT MARKETPLACE</h2>
         <p>
