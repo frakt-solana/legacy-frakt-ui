@@ -11,7 +11,8 @@ const getLevel = (points) => {
   else if (points < 500) return 2
   else if (points < 1000) return 3
   else if (points < 2500) return 4
-  else return 5
+  else if (points < 5000) return 5
+  else return 6
 }
 
 const UserLevel = ({ points }: IUserLevelProps) => {
