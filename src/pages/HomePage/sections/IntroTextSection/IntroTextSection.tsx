@@ -13,7 +13,7 @@ const IntroTextSection = () => (
     >
       fractal art
     </a>{' '}
-    NFT collection. We harness the mathematical nature of fractals to generate intricate design patterns. Built on Solana, every image is unique and exists as an NFT and stored with IPFS.
+    NFT collection. We harness the mathematical nature of fractals to generate intricate design patterns. Built on Solana, every image is unique and exists as an NFT.
   </TextSection>
 )
 
