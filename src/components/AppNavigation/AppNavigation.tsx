@@ -13,6 +13,11 @@ const AppNavigation = ({ className }: IAppNavigation) => {
     <ul className={`${styles.root} ${className || ''}`}>
       <NavigationLink to={URLS.COLLECTION} text='Collection' />
       <NavigationLink to={URLS.RARITY} text='Rarity hdbk' />
+      <li>
+        <a className={styles.link} href={URLS.LAUNCHPAD}>
+          Launchpad
+        </a>
+      </li>
     </ul>
   )
 }

@@ -1,7 +1,7 @@
 export const URLS = {
   ROOT: '/',
   COLLECTION: '/collection',
-  USER: '/user',
+  LAUNCHPAD: 'https://launchpd.frakt.art/',
   RARITY: '/rarity',
-  PAGE_404: '/404'
+  PAGE_404: '/404',
 }
