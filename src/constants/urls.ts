@@ -1,6 +1,6 @@
 export const URLS = {
   ROOT: '/',
-  EXPLORE: '/explore',
+  COLLECTION: '/collection',
   USER: '/user',
   RARITY: '/rarity',
   PAGE_404: '/404'

@@ -30,7 +30,7 @@ export function Routes() {
                   />
                   <Route
                     exact
-                    path={URLS.EXPLORE}
+                    path={URLS.COLLECTION}
                     component={() => <ExplorePage />}
                   />
                   <Route
@@ -40,7 +40,7 @@ export function Routes() {
                   />
                   <Route
                     exact
-                    path={`${URLS.EXPLORE}/:artAccountPubkey`}
+                    path={`${URLS.COLLECTION}/:artAccountPubkey`}
                     component={() => <ArtPage />}
                   />
                   <Route

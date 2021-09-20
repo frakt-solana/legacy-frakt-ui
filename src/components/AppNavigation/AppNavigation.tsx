@@ -14,7 +14,7 @@ const AppNavigation = ({ className }: IAppNavigation) => {
 
   return (
     <ul className={`${styles.root} ${className || ''}`}>
-      <NavigationLink to={URLS.EXPLORE} text='Explore' />
+      <NavigationLink to={URLS.COLLECTION} text='Collection' />
 
       <NavigationLink
         to={`${URLS.USER}/${wallet?.publicKey}`}
