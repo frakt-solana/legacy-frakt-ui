@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { keyBy } from 'lodash'
 import { PublicKey } from '@solana/web3.js'
 import * as contract from 'frakt-client'
 import { useWallet } from './wallet'
@@ -40,12 +39,12 @@ export const ArtsContext = React.createContext({
   arts: [],
   artMetaByMintKey: {},
   counter: 0,
-  getUserArtsInMigration: () => { },
-  getArts: () => { },
-  getCurrentUserArts: () => { },
-  getUserArts: () => { },
-  upgradeArts: () => { },
-  buyArt: () => { },
+  getUserArtsInMigration: () => {},
+  getArts: () => {},
+  getCurrentUserArts: () => {},
+  getUserArts: () => {},
+  upgradeArts: () => {},
+  buyArt: () => {},
 })
 
 export const ArtsProvider = ({ children = null as any }) => {
@@ -104,16 +103,18 @@ export const ArtsProvider = ({ children = null as any }) => {
   }
 
   const getArtOwner = async (mintAddress: PublicKey): Promise<String> => {
-    const largestTokenAccountOwner = await contract.getLargestTokenAccountOwnerByMint(
-      mintAddress,
-      { connection }
-    )
+    const largestTokenAccountOwner =
+      await contract.getLargestTokenAccountOwnerByMint(mintAddress, {
+        connection,
+      })
     return largestTokenAccountOwner
   }
 
   const getArts = async () => {
     const [rawArts, metadata] = await Promise.all([
-      fetch(`${CACHE_URL}/arts.json`, { headers: { "Accept-Encoding": "gzip" } }),
+      fetch(`${CACHE_URL}/arts.json`, {
+        headers: { 'Accept-Encoding': 'gzip' },
+      }),
       getTokensMetadata(),
     ])
     const arts = proccessArts(Object.values(await rawArts.json()))
@@ -124,13 +125,21 @@ export const ArtsProvider = ({ children = null as any }) => {
   const getUserArts = async (userPubKey: PublicKey) => {
     const tokens = await contract.getAllUserTokens(userPubKey, { connection })
     const [rawArts, metadata] = await Promise.all([
-      fetch(`${CACHE_URL}/arts.json`, { headers: { "Accept-Encoding": "gzip" } }),
+      fetch(`${CACHE_URL}/arts.json`, {
+        headers: { 'Accept-Encoding': 'gzip' },
+      }),
       getTokensMetadata(),
     ])
-    const arts = await rawArts.json();
-    setArts(proccessArts(Object.values(arts)));
-    const userArts = contract.getArtTokensFromTokens(Object.values(arts), tokens)
-    const artsInMigration = getUserArtsInMigration(Object.values(arts), userPubKey)
+    const arts = await rawArts.json()
+    setArts(proccessArts(Object.values(arts)))
+    const userArts = contract.getArtTokensFromTokens(
+      Object.values(arts),
+      tokens
+    )
+    const artsInMigration = getUserArtsInMigration(
+      Object.values(arts),
+      userPubKey
+    )
     return proccessArts([...userArts, ...artsInMigration])
   }
 
@@ -147,7 +156,7 @@ export const ArtsProvider = ({ children = null as any }) => {
         frakt.metadata.is_old_version === false &&
         frakt.metadata.is_minted === true &&
         frakt.metadata.minted_token_pubkey ===
-        '11111111111111111111111111111111'
+          '11111111111111111111111111111111'
     )
     return artsInMigration
   }
@@ -198,12 +207,12 @@ export const ArtsProvider = ({ children = null as any }) => {
     //   { connection }
     // )
     try {
-      const r = await fetch(`${CACHE_URL}/meta.json`, { headers: { "Accept-Encoding": "gzip" } })
-      const meta = await r.json();
-      setMetadata(meta);
-    } catch (error) {
-
-    }
+      const r = await fetch(`${CACHE_URL}/meta.json`, {
+        headers: { 'Accept-Encoding': 'gzip' },
+      })
+      const meta = await r.json()
+      setMetadata(meta)
+    } catch (error) {}
     // setMetadata(keyBy(creatorsMetas, 'mintAddress'))
   }
 
