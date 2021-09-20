@@ -12,6 +12,7 @@ import CollectionsPage from './pages/CollectionPage'
 import ArtPage from './pages/ArtPage'
 import Page404 from './pages/Page404'
 import RarityPage from './pages/RarityPage'
+import MarketplacesPage from './pages/MarketplacesPage'
 import { FraktsProvider } from './contexts/frakts'
 
 export function Routes() {
@@ -42,6 +43,11 @@ export function Routes() {
                     exact
                     path={URLS.RARITY}
                     component={() => <RarityPage />}
+                  />
+                  <Route
+                    exact
+                    path={URLS.MARKETPLACE}
+                    component={() => <MarketplacesPage />}
                   />
                   <Route
                     exact
