@@ -4,7 +4,6 @@ import { useWallet } from '../../contexts/wallet'
 import { formatNumber, shortenAddress } from '../../utils/utils'
 import { useNativeAccount } from '../../contexts/accounts'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
-import BuyButton from '../BuyButton'
 import Table from '../Table'
 import { DisconnectButton } from './DisconnectButton'
 
@@ -33,9 +32,6 @@ const CurrentUserTable = ({ className = '' }: ICurrentUserTableProps) => {
           ['Balance', getBalanceValue()],
         ]}
       />
-      <div className={styles.buttonsWrapper}>
-        <BuyButton className={styles.buyButton} />
-      </div>
     </div>
   )
 }
