@@ -15,7 +15,8 @@ export const sortArtsByNew = (arts) =>
 
 export const sortArtsByRarity = (arts) =>
   [...arts].sort(
-    ({ rarity: rarityA }, { rarity: rarityB }) => rarityA - rarityB
+    ({ attributes: attributesA }, { attributes: attributesB }) =>
+      attributesA.rarity - attributesB.rarity
   )
 
 export const sortArts = (arts, sortBy) =>

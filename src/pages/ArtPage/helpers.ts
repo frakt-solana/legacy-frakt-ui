@@ -1,7 +1,6 @@
 import { shortenAddress } from '../../utils/utils'
 import { COLOR, SHAPE } from '../../components/ArtCard/constants'
 import { getArtName } from '../../components/ArtCard/helpers'
-import { URLS } from '../../constants'
 
 export const getHeaderTitle = (artData) => {
   const color = artData?.attributes?.color
@@ -13,7 +12,7 @@ export const getHeaderTitle = (artData) => {
   return !!(artHash && artName) ? `${artName} #${artHash}` : 'Loading...'
 }
 
-export const isRainbow = (color, shape):boolean =>
+export const isRainbow = (color, shape): boolean =>
   !!(shape === SHAPE.Wave && color === COLOR.Magenta)
 
 export const getArtInfoData = ({ ownerAddress, tokenPubkey, artData }) => {
@@ -23,7 +22,9 @@ export const getArtInfoData = ({ ownerAddress, tokenPubkey, artData }) => {
     artData?.attributes?.shape_rarity || 0
   const getColorName = (artData): string => {
     const color = COLOR[artData?.attributes?.color]
-    return isRainbow(artData?.attributes?.color, artData?.attributes?.shape) ? 'Rainbow' : color
+    return isRainbow(artData?.attributes?.color, artData?.attributes?.shape)
+      ? 'Rainbow'
+      : color
   }
   const getColorRarity = (artData): number =>
     artData?.attributes?.color_rarity || 0
@@ -44,12 +45,7 @@ export const getArtInfoData = ({ ownerAddress, tokenPubkey, artData }) => {
 
   const ownerData = [
     'Owner',
-    ownerAddress
-      ? {
-          text: shortenAddress(ownerAddress),
-          linkTo: `${URLS.USER}/${ownerAddress}`,
-        }
-      : 'Loading...',
+    ownerAddress ? shortenAddress(ownerAddress) : 'Loading...',
   ]
 
   const tokenData = [

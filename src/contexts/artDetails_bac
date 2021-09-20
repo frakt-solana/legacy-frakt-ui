@@ -12,7 +12,6 @@ interface IArtsContext {
   currentUserArts: any
   arts: any
   getArts: any
-  metadataByMintKey: any
   getCurrentUserArts: any
   getUserArts: any
   upgradeArts: any
@@ -20,7 +19,6 @@ interface IArtsContext {
   buyArt: any
   getArtOwner: any
   getArtTokenPubkey: any
-  getTokensMetadata: any
   getUserArtsInMigration: any
   updateCounter: any
   counter: number
@@ -77,30 +75,30 @@ export const ArtsProvider = ({ children = null as any }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wallet?.publicKey])
 
-  const buyArt = async () => {
-    try {
-      void (await contract.buyArt(
-        wallet.publicKey,
-        programPubKey,
-        adminPubKey,
-        async (txn) => {
-          let { blockhash } = await connection.getRecentBlockhash()
+  // const buyArt = async () => {
+  //   try {
+  //     void (await contract.buyArt(
+  //       wallet.publicKey,
+  //       programPubKey,
+  //       adminPubKey,
+  //       async (txn) => {
+  //         let { blockhash } = await connection.getRecentBlockhash()
 
-          txn.recentBlockhash = blockhash
-          txn.feePayer = wallet.publicKey
-          let signed = await wallet.signTransaction(txn)
-          let txid = await connection.sendRawTransaction(signed.serialize())
-          return void connection.confirmTransaction(txid)
-        },
-        {
-          connection,
-        }
-      ))
-      return true
-    } catch (error) {
-      return false
-    }
-  }
+  //         txn.recentBlockhash = blockhash
+  //         txn.feePayer = wallet.publicKey
+  //         let signed = await wallet.signTransaction(txn)
+  //         let txid = await connection.sendRawTransaction(signed.serialize())
+  //         return void connection.confirmTransaction(txid)
+  //       },
+  //       {
+  //         connection,
+  //       }
+  //     ))
+  //     return true
+  //   } catch (error) {
+  //     return false
+  //   }
+  // }
 
   const getArtOwner = async (mintAddress: PublicKey): Promise<String> => {
     const largestTokenAccountOwner =
@@ -202,10 +200,6 @@ export const ArtsProvider = ({ children = null as any }) => {
   }
 
   const getTokensMetadata = async () => {
-    // const creatorsMetas = await contract.getCreatorsMetadataTokens(
-    //   adminPubKey,
-    //   { connection }
-    // )
     try {
       const r = await fetch(`${CACHE_URL}/meta.json`, {
         headers: { 'Accept-Encoding': 'gzip' },
@@ -213,7 +207,6 @@ export const ArtsProvider = ({ children = null as any }) => {
       const meta = await r.json()
       setMetadata(meta)
     } catch (error) {}
-    // setMetadata(keyBy(creatorsMetas, 'mintAddress'))
   }
 
   return (
@@ -229,7 +222,7 @@ export const ArtsProvider = ({ children = null as any }) => {
           arts,
           currentUserArts,
           counter,
-          buyArt,
+          // buyArt,
           getArtOwner,
           getArtTokenPubkey,
           updateCounter,

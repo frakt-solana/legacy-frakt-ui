@@ -1,12 +1,9 @@
 import React from 'react'
 
 import styles from './styles.module.scss'
-// import { useArts } from '../../../../contexts/artDetails'
-import BuyButton from '../../../../components/BuyButton'
 import Table from '../../../../components/Table'
 
 const BuySection = () => {
-  // const { counter, arts } = useArts()
   return (
     <div className={styles.root}>
       <div className={styles.content}>
@@ -17,7 +14,6 @@ const BuySection = () => {
             ['Price', '0.5 SOL'],
           ]}
         />
-        <BuyButton className={styles.buyButton} />
       </div>
     </div>
   )

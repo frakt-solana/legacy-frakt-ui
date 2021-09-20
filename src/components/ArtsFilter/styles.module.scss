@@ -4,6 +4,12 @@
   padding: 40px;
   border-bottom: 1px solid $color-gray-1;
   display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputWrapper {
+  display: flex;
   align-items: center;
 }
 
@@ -15,6 +21,10 @@
   margin: 0 12px;
   width: 150px;
   border-bottom: 1px dashed $color-white;
+
+  &__soring {
+    width: 105px;
+  }
 }
 
 .inputLabel {
@@ -73,5 +83,9 @@
   .separator {
     margin: 0 14px;
     width: 72px;
+
+    &__soring {
+      width: 42px;
+    }
   }
 }

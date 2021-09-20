@@ -8,11 +8,11 @@ import { MarketProvider } from './contexts/market'
 import { URLS } from './constants'
 
 import HomePage from './pages/HomePage'
-import ExplorePage from './pages/ExplorePage'
-import { ArtsProvider } from './contexts/artDetails'
+import CollectionsPage from './pages/CollectionPage'
 import ArtPage from './pages/ArtPage'
 import Page404 from './pages/Page404'
 import RarityPage from './pages/RarityPage'
+import { FraktsProvider } from './contexts/frakts'
 
 export function Routes() {
   return (
@@ -21,7 +21,7 @@ export function Routes() {
         <WalletProvider>
           <AccountsProvider>
             <MarketProvider>
-              <ArtsProvider>
+              <FraktsProvider>
                 <Switch>
                   <Route
                     exact
@@ -31,12 +31,7 @@ export function Routes() {
                   <Route
                     exact
                     path={URLS.COLLECTION}
-                    component={() => <ExplorePage />}
-                  />
-                  <Route
-                    exact
-                    path={`${URLS.USER}/:userAddress`}
-                    component={() => <ExplorePage />}
+                    component={() => <CollectionsPage />}
                   />
                   <Route
                     exact
@@ -55,7 +50,7 @@ export function Routes() {
                   />
                   <Route exact path={'*'} component={() => <Page404 />} />
                 </Switch>
-              </ArtsProvider>
+              </FraktsProvider>
             </MarketProvider>
           </AccountsProvider>
         </WalletProvider>
