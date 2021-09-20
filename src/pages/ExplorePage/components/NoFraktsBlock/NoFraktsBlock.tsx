@@ -21,7 +21,6 @@ const NoFraktsBlock = ({
   return (
     <div className={styles.root}>
       <p className={styles.message}>{message}</p>
-      {myFracts && <BuyButton />}
     </div>
   )
 }
