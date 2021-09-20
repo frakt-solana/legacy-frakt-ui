@@ -1,6 +1,5 @@
 import React from 'react'
 
-import BuyButton from '../../../../components/BuyButton'
 import styles from './styles.module.scss'
 
 interface INoFraktsBlockProps {
