@@ -17,3 +17,10 @@
   font-size: 20px;
   color: $color-gray-2;
 }
+
+@media screen and (max-width: 1023px) {
+  .root {
+    height: calc(100vh - 73px);
+    padding: 0 32px;
+  }
+}
