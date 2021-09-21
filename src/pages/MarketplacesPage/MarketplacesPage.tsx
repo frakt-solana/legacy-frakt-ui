@@ -5,9 +5,8 @@ import styles from './styles.module.scss'
 
 import SOLANART_LOGO from './images/solanart.webp'
 import DIGITALEYES_LOGO from './images/digitaleyes.svg'
+import MARKT_LOGO from './images/markt.png'
 
-
-//TODO: Fix digitaleyes icon, upload markt.frakt icon
 const MARKETPLACES = [
   {
     name: 'Solanart',
@@ -21,7 +20,7 @@ const MARKETPLACES = [
   },
   {
     name: 'markt.frakt',
-    imageSrc: SOLANART_LOGO,
+    imageSrc: MARKT_LOGO,
     href: 'https://markt.frakt.art/',
   },
 ]
