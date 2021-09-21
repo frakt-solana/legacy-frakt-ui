@@ -29,7 +29,7 @@ export const getArtInfoData = ({ ownerAddress, tokenPubkey, artData }) => {
   }
   const getColorRarity = (artData): number =>
     artData?.attributes?.color_rarity || 0
-  const getArtRarity = (artData): number => artData?.rarity || 0
+  const getArtRarity = (artData): number => artData?.attributes?.rarity || 0
   const getCirclesAmount = (artData): number =>
     artData?.attributes?.circles_amount || 0
   const getFractalIterationsAmount = (artData) =>
