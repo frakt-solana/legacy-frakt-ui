@@ -1,9 +1,9 @@
 import React from 'react'
 
-import styles from './styles.module.scss'
+import styles from '../styles.module.scss'
 import { imageExamples } from './imageExamples'
 import { getRandomInt } from './helpers'
-import ArtExample from '../../components/ArtExample'
+import ArtExample from './ArtExample'
 import {
   FIRST_CHANGE_DELAYS,
   INTERVALS,
@@ -12,7 +12,7 @@ import {
 } from './constants'
 
 const ArtExamplesSection = () => (
-  <div className={styles.root}>
+  <div className={styles.artExamples}>
     {Array(EXAMPLES_AMOUNT)
       .fill(null)
       .map((_, idx) => {
@@ -29,7 +29,7 @@ const ArtExamplesSection = () => (
             imagesSrc={imagesSrc}
             interval={interval}
             firstChangeDelay={firstChangeDelay}
-            className={styles.artExample}
+            className={styles.artExamples__example}
           />
         )
       })}

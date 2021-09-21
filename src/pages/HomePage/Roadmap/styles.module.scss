@@ -1,14 +1,14 @@
-@import '../../../../scss/abstracts/variables.scss';
+@import '../../../scss/abstracts/variables.scss';
 
 .root {
-  padding: 40px;
+  padding: 40px 0;
   position: relative;
 
   &::after {
     content: '';
     position: absolute;
     width: 2px;
-    background-color: $color-gray-3;
+    background-color: $color-gray-4;
     top: 32px;
     bottom: 32px;
     left: 50%;
@@ -16,7 +16,7 @@
   }
 }
 
-.roadMapContainer {
+.item {
   padding: 10px 40px;
   position: relative;
   background-color: inherit;
@@ -30,7 +30,7 @@
     width: 28px;
     height: 28px;
     background-color: $color-black;
-    border: 2px solid $color-gray-3;
+    border: 2px solid $color-gray-4;
     top: 14px;
     border-radius: 50%;
     z-index: 1;
@@ -44,7 +44,7 @@
     top: 28px;
     z-index: 1;
     left: 10px;
-    background: $color-gray-3;
+    background: $color-gray-4;
     width: 32px;
     height: 2px;
   }
@@ -64,38 +64,57 @@
       right: 10px;
     }
   }
-}
 
-.roadMapContent {
-  padding: 20px 30px;
-  background-color: $color-black;
-  border: 2px solid $color-gray-3;
-  position: relative;
-  font-size: 14px;
-  line-height: 1.5;
+  &_checked {
+    &::after {
+      background-color: $color-white;
+      border: 2px solid $color-white;
+    }
+    &::before {
+      background: $color-white;
+    }
 
-  h2 {
-    font-size: 24px;
-    margin-bottom: 14px;
+    .item__content {
+      border: 2px solid $color-white;
+    }
+
+    .item__title {
+      color: $color-white;
+    }
+
+    .item__content {
+      color: $color-white;
+    }
   }
-}
 
-.roadMapContainerChecked {
-  &::after {
-    background-color: $color-gray-4;
+  &__content {
+    padding: 20px 30px;
+    background-color: $color-black;
+    border: 2px solid $color-gray-4;
+    position: relative;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $color-gray-4;
+  }
+
+  &__title {
+    color: $color-gray-4;
+    font-size: 38px;
+    margin-bottom: 0;
+    text-transform: uppercase;
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .root {
-    padding: 24px;
+    padding: 24px 0;
   }
-
-  .roadMapContent {
-    padding: 10px 15px;
-    font-size: 12px;
-
-    h2 {
+  .item {
+    &__content {
+      padding: 10px 15px;
+      font-size: 14px;
+    }
+    &__title {
       font-size: 18px;
       margin-bottom: 0;
     }
@@ -104,8 +123,8 @@
 
 @media screen and (max-width: 767px) {
   .root {
-    padding: 24px;
-
+    margin: 0 -20px;
+    padding: 12px 24px;
     &::after {
       top: 18px;
       bottom: 18px;
@@ -114,7 +133,7 @@
     }
   }
 
-  .roadMapContainer {
+  .item {
     padding: 12px 0 12px 32px;
     width: 100%;
     left: unset;
@@ -148,13 +167,13 @@
         right: unset;
       }
     }
-  }
 
-  .roadMapContent {
-    padding: 10px 15px;
-    font-size: 12px;
+    &__content {
+      padding: 10px 15px;
+      font-size: 14px;
+    }
 
-    h2 {
+    &__title {
       font-size: 18px;
       margin-bottom: 0;
     }

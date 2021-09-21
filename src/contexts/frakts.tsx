@@ -90,7 +90,6 @@ export const FraktsProvider = ({ children = null as any }) => {
       const rawFrakts = await fraktsRes.json()
       const metadata = await metadataRes.json()
       setFrakts(proccessFrakts(Object.values(rawFrakts)))
-      console.log('meta', metadata)
       setArweaveMetadata(metadata)
     } catch (err) {
       console.error(err)

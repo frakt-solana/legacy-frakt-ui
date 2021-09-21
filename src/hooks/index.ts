@@ -34,10 +34,8 @@ export const useLazyArtImageSrc = () => {
 
     try {
       if (!metadata) {
-        console.log("doesn't have meta")
         await setImageFromIpfs(art.attributes?.image_url)
       } else {
-        console.log('has meta')
         await setImageFromArweave(metadata)
       }
     } catch (error) {
