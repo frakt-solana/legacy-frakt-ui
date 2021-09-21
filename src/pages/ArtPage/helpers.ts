@@ -1,6 +1,7 @@
 import { shortenAddress } from '../../utils/utils'
 import { COLOR, SHAPE } from '../../components/ArtCard/constants'
 import { getArtName } from '../../components/ArtCard/helpers'
+import { URLS } from '../../constants'
 
 export const getHeaderTitle = (artData) => {
   const color = artData?.attributes?.color
@@ -45,7 +46,12 @@ export const getArtInfoData = ({ ownerAddress, tokenPubkey, artData }) => {
 
   const ownerData = [
     'Owner',
-    ownerAddress ? shortenAddress(ownerAddress) : 'Loading...',
+    ownerAddress
+      ? {
+          text: shortenAddress(ownerAddress),
+          linkTo: `${URLS.WALLET}/${ownerAddress}`,
+        }
+      : 'Loading...',
   ]
 
   const tokenData = [

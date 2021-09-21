@@ -5,6 +5,7 @@ import { SORTING, FILTERS } from './constants'
 import { useWallet } from '../../contexts/wallet'
 
 interface IArtsSortProps {
+  hideFilter?: boolean
   className?: string
   sortValue: string
   onSortChange: (value: any) => void
@@ -13,6 +14,7 @@ interface IArtsSortProps {
 }
 
 const ArtsFilter = ({
+  hideFilter,
   className,
   sortValue,
   filterValue,
@@ -23,33 +25,35 @@ const ArtsFilter = ({
 
   return (
     <div className={`${styles.root} ${className || ''}`}>
-      <div className={styles.inputWrapper}>
-        <div className={styles.title}>Show</div>
-        <div className={styles.separator}></div>
-        {FILTERS.map(({ name, value }, idx) => (
-          <label
-            key={idx}
-            className={`${styles.inputLabel} ${
-              value === filterValue ? styles.inputLabelActive : ''
-            }`}
-            onClick={(event) => {
-              if (!connected) {
-                event.preventDefault()
-                select()
-              }
-            }}
-          >
-            <input
-              type='radio'
-              value={value}
-              name='sort'
-              checked={value === filterValue}
-              onChange={({ target }) => onFilterChangeValue(target.value)}
-            />
-            {name}
-          </label>
-        ))}
-      </div>
+      {!hideFilter && (
+        <div className={styles.inputWrapper}>
+          <div className={styles.title}>Show</div>
+          <div className={styles.separator}></div>
+          {FILTERS.map(({ name, value }, idx) => (
+            <label
+              key={idx}
+              className={`${styles.inputLabel} ${
+                value === filterValue ? styles.inputLabelActive : ''
+              }`}
+              onClick={(event) => {
+                if (!connected) {
+                  event.preventDefault()
+                  select()
+                }
+              }}
+            >
+              <input
+                type='radio'
+                value={value}
+                name='sort'
+                checked={value === filterValue}
+                onChange={({ target }) => onFilterChangeValue(target.value)}
+              />
+              {name}
+            </label>
+          ))}
+        </div>
+      )}
       <div className={styles.inputWrapper}>
         <div className={styles.title}>Sorted by</div>
         <div

@@ -15,6 +15,7 @@ interface IFraktsContext {
   currentUserFraktsLoading: boolean
   upgradeFrakts: (frakts: any) => Promise<boolean>
   getFraktOwner: (fraktMintedTokenPubkey: PublicKey) => Promise<String | null>
+  getWalletFrakts: (walletPubkey: PublicKey) => Promise<any>
 }
 
 export const FraktsContext = React.createContext({
@@ -25,6 +26,7 @@ export const FraktsContext = React.createContext({
   currentUserFraktsLoading: false,
   upgradeFrakts: async (frakts: any) => false,
   getFraktOwner: async (fraktMintedTokenPubkey: PublicKey) => null,
+  getWalletFrakts: async (walletPubkey: PublicKey) => [],
 })
 
 export const getFraktRarity = ({
@@ -122,6 +124,27 @@ export const FraktsProvider = ({ children = null as any }) => {
     }
   }
 
+  const getWalletFrakts = async (walletPubkey: PublicKey) => {
+    try {
+      const tokens = await contract.getAllUserTokens(walletPubkey, {
+        connection,
+      })
+      const tokensMint = tokens.map(({ mint }) => mint)
+
+      if (!frakts?.length && !fraktsLoading) {
+        await getFrakts()
+      }
+
+      const userFrakts = frakts.filter((frakt) => {
+        return tokensMint.includes(frakt?.metadata?.minted_token_pubkey)
+      })
+
+      return userFrakts
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   const upgradeFrakts = async (arts) => {
     try {
       void (await contract.migrateArtsToNewTokens(
@@ -166,6 +189,7 @@ export const FraktsProvider = ({ children = null as any }) => {
           currentUserFraktsLoading,
           upgradeFrakts,
           getFraktOwner,
+          getWalletFrakts,
         } as IFraktsContext
       }
     >
@@ -183,6 +207,7 @@ export const useFrakts = () => {
     currentUserFraktsLoading,
     upgradeFrakts,
     getFraktOwner,
+    getWalletFrakts,
   } = useContext(FraktsContext) as IFraktsContext
   return {
     frakts,
@@ -192,5 +217,6 @@ export const useFrakts = () => {
     currentUserFraktsLoading,
     upgradeFrakts,
     getFraktOwner,
+    getWalletFrakts,
   }
 }

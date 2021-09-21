@@ -1,0 +1,86 @@
+@import '../../scss/abstracts/variables.scss';
+
+.preloader {
+  flex-grow: 1;
+}
+
+.appMain {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 1023px) {
+  .preloader {
+    min-height: calc(100vh - 73px);
+  }
+}
+
+//? Header
+.header {
+  padding: 40px;
+  border-bottom: 1px solid $color-gray-1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__text {
+    font-size: 36px;
+    text-transform: uppercase;
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .header {
+    &__text {
+      font-size: 28px;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .header {
+    padding: 24px;
+
+    &__text {
+      font-size: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    &__text {
+      font-size: 18px;
+    }
+  }
+}
+
+//? NoFrakts
+.noFrakts {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  &__text {
+    font-size: 36px;
+    margin-bottom: 24px;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .noFrakts {
+    height: calc(100vh - 73px);
+    padding: 0 32px;
+
+    &__text {
+      font-size: 24px;
+    }
+  }
+}

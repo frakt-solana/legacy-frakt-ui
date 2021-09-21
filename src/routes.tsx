@@ -14,6 +14,7 @@ import Page404 from './pages/Page404'
 import RarityPage from './pages/RarityPage'
 import MarketplacesPage from './pages/MarketplacesPage'
 import { FraktsProvider } from './contexts/frakts'
+import WalletCollectionPage from './pages/WalletCollectionPage'
 
 export function Routes() {
   return (
@@ -28,6 +29,11 @@ export function Routes() {
                     exact
                     path={URLS.ROOT}
                     component={() => <HomePage />}
+                  />
+                  <Route
+                    exact
+                    path={`${URLS.WALLET}/:walletPubkey`}
+                    component={() => <WalletCollectionPage />}
                   />
                   <Route
                     exact
