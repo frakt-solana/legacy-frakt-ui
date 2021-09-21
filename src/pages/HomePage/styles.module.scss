@@ -72,6 +72,14 @@
     &__bg {
       svg {
         transform: scale(1.5);
+        & path {
+          &:nth-child(odd) {
+            animation: none;
+          }
+          &:nth-child(even) {
+            animation: none;
+          }
+        }
       }
     }
   }
