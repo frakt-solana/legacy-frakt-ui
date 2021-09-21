@@ -6,40 +6,40 @@ const STEPS = [
   {
     title: 'Launchpad',
     description:
-      'We are working with other projects in the Solana ecosystem to provide incentives for Frakt holders.',
+      'We are aiming to bring more into Solana NFT space with our launchpad. It means only original collections, true art and high utility projects. No bots, refunds or failing mint websites',
     checked: true,
     link: 'https://launchpd.frakt.art/',
   },
   {
     title: 'Staking',
     description:
-      'We plan to build a Verified Random Function on Solana. The chain currently does not have such a function, but will be necessary for gaming, gambling and other NFT projects that require an independent random function.',
+      'To power up all upcoming projects you will be able to stake your frakts and recieve voting power in DAO, airdrops, launchpad lottery tickets and yield from fraktionalizer fee and collection royalties',
     checked: false,
   },
   {
     title: 'DAO',
     description:
-      'We are working with other projects in the Solana ecosystem to provide incentives for Frakt holders.',
+      'To make our project more community-driven stakers will be able to vote for upcoming projects on launchpad and key decisions on next steps',
     checked: false,
   },
   {
-    title: 'Fraktionaize',
+    title: 'Fraktionalizer',
     description:
-      'We plan to build a Verified Random Function on Solana. The chain currently does not have such a function, but will be necessary for gaming, gambling and other NFT projects that require an independent random function.',
+      "As a one of first builders in Solana NFT space we aim to grow it's ecosystem even further with platform that allows you to fraction your NFT and trade fractions on DEX and AMM. A part of governance fee will be distributed to frakts stakers",
     checked: false,
   },
-  {
-    title: 'Multichain bridge',
-    description:
-      'We plan to build a Verified Random Function on Solana. The chain currently does not have such a function, but will be necessary for gaming, gambling and other NFT projects that require an independent random function.',
-    checked: false,
-  },
-  {
-    title: 'VPF oracle',
-    description:
-      'We plan to build a Verified Random Function on Solana. The chain currently does not have such a function, but will be necessary for gaming, gambling and other NFT projects that require an independent random function.',
-    checked: false,
-  },
+  // {
+  //   title: 'Multichain bridge',
+  //   description:
+  //     'We plan to build a Verified Random Function on Solana. The chain currently does not have such a function, but will be necessary for gaming, gambling and other NFT projects that require an independent random function.',
+  //   checked: false,
+  // },
+  // {
+  //   title: 'VPF oracle',
+  //   description:
+  //     'We plan to build a Verified Random Function on Solana. The chain currently does not have such a function, but will be necessary for gaming, gambling and other NFT projects that require an independent random function.',
+  //   checked: false,
+  // },
 ]
 
 const Roadmap = () => (

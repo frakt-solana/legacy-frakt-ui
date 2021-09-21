@@ -23,7 +23,7 @@ const HomePage = () => {
           pauseTime={4000}
         />
         <p className={styles.hero__subtitle}>
-          The first generative art NFT collection
+          The first generative art NFT project
           <br />
           on Solana building{' '}
           <AnchorLink smooth to={`#${ROADMAP_SECTION_ID}`}>
@@ -42,24 +42,21 @@ const HomePage = () => {
         <ArtExamples />
         <p className={styles.section__text}>
           Each frakt is one uniquely generated art piece. There are 5 different
-          types of fractal images and 4 color schemes,{' '}
+          types of shapes and 4 color schemes,{' '}
           <Link to={URLS.RARITY}>each with various rarities</Link>, and a
           limited supply of 10,000 frakts out of infinite possibilities.
         </p>
+        <br />
         <p className={styles.section__text}>
-          Every fractal generation uses a token hash, making it unique. They are
-          randomly generated, with the rarity determined by a cryptographically
-          secure random generator. All Frakts are stored on Solana's{' '}
+          Every frakt generation used a token hash, making it unique. All Frakts are minted on {' '}
           <a
             href='https://solana.com/'
             target='_blank'
             rel='noopener noreferrer'
           >
-            smart contract
+            Solana
           </a>
-          , and after generation the art is stored on IPFS. All of this makes
-          the project trustless and decentralised, and the whole codebase is
-          open source.
+          {' '} and avaliable only on <Link to={URLS.MARKETPLACE}> marketplaces </Link>
         </p>
       </div>
       <div className={styles.section} id={ROADMAP_SECTION_ID}>
