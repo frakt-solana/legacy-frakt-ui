@@ -5,7 +5,6 @@ import { useParams, useHistory } from 'react-router-dom'
 import AppLayout from '../../components/AppLayout'
 import styles from './styles.module.scss'
 import { URLS } from '../../constants'
-import { useArts } from '../../contexts/artDetails'
 import { PublicKey } from '@solana/web3.js'
 import Preloader from '../../components/Preloader'
 import ArtHeader from './components/ArtHeader'
@@ -13,24 +12,31 @@ import { getHeaderTitle, getArtInfoData } from './helpers'
 import Table from '../../components/Table'
 import ArtImage from '../../components/ArtImage'
 import { useLazyArtImageSrc } from '../../hooks'
+import { useFrakts } from '../../contexts/frakts'
 
 const ArtPage = () => {
   const { artAccountPubkey } = useParams<{ artAccountPubkey: string }>()
   const history = useHistory()
-  const { arts, getArts, getArtOwner, artMetaByMintKey } = useArts()
-  const [art, setArt] = useState({
+
+  const { frakts, fraktsLoading, getFraktOwner } = useFrakts()
+
+  const [frakt, setFrakt] = useState({
     attributes: null,
     metadata: null,
     rarity: 0,
   })
-  const { getSrc: getImageSrc, src: imageSrc, files } = useLazyArtImageSrc()
+  const {
+    getSrc: getImageSrc,
+    src: imageSrc,
+    imageFiles,
+  } = useLazyArtImageSrc()
   const [ownerAddress, setOwnerAddress] = useState(null)
   const [, setLoadingOwnerAddress] = useState(false)
   const [tokenPubkey, setTokenPubkey] = useState(null)
 
   const loadOwnerAddress = async (art) => {
     setLoadingOwnerAddress(true)
-    const ownerAddress: PublicKey = await getArtOwner(
+    const ownerAddress = await getFraktOwner(
       new PublicKey(art?.metadata.minted_token_pubkey)
     )
     setOwnerAddress(ownerAddress.toString())
@@ -39,37 +45,26 @@ const ArtPage = () => {
     setTokenPubkey(tokenPubkey.toString())
   }
 
-  //TODO: understand WTF is this
   const loadArt = async () => {
-    const data = arts.find(
+    const data = frakts.find(
       (art) => art.metadata.artAccountPubkey === artAccountPubkey
     )
-
-    if (!data) {
-      const arts = await getArts()
-      const data = arts.find(
-        (art) => art.metadata.artAccountPubkey === artAccountPubkey
-      )
-      loadOwnerAddress(data)
-      getImageSrc(data)
-      return setArt(data)
-    }
-
     loadOwnerAddress(data)
     getImageSrc(data)
-    setArt(data)
+    setFrakt(data)
   }
 
   useEffect(() => {
-    loadArt()
+    !fraktsLoading && loadArt()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [fraktsLoading])
 
   useEffect(() => {
-    if (art.metadata) {
-      getImageSrc(art)
+    if (frakt?.metadata) {
+      getImageSrc(frakt)
     }
-  }, [artMetaByMintKey, art.metadata])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [frakt])
 
   const onBackButtonHandler = () =>
     history.length <= 2 ? history.replace(URLS.ROOT) : history.goBack()
@@ -78,16 +73,17 @@ const ArtPage = () => {
     <AppLayout
       CustomHeader={() => (
         <ArtHeader
-          title={getHeaderTitle(art)}
+          title={getHeaderTitle(frakt)}
           onBackButtonClick={onBackButtonHandler}
-          imageFile={files[2]}
+          imageFile={imageFiles[2]}
         />
       )}
       mainClassName={!imageSrc && styles.appLayoutMain}
     >
       <Helmet>
-        <title>{`Art ${art?.metadata?.art_hash ? `#${art.metadata.hash}` : ''
-          } | FRAKT: Generative Art NFT Collection on Solana`}</title>
+        <title>{`Art ${
+          frakt?.metadata?.art_hash ? `#${frakt.metadata.hash}` : ''
+        } | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>
       <div className={styles.artContainer}>
         {!imageSrc ? (
@@ -96,13 +92,13 @@ const ArtPage = () => {
           </div>
         ) : (
           <>
-            <ArtImage src={files[1] || imageSrc} preloaderSize='md' />
-            {art && (
+            <ArtImage src={imageFiles[1] || imageSrc} preloaderSize='md' />
+            {frakt && (
               <div className={styles.info}>
                 <Table
                   data={getArtInfoData({
                     ownerAddress,
-                    artData: art,
+                    artData: frakt,
                     tokenPubkey,
                   })}
                   size='md'

@@ -17,7 +17,7 @@ const ArtCard = ({ className = '', art = {} }: IArtCardProps) => {
     attributes: { color, image_url, shape },
   } = art
 
-  const { src, getSrc, files } = useLazyArtImageSrc()
+  const { src, getSrc } = useLazyArtImageSrc()
 
   useEffect(() => {
     image_url && getSrc(art)
@@ -30,7 +30,9 @@ const ArtCard = ({ className = '', art = {} }: IArtCardProps) => {
       <div className={styles.infoWrapper}>
         <ArtTitle color={color} shape={shape} />
         <p className={styles.rarity}>
-          {art?.rarity ? `${art.rarity.toFixed(2)}% rarity` : ''}
+          {art?.attributes.rarity
+            ? `${art?.attributes.rarity.toFixed(2)}% rarity`
+            : ''}
         </p>
         <ButtonArrow size='lg' className={styles.exploreButton}>
           Explore

@@ -8,11 +8,13 @@ import { MarketProvider } from './contexts/market'
 import { URLS } from './constants'
 
 import HomePage from './pages/HomePage'
-import ExplorePage from './pages/ExplorePage'
-import { ArtsProvider } from './contexts/artDetails'
+import CollectionsPage from './pages/CollectionPage'
 import ArtPage from './pages/ArtPage'
 import Page404 from './pages/Page404'
 import RarityPage from './pages/RarityPage'
+import MarketplacesPage from './pages/MarketplacesPage'
+import { FraktsProvider } from './contexts/frakts'
+import WalletCollectionPage from './pages/WalletCollectionPage'
 
 export function Routes() {
   return (
@@ -21,7 +23,7 @@ export function Routes() {
         <WalletProvider>
           <AccountsProvider>
             <MarketProvider>
-              <ArtsProvider>
+              <FraktsProvider>
                 <Switch>
                   <Route
                     exact
@@ -30,17 +32,17 @@ export function Routes() {
                   />
                   <Route
                     exact
-                    path={URLS.EXPLORE}
-                    component={() => <ExplorePage />}
+                    path={`${URLS.WALLET}/:walletPubkey`}
+                    component={() => <WalletCollectionPage />}
                   />
                   <Route
                     exact
-                    path={`${URLS.USER}/:userAddress`}
-                    component={() => <ExplorePage />}
+                    path={URLS.COLLECTION}
+                    component={() => <CollectionsPage />}
                   />
                   <Route
                     exact
-                    path={`${URLS.EXPLORE}/:artAccountPubkey`}
+                    path={`${URLS.COLLECTION}/:artAccountPubkey`}
                     component={() => <ArtPage />}
                   />
                   <Route
@@ -50,12 +52,17 @@ export function Routes() {
                   />
                   <Route
                     exact
+                    path={URLS.MARKETPLACE}
+                    component={() => <MarketplacesPage />}
+                  />
+                  <Route
+                    exact
                     path={URLS.PAGE_404}
                     component={() => <Page404 />}
                   />
                   <Route exact path={'*'} component={() => <Page404 />} />
                 </Switch>
-              </ArtsProvider>
+              </FraktsProvider>
             </MarketProvider>
           </AccountsProvider>
         </WalletProvider>

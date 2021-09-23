@@ -13,7 +13,7 @@ export const getHeaderTitle = (artData) => {
   return !!(artHash && artName) ? `${artName} #${artHash}` : 'Loading...'
 }
 
-export const isRainbow = (color, shape):boolean =>
+export const isRainbow = (color, shape): boolean =>
   !!(shape === SHAPE.Wave && color === COLOR.Magenta)
 
 export const getArtInfoData = ({ ownerAddress, tokenPubkey, artData }) => {
@@ -23,11 +23,13 @@ export const getArtInfoData = ({ ownerAddress, tokenPubkey, artData }) => {
     artData?.attributes?.shape_rarity || 0
   const getColorName = (artData): string => {
     const color = COLOR[artData?.attributes?.color]
-    return isRainbow(artData?.attributes?.color, artData?.attributes?.shape) ? 'Rainbow' : color
+    return isRainbow(artData?.attributes?.color, artData?.attributes?.shape)
+      ? 'Rainbow'
+      : color
   }
   const getColorRarity = (artData): number =>
     artData?.attributes?.color_rarity || 0
-  const getArtRarity = (artData): number => artData?.rarity || 0
+  const getArtRarity = (artData): number => artData?.attributes?.rarity || 0
   const getCirclesAmount = (artData): number =>
     artData?.attributes?.circles_amount || 0
   const getFractalIterationsAmount = (artData) =>
@@ -47,7 +49,7 @@ export const getArtInfoData = ({ ownerAddress, tokenPubkey, artData }) => {
     ownerAddress
       ? {
           text: shortenAddress(ownerAddress),
-          linkTo: `${URLS.USER}/${ownerAddress}`,
+          linkTo: `${URLS.WALLET}/${ownerAddress}`,
         }
       : 'Loading...',
   ]

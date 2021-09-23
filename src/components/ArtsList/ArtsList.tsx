@@ -35,7 +35,7 @@ const ArtsList = ({ className = '', arts }: IArtsListProps) => {
         const isMigrating = checkIsArtInMigration(art)
         return (
           <Link
-            to={`${URLS.EXPLORE}/${art?.metadata?.artAccountPubkey}`}
+            to={`${URLS.COLLECTION}/${art?.metadata?.artAccountPubkey}`}
             key={art?.metadata?.artAccountPubkey}
             className={isMigrating ? styles.migratingArt : ''}
           >
