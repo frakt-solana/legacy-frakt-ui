@@ -25,9 +25,9 @@ const HomePage = () => {
         <p className={styles.hero__subtitle}>
           The first generative art NFT project
           <br />
-          on Solana building{' '}
+          on Solana that builds{' '}
           <AnchorLink smooth to={`#${ROADMAP_SECTION_ID}`}>
-            ecosystem
+            the ecosystem
           </AnchorLink>{' '}
           around
         </p>
@@ -48,15 +48,15 @@ const HomePage = () => {
         </p>
         <br />
         <p className={styles.section__text}>
-          Every frakt generation used a token hash, making it unique. All Frakts are minted on {' '}
+        Every time a frakt is generated, a token hash is used which makes it unique. All Frakts are minted on {' '}
           <a
             href='https://solana.com/'
             target='_blank'
             rel='noopener noreferrer'
           >
-            Solana
+            Solana network
           </a>
-          {' '} and avaliable only on <Link to={URLS.MARKETPLACE}> marketplaces </Link>
+          {' '} and are avaliable only on <Link to={URLS.MARKETPLACE}> marketplaces </Link>
         </p>
       </div>
       <div className={styles.section} id={ROADMAP_SECTION_ID}>

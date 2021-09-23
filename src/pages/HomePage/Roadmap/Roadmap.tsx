@@ -13,19 +13,19 @@ const STEPS = [
   {
     title: 'Staking',
     description:
-      'To power up all upcoming projects you will be able to stake your frakts and recieve voting power in DAO, airdrops, launchpad lottery tickets and yield from fraktionalizer fee and collection royalties',
+      "Here's your chance to get involved with the FRAKT ecosystem. Stake your frakts and you will be eligible to vote in the FRAKT DAO, receive exclusive airdrops, access Launchpad lottery tickets, and earn yields from collection royalties and fraktionalizer fees",
     checked: false,
   },
   {
     title: 'DAO',
     description:
-      'To make our project more community-driven stakers will be able to vote for upcoming projects on launchpad and key decisions on next steps',
+      'You, our community, are our main focus. To be even more community-oriented, stakers will be able to vote for upcoming projects on the launchpad and will be able to take part in key future decisions',
     checked: false,
   },
   {
     title: 'Fraktionalizer',
     description:
-      "As a one of first builders in Solana NFT space we aim to grow it's ecosystem even further with platform that allows you to fraction your NFT and trade fractions on DEX and AMM. A part of governance fee will be distributed to frakts stakers",
+      "As one of the first builders in the Solana NFT space, we aim to grow its ecosystem even further with a platform to split NFTs and trade fractions on a DEX and AMM. Stakers earn a portion of fees generated",
     checked: false,
   },
   // {
