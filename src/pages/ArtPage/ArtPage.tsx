@@ -82,7 +82,7 @@ const ArtPage = (): JSX.Element => {
     >
       <Helmet>
         <title>{`Art ${
-          frakt?.metadata?.art_hash ? `#${frakt.metadata.hash}` : ''
+          frakt?.attributes?.art_hash ? `#${frakt.attributes.art_hash}` : ''
         } | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>
       <div className={styles.artContainer}>
