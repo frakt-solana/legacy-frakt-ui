@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 import AppLayout from '../../components/AppLayout';
 import styles from './styles.module.scss';
@@ -27,6 +28,9 @@ const MARKETPLACES = [
 
 const MarketplacesPage = (): JSX.Element => (
   <AppLayout headerText="Select marketplace">
+    <Helmet>
+      <title>{`Marketplace | FRAKT: Generative Art NFT Collection on Solana`}</title>
+    </Helmet>
     <div className={styles.root}>
       {MARKETPLACES.map(({ href, name, imageSrc }, idx) => (
         <div className={styles.itemWrapper} key={idx}>
