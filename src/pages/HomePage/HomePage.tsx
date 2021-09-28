@@ -11,10 +11,14 @@ import styles from './styles.module.scss';
 import ScrambleText from '../../components/ScrambleText';
 import { ROADMAP_SECTION_ID } from './constants';
 import { URLS } from '../../constants';
+import { Helmet } from 'react-helmet';
 
 const HomePage = (): JSX.Element => {
   return (
     <AppLayout>
+      <Helmet>
+        <title>FRAKT | Generative Art NFT Collection on Solana</title>
+      </Helmet>
       <div className={styles.hero}>
         <ScrambleText
           texts={['Frakt', 'Frakt ']}
@@ -32,7 +36,6 @@ const HomePage = (): JSX.Element => {
           around
         </p>
         <div className={styles.hero__bg}>
-          {/* <img src={HERO_BG} alt='Frakt background' /> */}
           <SVG_IMAGE />
         </div>
       </div>
