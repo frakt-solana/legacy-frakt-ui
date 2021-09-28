@@ -40,7 +40,7 @@
     "extends": "react-app"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx}": [
+    "src/**/*.{ts,tsx}": [
       "npm run format",
       "npm run lint"
     ]
