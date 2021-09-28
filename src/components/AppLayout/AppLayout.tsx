@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react'
-import styles from './styles.module.scss'
+import React, { useEffect } from 'react';
+import styles from './styles.module.scss';
 
-import CompanyLogo from '../CompanyLogo'
-import AppNavigation from '../AppNavigation'
-import ConnectButton from '../ConnectButton'
-import BurgerMenu from '../BurgerMenu'
-import AppFooter from '../AppFooter'
-import CurrentUserTable from '../CurrentUserTable'
-import { useWallet } from '../../contexts/wallet'
-import WalletContent from '../WalletContent'
-import { useLocation } from 'react-router-dom'
+import CompanyLogo from '../CompanyLogo';
+import AppNavigation from '../AppNavigation';
+import ConnectButton from '../ConnectButton';
+import BurgerMenu from '../BurgerMenu';
+import AppFooter from '../AppFooter';
+import CurrentUserTable from '../CurrentUserTable';
+import { useWallet } from '../../external/contexts/wallet';
+import WalletContent from '../WalletContent';
+import { useLocation } from 'react-router-dom';
 
-interface IAppLayoutProps {
-  CustomHeader?: React.FunctionComponent
-  headerText?: string
-  children: any
-  className?: string
-  mainClassName?: string
+interface AppLayoutProps {
+  CustomHeader?: React.FunctionComponent;
+  headerText?: string;
+  children: any;
+  className?: string;
+  mainClassName?: string;
 }
 
 const AppLayout = ({
@@ -25,14 +25,14 @@ const AppLayout = ({
   children,
   className,
   mainClassName,
-}: IAppLayoutProps) => {
-  const { connected, isModalVisible, closeModal } = useWallet()
-  const location = useLocation()
+}: AppLayoutProps): JSX.Element => {
+  const { connected, isModalVisible, closeModal } = useWallet();
+  const location = useLocation();
 
   useEffect(() => {
-    isModalVisible && closeModal()
+    isModalVisible && closeModal();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location])
+  }, [location]);
 
   return (
     <div className={`${styles.root} ${className || ''}`}>
@@ -53,7 +53,7 @@ const AppLayout = ({
           <AppFooter className={styles.footer} />
         </div>
       </div>
-      <div className={`${styles.main} ${mainClassName || ''}`} id='mainContent'>
+      <div className={`${styles.main} ${mainClassName || ''}`} id="mainContent">
         {isModalVisible ? (
           <WalletContent />
         ) : (
@@ -65,7 +65,7 @@ const AppLayout = ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AppLayout
+export default AppLayout;

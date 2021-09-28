@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
 const STEPS = [
   {
@@ -25,7 +25,7 @@ const STEPS = [
   {
     title: 'Fraktionalizer',
     description:
-      "As one of the first builders in the Solana NFT space, we aim to grow its ecosystem even further with a platform to split NFTs and trade fractions on a DEX and AMM. Stakers earn a portion of fees generated",
+      'As one of the first builders in the Solana NFT space, we aim to grow its ecosystem even further with a platform to split NFTs and trade fractions on a DEX and AMM. Stakers earn a portion of fees generated',
     checked: false,
   },
   // {
@@ -40,9 +40,9 @@ const STEPS = [
   //     'We plan to build a Verified Random Function on Solana. The chain currently does not have such a function, but will be necessary for gaming, gambling and other NFT projects that require an independent random function.',
   //   checked: false,
   // },
-]
+];
 
-const Roadmap = () => (
+const Roadmap = (): JSX.Element => (
   <div className={styles.root}>
     {STEPS.map(({ title, description, checked, link }, idx) => (
       <div
@@ -53,8 +53,8 @@ const Roadmap = () => (
           {link ? (
             <a
               href={link}
-              rel='noopener noreferrer'
-              target='_blank'
+              rel="noopener noreferrer"
+              target="_blank"
               className={styles.item__title}
             >
               {title}
@@ -67,6 +67,6 @@ const Roadmap = () => (
       </div>
     ))}
   </div>
-)
+);
 
-export default Roadmap
+export default Roadmap;

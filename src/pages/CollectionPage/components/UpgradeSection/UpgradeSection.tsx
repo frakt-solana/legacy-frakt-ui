@@ -1,19 +1,19 @@
-import React from 'react'
-import Button from '../../../../components/Button'
-import { Tooltip } from 'antd'
+import React from 'react';
+import Button from '../../../../components/Button';
+import { Tooltip } from 'antd';
 
-import { pluralize } from '../../helpers'
-import styles from './styles.module.scss'
+import { pluralize } from '../../helpers';
+import styles from './styles.module.scss';
 
-interface IUpgradeSectionProps {
-  oldFraktsAmount: number
-  onUpgradeClick: (args: any) => any
+interface UpgradeSectionProps {
+  oldFraktsAmount: number;
+  onUpgradeClick: (args: any) => any;
 }
 
 const UpgradeSection = ({
   oldFraktsAmount,
   onUpgradeClick,
-}: IUpgradeSectionProps) => {
+}: UpgradeSectionProps): JSX.Element => {
   return (
     <div className={styles.root}>
       It seems that you have{' '}
@@ -29,10 +29,10 @@ const UpgradeSection = ({
         <span className={styles.questionText}>Why do I need this?</span>
       </Tooltip>
     </div>
-  )
-}
+  );
+};
 
 const TOOLTIP_TEXT =
-  'This update is needed for full Phantom wallet support, high resolution image and ability to trade your frakt later on Marketplace. Please, if you have more than 5 old standard tokens, repeat this operation after transaction confirmation'
+  'This update is needed for full Phantom wallet support, high resolution image and ability to trade your frakt later on Marketplace. Please, if you have more than 5 old standard tokens, repeat this operation after transaction confirmation';
 
-export default UpgradeSection
+export default UpgradeSection;

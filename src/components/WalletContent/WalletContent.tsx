@@ -1,22 +1,22 @@
-import React from 'react'
+import React from 'react';
 
-import { useWallet, WALLET_PROVIDERS } from '../../contexts/wallet'
-import ButtonArrow from '../ButtonArrow'
-import styles from './styles.module.scss'
-import { WalletItem } from './WalletItem'
+import { useWallet, WALLET_PROVIDERS } from '../../external/contexts/wallet';
+import ButtonArrow from '../ButtonArrow';
+import styles from './styles.module.scss';
+import { WalletItem } from './WalletItem';
 
-interface IWalletContentProps {
-  className?: string
+interface WalletContentProps {
+  className?: string;
 }
 
-const WalletContent = ({ className = '' }: IWalletContentProps) => {
-  const { setProviderUrl, setAutoConnect, closeModal } = useWallet()
+const WalletContent = ({ className = '' }: WalletContentProps): JSX.Element => {
+  const { setProviderUrl, setAutoConnect, closeModal } = useWallet();
 
   return (
     <div className={className}>
       <div className={styles.backButtonContainer}>
         <ButtonArrow
-          size='lg'
+          size="lg"
           arrowLeft
           className={styles.backButton}
           onClick={closeModal}
@@ -29,10 +29,10 @@ const WalletContent = ({ className = '' }: IWalletContentProps) => {
         {WALLET_PROVIDERS.map(({ url, name, icon: iconUrl }, idx) => (
           <WalletItem
             key={idx}
-            onClick={() => {
-              setProviderUrl(url)
-              setAutoConnect(true)
-              closeModal()
+            onClick={(): void => {
+              setProviderUrl(url);
+              setAutoConnect(true);
+              closeModal();
             }}
             imageSrc={iconUrl}
             imageAlt={name}
@@ -41,7 +41,7 @@ const WalletContent = ({ className = '' }: IWalletContentProps) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default WalletContent
+export default WalletContent;

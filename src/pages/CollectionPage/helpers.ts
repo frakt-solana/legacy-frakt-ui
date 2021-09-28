@@ -1,35 +1,25 @@
-import { COLOR, SHAPE } from '../../components/ArtCard/constants'
-import { shortenAddress } from '../../utils/utils'
+import { COLOR, SHAPE } from '../../components/ArtCard/constants';
 
-export const getHeaderText = ({ walletKey, userAddress }) =>
-  `${walletKey}` === userAddress
-    ? 'My Frakts'
-    : userAddress
-    ? `Collection of ${shortenAddress(userAddress)}`
-    : 'Explore'
-
-export const sortArtsByNew = (arts) =>
+export const sortArtsByNew = (arts: Array<any>): Array<any> =>
   [...arts].sort(({ metadata: metadataA }, { metadata: metadataB }) => {
-    return metadataB?.created_at - metadataA?.created_at
-  })
+    return metadataB?.created_at - metadataA?.created_at;
+  });
 
-export const sortArtsByRarity = (arts) =>
+export const sortArtsByRarity = (arts: Array<any>): Array<any> =>
   [...arts].sort(
     ({ attributes: attributesA }, { attributes: attributesB }) =>
-      attributesA.rarity - attributesB.rarity
-  )
+      attributesA.rarity - attributesB.rarity,
+  );
 
-export const sortArts = (arts, sortBy) =>
-  (sortBy === 'rarity' ? sortArtsByRarity : sortArtsByNew)(arts)
+export const sortArts = (
+  arts: Array<any>,
+  sortBy: string,
+): Array<any> => (sortBy === 'rarity' ? sortArtsByRarity : sortArtsByNew)(arts);
 
-export const pluralize = (
-  count: number,
-  noun: string,
-  suffix: string = 's'
-): string =>
-  count ? `${count} ${noun}${count !== 1 ? suffix : ''}` : `0 ${noun}${suffix}`
+export const pluralize = (count: number, noun: string, suffix = 's'): string =>
+  count ? `${count} ${noun}${count !== 1 ? suffix : ''}` : `0 ${noun}${suffix}`;
 
-export const getPointsForArt = (art) => {
+export const getPointsForArt = (art: any): number => {
   const pointsMatrix = {
     [SHAPE.Wave]: {
       [COLOR.Magenta]: 1760,
@@ -61,7 +51,7 @@ export const getPointsForArt = (art) => {
       [COLOR.Orange]: 13,
       [COLOR.White]: 10,
     },
-  }
+  };
 
-  return pointsMatrix[art.attributes.shape as number][art.attributes.color]
-}
+  return pointsMatrix[art.attributes.shape as number][art.attributes.color];
+};

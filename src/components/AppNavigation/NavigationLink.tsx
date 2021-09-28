@@ -1,13 +1,13 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
-interface INavigationLink {
-  to: string
-  text: string
-  notLink?: boolean
-  onClick?: () => void
+interface NavigationLink {
+  to: string;
+  text: string;
+  notLink?: boolean;
+  onClick?: () => void;
 }
 
 export const NavigationLink = ({
@@ -15,7 +15,7 @@ export const NavigationLink = ({
   text,
   notLink,
   onClick,
-}: INavigationLink) => (
+}: NavigationLink): JSX.Element => (
   <li>
     {!notLink ? (
       <NavLink
@@ -31,4 +31,4 @@ export const NavigationLink = ({
       </p>
     )}
   </li>
-)
+);

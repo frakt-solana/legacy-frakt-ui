@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
-interface IWalletItemProps {
-  onClick: () => void
-  imageSrc: string
-  imageAlt: string
-  name: string
+interface WalletItemProps {
+  onClick: () => void;
+  imageSrc: string;
+  imageAlt: string;
+  name: string;
 }
 
 export const WalletItem = ({
@@ -14,7 +14,7 @@ export const WalletItem = ({
   imageSrc,
   imageAlt,
   name,
-}: IWalletItemProps) => {
+}: WalletItemProps): JSX.Element => {
   return (
     <div className={styles.walletItemContainer} onClick={onClick}>
       <div className={styles.walletItem}>
@@ -22,5 +22,5 @@ export const WalletItem = ({
         {name}
       </div>
     </div>
-  )
-}
+  );
+};

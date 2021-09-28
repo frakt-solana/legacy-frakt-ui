@@ -1,32 +1,32 @@
-import React from 'react'
-import styles from './styles.module.scss'
+import React from 'react';
+import styles from './styles.module.scss';
 
-interface IButtonRegularProps {
-  className?: string
-  disabled?: boolean
-  isLink?: boolean
-  linkAttrs?: Object
-  onClick?: (args: any) => any
-  size?: string
-  Icon?: any
-  children: any
+interface ButtonRegularProps {
+  className?: string;
+  disabled?: boolean;
+  isLink?: boolean;
+  linkAttrs?: Record<string, any>;
+  onClick?: (args: any) => any;
+  size?: string;
+  Icon?: any;
+  children: any;
 }
 
-const getIcon = ({ Icon, size = 'md' }) => {
-  const pixelSize = size === 'sm' ? 14 : size === 'lg' ? 24 : 18
-  return Icon ? <Icon size={pixelSize} /> : ''
-}
+const getIcon = ({ Icon, size = 'md' }): JSX.Element | string => {
+  const pixelSize = size === 'sm' ? 14 : size === 'lg' ? 24 : 18;
+  return Icon ? <Icon size={pixelSize} /> : '';
+};
 
 const ButtonRegular = ({
   className,
   disabled = false,
   isLink = false,
   linkAttrs,
-  onClick = () => {},
+  onClick = (): void => {},
   size = 'md',
   Icon,
   children,
-}: IButtonRegularProps) => {
+}: ButtonRegularProps): JSX.Element => {
   if (isLink) {
     return (
       <a
@@ -38,12 +38,12 @@ const ButtonRegular = ({
         {getIcon({ Icon, size })}
         {children}
       </a>
-    )
+    );
   }
 
   return (
     <button
-      type='button'
+      type="button"
       className={`${styles.root} ${className || ''} ${
         disabled ? styles.disabled : ''
       } ${styles[size]}`}
@@ -52,7 +52,7 @@ const ButtonRegular = ({
       {getIcon({ Icon, size })}
       {children}
     </button>
-  )
-}
+  );
+};
 
-export default ButtonRegular
+export default ButtonRegular;

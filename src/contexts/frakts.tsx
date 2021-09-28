@@ -1,21 +1,24 @@
-import React, { useEffect, useState, useContext } from 'react'
-import { PublicKey } from '@solana/web3.js'
-import * as contract from 'frakt-client'
-import { useWallet } from './wallet'
-import { useConnection } from './connection'
-import config, { CACHE_URL } from '../config'
+/* eslint-disable require-await */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/camelcase */
+import React, { useEffect, useState, useContext } from 'react';
+import { PublicKey } from '@solana/web3.js';
+import * as contract from 'frakt-client';
+import { useWallet } from '../external/contexts/wallet';
+import { useConnection } from '../external/contexts/connection';
+import config, { CACHE_URL } from '../config';
 
-const programPubKey = new PublicKey(config.PROGRAM_PUBLIC_KEY)
+const programPubKey = new PublicKey(config.PROGRAM_PUBLIC_KEY);
 
-interface IFraktsContext {
-  frakts: any
-  arweaveMetadata: any
-  fraktsLoading: boolean
-  currentUserFrakts: any
-  currentUserFraktsLoading: boolean
-  upgradeFrakts: (frakts: any) => Promise<boolean>
-  getFraktOwner: (fraktMintedTokenPubkey: PublicKey) => Promise<String | null>
-  getWalletFrakts: (walletPubkey: PublicKey) => Promise<any>
+interface FraktsContextInterface {
+  frakts: any[];
+  arweaveMetadata: any;
+  fraktsLoading: boolean;
+  currentUserFrakts: any[];
+  currentUserFraktsLoading: boolean;
+  upgradeFrakts: (frakts: any) => Promise<boolean>;
+  getFraktOwner: (fraktMintedTokenPubkey: PublicKey) => Promise<string | null>;
+  getWalletFrakts: (walletPubkey: PublicKey) => Promise<any>;
 }
 
 export const FraktsContext = React.createContext({
@@ -24,33 +27,35 @@ export const FraktsContext = React.createContext({
   fraktsLoading: false,
   currentUserFrakts: [],
   currentUserFraktsLoading: false,
-  upgradeFrakts: async (frakts: any) => false,
-  getFraktOwner: async (fraktMintedTokenPubkey: PublicKey) => null,
-  getWalletFrakts: async (walletPubkey: PublicKey) => [],
-})
+  upgradeFrakts: async (frakts: any): Promise<boolean> => false,
+  getFraktOwner: async (
+    fraktMintedTokenPubkey: PublicKey,
+  ): Promise<string | null> => null,
+  getWalletFrakts: async (walletPubkey: PublicKey): Promise<any> => [],
+});
 
 export const getFraktRarity = ({
   color_rarity,
   shape_rarity,
 }: {
-  color_rarity: number
-  shape_rarity: number
-}): number => (color_rarity * shape_rarity) / 100
+  color_rarity: number;
+  shape_rarity: number;
+}): number => (color_rarity * shape_rarity) / 100;
 
-export const FraktsProvider = ({ children = null as any }) => {
-  const [frakts, setFrakts] = useState([])
-  const [fraktsLoading, setFraktsLoading] = useState<boolean>(true)
+export const FraktsProvider = ({ children = null as any }): JSX.Element => {
+  const [frakts, setFrakts] = useState([]);
+  const [fraktsLoading, setFraktsLoading] = useState<boolean>(true);
 
-  const [arweaveMetadata, setArweaveMetadata] = useState({})
+  const [arweaveMetadata, setArweaveMetadata] = useState({});
 
-  const [currentUserFrakts, setCurrentUserFrakts] = useState([])
+  const [currentUserFrakts, setCurrentUserFrakts] = useState([]);
   const [currentUserFraktsLoading, setCurrentUserFraktsLoading] =
-    useState<boolean>(false)
+    useState<boolean>(false);
 
-  const { wallet, connected } = useWallet()
-  const connection = useConnection()
+  const { wallet, connected } = useWallet();
+  const connection = useConnection();
 
-  const proccessFrakts = (frakts) => {
+  const proccessFrakts = (frakts: any[]): any[] => {
     return frakts
       .map((frakt) => ({
         ...frakt,
@@ -62,24 +67,24 @@ export const FraktsProvider = ({ children = null as any }) => {
           }),
         },
       }))
-      .filter((frakt) => frakt.metadata.is_minted === true)
-  }
+      .filter((frakt) => frakt.metadata.is_minted === true);
+  };
 
   useEffect(() => {
-    getFrakts()
+    getFrakts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   useEffect(() => {
     connected &&
       !currentUserFrakts?.length &&
       !currentUserFraktsLoading &&
-      getCurrentUserFrakts()
+      getCurrentUserFrakts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [connected])
+  }, [connected]);
 
-  const getFrakts = async () => {
-    setFraktsLoading(true)
+  const getFrakts = async (): Promise<void> => {
+    setFraktsLoading(true);
     try {
       const [fraktsRes, metadataRes] = await Promise.all([
         fetch(`${CACHE_URL}/arts.json`, {
@@ -88,117 +93,119 @@ export const FraktsProvider = ({ children = null as any }) => {
         fetch(`${CACHE_URL}/meta.json`, {
           headers: { 'Accept-Encoding': 'gzip' },
         }),
-      ])
-      const rawFrakts = await fraktsRes.json()
-      const metadata = await metadataRes.json()
-      setFrakts(proccessFrakts(Object.values(rawFrakts)))
-      setArweaveMetadata(metadata)
+      ]);
+      const rawFrakts = await fraktsRes.json();
+      const metadata = await metadataRes.json();
+      setFrakts(proccessFrakts(Object.values(rawFrakts)));
+      setArweaveMetadata(metadata);
     } catch (err) {
-      console.error(err)
+      // eslint-disable-next-line no-console
+      console.error(err);
     } finally {
-      setFraktsLoading(false)
+      setFraktsLoading(false);
     }
-  }
+  };
 
-  const getCurrentUserFrakts = async () => {
-    setCurrentUserFraktsLoading(true)
+  const getCurrentUserFrakts = async (): Promise<void> => {
+    setCurrentUserFraktsLoading(true);
     try {
       const tokens = await contract.getAllUserTokens(wallet.publicKey, {
         connection,
-      })
-      const tokensMint = tokens.map(({ mint }) => mint)
+      });
+      const tokensMint = tokens.map(({ mint }) => mint);
 
       if (!frakts?.length && !fraktsLoading) {
-        await getFrakts()
+        await getFrakts();
       }
 
       const userFrakts = frakts.filter((frakt) => {
-        return tokensMint.includes(frakt?.metadata?.minted_token_pubkey)
-      })
+        return tokensMint.includes(frakt?.metadata?.minted_token_pubkey);
+      });
 
-      setCurrentUserFrakts(userFrakts)
+      setCurrentUserFrakts(userFrakts);
     } catch (err) {
-      console.error(err)
+      // eslint-disable-next-line no-console
+      console.error(err);
     } finally {
-      setCurrentUserFraktsLoading(false)
+      setCurrentUserFraktsLoading(false);
     }
-  }
+  };
 
-  const getWalletFrakts = async (walletPubkey: PublicKey) => {
+  const getWalletFrakts = async (walletPubkey: PublicKey): Promise<any[]> => {
     try {
       const tokens = await contract.getAllUserTokens(walletPubkey, {
         connection,
-      })
-      const tokensMint = tokens.map(({ mint }) => mint)
+      });
+      const tokensMint = tokens.map(({ mint }) => mint);
 
       if (!frakts?.length && !fraktsLoading) {
-        await getFrakts()
+        await getFrakts();
       }
 
       const userFrakts = frakts.filter((frakt) => {
-        return tokensMint.includes(frakt?.metadata?.minted_token_pubkey)
-      })
+        return tokensMint.includes(frakt?.metadata?.minted_token_pubkey);
+      });
 
-      return userFrakts
+      return userFrakts;
     } catch (err) {
-      console.error(err)
+      // eslint-disable-next-line no-console
+      console.error(err);
     }
-  }
+  };
 
-  const upgradeFrakts = async (arts) => {
+  const upgradeFrakts = async (arts: any[]): Promise<boolean> => {
     try {
       void (await contract.migrateArtsToNewTokens(
         arts,
         wallet.publicKey,
         programPubKey,
         async (txn) => {
-          let { blockhash } = await connection.getRecentBlockhash()
+          const { blockhash } = await connection.getRecentBlockhash();
 
-          txn.recentBlockhash = blockhash
-          txn.feePayer = wallet.publicKey
-          let signed = await wallet.signTransaction(txn)
-          let txid = await connection.sendRawTransaction(signed.serialize())
-          return void connection.confirmTransaction(txid)
+          txn.recentBlockhash = blockhash;
+          txn.feePayer = wallet.publicKey;
+          const signed = await wallet.signTransaction(txn);
+          const txid = await connection.sendRawTransaction(signed.serialize());
+          return void connection.confirmTransaction(txid);
         },
-        { connection }
-      ))
-      return true
+        { connection },
+      ));
+      return true;
     } catch (error) {
-      console.log(error)
+      // eslint-disable-next-line no-console
+      console.log(error);
     }
-  }
+  };
 
   const getFraktOwner = async (
-    fraktMintedTokenPubkey: PublicKey
-  ): Promise<String> => {
+    fraktMintedTokenPubkey: PublicKey,
+  ): Promise<string> => {
     const largestTokenAccountOwner =
       await contract.getLargestTokenAccountOwnerByMint(fraktMintedTokenPubkey, {
         connection,
-      })
-    return largestTokenAccountOwner
-  }
+      });
+    return largestTokenAccountOwner as string;
+  };
 
   return (
     <FraktsContext.Provider
-      value={
-        {
-          frakts,
-          arweaveMetadata,
-          fraktsLoading,
-          currentUserFrakts,
-          currentUserFraktsLoading,
-          upgradeFrakts,
-          getFraktOwner,
-          getWalletFrakts,
-        } as IFraktsContext
-      }
+      value={{
+        frakts,
+        arweaveMetadata,
+        fraktsLoading,
+        currentUserFrakts,
+        currentUserFraktsLoading,
+        upgradeFrakts,
+        getFraktOwner,
+        getWalletFrakts,
+      }}
     >
       {children}
     </FraktsContext.Provider>
-  )
-}
+  );
+};
 
-export const useFrakts = () => {
+export const useFrakts = (): FraktsContextInterface => {
   const {
     frakts,
     arweaveMetadata,
@@ -208,7 +215,7 @@ export const useFrakts = () => {
     upgradeFrakts,
     getFraktOwner,
     getWalletFrakts,
-  } = useContext(FraktsContext) as IFraktsContext
+  } = useContext(FraktsContext);
   return {
     frakts,
     arweaveMetadata,
@@ -218,5 +225,5 @@ export const useFrakts = () => {
     upgradeFrakts,
     getFraktOwner,
     getWalletFrakts,
-  }
-}
+  };
+};

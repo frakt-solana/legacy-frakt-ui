@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-export const IconSvg = React.memo(
+const IconSvg = React.memo(
   ({ className, icon, size, fill, stroke, ...props }: any) => {
     return (
       <svg
@@ -12,8 +12,10 @@ export const IconSvg = React.memo(
       >
         {icon}
       </svg>
-    )
-  }
-)
+    );
+  },
+);
 
-export default IconSvg
+IconSvg.displayName = 'IconSvg';
+
+export default IconSvg;

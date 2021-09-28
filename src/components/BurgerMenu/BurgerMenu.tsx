@@ -1,22 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import { useWallet } from '../../contexts/wallet'
-import AppFooter from '../AppFooter'
-import AppNavigation from '../AppNavigation'
-import ConnectButton from '../ConnectButton'
-import CurrentUserTable from '../CurrentUserTable'
+import { useWallet } from '../../external/contexts/wallet';
+import AppFooter from '../AppFooter';
+import AppNavigation from '../AppNavigation';
+import ConnectButton from '../ConnectButton';
+import CurrentUserTable from '../CurrentUserTable';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
-interface IBurgerMenuProps {
-  className?: string
+interface BurgerMenuProps {
+  className?: string;
 }
 
-const BurgerMenu = ({ className = '' }: IBurgerMenuProps) => {
-  const { connected } = useWallet()
-  const [isOpen, setIsOpen] = useState(false)
+const BurgerMenu = ({ className = '' }: BurgerMenuProps): JSX.Element => {
+  const { connected } = useWallet();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const closeMenu = () => setIsOpen(false)
+  const closeMenu = (): void => setIsOpen(false);
 
   return (
     <>
@@ -24,7 +24,7 @@ const BurgerMenu = ({ className = '' }: IBurgerMenuProps) => {
         className={`${styles.burgerIcon} ${
           isOpen ? styles.opened : ''
         } ${className}`}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={(): void => setIsOpen(!isOpen)}
       ></div>
       <div
         className={`${styles.menuOverlay} ${
@@ -42,7 +42,7 @@ const BurgerMenu = ({ className = '' }: IBurgerMenuProps) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default BurgerMenu
+export default BurgerMenu;

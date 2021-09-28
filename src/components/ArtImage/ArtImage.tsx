@@ -1,14 +1,14 @@
-import React from 'react'
-import Preloader from '../Preloader'
+import React from 'react';
+import Preloader from '../Preloader';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
-interface IArtImageProps {
-  src?: string
-  alt?: string
-  className?: string
-  imageClass?: string
-  preloaderSize?: string
+interface ArtImageProps {
+  src?: string;
+  alt?: string;
+  className?: string;
+  imageClass?: string;
+  preloaderSize?: string;
 }
 
 const ArtImage = ({
@@ -17,7 +17,7 @@ const ArtImage = ({
   className = '',
   imageClass = '',
   preloaderSize = 'sm',
-}: IArtImageProps) => (
+}: ArtImageProps): JSX.Element => (
   <div className={`${styles.root} ${className}`}>
     <div className={styles.content}>
       {src && (
@@ -31,6 +31,6 @@ const ArtImage = ({
       <Preloader size={preloaderSize} />
     </div>
   </div>
-)
+);
 
-export default ArtImage
+export default ArtImage;

@@ -1,17 +1,20 @@
-import React from 'react'
+import React from 'react';
 
-import styles from './styles.module.scss'
-import { SHAPE, COLOR, COLOR_HEX } from './constants'
-import { getArtName } from './helpers'
+import styles from './styles.module.scss';
+import { SHAPE, COLOR, COLOR_HEX } from './constants';
+import { getArtName } from './helpers';
 
-interface IArtTitleProps {
-  color?: string
-  shape?: string
+interface ArtTitleProps {
+  color?: string;
+  shape?: string;
 }
 
-export const ArtTitle = ({ color = '', shape = '' }: IArtTitleProps) => {
-  const isRainbow = ({ shape, color }) =>
-    !!(shape === SHAPE.Wave && color === COLOR.Magenta)
+export const ArtTitle = ({
+  color = '',
+  shape = '',
+}: ArtTitleProps): JSX.Element => {
+  const isRainbow = ({ shape, color }): boolean =>
+    !!(shape === SHAPE.Wave && color === COLOR.Magenta);
 
   return (
     <p
@@ -22,5 +25,5 @@ export const ArtTitle = ({ color = '', shape = '' }: IArtTitleProps) => {
     >
       {getArtName({ color, shape })}
     </p>
-  )
-}
+  );
+};

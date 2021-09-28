@@ -1,49 +1,49 @@
-import { useFrakts } from './../contexts/frakts'
-import { useState } from 'react'
-import { ipfsUriToGatewayUrl } from '../utils/ipfs'
+import { useFrakts } from './../contexts/frakts';
+import { useState } from 'react';
+import { ipfsUriToGatewayUrl } from '../external/utils/ipfs';
 
-export * from './useUserAccounts'
-export * from './useAccountByMint'
-export * from './useTokenName'
-export * from './useUserBalance'
-export * from './useUserTotalBalance'
+export const useLazyArtImageSrc = (): {
+  src: string | null;
+  loading: boolean;
+  error: any | null;
+  getSrc: (art: any) => Promise<void>;
+  imageFiles: any[];
+} => {
+  const [src, setSrc] = useState(null);
+  const [imageFiles, setImageFiles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { arweaveMetadata } = useFrakts();
 
-export const useLazyArtImageSrc = () => {
-  const [src, setSrc] = useState(null)
-  const [imageFiles, setImageFiles] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const { arweaveMetadata } = useFrakts()
+  const setImageFromIpfs = async (imageUrl: string): Promise<void> => {
+    const res = await fetch(ipfsUriToGatewayUrl(imageUrl));
+    const { image } = await res.json();
+    setSrc(ipfsUriToGatewayUrl(image));
+  };
 
-  const setImageFromIpfs = async (imageUrl) => {
-    const res = await fetch(ipfsUriToGatewayUrl(imageUrl))
-    const { image } = await res.json()
-    setSrc(ipfsUriToGatewayUrl(image))
-  }
+  const setImageFromArweave = async (metadata: any): Promise<void> => {
+    const res = await fetch(metadata.account.info.data.uri);
+    const data = await res.json();
+    setImageFiles(data.properties.files);
+    setSrc(data.image);
+  };
 
-  const setImageFromArweave = async (metadata) => {
-    const res = await fetch(metadata.account.info.data.uri)
-    const data = await res.json()
-    setImageFiles(data.properties.files)
-    setSrc(data.image)
-  }
-
-  const getSrc = async (art) => {
-    setLoading(true)
-    const metadata = arweaveMetadata[art.metadata.minted_token_pubkey]
+  const getSrc = async (art: any): Promise<void> => {
+    setLoading(true);
+    const metadata = arweaveMetadata[art.metadata.minted_token_pubkey];
 
     try {
       if (!metadata) {
-        await setImageFromIpfs(art.attributes?.image_url)
+        await setImageFromIpfs(art.attributes?.image_url);
       } else {
-        await setImageFromArweave(metadata)
+        await setImageFromArweave(metadata);
       }
     } catch (error) {
-      setError(error)
+      setError(error);
     }
 
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
-  return { src, loading, error, getSrc, imageFiles }
-}
+  return { src, loading, error, getSrc, imageFiles };
+};

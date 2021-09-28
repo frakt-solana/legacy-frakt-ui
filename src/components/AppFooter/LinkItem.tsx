@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-interface ILinkItem {
-  url: string
-  Icon: React.FunctionComponent
+interface LinkItem {
+  url: string;
+  Icon: React.FunctionComponent;
 }
 
-export const LinkItem = ({ url, Icon }: ILinkItem) => (
+export const LinkItem = ({ url, Icon }: LinkItem): JSX.Element => (
   <li>
-    <a href={url} target='_blank' rel='noopener noreferrer'>
+    <a href={url} target="_blank" rel="noopener noreferrer">
       <Icon />
     </a>
   </li>
-)
+);

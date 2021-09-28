@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-import AppLayout from '../../components/AppLayout'
-import styles from './styles.module.scss'
+import AppLayout from '../../components/AppLayout';
+import styles from './styles.module.scss';
 
-import SOLANART_LOGO from './images/solanart.webp'
-import DIGITALEYES_LOGO from './images/digitaleyes.svg'
-import MARKT_LOGO from './images/markt.png'
+import SOLANART_LOGO from './images/solanart.webp';
+import DIGITALEYES_LOGO from './images/digitaleyes.svg';
+import MARKT_LOGO from './images/markt.png';
 
 const MARKETPLACES = [
   {
@@ -23,17 +23,17 @@ const MARKETPLACES = [
     imageSrc: MARKT_LOGO,
     href: 'https://markt.frakt.art/',
   },
-]
+];
 
-const MarketplacesPage = () => (
-  <AppLayout headerText='Select marketplace'>
+const MarketplacesPage = (): JSX.Element => (
+  <AppLayout headerText="Select marketplace">
     <div className={styles.root}>
       {MARKETPLACES.map(({ href, name, imageSrc }, idx) => (
         <div className={styles.itemWrapper} key={idx}>
           <a
             href={href}
-            target='_blank'
-            rel='noopener noreferrer'
+            target="_blank"
+            rel="noopener noreferrer"
             className={styles.item}
           >
             <img alt={name} src={imageSrc} />
@@ -43,6 +43,6 @@ const MarketplacesPage = () => (
       ))}
     </div>
   </AppLayout>
-)
+);
 
-export default MarketplacesPage
+export default MarketplacesPage;

@@ -1,6 +1,6 @@
 {
-  "short_name": "Frakt art",
-  "name": "Frakt art",
+  "short_name": "Fraktionalizer",
+  "name": "Fraktionalizer",
   "display": "standalone",
   "start_url": "./",
   "theme_color": "#ffffff",

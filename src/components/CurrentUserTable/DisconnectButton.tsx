@@ -1,19 +1,21 @@
-import React from 'react'
+import React from 'react';
 
-import ButtonArrow from '../ButtonArrow'
-import styles from './styles.module.scss'
+import ButtonArrow from '../ButtonArrow';
+import styles from './styles.module.scss';
 
-interface IDisconnectButton {
-  onClick: () => void
+interface DisconnectButton {
+  onClick: () => void;
 }
 
-export const DisconnectButton = ({ onClick }: IDisconnectButton) => (
+export const DisconnectButton = ({
+  onClick,
+}: DisconnectButton): JSX.Element => (
   <ButtonArrow
     className={styles.disconnectButton}
     onClick={onClick}
-    size='md'
+    size="md"
     arrowLeft
   >
     Disconnect wallet
   </ButtonArrow>
-)
+);

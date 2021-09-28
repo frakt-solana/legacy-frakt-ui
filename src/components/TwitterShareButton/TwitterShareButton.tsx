@@ -1,17 +1,17 @@
-import React, { useMemo } from 'react'
-import ButtonRegular from '../Button'
-import { TwitterIcon2 } from '../../icons'
+import React, { useMemo } from 'react';
+import ButtonRegular from '../Button';
+import { TwitterIcon2 } from '../../icons';
 
 const DEFAULT_TWEET_TEXT =
-  'Look at this awesome fractal art #NFT that I just minted!\n\nMint your own unique FRAKT for 0.5 SOL'
+  'Look at this awesome fractal art #NFT that I just minted!\n\nMint your own unique FRAKT for 0.5 SOL';
 
-const HASHTAGS = ['NFTcollectibles', 'NFTCommunity', 'nftart', 'NFTs']
-interface ITwitterShareButtonProps {
-  className?: string
-  size?: string
-  url?: string
-  tweetText?: string
-  hashtags?: Array<string>
+const HASHTAGS = ['NFTcollectibles', 'NFTCommunity', 'nftart', 'NFTs'];
+interface TwitterShareButtonProps {
+  className?: string;
+  size?: string;
+  url?: string;
+  tweetText?: string;
+  hashtags?: Array<string>;
 }
 const TwitterShareButton = ({
   className,
@@ -19,7 +19,7 @@ const TwitterShareButton = ({
   url = window.location.href,
   hashtags = HASHTAGS,
   size = 'md',
-}: ITwitterShareButtonProps) => {
+}: TwitterShareButtonProps): JSX.Element => {
   const searchParams = useMemo(
     () =>
       new URLSearchParams({
@@ -27,8 +27,8 @@ const TwitterShareButton = ({
         text: `${tweetText}\n`,
         url: url,
       }).toString(),
-    [tweetText, url, hashtags]
-  )
+    [tweetText, url, hashtags],
+  );
 
   return (
     <ButtonRegular
@@ -44,7 +44,7 @@ const TwitterShareButton = ({
     >
       Share
     </ButtonRegular>
-  )
-}
+  );
+};
 
-export default TwitterShareButton
+export default TwitterShareButton;
