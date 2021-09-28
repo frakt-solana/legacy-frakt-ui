@@ -1,6 +1,7 @@
 import React from 'react';
 import { HashLink as AnchorLink } from 'react-router-hash-link';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import AppLayout from '../../components/AppLayout';
 
@@ -11,7 +12,6 @@ import styles from './styles.module.scss';
 import ScrambleText from '../../components/ScrambleText';
 import { ROADMAP_SECTION_ID } from './constants';
 import { URLS } from '../../constants';
-import { Helmet } from 'react-helmet';
 
 const HomePage = (): JSX.Element => {
   return (
