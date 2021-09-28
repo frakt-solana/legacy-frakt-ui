@@ -19,7 +19,7 @@
     }
 
     .questionIcon {
-      font-size: 12px;
+      width: 12px;
       margin-left: 2px;
     }
   }
@@ -37,7 +37,7 @@
     }
 
     .questionIcon {
-      font-size: 14px;
+      width: 14px;
       margin-left: 4px;
     }
   }
@@ -55,7 +55,7 @@
     }
 
     .questionIcon {
-      font-size: 20px;
+      width: 20px;
       margin-left: 8px;
     }
   }
@@ -86,6 +86,7 @@
 
 .questionIcon {
   cursor: pointer;
+  fill: $color-gray-2;
 }
 
 .link {
@@ -113,7 +114,7 @@
       }
 
       .questionIcon {
-        font-size: 10px;
+        width: 10px;
         margin-left: 2px;
       }
     }
@@ -131,7 +132,7 @@
       }
 
       .questionIcon {
-        font-size: 12px;
+        width: 12px;
         margin-left: 3px;
       }
     }
@@ -149,7 +150,7 @@
       }
 
       .questionIcon {
-        font-size: 16px;
+        width: 16px;
         margin-left: 6px;
       }
     }
