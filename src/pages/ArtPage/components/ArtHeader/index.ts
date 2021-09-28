@@ -1,1 +1,1 @@
-export { default } from './ArtHeader'
+export { default } from './ArtHeader';

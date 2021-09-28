@@ -1,1 +1,1 @@
-export { default } from './WalletCollectionPage'
+export { default } from './WalletCollectionPage';

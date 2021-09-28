@@ -1,1 +1,1 @@
-export { default } from './NoFraktsBlock'
+export { default } from './NoFraktsBlock';

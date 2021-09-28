@@ -1,1 +1,1 @@
-export { default } from './MarketplacesPage'
+export { default } from './MarketplacesPage';

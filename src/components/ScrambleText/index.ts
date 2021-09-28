@@ -1,1 +1,1 @@
-export { default } from './ScrambleText'
+export { default } from './ScrambleText';

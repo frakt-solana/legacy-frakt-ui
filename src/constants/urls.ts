@@ -6,4 +6,4 @@ export const URLS = {
   WALLET: '/wallet',
   RARITY: '/rarity',
   PAGE_404: '/404',
-}
+};

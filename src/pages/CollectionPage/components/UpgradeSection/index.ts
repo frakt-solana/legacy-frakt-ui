@@ -1,1 +1,1 @@
-export { default } from './UpgradeSection'
+export { default } from './UpgradeSection';

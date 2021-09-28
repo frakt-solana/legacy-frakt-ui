@@ -11,10 +11,8 @@ export const sortArtsByRarity = (arts: Array<any>): Array<any> =>
       attributesA.rarity - attributesB.rarity,
   );
 
-export const sortArts = (
-  arts: Array<any>,
-  sortBy: string,
-): Array<any> => (sortBy === 'rarity' ? sortArtsByRarity : sortArtsByNew)(arts);
+export const sortArts = (arts: Array<any>, sortBy: string): Array<any> =>
+  (sortBy === 'rarity' ? sortArtsByRarity : sortArtsByNew)(arts);
 
 export const pluralize = (count: number, noun: string, suffix = 's'): string =>
   count ? `${count} ${noun}${count !== 1 ? suffix : ''}` : `0 ${noun}${suffix}`;
