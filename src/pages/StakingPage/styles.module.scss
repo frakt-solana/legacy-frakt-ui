@@ -1,0 +1,21 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 140px;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 1023px) {
+  .root {
+    height: calc(100vh - 73px);
+    padding: 0 32px;
+  }
+}
