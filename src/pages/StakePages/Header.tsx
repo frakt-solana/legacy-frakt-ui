@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 interface HeaderProps {
   steps: Array<string>;
   currentStep: number;
-  onBackButtonClick: () => void;
+  onBackButtonClick?: () => void;
   hideBackButton?: boolean;
 }
 

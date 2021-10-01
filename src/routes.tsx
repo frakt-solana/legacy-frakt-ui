@@ -12,8 +12,7 @@ import CollectionsPage from './pages/CollectionPage';
 import ArtPage from './pages/ArtPage';
 import Page404 from './pages/Page404';
 import RarityPage from './pages/RarityPage';
-import StakingPage from './pages/StakingPage';
-import CreateStakePage from './pages/CreateStakePage';
+import { StakingPage, CreateStakePage, UnstakePage } from './pages/StakePages';
 import MarketplacesPage from './pages/MarketplacesPage';
 import { FraktsProvider } from './contexts/frakts';
 import WalletCollectionPage from './pages/WalletCollectionPage';
@@ -59,8 +58,13 @@ export function Routes(): JSX.Element {
                   />
                   <Route
                     exact
-                    path={`${URLS.STAKING}/create`}
+                    path={URLS.STAKING_CREATE}
                     component={(): JSX.Element => <CreateStakePage />}
+                  />
+                  <Route
+                    exact
+                    path={URLS.STAKING_UNSTAKE}
+                    component={(): JSX.Element => <UnstakePage />}
                   />
                   <Route
                     exact

@@ -303,3 +303,24 @@
     }
   }
 }
+
+//? Staking page
+
+.stakingPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &__title {
+    font-size: 140px;
+    text-transform: uppercase;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .stakingPage {
+    height: calc(100vh - 73px);
+    padding: 0 32px;
+  }
+}
