@@ -18,39 +18,46 @@ export const sortArts = (arts: Array<any>, sortBy: string): Array<any> =>
 export const pluralize = (count: number, noun: string, suffix = 's'): string =>
   count ? `${count} ${noun}${count !== 1 ? suffix : ''}` : `0 ${noun}${suffix}`;
 
-export const getPointsForArt = (art: Frakt): number => {
-  const pointsMatrix = {
-    [SHAPE.Wave]: {
-      [COLOR.Magenta]: 1760,
-      [COLOR.Red]: 880,
-      [COLOR.Orange]: 587,
-      [COLOR.White]: 440,
-    },
-    [SHAPE.Eye]: {
-      [COLOR.Magenta]: 352,
-      [COLOR.Red]: 176,
-      [COLOR.Orange]: 117,
-      [COLOR.White]: 88,
-    },
-    [SHAPE.Star]: {
-      [COLOR.Magenta]: 88,
-      [COLOR.Red]: 44,
-      [COLOR.Orange]: 29,
-      [COLOR.White]: 22,
-    },
-    [SHAPE.Portal]: {
-      [COLOR.Magenta]: 59,
-      [COLOR.Red]: 29,
-      [COLOR.Orange]: 20,
-      [COLOR.White]: 15,
-    },
-    [SHAPE.Net]: {
-      [COLOR.Magenta]: 40,
-      [COLOR.Red]: 20,
-      [COLOR.Orange]: 13,
-      [COLOR.White]: 10,
-    },
-  };
+const POINTS_MATRIX = {
+  [SHAPE.Wave]: {
+    [COLOR.Magenta]: 1760,
+    [COLOR.Red]: 880,
+    [COLOR.Orange]: 587,
+    [COLOR.White]: 440,
+  },
+  [SHAPE.Eye]: {
+    [COLOR.Magenta]: 352,
+    [COLOR.Red]: 176,
+    [COLOR.Orange]: 117,
+    [COLOR.White]: 88,
+  },
+  [SHAPE.Star]: {
+    [COLOR.Magenta]: 88,
+    [COLOR.Red]: 44,
+    [COLOR.Orange]: 29,
+    [COLOR.White]: 22,
+  },
+  [SHAPE.Portal]: {
+    [COLOR.Magenta]: 59,
+    [COLOR.Red]: 29,
+    [COLOR.Orange]: 20,
+    [COLOR.White]: 15,
+  },
+  [SHAPE.Net]: {
+    [COLOR.Magenta]: 40,
+    [COLOR.Red]: 20,
+    [COLOR.Orange]: 13,
+    [COLOR.White]: 10,
+  },
+};
 
-  return pointsMatrix[art.attributes.shape as number][art.attributes.color];
+export const getPointsForArt = (art: Frakt): number => {
+  return POINTS_MATRIX[art.attributes.shape as number][art.attributes.color];
+};
+
+export const getPointsByColorAndShape = (
+  color: number,
+  shape: number,
+): number => {
+  return POINTS_MATRIX[shape][color];
 };
