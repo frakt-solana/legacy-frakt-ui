@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+/* eslint-disable require-await */
+import React, { useState, useContext, useMemo } from 'react';
 import { PublicKey } from '@solana/web3.js';
 import * as contract from 'frakt-client';
 import { useConnection } from '../external/contexts/connection';
@@ -6,10 +7,13 @@ import config from '../config';
 import { useWallet } from '../external/contexts/wallet';
 import { notify } from '../external/utils/notifications';
 import { Frakt } from './frakts';
+import moment from 'moment';
 
 const programPubKey = new PublicKey(config.PROGRAM_PUBLIC_KEY);
+const farmingMintPubKey = new PublicKey(config.FARMING_TOKEN_MINT);
 
 interface StakingContextInterface {
+  userStakeAccounts: contract.StakeView[];
   poolConfigAccount: contract.PoolConfigView;
   stakeAccounts: contract.StakeView[];
   userFrakts: Frakt[];
@@ -17,15 +21,23 @@ interface StakingContextInterface {
   error: Error | null;
   fetchData: () => Promise<void>;
   stakeFrakts: (artsAndMints: contract.ArtAndMint[]) => Promise<boolean>;
+  harvestStakes: (stakesPubkeys: PublicKey[]) => Promise<boolean>;
+  secondsSumAfterHarvest: number;
+  fraktsAvailableToUnstakeAmount: number;
 }
 
 export const StakingContext = React.createContext({
+  userStakeAccounts: [],
   poolConfigAccount: null,
   stakeAccounts: [],
   userFrakts: [],
   loading: false,
   error: null,
   fetchData: async () => {},
+  stakeFrakts: async () => false,
+  harvestStakes: async () => false,
+  secondsSumAfterHarvest: 0,
+  fraktsAvailableToUnstakeAmount: 0,
 } as StakingContextInterface);
 
 export const StakingProvider = ({
@@ -68,6 +80,29 @@ export const StakingProvider = ({
     }
   };
 
+  const userStakeAccounts = useMemo((): contract.StakeView[] => {
+    return stakeAccounts.filter(
+      ({ stake_owner, is_staked }) =>
+        stake_owner === `${wallet.publicKey}` && is_staked,
+    );
+  }, [stakeAccounts, wallet]);
+
+  const secondsSumAfterHarvest = useMemo(() => {
+    return userStakeAccounts.reduce((secondsSum, { last_harvested_at }) => {
+      const seconds = moment().unix() - Number(last_harvested_at);
+      return secondsSum + seconds;
+    }, 0);
+  }, [userStakeAccounts]);
+
+  const fraktsAvailableToUnstakeAmount = useMemo(() => {
+    return userStakeAccounts.reduce((amount, stakeAccount) => {
+      const isAvailableToUnstake =
+        moment().unix() - Number(stakeAccount.stake_end_at) >= 0;
+
+      return isAvailableToUnstake ? amount + 1 : amount;
+    }, 0);
+  }, [userStakeAccounts]);
+
   const stakeFrakts = async (
     artsAndMints: contract.ArtAndMint[],
   ): Promise<boolean> => {
@@ -102,16 +137,55 @@ export const StakingProvider = ({
     }
   };
 
+  const harvestStakes = async (
+    stakesPubkeys: PublicKey[],
+  ): Promise<boolean> => {
+    try {
+      void (await contract.harvestBulkStakes(
+        stakesPubkeys,
+        wallet.publicKey,
+        farmingMintPubKey,
+        programPubKey,
+        async (txn) => {
+          const { blockhash } = await connection.getRecentBlockhash();
+
+          txn.recentBlockhash = blockhash;
+          txn.feePayer = wallet.publicKey;
+          const signed = await wallet.signTransaction(txn);
+          const txid = await connection.sendRawTransaction(signed.serialize());
+          return void connection.confirmTransaction(txid);
+        },
+        { connection },
+      ));
+      notify({
+        message: `FRKTs harvested successfully`,
+        type: 'success',
+      });
+      return true;
+    } catch (error) {
+      notify({
+        message: 'Transaction failed',
+        type: 'error',
+      });
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  };
+
   return (
     <StakingContext.Provider
       value={{
+        userStakeAccounts,
         poolConfigAccount,
         stakeAccounts,
         loading,
         error,
         fetchData,
         stakeFrakts,
+        harvestStakes,
         userFrakts,
+        secondsSumAfterHarvest,
+        fraktsAvailableToUnstakeAmount,
       }}
     >
       {children}
@@ -121,6 +195,7 @@ export const StakingProvider = ({
 
 export const useStaking = (): StakingContextInterface => {
   const {
+    userStakeAccounts,
     poolConfigAccount,
     stakeAccounts,
     loading,
@@ -128,8 +203,12 @@ export const useStaking = (): StakingContextInterface => {
     fetchData,
     stakeFrakts,
     userFrakts,
+    secondsSumAfterHarvest,
+    fraktsAvailableToUnstakeAmount,
+    harvestStakes,
   } = useContext(StakingContext);
   return {
+    userStakeAccounts,
     poolConfigAccount,
     stakeAccounts,
     loading,
@@ -137,5 +216,8 @@ export const useStaking = (): StakingContextInterface => {
     fetchData,
     stakeFrakts,
     userFrakts,
+    secondsSumAfterHarvest,
+    fraktsAvailableToUnstakeAmount,
+    harvestStakes,
   };
 };

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
 import AppLayout from '../../components/AppLayout';
-import { Frakt, useFrakts } from '../../contexts/frakts';
+import { Frakt } from '../../contexts/frakts';
+import { useStaking } from '../../contexts/staking';
 import Header from './Header';
 import ApproveStep from './steps/ApproveStep';
 import AttentionStep from './steps/AttentionStep';
@@ -13,7 +14,7 @@ const STEPS = ['Select Frakts', 'Attention', 'Approve'];
 
 const CreateStakePage = (): JSX.Element => {
   const [currentStep, setCurrentStep] = useState<number>(0);
-  const { currentUserFrakts, currentUserFraktsLoading } = useFrakts();
+  const { userFrakts, loading } = useStaking();
   const history = useHistory();
 
   const [selectedFrakts, setSelectedFrakts] = useState<Frakt[]>([]);
@@ -38,8 +39,8 @@ const CreateStakePage = (): JSX.Element => {
       />
       {currentStep === 0 && (
         <SelectStep
-          frakts={currentUserFrakts}
-          fraktsLoading={currentUserFraktsLoading}
+          frakts={userFrakts}
+          fraktsLoading={loading}
           selectedFrakts={selectedFrakts}
           setSelectedFrakts={setSelectedFrakts}
           nextStep={nextStep}

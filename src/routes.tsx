@@ -15,7 +15,12 @@ import CollectionsPage from './pages/CollectionPage';
 import ArtPage from './pages/ArtPage';
 import Page404 from './pages/Page404';
 import RarityPage from './pages/RarityPage';
-import { StakingPage, CreateStakePage, UnstakePage } from './pages/StakePages';
+import {
+  StakingPage,
+  CreateStakePage,
+  UnstakePage,
+  HarvestPage,
+} from './pages/StakePages';
 import MarketplacesPage from './pages/MarketplacesPage';
 import WalletCollectionPage from './pages/WalletCollectionPage';
 
@@ -68,6 +73,11 @@ export function Routes(): JSX.Element {
                       exact
                       path={URLS.STAKING_UNSTAKE}
                       component={(): JSX.Element => <UnstakePage />}
+                    />
+                    <Route
+                      exact
+                      path={URLS.STAKING_HARVEST}
+                      component={(): JSX.Element => <HarvestPage />}
                     />
                     <Route
                       exact
