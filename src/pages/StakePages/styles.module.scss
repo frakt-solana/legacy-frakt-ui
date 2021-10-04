@@ -307,20 +307,102 @@
 //? Staking page
 
 .stakingPage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  flex-grow: 1;
+  display: grid;
+  gap: 1px;
+  background: $color-gray-1;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 
   &__title {
     font-size: 140px;
     text-transform: uppercase;
+  }
+
+  &__infoTable {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  &__stakeWrapper,
+  &__unstakeWrapper,
+  &__harvestWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 60px;
+    background: $color-black;
+  }
+
+  &__stakeWrapper {
+    grid-column: 1 / 1;
+  }
+
+  &__unstakeWrapper {
+    grid-column: 1 / 1;
+  }
+
+  &__harvestWrapper {
+    grid-column: 2 / 2;
+    grid-row: 1/ -1;
   }
 }
 
 @media screen and (max-width: 1023px) {
   .stakingPage {
     height: calc(100vh - 73px);
-    padding: 0 32px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .stakingPage {
+    height: calc(100vh - 73px);
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    padding: 0;
+
+    &__stakeWrapper,
+    &__unstakeWrapper,
+    &__harvestWrapper {
+      padding: 24px;
+    }
+
+    &__stakeWrapper {
+      grid-column: unset;
+      grid-row: 2 / 2;
+    }
+
+    &__unstakeWrapper {
+      grid-column: unset;
+      grid-row: 3 / 3;
+    }
+
+    &__harvestWrapper {
+      grid-column: unset;
+      grid-row: 1 / 1;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+  .stakingPage {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    &__stakeWrapper {
+      grid-column: unset;
+      grid-row: 2 / 3;
+    }
+
+    &__unstakeWrapper {
+      grid-column: unset;
+      grid-row: 3 / 3;
+    }
+
+    &__harvestWrapper {
+      grid-column: unset;
+      grid-row: 1 / 2;
+    }
   }
 }
