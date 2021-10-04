@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
 import AppLayout from '../../components/AppLayout';
-import { useFrakts } from '../../contexts/frakts';
+import { Frakt, useFrakts } from '../../contexts/frakts';
 import Header from './Header';
 import ApproveStep from './steps/ApproveStep';
 import AttentionStep from './steps/AttentionStep';
@@ -16,7 +16,7 @@ const CreateStakePage = (): JSX.Element => {
   const { currentUserFrakts, currentUserFraktsLoading } = useFrakts();
   const history = useHistory();
 
-  const [selectedFrakts, setSelectedFrakts] = useState<any[]>([]);
+  const [selectedFrakts, setSelectedFrakts] = useState<Frakt[]>([]);
 
   const onBackButtonClick = (): void => {
     if (currentStep === 0) {
@@ -48,7 +48,7 @@ const CreateStakePage = (): JSX.Element => {
       {currentStep === 1 && (
         <AttentionStep selectedFrakts={selectedFrakts} nextStep={nextStep} />
       )}
-      {currentStep === 2 && <ApproveStep />}
+      {currentStep === 2 && <ApproveStep selectedFrakts={selectedFrakts} />}
     </AppLayout>
   );
 };
