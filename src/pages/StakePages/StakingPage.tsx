@@ -33,11 +33,11 @@ const StakingPage = (): JSX.Element => (
           data={[
             ['Points staking', '280'],
             ['FRKTs per month', '100'],
-            ['FRKTs earned', '500'],
+            ['FRKTs to harvest', '500'],
           ]}
           className={styles.stakingPage__infoTable}
         />
-        <Button size="lg">Harvest</Button>
+        <Button size="lg">Harvest 500</Button>
       </div>
       <div className={styles.stakingPage__unstakeWrapper}>
         <Table
