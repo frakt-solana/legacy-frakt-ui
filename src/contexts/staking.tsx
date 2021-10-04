@@ -28,9 +28,11 @@ export const StakingContext = React.createContext({
   fetchData: async () => {},
 } as StakingContextInterface);
 
-//TODO: Describe type
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const StakingProvider = ({ children = null as any }): JSX.Element => {
+export const StakingProvider = ({
+  children = null,
+}: {
+  children: JSX.Element;
+}): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error>(null);
 
