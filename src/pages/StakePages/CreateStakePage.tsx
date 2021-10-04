@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
@@ -14,14 +13,13 @@ const STEPS = ['Select Frakts', 'Attention', 'Approve'];
 
 const CreateStakePage = (): JSX.Element => {
   const [currentStep, setCurrentStep] = useState<number>(0);
-  const { frakts, fraktsLoading } = useFrakts();
+  const { currentUserFrakts, currentUserFraktsLoading } = useFrakts();
   const history = useHistory();
 
   const [selectedFrakts, setSelectedFrakts] = useState<any[]>([]);
 
   const onBackButtonClick = (): void => {
     if (currentStep === 0) {
-      //TODO: Investigate why page reloads
       history.goBack();
     } else {
       setCurrentStep((step) => step - 1);
@@ -40,8 +38,8 @@ const CreateStakePage = (): JSX.Element => {
       />
       {currentStep === 0 && (
         <SelectStep
-          frakts={frakts}
-          fraktsLoading={fraktsLoading}
+          frakts={currentUserFrakts}
+          fraktsLoading={currentUserFraktsLoading}
           selectedFrakts={selectedFrakts}
           setSelectedFrakts={setSelectedFrakts}
           nextStep={nextStep}

@@ -1,6 +1,5 @@
 /* eslint-disable require-await */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/camelcase */
 import React, { useEffect, useState, useContext } from 'react';
 import { PublicKey } from '@solana/web3.js';
 import * as contract from 'frakt-client';
@@ -10,15 +9,42 @@ import config from '../config';
 
 const programPubKey = new PublicKey(config.PROGRAM_PUBLIC_KEY);
 
+export interface Frakt {
+  metadata: {
+    artAccountPubkey: string;
+    created_at: number;
+    first_owner_pubkey: string;
+    id: number;
+    isInitialized: boolean;
+    is_minted: boolean;
+    is_old_version: boolean;
+    minted_token_pubkey: string;
+  };
+  attributes: {
+    art_hash: number;
+    circles_amount: number;
+    color: number;
+    color_rarity: number;
+    fractial_iterations: number;
+    image_url: string;
+    max_rad_high_limit: number;
+    max_rad_low_limit: number;
+    min_rad_high_limit: number;
+    min_rad_low_limit: number;
+    rarity: number;
+    shape: number;
+    shape_rarity: number;
+  };
+}
 interface FraktsContextInterface {
-  frakts: any[];
+  frakts: Frakt[];
   arweaveMetadata: any;
   fraktsLoading: boolean;
-  currentUserFrakts: any[];
+  currentUserFrakts: Frakt[];
   currentUserFraktsLoading: boolean;
-  upgradeFrakts: (frakts: any) => Promise<boolean>;
+  upgradeFrakts: (frakts: Frakt[]) => Promise<boolean>;
   getFraktOwner: (fraktMintedTokenPubkey: PublicKey) => Promise<string | null>;
-  getWalletFrakts: (walletPubkey: PublicKey) => Promise<any>;
+  getWalletFrakts: (walletPubkey: PublicKey) => Promise<Frakt[]>;
 }
 
 export const FraktsContext = React.createContext({
@@ -27,11 +53,11 @@ export const FraktsContext = React.createContext({
   fraktsLoading: false,
   currentUserFrakts: [],
   currentUserFraktsLoading: false,
-  upgradeFrakts: async (frakts: any): Promise<boolean> => false,
+  upgradeFrakts: async (frakts: Frakt[]): Promise<boolean> => false,
   getFraktOwner: async (
     fraktMintedTokenPubkey: PublicKey,
   ): Promise<string | null> => null,
-  getWalletFrakts: async (walletPubkey: PublicKey): Promise<any> => [],
+  getWalletFrakts: async (walletPubkey: PublicKey): Promise<Frakt[]> => [],
 });
 
 export const getFraktRarity = ({
@@ -42,20 +68,22 @@ export const getFraktRarity = ({
   shape_rarity: number;
 }): number => (color_rarity * shape_rarity) / 100;
 
+//TODO: Describe type
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const FraktsProvider = ({ children = null as any }): JSX.Element => {
-  const [frakts, setFrakts] = useState([]);
+  const [frakts, setFrakts] = useState<Frakt[]>([]);
   const [fraktsLoading, setFraktsLoading] = useState<boolean>(true);
 
   const [arweaveMetadata, setArweaveMetadata] = useState({});
 
-  const [currentUserFrakts, setCurrentUserFrakts] = useState([]);
+  const [currentUserFrakts, setCurrentUserFrakts] = useState<Frakt[]>([]);
   const [currentUserFraktsLoading, setCurrentUserFraktsLoading] =
     useState<boolean>(false);
 
   const { wallet, connected } = useWallet();
   const connection = useConnection();
 
-  const proccessFrakts = (frakts: any[]): any[] => {
+  const proccessFrakts = (frakts: Frakt[]): Frakt[] => {
     return frakts
       .map((frakt) => ({
         ...frakt,
@@ -131,7 +159,7 @@ export const FraktsProvider = ({ children = null as any }): JSX.Element => {
     }
   };
 
-  const getWalletFrakts = async (walletPubkey: PublicKey): Promise<any[]> => {
+  const getWalletFrakts = async (walletPubkey: PublicKey): Promise<Frakt[]> => {
     try {
       const tokens = await contract.getAllUserTokens(walletPubkey, {
         connection,
@@ -153,7 +181,7 @@ export const FraktsProvider = ({ children = null as any }): JSX.Element => {
     }
   };
 
-  const upgradeFrakts = async (arts: any[]): Promise<boolean> => {
+  const upgradeFrakts = async (arts: Frakt[]): Promise<boolean> => {
     try {
       void (await contract.migrateArtsToNewTokens(
         arts,

@@ -1,6 +1,9 @@
 import { useFrakts } from './../contexts/frakts';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ipfsUriToGatewayUrl } from '../external/utils/ipfs';
+import { useWallet } from '../external/contexts/wallet';
+import { useHistory } from 'react-router-dom';
+import { URLS } from '../constants';
 
 export const useLazyArtImageSrc = (): {
   src: string | null;
@@ -46,4 +49,14 @@ export const useLazyArtImageSrc = (): {
   };
 
   return { src, loading, error, getSrc, imageFiles };
+};
+
+export const usePrivatePage = (): void => {
+  const { connected } = useWallet();
+  const history = useHistory();
+
+  useEffect(() => {
+    !connected && history.push(URLS.ROOT);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [connected]);
 };

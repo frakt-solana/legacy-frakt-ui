@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import styles from './styles.module.scss';
 
-interface NavigationLink {
+interface NavigationLinkInterface {
   to: string;
   text: string;
   notLink?: boolean;
@@ -15,7 +15,7 @@ export const NavigationLink = ({
   text,
   notLink,
   onClick,
-}: NavigationLink): JSX.Element => (
+}: NavigationLinkInterface): JSX.Element => (
   <li>
     {!notLink ? (
       <NavLink

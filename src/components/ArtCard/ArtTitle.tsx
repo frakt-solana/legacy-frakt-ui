@@ -5,13 +5,13 @@ import { SHAPE, COLOR, COLOR_HEX } from './constants';
 import { getArtName } from './helpers';
 
 interface ArtTitleProps {
-  color?: string;
-  shape?: string;
+  color?: number;
+  shape?: number;
 }
 
 export const ArtTitle = ({
-  color = '',
-  shape = '',
+  color = null,
+  shape = null,
 }: ArtTitleProps): JSX.Element => {
   const isRainbow = ({ shape, color }): boolean =>
     !!(shape === SHAPE.Wave && color === COLOR.Magenta);

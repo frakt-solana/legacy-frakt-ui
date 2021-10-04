@@ -27,8 +27,9 @@ export const ENDPOINTS = [
 ];
 
 const devnet = {
-  PROGRAM_PUBLIC_KEY: '6zcw5qXiCjScAxYLhxhuPgAo69PSoDijpnWTDGmDVDbv',
-  ADMIN_PUBLIC_KEY: 'DQfi54Fspjfi6VyMH1iSDyYAcui2hUF1QRbQ1GM7N1uo',
+  PROGRAM_PUBLIC_KEY: 'D1bz9T4br5DaRfYx48aSaQsstcfuaytvvArxVjShLwca',
+  ADMIN_PUBLIC_KEY: '8CoRNSG1gdWFo5hwWTyn8Vk8QtmwHnNfaLYSRyZ7pme3',
+  FARMING_TOKEN_MINT: '2kMr32vCwjehHizggK4Gdv7izk7NhTUyLrH7RYvQRFHH',
   ENDPOINT: ENDPOINTS[2],
   ARTS_CACHE_URL: '/arts_dev.json',
   METADATA_CACHE_URL: '/meta_dev.json',
@@ -37,6 +38,7 @@ const devnet = {
 const mainnet = {
   PROGRAM_PUBLIC_KEY: '6zcw5qXiCjScAxYLhxhuPgAo69PSoDijpnWTDGmDVDbv',
   ADMIN_PUBLIC_KEY: '6wPYbuGRXZjVw2tCeTxwRiQU7AzFDTeFEKuUFpJZpcix',
+  FARMING_TOKEN_MINT: '',
   ENDPOINT: ENDPOINTS[0],
   ARTS_CACHE_URL: 'https://cache.frakt.art/arts.json',
   METADATA_CACHE_URL: 'https://cache.frakt.art/meta.json',

@@ -13,6 +13,8 @@ const TooltipIcon = ({ text }): JSX.Element => (
   </Tooltip>
 );
 
+//TODO: Describe type
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const TableRow = ({ name, value }): JSX.Element => (
   <div className={styles.row}>
     {typeof name === 'string' ? (

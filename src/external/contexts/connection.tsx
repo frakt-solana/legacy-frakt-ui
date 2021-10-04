@@ -42,6 +42,8 @@ const ConnectionContext = React.createContext<ConnectionConfig>({
   tokenMap: new Map<string, TokenInfo>(),
 });
 
+//TODO: Describe type
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function ConnectionProvider({
   children = undefined as any,
 }): JSX.Element {

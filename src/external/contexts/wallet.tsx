@@ -81,6 +81,8 @@ export const WalletContext = React.createContext<{
   setAutoConnect: null,
 });
 
+//TODO: Describe type
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function WalletProvider({ children = null as any }): JSX.Element {
   const { endpoint } = useConnectionConfig();
 

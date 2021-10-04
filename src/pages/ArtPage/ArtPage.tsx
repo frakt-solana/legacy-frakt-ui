@@ -51,7 +51,11 @@ const ArtPage = (): JSX.Element => {
     );
     await loadOwnerAddress(data);
     getImageSrc(data);
-    setFrakt(data);
+    setFrakt({
+      attributes: data.attributes,
+      metadata: data.metadata,
+      rarity: data.attributes.rarity,
+    });
   };
 
   useEffect(() => {

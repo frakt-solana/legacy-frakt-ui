@@ -18,10 +18,10 @@ import { useUserAccounts } from '../hooks';
 
 export const BONFIDA_POOL_INTERVAL = 30 * 60_000; // 30 min
 
-interface RecentPoolData {
-  pool_identifier: string;
-  volume24hA: number;
-}
+// interface RecentPoolData {
+//   pool_identifier: string;
+//   volume24hA: number;
+// }
 
 export interface MarketsContextState {
   midPriceInUSD: (mint: string) => number;
@@ -40,6 +40,8 @@ const MarketsContext = React.createContext<MarketsContextState | null>(null);
 
 const marketEmitter = new EventEmitter();
 
+//TODO: Describe type
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function MarketProvider({ children = null as any }): JSX.Element {
   const { endpoint } = useConnectionConfig();
   const accountsToObserve = useMemo(() => new Map<string, number>(), []);

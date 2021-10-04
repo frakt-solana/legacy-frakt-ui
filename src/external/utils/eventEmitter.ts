@@ -5,6 +5,8 @@ export class CacheUpdateEvent {
   id: string;
   parser: any;
   isNew: boolean;
+  //TODO: Describe type
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   constructor(id: string, isNew: boolean, parser: any) {
     this.id = id;
     this.parser = parser;
@@ -53,6 +55,8 @@ export class EventEmitter {
     this.emitter.emit(MarketUpdateEvent.type, new MarketUpdateEvent(ids));
   }
 
+  //TODO: Describe type
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   raiseCacheUpdated(id: string, isNew: boolean, parser: any): void {
     this.emitter.emit(
       CacheUpdateEvent.type,

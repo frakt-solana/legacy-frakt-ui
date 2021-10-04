@@ -1,11 +1,11 @@
 import React from 'react';
 
-interface LinkItem {
+interface LinkItemInterface {
   url: string;
   Icon: React.FunctionComponent;
 }
 
-export const LinkItem = ({ url, Icon }: LinkItem): JSX.Element => (
+export const LinkItem = ({ url, Icon }: LinkItemInterface): JSX.Element => (
   <li>
     <a href={url} target="_blank" rel="noopener noreferrer">
       <Icon />

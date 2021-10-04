@@ -3,13 +3,13 @@ import React from 'react';
 import ButtonArrow from '../ButtonArrow';
 import styles from './styles.module.scss';
 
-interface DisconnectButton {
+interface DisconnectButtonInterface {
   onClick: () => void;
 }
 
 export const DisconnectButton = ({
   onClick,
-}: DisconnectButton): JSX.Element => (
+}: DisconnectButtonInterface): JSX.Element => (
   <ButtonArrow
     className={styles.disconnectButton}
     onClick={onClick}

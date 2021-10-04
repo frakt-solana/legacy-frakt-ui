@@ -16,6 +16,8 @@ const icon = (
   </g>
 );
 
+//TODO: Describe type
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const CopyClipboardIcon = (props: any): JSX.Element => (
   <IconSvg icon={icon} viewBox="0 0 460 460" {...props} />
 );

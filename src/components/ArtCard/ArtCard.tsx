@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import React, { useEffect } from 'react';
 
 import styles from './styles.module.scss';

@@ -1,9 +1,10 @@
+import { Frakt } from './../../contexts/frakts';
 import { shortenAddress } from '../../external/utils/utils';
 import { COLOR, SHAPE } from '../../components/ArtCard/constants';
 import { getArtName } from '../../components/ArtCard/helpers';
 import { URLS } from '../../constants';
 
-export const getHeaderTitle = (artData: any): string => {
+export const getHeaderTitle = (artData: Frakt): string => {
   const color = artData?.attributes?.color;
   const shape = artData?.attributes?.shape;
   const artHash = artData?.attributes?.art_hash;

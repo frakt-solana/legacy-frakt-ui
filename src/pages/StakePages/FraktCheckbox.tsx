@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import React, { useEffect } from 'react';
 
 import { ArtTitle } from '../../components/ArtCard/ArtTitle';

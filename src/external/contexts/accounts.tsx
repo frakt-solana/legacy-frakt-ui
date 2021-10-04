@@ -344,6 +344,8 @@ const precacheUserTokenAccounts = async (
   });
 };
 
+//TODO: Describe type
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function AccountsProvider({ children = null as any }): JSX.Element {
   const connection = useConnection();
   const { publicKey, wallet, connected } = useWallet();
@@ -446,6 +448,8 @@ export function useNativeAccount(): {
 }
 
 export const getMultipleAccounts = async (
+  //TODO: Describe type
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   connection: any,
   keys: string[],
   commitment: string,

@@ -15,6 +15,7 @@
     "buffer-layout": "^1.2.0",
     "eventemitter3": "^4.0.7",
     "frakt-client": "^1.4.3",
+    "moment": "^2.29.1",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -22,8 +23,7 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^5.2.0",
     "react-router-hash-link": "^2.4.3",
-    "react-scripts": "3.4.3",
-    "typescript": "^4.0.0"
+    "react-scripts": "^4.0.3"
   },
   "scripts": {
     "start": "npm run devnet",
@@ -80,6 +80,11 @@
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.1",
     "prettier-eslint": "^13.0.0",
-    "prettier-eslint-cli": "^5.0.1"
+    "prettier-eslint-cli": "^5.0.1",
+    "typescript": "^4.4.3"
+  },
+  "resolutions": {
+    "**/@typescript-eslint/eslint-plugin": "^4.1.1",
+    "**/@typescript-eslint/parser": "^4.1.1"
   }
 }

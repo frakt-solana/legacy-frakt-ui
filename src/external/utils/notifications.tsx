@@ -1,5 +1,7 @@
 import { notification } from 'antd';
 
+//TODO: Describe type
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function notify({
   message = '',
   description = null,

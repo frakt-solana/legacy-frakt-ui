@@ -10,6 +10,8 @@ const icon = (
   />
 );
 
+//TODO: Describe type
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const DiscordIcon = (props: any): JSX.Element => (
   <IconSvg icon={icon} viewBox="0 0 33 32" {...props} />
 );

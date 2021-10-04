@@ -19,6 +19,8 @@ const icon = (
   </>
 );
 
+//TODO: Describe type
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const SpinnerIcon = (props: any): JSX.Element => (
   <IconSvg icon={icon} viewBox="0 0 102.455 102.455" {...props} />
 );

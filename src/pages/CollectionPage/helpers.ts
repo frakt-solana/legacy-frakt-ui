@@ -1,3 +1,4 @@
+import { Frakt } from './../../contexts/frakts';
 import { COLOR, SHAPE } from '../../components/ArtCard/constants';
 
 export const sortArtsByNew = (arts: Array<any>): Array<any> =>
@@ -17,7 +18,7 @@ export const sortArts = (arts: Array<any>, sortBy: string): Array<any> =>
 export const pluralize = (count: number, noun: string, suffix = 's'): string =>
   count ? `${count} ${noun}${count !== 1 ? suffix : ''}` : `0 ${noun}${suffix}`;
 
-export const getPointsForArt = (art: any): number => {
+export const getPointsForArt = (art: Frakt): number => {
   const pointsMatrix = {
     [SHAPE.Wave]: {
       [COLOR.Magenta]: 1760,

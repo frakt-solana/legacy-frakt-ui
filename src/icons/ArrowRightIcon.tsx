@@ -7,6 +7,8 @@ const icon = (
   </g>
 );
 
+//TODO: Describe type
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const ArrowRightIcon = ({
   className,
   fill,
