@@ -30,14 +30,16 @@ const devnet = {
   PROGRAM_PUBLIC_KEY: '6zcw5qXiCjScAxYLhxhuPgAo69PSoDijpnWTDGmDVDbv',
   ADMIN_PUBLIC_KEY: 'DQfi54Fspjfi6VyMH1iSDyYAcui2hUF1QRbQ1GM7N1uo',
   ENDPOINT: ENDPOINTS[2],
+  ARTS_CACHE_URL: '/arts_dev.json',
+  METADATA_CACHE_URL: '/meta_dev.json',
 };
 
 const mainnet = {
   PROGRAM_PUBLIC_KEY: '6zcw5qXiCjScAxYLhxhuPgAo69PSoDijpnWTDGmDVDbv',
   ADMIN_PUBLIC_KEY: '6wPYbuGRXZjVw2tCeTxwRiQU7AzFDTeFEKuUFpJZpcix',
   ENDPOINT: ENDPOINTS[0],
+  ARTS_CACHE_URL: 'https://cache.frakt.art/arts.json',
+  METADATA_CACHE_URL: 'https://cache.frakt.art/meta.json',
 };
-
-export const CACHE_URL = 'https://cache.frakt.art';
 
 export default process.env.REACT_APP_NETWORK === 'devnet' ? devnet : mainnet;

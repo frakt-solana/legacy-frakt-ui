@@ -6,7 +6,7 @@ import { PublicKey } from '@solana/web3.js';
 import * as contract from 'frakt-client';
 import { useWallet } from '../external/contexts/wallet';
 import { useConnection } from '../external/contexts/connection';
-import config, { CACHE_URL } from '../config';
+import config from '../config';
 
 const programPubKey = new PublicKey(config.PROGRAM_PUBLIC_KEY);
 
@@ -87,10 +87,10 @@ export const FraktsProvider = ({ children = null as any }): JSX.Element => {
     setFraktsLoading(true);
     try {
       const [fraktsRes, metadataRes] = await Promise.all([
-        fetch(`${CACHE_URL}/arts.json`, {
+        fetch(config.ARTS_CACHE_URL, {
           headers: { 'Accept-Encoding': 'gzip' },
         }),
-        fetch(`${CACHE_URL}/meta.json`, {
+        fetch(config.METADATA_CACHE_URL, {
           headers: { 'Accept-Encoding': 'gzip' },
         }),
       ]);
