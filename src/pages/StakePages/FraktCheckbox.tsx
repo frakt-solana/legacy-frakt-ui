@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 
 import { ArtTitle } from '../../components/ArtCard/ArtTitle';
 import ArtImage from '../../components/ArtImage';
+import { Frakt } from '../../contexts/frakts';
 import { useLazyArtImageSrc } from '../../hooks';
 import styles from './styles.module.scss';
 
 interface FraktCheckboxProps {
-  frakt: any;
+  frakt: Frakt;
   isSelected: boolean;
-  onClick: (frakt: any) => void;
+  onClick: () => void;
 }
 
 const FraktCheckbox = ({

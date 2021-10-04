@@ -4,14 +4,15 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { ARTS_PER_SCROLL } from '../../../components/ArtsList/constants';
 import Button from '../../../components/Button';
 import Preloader from '../../../components/Preloader';
+import { Frakt } from '../../../contexts/frakts';
 import FraktCheckbox from '../FraktCheckbox';
 import styles from '../styles.module.scss';
 
 interface SelectStepProps {
-  frakts: any[];
+  frakts: Frakt[];
   fraktsLoading: boolean;
-  selectedFrakts: any[];
-  setSelectedFrakts: (frakt: any) => void;
+  selectedFrakts: Frakt[];
+  setSelectedFrakts: (frakt: Frakt[]) => void;
   nextStep: () => void;
 }
 
@@ -31,7 +32,7 @@ const SelectStep = ({
   const onScrollHandler = (): void =>
     setFraktsToShow((prev) => prev + ARTS_PER_SCROLL);
 
-  const onFraktCheckboxClick = (frakt: any): void => {
+  const onFraktCheckboxClick = (frakt: Frakt): void => {
     selectedFrakts.find(
       (selectedFrakt) =>
         selectedFrakt?.metadata?.artAccountPubkey ===
@@ -72,11 +73,13 @@ const SelectStep = ({
             <FraktCheckbox
               key={idx}
               frakt={frakt}
-              isSelected={selectedFrakts.find(
-                (selectedFrakt) =>
-                  selectedFrakt?.metadata?.artAccountPubkey ===
-                  frakt?.metadata?.artAccountPubkey,
-              )}
+              isSelected={
+                !!selectedFrakts.find(
+                  (selectedFrakt) =>
+                    selectedFrakt?.metadata?.artAccountPubkey ===
+                    frakt?.metadata?.artAccountPubkey,
+                )
+              }
               onClick={(): void => onFraktCheckboxClick(frakt)}
             />
           ))}
