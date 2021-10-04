@@ -308,15 +308,25 @@
 
 .stakingPage {
   flex-grow: 1;
-  display: grid;
-  gap: 1px;
-  background: $color-gray-1;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
 
   &__title {
     font-size: 140px;
     text-transform: uppercase;
+  }
+
+  &__preloader {
+    flex-grow: 1;
+  }
+
+  &__content {
+    flex-grow: 1;
+    display: grid;
+    gap: 1px;
+    background: $color-gray-1;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
   }
 
   &__infoTable {
@@ -358,9 +368,12 @@
 @media screen and (max-width: 767px) {
   .stakingPage {
     height: calc(100vh - 73px);
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    padding: 0;
+
+    &__content {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      padding: 0;
+    }
 
     &__stakeWrapper,
     &__unstakeWrapper,
@@ -387,8 +400,10 @@
 
 @media screen and (min-width: 1024px) and (max-width: 1279px) {
   .stakingPage {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    &__content {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+    }
 
     &__stakeWrapper {
       grid-column: unset;

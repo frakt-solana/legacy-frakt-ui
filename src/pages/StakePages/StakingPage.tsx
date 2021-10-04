@@ -3,6 +3,7 @@ import { useEffect, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 import { NavLink } from 'react-router-dom';
 import { sum } from 'lodash';
+import moment from 'moment';
 
 import AppLayout from '../../components/AppLayout';
 import Button from '../../components/Button';
@@ -17,7 +18,7 @@ import {
   getPointsForArt,
 } from '../CollectionPage/helpers';
 import { usePrivatePage } from '../../hooks';
-import moment from 'moment';
+import Preloader from '../../components/Preloader';
 
 const SECONDS_IN_MONTH = 60 * 60 * 24 * 30;
 const DECIMALS_PER_FRKT = 1e8;
@@ -85,7 +86,7 @@ const useUserStaking = (): {
 const StakingPage = (): JSX.Element => {
   usePrivatePage();
   const {
-    // loading,
+    loading,
     userStakeAccounts,
     userFraktsNotStaked,
     poolConfigAccount,
@@ -124,54 +125,60 @@ const StakingPage = (): JSX.Element => {
         <title>{`Staking | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>
       <div className={styles.stakingPage}>
-        <div className={styles.stakingPage__stakeWrapper}>
-          <Table
-            size="md"
-            data={[
-              ['Frakts to stake', fraktsToStake.toString()],
-              ['Points to stake', pointsToStake.toString()],
-            ]}
-            className={styles.stakingPage__infoTable}
-          />
-          {!!userFraktsNotStaked.length && (
-            <NavLink to={URLS.STAKING_CREATE}>
-              <Button size="md">Stake</Button>
-            </NavLink>
-          )}
-        </div>
-        <div className={styles.stakingPage__harvestWrapper}>
-          <Table
-            size="lg"
-            data={[
-              ['Points staking', pointsStaking.toString()],
-              ['FRKTs per month', frktsPerMonth.toFixed(2)],
-              ['FRKTs to harvest', frktsToHarvest.toFixed(2)],
-            ]}
-            className={styles.stakingPage__infoTable}
-          />
-          {frktsToHarvest > 0.5 && <Button size="lg">Harvest</Button>}
-        </div>
-        <div className={styles.stakingPage__unstakeWrapper}>
-          <Table
-            size="md"
-            data={[
-              ['Frakts staking', fraktsStaking.toString()],
-              ['Points staking', pointsStaking.toString()],
-              [
-                'Available to unstake',
-                fraktsAvailableToUnstakeAmount.toString(),
-              ],
-            ]}
-            className={styles.stakingPage__infoTable}
-          />
-          {!!fraktsAvailableToUnstakeAmount && (
-            <NavLink to={URLS.STAKING_UNSTAKE}>
-              <Button size="md">
-                Unstake {fraktsAvailableToUnstakeAmount}
-              </Button>
-            </NavLink>
-          )}
-        </div>
+        {loading ? (
+          <Preloader size="lg" className={styles.stakingPage__preloader} />
+        ) : (
+          <div className={styles.stakingPage__content}>
+            <div className={styles.stakingPage__stakeWrapper}>
+              <Table
+                size="md"
+                data={[
+                  ['Frakts to stake', fraktsToStake.toString()],
+                  ['Points to stake', pointsToStake.toString()],
+                ]}
+                className={styles.stakingPage__infoTable}
+              />
+              {!!userFraktsNotStaked.length && (
+                <NavLink to={URLS.STAKING_CREATE}>
+                  <Button size="md">Stake</Button>
+                </NavLink>
+              )}
+            </div>
+            <div className={styles.stakingPage__harvestWrapper}>
+              <Table
+                size="lg"
+                data={[
+                  ['Points staking', pointsStaking.toString()],
+                  ['FRKTs per month', frktsPerMonth.toFixed(2)],
+                  ['FRKTs to harvest', frktsToHarvest.toFixed(2)],
+                ]}
+                className={styles.stakingPage__infoTable}
+              />
+              {frktsToHarvest > 0.5 && <Button size="lg">Harvest</Button>}
+            </div>
+            <div className={styles.stakingPage__unstakeWrapper}>
+              <Table
+                size="md"
+                data={[
+                  ['Frakts staking', fraktsStaking.toString()],
+                  ['Points staking', pointsStaking.toString()],
+                  [
+                    'Available to unstake',
+                    fraktsAvailableToUnstakeAmount.toString(),
+                  ],
+                ]}
+                className={styles.stakingPage__infoTable}
+              />
+              {!!fraktsAvailableToUnstakeAmount && (
+                <NavLink to={URLS.STAKING_UNSTAKE}>
+                  <Button size="md">
+                    Unstake {fraktsAvailableToUnstakeAmount}
+                  </Button>
+                </NavLink>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </AppLayout>
   );
