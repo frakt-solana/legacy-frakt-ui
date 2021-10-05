@@ -89,7 +89,7 @@ const StakingPage = (): JSX.Element => {
                 ]}
                 className={styles.stakingPage__infoTable}
               />
-              {frktsToHarvest > 1 && (
+              {frktsToHarvest > 0.01 && (
                 <NavLink to={URLS.STAKING_HARVEST}>
                   <Button size="lg">Harvest</Button>
                 </NavLink>
