@@ -90,7 +90,7 @@ const StakingPage = (): JSX.Element => {
                 data={[
                   ['Points staking', pointsStaking.toString()],
                   ['FRKT per month', frktsPerMonth.toFixed(2)],
-                  ['FRKT to harvest', frktsToHarvest.toFixed(3)],
+                  ['FRKT to harvest', frktsToHarvest.toFixed(4)],
                 ]}
                 className={styles.stakingPage__infoTable}
               />
