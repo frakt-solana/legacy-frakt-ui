@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { NavLink } from 'react-router-dom';
 import { sum } from 'lodash';
+import BN from 'bn.js';
 
 import AppLayout from '../../components/AppLayout';
 import Button from '../../components/Button';
@@ -11,7 +13,6 @@ import styles from './styles.module.scss';
 import { getPointsForArt } from '../CollectionPage/helpers';
 import { usePrivatePage } from '../../hooks';
 import Preloader from '../../components/Preloader';
-import { useEffect } from 'react';
 
 const SECONDS_IN_MONTH = 60 * 60 * 24 * 30;
 const DECIMALS_PER_FRKT = 1e10;
@@ -42,17 +43,21 @@ const StakingPage = (): JSX.Element => {
   const fraktsStaking = userStakeAccounts.length;
   const pointsStaking = sum(userStakeAccounts.map(({ points }) => points));
 
+  const farming_tokens_per_second_per_point = Number(
+    poolConfigAccount?.farming_tokens_per_second_per_point,
+  );
+
   const frktsToHarvest =
-    (Number(poolConfigAccount?.farming_tokens_per_second_per_point) *
-      pointsStaking *
-      secondsSumAfterHarvest) /
-    DECIMALS_PER_FRKT;
+    new BN(farming_tokens_per_second_per_point)
+      .mul(new BN(pointsStaking))
+      .mul(new BN(secondsSumAfterHarvest))
+      .toNumber() / DECIMALS_PER_FRKT;
 
   const frktsPerMonth =
-    (Number(poolConfigAccount?.farming_tokens_per_second_per_point) *
-      pointsStaking *
-      SECONDS_IN_MONTH) /
-    DECIMALS_PER_FRKT;
+    new BN(farming_tokens_per_second_per_point)
+      .mul(new BN(pointsStaking))
+      .mul(new BN(SECONDS_IN_MONTH))
+      .toNumber() / DECIMALS_PER_FRKT;
 
   return (
     <AppLayout headerText="Staking" mainClassName={styles.appMain}>
