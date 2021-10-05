@@ -88,7 +88,6 @@ const StakingPage = (): JSX.Element => {
               <Table
                 size="lg"
                 data={[
-                  ['Points staking', pointsStaking.toString()],
                   ['FRKT per month', frktsPerMonth.toFixed(2)],
                   ['FRKT to harvest', frktsToHarvest.toFixed(4)],
                 ]}
@@ -105,7 +104,7 @@ const StakingPage = (): JSX.Element => {
                 size="md"
                 data={[
                   ['Frakts staking', fraktsStaking.toString()],
-                  // ['Points staking', pointsStaking.toString()],
+                  ['Points staking', pointsStaking.toString()],
                   [
                     'Available to unstake',
                     userStakeAccountsAvailableToUnstake.length.toString(),
