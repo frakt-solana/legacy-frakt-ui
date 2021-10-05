@@ -2,12 +2,14 @@
 import React, { useState, useContext, useMemo } from 'react';
 import { PublicKey } from '@solana/web3.js';
 import * as contract from 'frakt-client';
+import moment from 'moment';
+import { sum } from 'lodash';
+
 import { useConnection } from '../external/contexts/connection';
 import config from '../config';
 import { useWallet } from '../external/contexts/wallet';
 import { notify } from '../external/utils/notifications';
 import { Frakt } from './frakts';
-import moment from 'moment';
 
 const programPubKey = new PublicKey(config.PROGRAM_PUBLIC_KEY);
 const farmingMintPubKey = new PublicKey(config.FARMING_TOKEN_MINT);
@@ -88,10 +90,11 @@ export const StakingProvider = ({
   }, [stakeAccounts, wallet]);
 
   const secondsSumAfterHarvest = useMemo(() => {
-    return userStakeAccounts.reduce((secondsSum, { last_harvested_at }) => {
-      const seconds = moment().unix() - Number(last_harvested_at);
-      return secondsSum + seconds;
-    }, 0);
+    return sum(
+      userStakeAccounts.map(
+        ({ last_harvested_at }) => moment().unix() - Number(last_harvested_at),
+      ),
+    );
   }, [userStakeAccounts]);
 
   const fraktsAvailableToUnstakeAmount = useMemo(() => {
