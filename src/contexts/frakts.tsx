@@ -6,6 +6,7 @@ import * as contract from 'frakt-client';
 import { useWallet } from '../external/contexts/wallet';
 import { useConnection } from '../external/contexts/connection';
 import config from '../config';
+import { DECIMALS_PER_FRKT } from '../pages/StakePages/constants';
 
 const programPubKey = new PublicKey(config.PROGRAM_PUBLIC_KEY);
 
@@ -38,6 +39,7 @@ export interface Frakt {
 }
 interface FraktsContextInterface {
   frakts: Frakt[];
+  userFrktBalance: number;
   arweaveMetadata: any;
   fraktsLoading: boolean;
   currentUserFrakts: Frakt[];
@@ -49,6 +51,7 @@ interface FraktsContextInterface {
 
 export const FraktsContext = React.createContext({
   frakts: [],
+  userFrktBalance: 0,
   arweaveMetadata: {},
   fraktsLoading: false,
   currentUserFrakts: [],
@@ -72,6 +75,7 @@ export const getFraktRarity = ({
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const FraktsProvider = ({ children = null as any }): JSX.Element => {
   const [frakts, setFrakts] = useState<Frakt[]>([]);
+  const [userFrktBalance, setUserFrktBalance] = useState<number>(0);
   const [fraktsLoading, setFraktsLoading] = useState<boolean>(true);
 
   const [arweaveMetadata, setArweaveMetadata] = useState({});
@@ -140,6 +144,12 @@ export const FraktsProvider = ({ children = null as any }): JSX.Element => {
       const tokens = await contract.getAllUserTokens(wallet.publicKey, {
         connection,
       });
+
+      const frktBalance =
+        Number(
+          tokens.filter(({ mint }) => mint === config.FARMING_TOKEN_MINT)?.[0]
+            .amount || 0,
+        ) / DECIMALS_PER_FRKT;
       const tokensMint = tokens.map(({ mint }) => mint);
 
       if (!frakts?.length && !fraktsLoading) {
@@ -151,6 +161,7 @@ export const FraktsProvider = ({ children = null as any }): JSX.Element => {
       });
 
       setCurrentUserFrakts(userFrakts);
+      setUserFrktBalance(frktBalance);
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(err);
@@ -219,6 +230,7 @@ export const FraktsProvider = ({ children = null as any }): JSX.Element => {
     <FraktsContext.Provider
       value={{
         frakts,
+        userFrktBalance,
         arweaveMetadata,
         fraktsLoading,
         currentUserFrakts,
@@ -236,6 +248,7 @@ export const FraktsProvider = ({ children = null as any }): JSX.Element => {
 export const useFrakts = (): FraktsContextInterface => {
   const {
     frakts,
+    userFrktBalance,
     arweaveMetadata,
     fraktsLoading,
     currentUserFrakts,
@@ -246,6 +259,7 @@ export const useFrakts = (): FraktsContextInterface => {
   } = useContext(FraktsContext);
   return {
     frakts,
+    userFrktBalance,
     arweaveMetadata,
     fraktsLoading,
     currentUserFrakts,
