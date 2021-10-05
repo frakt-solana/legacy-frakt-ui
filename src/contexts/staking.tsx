@@ -33,7 +33,7 @@ export const StakingContext = React.createContext({
   userFrakts: [],
   loading: false,
   error: null,
-  fetchData: async () => {},
+  fetchData: async () => { },
   stakeFrakts: async () => false,
   harvestStakes: async () => false,
   secondsSumAfterHarvest: 0,
@@ -158,7 +158,7 @@ export const StakingProvider = ({
         { connection },
       ));
       notify({
-        message: `FRKTs harvested successfully`,
+        message: `FRKT harvested successfully`,
         type: 'success',
       });
       return true;
