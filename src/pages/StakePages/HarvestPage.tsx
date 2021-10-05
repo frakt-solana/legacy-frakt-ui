@@ -12,7 +12,7 @@ import { usePrivatePage } from '../../hooks';
 import { URLS } from '../../constants';
 import { StakeView } from 'frakt-client';
 
-const ACCOUNTS_PER_CHUNK = 15;
+const ACCOUNTS_PER_CHUNK = 12;
 
 const HarvestPage = (): JSX.Element => {
   usePrivatePage();
