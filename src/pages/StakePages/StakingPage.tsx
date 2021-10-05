@@ -14,7 +14,7 @@ import { getPointsForArt } from '../CollectionPage/helpers';
 import { usePrivatePage } from '../../hooks';
 import Preloader from '../../components/Preloader';
 
-const SECONDS_IN_MONTH = 60 * 60 * 24 * 30;
+const SECONDS_IN_YEAR = 31560000;
 const DECIMALS_PER_FRKT = 1e10;
 
 const StakingPage = (): JSX.Element => {
@@ -53,10 +53,15 @@ const StakingPage = (): JSX.Element => {
       .mul(new BN(secondsSumAfterHarvest))
       .toNumber() / DECIMALS_PER_FRKT;
 
-  const frktsPerMonth =
+  const frktsPerSecond =
     new BN(farming_tokens_per_second_per_point)
       .mul(new BN(pointsStaking))
-      .mul(new BN(SECONDS_IN_MONTH))
+      .toNumber() / DECIMALS_PER_FRKT;
+
+  const frktsPerYear =
+    new BN(farming_tokens_per_second_per_point)
+      .mul(new BN(pointsStaking))
+      .mul(new BN(SECONDS_IN_YEAR))
       .toNumber() / DECIMALS_PER_FRKT;
 
   return (
@@ -88,8 +93,24 @@ const StakingPage = (): JSX.Element => {
               <Table
                 size="lg"
                 data={[
-                  ['FRKT per month', frktsPerMonth.toFixed(2)],
-                  ['FRKT to harvest', frktsToHarvest.toFixed(4)],
+                  [
+                    {
+                      text: 'FRKT/sec per point',
+                      tooltipText:
+                        'Amount of FRKT you earning for every point locked for second in staking protocol',
+                    },
+                    farming_tokens_per_second_per_point.toFixed(8),
+                  ],
+                  ['FRKT/second', frktsPerSecond.toFixed(8)],
+                  ['FRKT/year', frktsPerYear.toFixed(8)],
+                  [
+                    {
+                      text: 'FRKT to harvest',
+                      tooltipText:
+                        'Amount of FRKT available to withdraw. Withdraw available from 0.01 FRKT on your balance',
+                    },
+                    frktsToHarvest.toFixed(8),
+                  ],
                 ]}
                 className={styles.stakingPage__infoTable}
               />
