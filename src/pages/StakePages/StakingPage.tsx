@@ -84,8 +84,8 @@ const StakingPage = (): JSX.Element => {
                 size="lg"
                 data={[
                   ['Points staking', pointsStaking.toString()],
-                  ['FRKTs per month', frktsPerMonth.toFixed(2)],
-                  ['FRKTs to harvest', frktsToHarvest.toFixed(2)],
+                  ['FRKT per month', frktsPerMonth.toFixed(2)],
+                  ['FRKT to harvest', frktsToHarvest.toFixed(2)],
                 ]}
                 className={styles.stakingPage__infoTable}
               />
@@ -100,7 +100,7 @@ const StakingPage = (): JSX.Element => {
                 size="md"
                 data={[
                   ['Frakts staking', fraktsStaking.toString()],
-                  ['Points staking', pointsStaking.toString()],
+                  // ['Points staking', pointsStaking.toString()],
                   [
                     'Available to unstake',
                     fraktsAvailableToUnstakeAmount.toString(),
