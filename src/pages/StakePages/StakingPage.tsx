@@ -26,7 +26,7 @@ const StakingPage = (): JSX.Element => {
     userFrakts: userFraktsNotStaked,
     poolConfigAccount,
     secondsSumAfterHarvest,
-    fraktsAvailableToUnstakeAmount,
+    userStakeAccountsAvailableToUnstake,
     fetchData: fetchStakingInfo,
   } = useStaking();
 
@@ -108,18 +108,22 @@ const StakingPage = (): JSX.Element => {
                   // ['Points staking', pointsStaking.toString()],
                   [
                     'Available to unstake',
-                    fraktsAvailableToUnstakeAmount.toString(),
+                    userStakeAccountsAvailableToUnstake.length.toString(),
                   ],
                 ]}
                 className={styles.stakingPage__infoTable}
               />
-              {!!fraktsAvailableToUnstakeAmount && (
-                <NavLink to={URLS.STAKING_UNSTAKE}>
-                  <Button size="md">
-                    Unstake {fraktsAvailableToUnstakeAmount}
-                  </Button>
-                </NavLink>
-              )}
+              {/* {!!userStakeAccountsAvailableToUnstake.length && ( */}
+              <NavLink to={URLS.STAKING_UNSTAKE}>
+                <Button size="md">
+                  {/* Unstake {userStakeAccountsAvailableToUnstake.length} */}
+                  Unstake all
+                </Button>
+              </NavLink>
+              <p style={{ marginTop: 10, textAlign: 'right' }}>
+                *In dev environment you are able to unstake all staking Frakts
+              </p>
+              {/* )} */}
             </div>
           </div>
         )}

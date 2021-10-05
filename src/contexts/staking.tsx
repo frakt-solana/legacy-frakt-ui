@@ -16,30 +16,38 @@ const farmingMintPubKey = new PublicKey(config.FARMING_TOKEN_MINT);
 
 interface StakingContextInterface {
   userStakeAccounts: contract.StakeView[];
+  userStakeAccountsAvailableToUnstake: contract.StakeView[];
   poolConfigAccount: contract.PoolConfigView;
   stakeAccounts: contract.StakeView[];
+  reusableStakeAccounts: contract.StakeView[];
   userFrakts: Frakt[];
   loading: boolean;
   error: Error | null;
   fetchData: () => Promise<void>;
   stakeFrakts: (artsAndMints: contract.ArtAndMint[]) => Promise<boolean>;
+  unstakeFrakts: (artsAndMints: contract.UnstakeParams[]) => Promise<boolean>;
+  updateStakeFrakts: (
+    artsAndMints: contract.UnstakeParams[],
+  ) => Promise<boolean>;
   harvestStakes: (stakesPubkeys: PublicKey[]) => Promise<boolean>;
   secondsSumAfterHarvest: number;
-  fraktsAvailableToUnstakeAmount: number;
 }
 
 export const StakingContext = React.createContext({
   userStakeAccounts: [],
+  userStakeAccountsAvailableToUnstake: [],
   poolConfigAccount: null,
   stakeAccounts: [],
+  reusableStakeAccounts: [],
   userFrakts: [],
   loading: false,
   error: null,
   fetchData: async () => {},
   stakeFrakts: async () => false,
+  unstakeFrakts: async () => false,
+  updateStakeFrakts: async () => false,
   harvestStakes: async () => false,
   secondsSumAfterHarvest: 0,
-  fraktsAvailableToUnstakeAmount: 0,
 } as StakingContextInterface);
 
 export const StakingProvider = ({
@@ -89,6 +97,10 @@ export const StakingProvider = ({
     );
   }, [stakeAccounts, wallet]);
 
+  const reusableStakeAccounts = useMemo((): contract.StakeView[] => {
+    return stakeAccounts.filter(({ is_staked }) => !is_staked);
+  }, [stakeAccounts]);
+
   const secondsSumAfterHarvest = useMemo(() => {
     return sum(
       userStakeAccounts.map(
@@ -97,13 +109,10 @@ export const StakingProvider = ({
     );
   }, [userStakeAccounts]);
 
-  const fraktsAvailableToUnstakeAmount = useMemo(() => {
-    return userStakeAccounts.reduce((amount, stakeAccount) => {
-      const isAvailableToUnstake =
-        moment().unix() - Number(stakeAccount.stake_end_at) >= 0;
-
-      return isAvailableToUnstake ? amount + 1 : amount;
-    }, 0);
+  const userStakeAccountsAvailableToUnstake = useMemo(() => {
+    return userStakeAccounts.filter(({ stake_end_at }) => {
+      moment().unix() - Number(stake_end_at) >= 0;
+    });
   }, [userStakeAccounts]);
 
   const stakeFrakts = async (
@@ -127,6 +136,75 @@ export const StakingProvider = ({
       ));
       notify({
         message: `${artsAndMints.length} Frakts staked successfully`,
+        type: 'success',
+      });
+      return true;
+    } catch (error) {
+      notify({
+        message: 'Transaction failed',
+        type: 'error',
+      });
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  };
+
+  const unstakeFrakts = async (
+    fraktsAndStakes: contract.UnstakeParams[],
+  ): Promise<boolean> => {
+    try {
+      void (await contract.unstakeBulkFrakts(
+        fraktsAndStakes,
+        farmingMintPubKey,
+        wallet.publicKey,
+        programPubKey,
+        async (txn) => {
+          const { blockhash } = await connection.getRecentBlockhash();
+
+          txn.recentBlockhash = blockhash;
+          txn.feePayer = wallet.publicKey;
+          const signed = await wallet.signTransaction(txn);
+          const txid = await connection.sendRawTransaction(signed.serialize());
+          return void connection.confirmTransaction(txid);
+        },
+        { connection },
+      ));
+      notify({
+        message: `${fraktsAndStakes.length} Frakts unstaked successfully`,
+        type: 'success',
+      });
+      return true;
+    } catch (error) {
+      notify({
+        message: 'Transaction failed',
+        type: 'error',
+      });
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  };
+
+  const updateStakeFrakts = async (
+    fraktsAndStakes: contract.UnstakeParams[],
+  ): Promise<boolean> => {
+    try {
+      void (await contract.updateStakeBulkFrakts(
+        fraktsAndStakes,
+        wallet.publicKey,
+        programPubKey,
+        async (txn) => {
+          const { blockhash } = await connection.getRecentBlockhash();
+
+          txn.recentBlockhash = blockhash;
+          txn.feePayer = wallet.publicKey;
+          const signed = await wallet.signTransaction(txn);
+          const txid = await connection.sendRawTransaction(signed.serialize());
+          return void connection.confirmTransaction(txid);
+        },
+        { connection },
+      ));
+      notify({
+        message: `${fraktsAndStakes.length} Frakts staked successfully`,
         type: 'success',
       });
       return true;
@@ -179,16 +257,19 @@ export const StakingProvider = ({
     <StakingContext.Provider
       value={{
         userStakeAccounts,
+        userStakeAccountsAvailableToUnstake,
         poolConfigAccount,
         stakeAccounts,
+        reusableStakeAccounts,
         loading,
         error,
         fetchData,
         stakeFrakts,
+        unstakeFrakts,
+        updateStakeFrakts,
         harvestStakes,
         userFrakts,
         secondsSumAfterHarvest,
-        fraktsAvailableToUnstakeAmount,
       }}
     >
       {children}
@@ -199,28 +280,34 @@ export const StakingProvider = ({
 export const useStaking = (): StakingContextInterface => {
   const {
     userStakeAccounts,
+    userStakeAccountsAvailableToUnstake,
     poolConfigAccount,
     stakeAccounts,
+    reusableStakeAccounts,
     loading,
     error,
     fetchData,
     stakeFrakts,
+    unstakeFrakts,
+    updateStakeFrakts,
     userFrakts,
     secondsSumAfterHarvest,
-    fraktsAvailableToUnstakeAmount,
     harvestStakes,
   } = useContext(StakingContext);
   return {
     userStakeAccounts,
+    userStakeAccountsAvailableToUnstake,
     poolConfigAccount,
     stakeAccounts,
+    reusableStakeAccounts,
     loading,
     error,
     fetchData,
     stakeFrakts,
+    unstakeFrakts,
+    updateStakeFrakts,
     userFrakts,
     secondsSumAfterHarvest,
-    fraktsAvailableToUnstakeAmount,
     harvestStakes,
   };
 };

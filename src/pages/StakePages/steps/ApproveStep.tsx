@@ -17,16 +17,52 @@ interface ApproveStepProps {
 
 const ApproveStep = ({ selectedFrakts }: ApproveStepProps): JSX.Element => {
   usePrivatePage();
-  const { stakeFrakts } = useStaking();
+  const { stakeFrakts, updateStakeFrakts, reusableStakeAccounts } =
+    useStaking();
   const history = useHistory();
 
   useEffect(() => {
     const stake = async () => {
-      const chunks = chunk(selectedFrakts, FRAKTS_PER_CHUNK);
+      const { reusedStakeAccounts, newFrakts } = selectedFrakts.reduce(
+        (acc, frakt) => {
+          const account = reusableStakeAccounts.find(
+            ({ art_pubkey }) => art_pubkey === frakt.metadata.artAccountPubkey,
+          );
 
-      for (let i = 0; i < chunks.length; ++i) {
+          if (account) {
+            acc.reusedStakeAccounts = [...acc.reusedStakeAccounts, account];
+          } else {
+            acc.newFrakts = [...acc.newFrakts, frakt];
+          }
+
+          return acc;
+        },
+        { reusedStakeAccounts: [], newFrakts: [] },
+      );
+
+      const reusedStakeAccountsChunks = chunk(
+        reusedStakeAccounts,
+        FRAKTS_PER_CHUNK,
+      );
+
+      const newFraktsChunks = chunk(newFrakts, FRAKTS_PER_CHUNK);
+
+      for (let i = 0; i < reusedStakeAccountsChunks.length; ++i) {
+        const res = await updateStakeFrakts(
+          reusedStakeAccountsChunks[i].map(
+            ({ stakeAccountPubkey, art_pubkey, mint_pubkey }) => ({
+              artPubKey: new PublicKey(art_pubkey),
+              mintPubKey: new PublicKey(mint_pubkey),
+              stakePubkey: new PublicKey(stakeAccountPubkey),
+            }),
+          ),
+        );
+        if (!res) break;
+      }
+
+      for (let i = 0; i < newFraktsChunks.length; ++i) {
         const res = await stakeFrakts(
-          chunks[i].map(({ metadata }) => ({
+          newFraktsChunks[i].map(({ metadata }) => ({
             artPubKey: new PublicKey(metadata.artAccountPubkey),
             mintPubKey: new PublicKey(metadata.minted_token_pubkey),
           })),
