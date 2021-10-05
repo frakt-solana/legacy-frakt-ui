@@ -11,7 +11,7 @@ import { URLS } from '../../constants';
 import { useStaking } from '../../contexts/staking';
 import styles from './styles.module.scss';
 import { getPointsForArt } from '../CollectionPage/helpers';
-import { usePrivatePage } from '../../hooks';
+import { usePolling, usePrivatePage } from '../../hooks';
 import Preloader from '../../components/Preloader';
 
 const SECONDS_IN_YEAR = 31560000;
@@ -28,7 +28,27 @@ const StakingPage = (): JSX.Element => {
     secondsSumAfterHarvest,
     userStakeAccountsAvailableToUnstake,
     fetchData: fetchStakingInfo,
+    silentFetchData: silentFetchStakingInfo,
   } = useStaking();
+
+  const { isPolling, startPolling, stopPolling } = usePolling(
+    silentFetchStakingInfo,
+    5000,
+  );
+
+  useEffect(() => {
+    if (poolConfigAccount && !loading && !isPolling) {
+      startPolling();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
+
+  useEffect(() => {
+    return () => {
+      stopPolling();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     fetchStakingInfo();

@@ -1,5 +1,5 @@
 import { useFrakts } from './../contexts/frakts';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ipfsUriToGatewayUrl } from '../external/utils/ipfs';
 import { useWallet } from '../external/contexts/wallet';
 import { useHistory } from 'react-router-dom';
@@ -59,4 +59,57 @@ export const usePrivatePage = (): void => {
     !connected && history.push(URLS.ROOT);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connected]);
+};
+
+export const usePolling = (
+  callback: () => Promise<void>,
+  delay = 10000,
+  retryCount = 0,
+): {
+  isPolling: boolean;
+  startPolling: () => void;
+  stopPolling: () => void;
+} => {
+  const [isPolling, setIsPolling] = useState<boolean>(false);
+
+  const persistedIsPolling = useRef<boolean>();
+  const poll = useRef<any>();
+  const retryCountRef = useRef<number>(retryCount);
+
+  persistedIsPolling.current = isPolling;
+
+  const shouldRetry = retryCount ? true : false;
+
+  const stopPolling = () => {
+    if (poll.current) {
+      clearTimeout(poll.current);
+      poll.current = null;
+    }
+    setIsPolling(false);
+  };
+
+  const startPolling = () => {
+    setIsPolling(true);
+    runPolling();
+  };
+
+  const runPolling = () => {
+    const timeoutId = setTimeout(() => {
+      callback()
+        .then(() => {
+          persistedIsPolling.current ? runPolling() : stopPolling();
+        })
+        .catch(() => {
+          if (shouldRetry && retryCount > 0) {
+            retryCountRef.current--;
+            runPolling();
+          } else {
+            stopPolling();
+          }
+        });
+    }, delay);
+    poll.current = timeoutId;
+  };
+
+  return { isPolling, startPolling, stopPolling };
 };

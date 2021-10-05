@@ -24,6 +24,7 @@ interface StakingContextInterface {
   loading: boolean;
   error: Error | null;
   fetchData: () => Promise<void>;
+  silentFetchData: () => Promise<void>;
   stakeFrakts: (artsAndMints: contract.ArtAndMint[]) => Promise<boolean>;
   unstakeFrakts: (artsAndMints: contract.UnstakeParams[]) => Promise<boolean>;
   updateStakeFrakts: (
@@ -43,6 +44,7 @@ export const StakingContext = React.createContext({
   loading: false,
   error: null,
   fetchData: async () => {},
+  silentFetchData: async () => {},
   stakeFrakts: async () => false,
   unstakeFrakts: async () => false,
   updateStakeFrakts: async () => false,
@@ -87,6 +89,26 @@ export const StakingProvider = ({
       setError(error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const silentFetchData = async (): Promise<void> => {
+    try {
+      const { stakeAccounts, poolConfigAccount, artAccounts } =
+        await contract.getAllProgramAccounts(programPubKey, { connection });
+      const tokens = await contract.getAllUserTokens(wallet.publicKey, {
+        connection,
+      });
+      const tokensMint = tokens.map(({ mint }) => mint);
+      const userFrakts = artAccounts.filter((frakt) => {
+        return tokensMint.includes(frakt?.metadata?.minted_token_pubkey);
+      });
+
+      setUserFrakts(userFrakts as Frakt[]);
+      setPoolConfigAccount(poolConfigAccount);
+      setStakeAccounts(stakeAccounts);
+    } catch (error) {
+      setError(error);
     }
   };
 
@@ -264,6 +286,7 @@ export const StakingProvider = ({
         loading,
         error,
         fetchData,
+        silentFetchData,
         stakeFrakts,
         unstakeFrakts,
         updateStakeFrakts,
@@ -287,6 +310,7 @@ export const useStaking = (): StakingContextInterface => {
     loading,
     error,
     fetchData,
+    silentFetchData,
     stakeFrakts,
     unstakeFrakts,
     updateStakeFrakts,
@@ -303,6 +327,7 @@ export const useStaking = (): StakingContextInterface => {
     loading,
     error,
     fetchData,
+    silentFetchData,
     stakeFrakts,
     unstakeFrakts,
     updateStakeFrakts,
