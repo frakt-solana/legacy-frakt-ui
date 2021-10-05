@@ -4,6 +4,7 @@ import { ArtTitle } from '../../components/ArtCard/ArtTitle';
 import ArtImage from '../../components/ArtImage';
 import { Frakt } from '../../contexts/frakts';
 import { useLazyArtImageSrc } from '../../hooks';
+import { getPointsForArt } from '../CollectionPage/helpers';
 import styles from './styles.module.scss';
 
 interface FraktCheckboxProps {
@@ -38,11 +39,7 @@ const FraktCheckbox = ({
       <ArtImage className={styles.fraktCheckbox__img} src={src} />
       <div className={styles.fraktCheckbox__info}>
         <ArtTitle color={color} shape={shape} />
-        <p className={styles.rarity}>
-          {frakt?.attributes.rarity
-            ? `${frakt?.attributes.rarity.toFixed(2)}% rarity`
-            : ''}
-        </p>
+        <p className={styles.rarity}>{getPointsForArt(frakt)} points</p>
       </div>
     </div>
   );
