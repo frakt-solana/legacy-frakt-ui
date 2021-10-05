@@ -54,7 +54,7 @@ const HarvestPage = (): JSX.Element => {
     <AppLayout mainClassName={styles.appMain} headerText="Harvest">
       <div className={styles.approveStep}>
         <Preloader size="lg" />
-        <p className={styles.approveStep__title}>Unstaking Frakts...</p>
+        <p className={styles.approveStep__title}>Harvesting FRKTs...</p>
         <p className={styles.approveStep__subtitle}>
           Please approve all transactions.
         </p>
