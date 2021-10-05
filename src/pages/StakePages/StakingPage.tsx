@@ -107,7 +107,7 @@ const StakingPage = (): JSX.Element => {
                     {
                       text: 'FRKT to harvest',
                       tooltipText:
-                        'Amount of FRKT available to withdraw. Withdraw available from 0.01 FRKT on your balance',
+                        'Amount of FRKT available to withdraw. Withdraw is available from 0.01 FRKT',
                     },
                     frktsToHarvest.toFixed(8),
                   ],
