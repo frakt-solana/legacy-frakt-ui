@@ -5,12 +5,12 @@ import AppLayout from '../../components/AppLayout';
 import { Frakt } from '../../contexts/frakts';
 import { useStaking } from '../../contexts/staking';
 import Header from './Header';
-import ApproveStep from './steps/ApproveStep';
-import AttentionStep from './steps/AttentionStep';
+import ApprovalStep from './steps/ApprovalStep';
+import WarningStep from './steps/WarningStep';
 import SelectStep from './steps/SelectStep';
 import styles from './styles.module.scss';
 
-const STEPS = ['Select Frakts', 'Attention', 'Approve'];
+const STEPS = ['Select Frakts', 'Warning', 'Approval'];
 
 const CreateStakePage = (): JSX.Element => {
   const [currentStep, setCurrentStep] = useState<number>(0);
@@ -47,9 +47,9 @@ const CreateStakePage = (): JSX.Element => {
         />
       )}
       {currentStep === 1 && (
-        <AttentionStep selectedFrakts={selectedFrakts} nextStep={nextStep} />
+        <WarningStep selectedFrakts={selectedFrakts} nextStep={nextStep} />
       )}
-      {currentStep === 2 && <ApproveStep selectedFrakts={selectedFrakts} />}
+      {currentStep === 2 && <ApprovalStep selectedFrakts={selectedFrakts} />}
     </AppLayout>
   );
 };

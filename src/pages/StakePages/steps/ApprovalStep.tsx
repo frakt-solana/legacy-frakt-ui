@@ -11,11 +11,12 @@ import { URLS } from '../../../constants';
 import { usePrivatePage } from '../../../hooks';
 
 const FRAKTS_PER_CHUNK = 2;
-interface ApproveStepProps {
+
+interface ApprovalStepProps {
   selectedFrakts: Frakt[];
 }
 
-const ApproveStep = ({ selectedFrakts }: ApproveStepProps): JSX.Element => {
+const ApprovalStep = ({ selectedFrakts }: ApprovalStepProps): JSX.Element => {
   usePrivatePage();
   const { stakeFrakts, updateStakeFrakts, reusableStakeAccounts } =
     useStaking();
@@ -88,4 +89,4 @@ const ApproveStep = ({ selectedFrakts }: ApproveStepProps): JSX.Element => {
   );
 };
 
-export default ApproveStep;
+export default ApprovalStep;

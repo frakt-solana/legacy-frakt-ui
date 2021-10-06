@@ -1,24 +1,22 @@
-import React from 'react';
-
 import Button from '../../../components/Button';
 import { Frakt } from '../../../contexts/frakts';
 import styles from '../styles.module.scss';
 
-interface AttentionStepProps {
+interface WarningStepProps {
   selectedFrakts: Frakt[];
   nextStep: () => void;
 }
 
-const AttentionStep = ({
+const WarningStep = ({
   selectedFrakts,
   nextStep,
-}: AttentionStepProps): JSX.Element => {
+}: WarningStepProps): JSX.Element => {
   return (
     <div className={styles.attentionStep}>
-      <h2 className={styles.attentionStep__title}>Attention!</h2>
+      <h2 className={styles.attentionStep__title}>Warning!</h2>
       <p className={styles.attentionStep__text}>
-        Notice that {selectedFrakts.length} Frakts that you chosen frakts will
-        be locked during the staking period.
+        Please note that you have selected {selectedFrakts.length} frakt(s) that
+        will be locked during the staking period.
       </p>
       <Button onClick={nextStep} size={'lg'}>
         I understand
@@ -27,4 +25,4 @@ const AttentionStep = ({
   );
 };
 
-export default AttentionStep;
+export default WarningStep;
