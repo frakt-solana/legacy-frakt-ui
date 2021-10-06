@@ -6,7 +6,7 @@ import { useNativeAccount } from '../../external/contexts/accounts';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import Table from '../Table';
 import { DisconnectButton } from './DisconnectButton';
-import { useFrakts } from '../../contexts/frakts';
+import { DECIMALS_PER_FRKT, useFrktBalance } from '../../contexts/frktBalance';
 
 interface CurrentUserTableProps {
   className?: string;
@@ -16,7 +16,7 @@ const CurrentUserTable = ({
   className = '',
 }: CurrentUserTableProps): JSX.Element => {
   const { wallet, disconnect } = useWallet();
-  const { userFrktBalance } = useFrakts();
+  const { balance } = useFrktBalance();
   const { account } = useNativeAccount();
 
   if (!wallet?.publicKey) {
@@ -27,7 +27,7 @@ const CurrentUserTable = ({
     `${formatNumber.format((account?.lamports || 0) / LAMPORTS_PER_SOL)} SOL`;
 
   const getFrktBalanceValue = (): string =>
-    `${userFrktBalance ? userFrktBalance.toFixed(6) : '--'} FRKT`;
+    `${balance ? (balance / DECIMALS_PER_FRKT).toFixed(6) : '--'} FRKT`;
 
   return (
     <div className={className}>

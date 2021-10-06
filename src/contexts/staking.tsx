@@ -9,6 +9,7 @@ import config from '../config';
 import { useWallet } from '../external/contexts/wallet';
 import { notify } from '../external/utils/notifications';
 import { Frakt } from './frakts';
+import { useFrktBalance } from './frktBalance';
 
 const programPubKey = new PublicKey(config.PROGRAM_PUBLIC_KEY);
 const farmingMintPubKey = new PublicKey(config.FARMING_TOKEN_MINT);
@@ -64,6 +65,7 @@ export const StakingProvider = ({
 
   const connection = useConnection();
   const { wallet } = useWallet();
+  const { setBalance: setFrktBalance } = useFrktBalance();
 
   const fetchData = async (): Promise<void> => {
     if (loading) return;
@@ -82,6 +84,7 @@ export const StakingProvider = ({
       setUserFrakts(userFrakts as Frakt[]);
       setPoolConfigAccount(poolConfigAccount);
       setStakeAccounts(stakeAccounts);
+      setFrktBalance(tokens);
     } catch (error) {
       setError(error);
     } finally {
@@ -104,6 +107,7 @@ export const StakingProvider = ({
       setUserFrakts(userFrakts as Frakt[]);
       setPoolConfigAccount(poolConfigAccount);
       setStakeAccounts(stakeAccounts);
+      setFrktBalance(tokens);
     } catch (error) {
       setError(error);
     }

@@ -14,7 +14,9 @@ import styles from './styles.module.scss';
 import { getPointsForArt } from '../CollectionPage/helpers';
 import { usePolling, usePrivatePage } from '../../hooks';
 import Preloader from '../../components/Preloader';
-import { DECIMALS_PER_FRKT, SECONDS_IN_YEAR } from './constants';
+import { DECIMALS_PER_FRKT } from '../../contexts/frktBalance';
+
+const SECONDS_IN_YEAR = 31560000;
 
 const StakingPage = (): JSX.Element => {
   usePrivatePage();
