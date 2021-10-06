@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 import { NavLink } from 'react-router-dom';
 import { sum } from 'lodash';
+import moment from 'moment';
 import BN from 'bn.js';
 
 import AppLayout from '../../components/AppLayout';
@@ -23,7 +24,6 @@ const StakingPage = (): JSX.Element => {
     userStakeAccounts,
     userFrakts: userFraktsNotStaked,
     poolConfigAccount,
-    secondsSumAfterHarvest,
     userStakeAccountsAvailableToUnstake,
     fetchData: fetchStakingInfo,
     silentFetchData: silentFetchStakingInfo,
@@ -65,11 +65,19 @@ const StakingPage = (): JSX.Element => {
     poolConfigAccount?.farming_tokens_per_second_per_point,
   );
 
-  const frktsToHarvest =
-    new BN(farming_tokens_per_second_per_point)
-      .mul(new BN(pointsStaking))
-      .mul(new BN(secondsSumAfterHarvest))
-      .toNumber() / DECIMALS_PER_FRKT;
+  const frktsToHarvest = useMemo(
+    () =>
+      sum(
+        userStakeAccounts.map(
+          ({ points, last_harvested_at }) =>
+            (moment().unix() - Number(last_harvested_at)) *
+            Number(points) *
+            farming_tokens_per_second_per_point,
+        ),
+      ) / DECIMALS_PER_FRKT,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [userStakeAccounts],
+  );
 
   const frktsPerSecond =
     new BN(farming_tokens_per_second_per_point)

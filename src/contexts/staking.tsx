@@ -3,7 +3,6 @@ import React, { useState, useContext, useMemo } from 'react';
 import { PublicKey } from '@solana/web3.js';
 import * as contract from 'frakt-client';
 import moment from 'moment';
-import { sum } from 'lodash';
 
 import { useConnection } from '../external/contexts/connection';
 import config from '../config';
@@ -31,7 +30,6 @@ interface StakingContextInterface {
     artsAndMints: contract.UnstakeParams[],
   ) => Promise<boolean>;
   harvestStakes: (stakesPubkeys: PublicKey[]) => Promise<boolean>;
-  secondsSumAfterHarvest: number;
 }
 
 export const StakingContext = React.createContext({
@@ -49,7 +47,6 @@ export const StakingContext = React.createContext({
   unstakeFrakts: async () => false,
   updateStakeFrakts: async () => false,
   harvestStakes: async () => false,
-  secondsSumAfterHarvest: 0,
 } as StakingContextInterface);
 
 export const StakingProvider = ({
@@ -122,14 +119,6 @@ export const StakingProvider = ({
   const reusableStakeAccounts = useMemo((): contract.StakeView[] => {
     return stakeAccounts.filter(({ is_staked }) => !is_staked);
   }, [stakeAccounts]);
-
-  const secondsSumAfterHarvest = useMemo(() => {
-    return sum(
-      userStakeAccounts.map(
-        ({ last_harvested_at }) => moment().unix() - Number(last_harvested_at),
-      ),
-    );
-  }, [userStakeAccounts]);
 
   const userStakeAccountsAvailableToUnstake = useMemo(() => {
     return userStakeAccounts.filter(({ stake_end_at }) => {
@@ -292,7 +281,6 @@ export const StakingProvider = ({
         updateStakeFrakts,
         harvestStakes,
         userFrakts,
-        secondsSumAfterHarvest,
       }}
     >
       {children}
@@ -315,7 +303,6 @@ export const useStaking = (): StakingContextInterface => {
     unstakeFrakts,
     updateStakeFrakts,
     userFrakts,
-    secondsSumAfterHarvest,
     harvestStakes,
   } = useContext(StakingContext);
   return {
@@ -332,7 +319,6 @@ export const useStaking = (): StakingContextInterface => {
     unstakeFrakts,
     updateStakeFrakts,
     userFrakts,
-    secondsSumAfterHarvest,
     harvestStakes,
   };
 };
