@@ -14,6 +14,7 @@ import { getPointsForArt } from '../CollectionPage/helpers';
 import { usePolling, usePrivatePage } from '../../hooks';
 import Preloader from '../../components/Preloader';
 import { DECIMALS_PER_FRKT, SECONDS_IN_YEAR } from './constants';
+import moment from 'moment';
 
 const StakingPage = (): JSX.Element => {
   usePrivatePage();
@@ -66,10 +67,21 @@ const StakingPage = (): JSX.Element => {
   );
 
   const frktsToHarvest =
-    new BN(farming_tokens_per_second_per_point)
-      .mul(new BN(pointsStaking))
-      .mul(new BN(secondsSumAfterHarvest))
-      .toNumber() / DECIMALS_PER_FRKT;
+    userStakeAccounts.reduce(
+      (acc, { points, last_harvested_at }) =>
+        (moment().unix() - Number(last_harvested_at)) *
+          Number(points) *
+          farming_tokens_per_second_per_point +
+        acc,
+      0,
+    ) / DECIMALS_PER_FRKT;
+
+  // const frktsToHarvest_old =
+  // new BN(farming_tokens_per_second_per_point)
+  //   .mul(new BN(pointsStaking))
+  //   .mul(new BN(secondsSumAfterHarvest))
+  //   .toNumber() / DECIMALS_PER_FRKT;
+  // console.log({frktsToHarvest, frktsToHarvest_old})
 
   const frktsPerSecond =
     new BN(farming_tokens_per_second_per_point)
