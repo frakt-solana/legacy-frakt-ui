@@ -153,7 +153,7 @@
   flex-direction: column;
   &__frakts {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
 
   &__preloader {
@@ -168,14 +168,6 @@
     }
     &__preloader {
       min-height: calc(100vh - 210px);
-    }
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1200px) {
-  .selectStep {
-    &__frakts {
-      grid-template-columns: 1fr 1fr 1fr;
     }
   }
 }
