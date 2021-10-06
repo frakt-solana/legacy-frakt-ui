@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { ARTS_PER_SCROLL } from '../../../components/ArtsList/constants';
-import Button from '../../../components/Button';
 import Preloader from '../../../components/Preloader';
 import { Frakt } from '../../../contexts/frakts';
+import { usePrivatePage } from '../../../hooks';
 import FraktCheckbox from '../FraktCheckbox';
 import styles from '../styles.module.scss';
 
@@ -13,7 +13,6 @@ interface SelectStepProps {
   fraktsLoading: boolean;
   selectedFrakts: Frakt[];
   setSelectedFrakts: (frakt: Frakt[]) => void;
-  nextStep: () => void;
 }
 
 const SelectStep = ({
@@ -21,8 +20,8 @@ const SelectStep = ({
   fraktsLoading,
   selectedFrakts,
   setSelectedFrakts,
-  nextStep,
 }: SelectStepProps): JSX.Element => {
+  usePrivatePage();
   const [fraktsToShow, setFraktsToShow] = useState(ARTS_PER_SCROLL);
 
   useEffect(() => {
@@ -48,18 +47,11 @@ const SelectStep = ({
       : setSelectedFrakts([...selectedFrakts, frakt]);
   };
 
-  const selectDeselectHandler = (): void => {
-    selectedFrakts.length === frakts.length
-      ? setSelectedFrakts([])
-      : setSelectedFrakts(frakts);
-  };
-
   return (
     <div className={styles.selectStep}>
       {fraktsLoading && (
         <Preloader size="lg" className={styles.selectStep__preloader} />
       )}
-
       {!!frakts.length && (
         <InfiniteScroll
           className={styles.selectStep__frakts}
@@ -84,27 +76,6 @@ const SelectStep = ({
             />
           ))}
         </InfiniteScroll>
-      )}
-      {!fraktsLoading && (
-        <div className={styles.popupContainer}>
-          <button
-            className={styles.popupContainer__selectDeselectButton}
-            onClick={selectDeselectHandler}
-          >
-            {selectedFrakts.length === frakts.length
-              ? 'Deselect all'
-              : 'Select all'}
-          </button>
-          <Button
-            disabled={!selectedFrakts.length}
-            onClick={nextStep}
-            size={'lg'}
-          >
-            {selectedFrakts.length
-              ? `Stake ${selectedFrakts.length} Frakts`
-              : `Next step`}
-          </Button>
-        </div>
       )}
     </div>
   );

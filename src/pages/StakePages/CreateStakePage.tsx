@@ -29,13 +29,23 @@ const CreateStakePage = (): JSX.Element => {
 
   const nextStep = (): void => setCurrentStep((step) => step + 1);
 
+  const selectDeselectAllHandler = (): void => {
+    selectedFrakts.length === userFrakts.length
+      ? setSelectedFrakts([])
+      : setSelectedFrakts(userFrakts);
+  };
+
   return (
     <AppLayout mainClassName={styles.appMain}>
       <Header
+        frakts={userFrakts}
+        fraktsLoading={loading}
+        selectedFrakts={selectedFrakts}
         steps={STEPS}
         currentStep={currentStep}
         onBackButtonClick={onBackButtonClick}
-        hideBackButton={currentStep === 2}
+        selectDeselectAllHandler={selectDeselectAllHandler}
+        nextStep={nextStep}
       />
       {currentStep === 0 && (
         <SelectStep
@@ -43,7 +53,6 @@ const CreateStakePage = (): JSX.Element => {
           fraktsLoading={loading}
           selectedFrakts={selectedFrakts}
           setSelectedFrakts={setSelectedFrakts}
-          nextStep={nextStep}
         />
       )}
       {currentStep === 1 && (
