@@ -142,8 +142,10 @@ const StakingPage = (): JSX.Element => {
               <Table
                 size="md"
                 data={[
-                  ['Frakts staking', fraktsStaking.toString()],
-                  ['Points staking', pointsStaking.toString()],
+                  [
+                    'Frakts(Points) staked',
+                    `${fraktsStaking}(${pointsStaking})`,
+                  ],
                   [
                     'Available to unstake',
                     userStakeAccountsAvailableToUnstake.length.toString(),
