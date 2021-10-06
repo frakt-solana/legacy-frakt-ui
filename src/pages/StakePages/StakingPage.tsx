@@ -115,7 +115,7 @@ const StakingPage = (): JSX.Element => {
                     {
                       text: 'FRKT/sec per point',
                       tooltipText:
-                        'Amount of FRKT you earning for every point locked for second in staking protocol',
+                        'Amount of FRKT you earn per second for every point locked in the staking protocol.',
                     },
                     farming_tokens_per_second_per_point.toFixed(8),
                   ],
@@ -125,7 +125,7 @@ const StakingPage = (): JSX.Element => {
                     {
                       text: 'FRKT to harvest',
                       tooltipText:
-                        'Amount of FRKT available to withdraw. Withdraw is available from 0.01 FRKT',
+                        'Amount of FRKT available to withdraw. Withdrawing is available from 0.01 FRKT.',
                     },
                     frktsToHarvest.toFixed(8),
                   ],
