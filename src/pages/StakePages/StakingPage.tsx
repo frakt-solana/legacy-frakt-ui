@@ -17,6 +17,10 @@ import Preloader from '../../components/Preloader';
 import { DECIMALS_PER_FRKT } from '../../contexts/frktBalance';
 
 const SECONDS_IN_YEAR = 31560000;
+const VALUES_PRECISION = 6;
+
+const HARVEST_UNLOCK_DATE_UNIX = 1633889100;
+const IS_LOCKED_PERIOD = HARVEST_UNLOCK_DATE_UNIX - moment().unix() >= 0;
 
 const StakingPage = (): JSX.Element => {
   usePrivatePage();
@@ -63,9 +67,9 @@ const StakingPage = (): JSX.Element => {
   const fraktsStaking = userStakeAccounts.length;
   const pointsStaking = sum(userStakeAccounts.map(({ points }) => points));
 
-  const farming_tokens_per_second_per_point =
-    Number(poolConfigAccount?.farming_tokens_per_second_per_point) /
-    DECIMALS_PER_FRKT;
+  const farming_tokens_per_second_per_point = Number(
+    poolConfigAccount?.farming_tokens_per_second_per_point,
+  );
 
   const frktsToHarvest = useMemo(
     () =>
@@ -127,25 +131,37 @@ const StakingPage = (): JSX.Element => {
                       tooltipText:
                         'Amount of FRKT you earn per second for every point locked in the staking protocol.',
                     },
-                    farming_tokens_per_second_per_point.toFixed(6),
+                    (
+                      farming_tokens_per_second_per_point / DECIMALS_PER_FRKT
+                    ).toFixed(VALUES_PRECISION),
                   ],
-                  ['FRKT/second', frktsPerSecond.toFixed(6)],
-                  ['FRKT/year', frktsPerYear.toFixed(6)],
+                  ['FRKT/second', frktsPerSecond.toFixed(VALUES_PRECISION)],
+                  ['FRKT/year', frktsPerYear.toFixed(VALUES_PRECISION)],
                   [
                     {
                       text: 'FRKT to harvest',
                       tooltipText:
                         'Amount of FRKT available to withdraw. Withdrawing is available from 0.01 FRKT.',
                     },
-                    frktsToHarvest.toFixed(6),
+                    frktsToHarvest.toFixed(VALUES_PRECISION),
                   ],
                 ]}
                 className={styles.stakingPage__infoTable}
               />
-              {frktsToHarvest > 0.01 && (
+              {frktsToHarvest > 0.01 && !IS_LOCKED_PERIOD && (
                 <NavLink to={URLS.STAKING_HARVEST}>
                   <Button size="lg">Harvest</Button>
                 </NavLink>
+              )}
+              {IS_LOCKED_PERIOD && (
+                <p style={{ fontSize: 15, textAlign: 'right' }}>
+                  Harvest unlocks on{' '}
+                  {moment
+                    .unix(HARVEST_UNLOCK_DATE_UNIX)
+                    .utc()
+                    .format('DD MMMM H:MM')}{' '}
+                  UTC
+                </p>
               )}
             </div>
             <div className={styles.stakingPage__unstakeWrapper}>
