@@ -159,7 +159,7 @@ const StakingPage = (): JSX.Element => {
                   {moment
                     .unix(HARVEST_UNLOCK_DATE_UNIX)
                     .utc()
-                    .format('DD MMMM H:MM')}{' '}
+                    .format('DD MMMM H:mm')}{' '}
                   UTC
                 </p>
               )}
