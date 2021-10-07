@@ -16,10 +16,10 @@ const ACCOUNTS_PER_CHUNK = 2;
 
 const UnstakePage = (): JSX.Element => {
   usePrivatePage();
-  //TODO: Disable ability to unstake all frakts on prod
   const {
-    userStakeAccounts: userStakeAccountsAvailableToUnstake,
-    /* userStakeAccountsAvailableToUnstake,*/ unstakeFrakts,
+    // userStakeAccounts: userStakeAccountsAvailableToUnstake,
+    userStakeAccountsAvailableToUnstake,
+    unstakeFrakts,
   } = useStaking();
   const history = useHistory();
 

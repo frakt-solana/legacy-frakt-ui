@@ -63,9 +63,9 @@ const StakingPage = (): JSX.Element => {
   const fraktsStaking = userStakeAccounts.length;
   const pointsStaking = sum(userStakeAccounts.map(({ points }) => points));
 
-  const farming_tokens_per_second_per_point = Number(
-    poolConfigAccount?.farming_tokens_per_second_per_point,
-  );
+  const farming_tokens_per_second_per_point =
+    Number(poolConfigAccount?.farming_tokens_per_second_per_point) /
+    DECIMALS_PER_FRKT;
 
   const frktsToHarvest = useMemo(
     () =>
@@ -127,17 +127,17 @@ const StakingPage = (): JSX.Element => {
                       tooltipText:
                         'Amount of FRKT you earn per second for every point locked in the staking protocol.',
                     },
-                    farming_tokens_per_second_per_point.toFixed(8),
+                    farming_tokens_per_second_per_point.toFixed(6),
                   ],
-                  ['FRKT/second', frktsPerSecond.toFixed(8)],
-                  ['FRKT/year', frktsPerYear.toFixed(8)],
+                  ['FRKT/second', frktsPerSecond.toFixed(6)],
+                  ['FRKT/year', frktsPerYear.toFixed(6)],
                   [
                     {
                       text: 'FRKT to harvest',
                       tooltipText:
                         'Amount of FRKT available to withdraw. Withdrawing is available from 0.01 FRKT.',
                     },
-                    frktsToHarvest.toFixed(8),
+                    frktsToHarvest.toFixed(6),
                   ],
                 ]}
                 className={styles.stakingPage__infoTable}
@@ -163,17 +163,22 @@ const StakingPage = (): JSX.Element => {
                 ]}
                 className={styles.stakingPage__infoTable}
               />
-              {/* {!!userStakeAccountsAvailableToUnstake.length && ( */}
-              <NavLink to={URLS.STAKING_UNSTAKE}>
-                <Button size="md">
-                  {/* Unstake {userStakeAccountsAvailableToUnstake.length} */}
-                  Unstake all
-                </Button>
+
+              {/* //? For dev */}
+              {/* <NavLink to={URLS.STAKING_UNSTAKE}>
+                <Button size="md">Unstake all</Button>
               </NavLink>
               <p style={{ marginTop: 10, textAlign: 'right' }}>
                 *In dev environment you are able to unstake all staking Frakts
-              </p>
-              {/* )} */}
+              </p> */}
+
+              {!!userStakeAccountsAvailableToUnstake.length && (
+                <NavLink to={URLS.STAKING_UNSTAKE}>
+                  <Button size="md">
+                    Unstake {userStakeAccountsAvailableToUnstake.length}
+                  </Button>
+                </NavLink>
+              )}
             </div>
           </div>
         )}
