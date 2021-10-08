@@ -1,5 +1,5 @@
-import React from 'react';
-
+import { NavLink } from 'react-router-dom';
+import { URLS } from '../../../constants';
 import styles from './styles.module.scss';
 
 const STEPS = [
@@ -8,13 +8,14 @@ const STEPS = [
     description:
       'We are aiming to bring more into Solana NFT space with our launchpad. It means only original collections, true art and high utility projects. No bots, refunds or failing mint websites',
     checked: true,
-    link: 'https://launchpd.frakt.art/',
+    link: { external: true, url: 'https://launchpd.frakt.art/' },
   },
   {
     title: 'Staking',
     description:
       "Here's your chance to get involved with the FRAKT ecosystem. Stake your frakts and you will be eligible to vote in the FRAKT DAO, receive exclusive airdrops, access Launchpad lottery tickets, and earn yields from collection royalties and fraktionalizer fees",
-    checked: false,
+    checked: true,
+    link: { external: false, url: URLS.STAKING },
   },
   {
     title: 'DAO',
@@ -51,14 +52,20 @@ const Roadmap = (): JSX.Element => (
       >
         <div className={styles.item__content}>
           {link ? (
-            <a
-              href={link}
-              rel="noopener noreferrer"
-              target="_blank"
-              className={styles.item__title}
-            >
-              {title}
-            </a>
+            link.external ? (
+              <a
+                href={link.url}
+                rel="noopener noreferrer"
+                target="_blank"
+                className={styles.item__title}
+              >
+                {title}
+              </a>
+            ) : (
+              <NavLink to={link.url} className={styles.item__title}>
+                {title}
+              </NavLink>
+            )
           ) : (
             <h3 className={styles.item__title}>{title}</h3>
           )}
