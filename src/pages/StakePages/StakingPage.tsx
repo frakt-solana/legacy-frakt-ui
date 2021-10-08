@@ -17,6 +17,10 @@ import Preloader from '../../components/Preloader';
 import { DECIMALS_PER_FRKT } from '../../contexts/frktBalance';
 
 const SECONDS_IN_YEAR = 31560000;
+const VALUES_PRECISION = 6;
+
+const HARVEST_UNLOCK_DATE_UNIX = 1633889100;
+const IS_LOCKED_PERIOD = HARVEST_UNLOCK_DATE_UNIX - moment().unix() >= 0;
 
 const StakingPage = (): JSX.Element => {
   usePrivatePage();
@@ -127,25 +131,37 @@ const StakingPage = (): JSX.Element => {
                       tooltipText:
                         'Amount of FRKT you earn per second for every point locked in the staking protocol.',
                     },
-                    farming_tokens_per_second_per_point.toFixed(8),
+                    (
+                      farming_tokens_per_second_per_point / DECIMALS_PER_FRKT
+                    ).toFixed(VALUES_PRECISION),
                   ],
-                  ['FRKT/second', frktsPerSecond.toFixed(8)],
-                  ['FRKT/year', frktsPerYear.toFixed(8)],
+                  ['FRKT/second', frktsPerSecond.toFixed(VALUES_PRECISION)],
+                  ['FRKT/year', frktsPerYear.toFixed(VALUES_PRECISION)],
                   [
                     {
                       text: 'FRKT to harvest',
                       tooltipText:
                         'Amount of FRKT available to withdraw. Withdrawing is available from 0.01 FRKT.',
                     },
-                    frktsToHarvest.toFixed(8),
+                    frktsToHarvest.toFixed(VALUES_PRECISION),
                   ],
                 ]}
                 className={styles.stakingPage__infoTable}
               />
-              {frktsToHarvest > 0.01 && (
+              {frktsToHarvest > 0.01 && !IS_LOCKED_PERIOD && (
                 <NavLink to={URLS.STAKING_HARVEST}>
                   <Button size="lg">Harvest</Button>
                 </NavLink>
+              )}
+              {IS_LOCKED_PERIOD && (
+                <p style={{ fontSize: 15, textAlign: 'right' }}>
+                  Harvest unlocks on{' '}
+                  {moment
+                    .unix(HARVEST_UNLOCK_DATE_UNIX)
+                    .utc()
+                    .format('DD MMMM H:mm')}{' '}
+                  UTC
+                </p>
               )}
             </div>
             <div className={styles.stakingPage__unstakeWrapper}>
@@ -163,17 +179,22 @@ const StakingPage = (): JSX.Element => {
                 ]}
                 className={styles.stakingPage__infoTable}
               />
-              {/* {!!userStakeAccountsAvailableToUnstake.length && ( */}
-              <NavLink to={URLS.STAKING_UNSTAKE}>
-                <Button size="md">
-                  {/* Unstake {userStakeAccountsAvailableToUnstake.length} */}
-                  Unstake all
-                </Button>
+
+              {/* //? For dev */}
+              {/* <NavLink to={URLS.STAKING_UNSTAKE}>
+                <Button size="md">Unstake all</Button>
               </NavLink>
               <p style={{ marginTop: 10, textAlign: 'right' }}>
                 *In dev environment you are able to unstake all staking Frakts
-              </p>
-              {/* )} */}
+              </p> */}
+
+              {!!userStakeAccountsAvailableToUnstake.length && (
+                <NavLink to={URLS.STAKING_UNSTAKE}>
+                  <Button size="md">
+                    Unstake {userStakeAccountsAvailableToUnstake.length}
+                  </Button>
+                </NavLink>
+              )}
             </div>
           </div>
         )}

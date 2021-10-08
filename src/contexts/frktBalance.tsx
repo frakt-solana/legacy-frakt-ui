@@ -26,7 +26,7 @@ export const FrktBalanceProvider = ({
     setBalance(
       Number(
         userTokens.filter(({ mint }) => mint === config.FARMING_TOKEN_MINT)?.[0]
-          .amount || 0,
+          ?.amount || 0,
       ),
     );
   };

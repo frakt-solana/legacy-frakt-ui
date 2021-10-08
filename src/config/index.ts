@@ -40,7 +40,7 @@ const devnet = {
 const mainnet = {
   PROGRAM_PUBLIC_KEY: '6zcw5qXiCjScAxYLhxhuPgAo69PSoDijpnWTDGmDVDbv',
   ADMIN_PUBLIC_KEY: '6wPYbuGRXZjVw2tCeTxwRiQU7AzFDTeFEKuUFpJZpcix',
-  FARMING_TOKEN_MINT: '',
+  FARMING_TOKEN_MINT: 'ErGB9xa24Szxbk1M28u2Tx8rKPqzL6BroNkkzk5rG4zj',
   ENDPOINT: ENDPOINTS[0],
   ARTS_CACHE_URL: 'https://cache.frakt.art/arts.json',
   METADATA_CACHE_URL: 'https://cache.frakt.art/meta.json',
