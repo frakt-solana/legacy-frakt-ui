@@ -26,7 +26,7 @@ const AppFooter = ({ className }: AppFooterProps): JSX.Element => {
       <ul className={styles.icons}>
         <LinkItem url={DISCORD_LINK} Icon={DiscordIcon} />
         <LinkItem url={TWITTER_LINK} Icon={TwitterIcon} />
-        <LinkItem url={TELEGRAM_LINK} Icon={TelegramIcon} />
+        {/* <LinkItem url={TELEGRAM_LINK} Icon={TelegramIcon} /> */}
         <LinkItem url={GITHUB_LINK} Icon={GitHubIcon} />
       </ul>
     </div>
