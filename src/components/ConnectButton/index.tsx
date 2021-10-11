@@ -1,1 +1,1 @@
-export { default } from './ConnectButton'
+export { default } from './ConnectButton';

@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 
-import { SYMBOLS } from './constants'
-import { randomItem, nextItem } from './helpers'
+import { SYMBOLS } from './constants';
+import { randomItem, nextItem } from './helpers';
 
-interface IScrambleTextProps {
-  texts: Array<string>
-  className?: string
-  letterSpeed?: number
-  nextLetterSpeed?: number
-  paused?: boolean
-  pauseTime?: number
+interface ScrambleTextProps {
+  texts: Array<string>;
+  className?: string;
+  letterSpeed?: number;
+  nextLetterSpeed?: number;
+  paused?: boolean;
+  pauseTime?: number;
 }
 
 const ScrambleText = ({
@@ -19,79 +19,80 @@ const ScrambleText = ({
   nextLetterSpeed = 100,
   paused = false,
   pauseTime = 1500,
-}: IScrambleTextProps) => {
-  const [currentText, setCurrentText] = useState<string>(texts[0])
+}: ScrambleTextProps): JSX.Element => {
+  const [currentText, setCurrentText] = useState<string>(texts[0]);
 
   const [displayedText, setDisplayedText] = useState<string[]>(
     Array(currentText.length)
       .fill(0)
-      .map(() => randomItem(SYMBOLS))
-  )
+      .map(() => randomItem(SYMBOLS)),
+  );
 
-  const leftIndexes = useRef([])
+  const leftIndexes = useRef([]);
 
-  const defaultLeftIndexes = () =>
+  const defaultLeftIndexes = (): number[] =>
     (leftIndexes.current = Array(currentText.length)
       .fill(0)
-      .map((_, idx) => idx))
+      .map((_, idx) => idx));
 
-  const bakeLetterInterval = useRef(null)
-  const bakeTextInterval = useRef(null)
-  const timeoutRef = useRef(null)
+  const bakeLetterInterval = useRef(null);
+  const bakeTextInterval = useRef(null);
+  const timeoutRef = useRef(null);
 
-  const clearTimers = () => {
-    clearInterval(bakeLetterInterval.current)
-    clearInterval(bakeTextInterval.current)
-    clearTimeout(timeoutRef.current)
-  }
+  const clearTimers = (): void => {
+    clearInterval(bakeLetterInterval.current);
+    clearInterval(bakeTextInterval.current);
+    clearTimeout(timeoutRef.current);
+  };
 
-  const bakeLetter = () => {
+  const bakeLetter = (): void => {
     bakeLetterInterval.current = setInterval(() => {
       if (!paused) {
-        const updatedText: string[] = []
+        const updatedText: string[] = [];
 
         currentText.split('').forEach((_, i) => {
           if (!leftIndexes.current.includes(i)) {
-            updatedText[i] = currentText[i]
-            return
+            updatedText[i] = currentText[i];
+            return;
           }
 
-          const randomSymbol = randomItem(SYMBOLS)
-          updatedText[i] = randomSymbol
-        })
+          const randomSymbol = randomItem(SYMBOLS);
+          updatedText[i] = randomSymbol;
+        });
 
-        setDisplayedText(updatedText)
+        setDisplayedText(updatedText);
       }
-    }, letterSpeed)
-  }
+    }, letterSpeed);
+  };
 
-  const bakeText = () => {
-    defaultLeftIndexes()
-    bakeLetter()
+  const bakeText = (): void => {
+    defaultLeftIndexes();
+    bakeLetter();
 
     bakeTextInterval.current = setInterval(() => {
       if (!paused) {
         if (leftIndexes.current.length === 0) {
-          clearTimers()
+          clearTimers();
 
           timeoutRef.current = setTimeout(() => {
-            setCurrentText(nextItem(texts, currentText))
-            defaultLeftIndexes()
-          }, pauseTime)
+            setCurrentText(nextItem(texts, currentText));
+            defaultLeftIndexes();
+          }, pauseTime);
         }
 
-        leftIndexes.current = leftIndexes.current.slice(1)
+        leftIndexes.current = leftIndexes.current.slice(1);
       }
-    }, nextLetterSpeed)
-  }
+    }, nextLetterSpeed);
+  };
 
   useEffect(() => {
-    !paused && bakeText()
-  }, [currentText, paused]) // eslint-disable-line react-hooks/exhaustive-deps
+    !paused && bakeText();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentText, paused]);
 
-  useEffect(() => clearTimers, [])
+  useEffect(() => clearTimers, []);
 
-  return <div className={className}>{displayedText}</div>
-}
+  return <div className={className}>{displayedText}</div>;
+};
 
-export default ScrambleText
+export default ScrambleText;

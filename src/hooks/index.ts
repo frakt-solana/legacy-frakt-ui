@@ -1,49 +1,115 @@
-import { useFrakts } from './../contexts/frakts'
-import { useState } from 'react'
-import { ipfsUriToGatewayUrl } from '../utils/ipfs'
+import { useFrakts } from './../contexts/frakts';
+import { useEffect, useRef, useState } from 'react';
+import { ipfsUriToGatewayUrl } from '../external/utils/ipfs';
+import { useWallet } from '../external/contexts/wallet';
+import { useHistory } from 'react-router-dom';
+import { URLS } from '../constants';
 
-export * from './useUserAccounts'
-export * from './useAccountByMint'
-export * from './useTokenName'
-export * from './useUserBalance'
-export * from './useUserTotalBalance'
+export const useLazyArtImageSrc = (): {
+  src: string | null;
+  loading: boolean;
+  error: any | null;
+  getSrc: (art: any) => Promise<void>;
+  imageFiles: any[];
+} => {
+  const [src, setSrc] = useState(null);
+  const [imageFiles, setImageFiles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { arweaveMetadata } = useFrakts();
 
-export const useLazyArtImageSrc = () => {
-  const [src, setSrc] = useState(null)
-  const [imageFiles, setImageFiles] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const { arweaveMetadata } = useFrakts()
+  const setImageFromIpfs = async (imageUrl: string): Promise<void> => {
+    const res = await fetch(ipfsUriToGatewayUrl(imageUrl));
+    const { image } = await res.json();
+    setSrc(ipfsUriToGatewayUrl(image));
+  };
 
-  const setImageFromIpfs = async (imageUrl) => {
-    const res = await fetch(ipfsUriToGatewayUrl(imageUrl))
-    const { image } = await res.json()
-    setSrc(ipfsUriToGatewayUrl(image))
-  }
+  const setImageFromArweave = async (metadata: any): Promise<void> => {
+    const res = await fetch(metadata.account.info.data.uri);
+    const data = await res.json();
+    setImageFiles(data.properties.files);
+    setSrc(data.image);
+  };
 
-  const setImageFromArweave = async (metadata) => {
-    const res = await fetch(metadata.account.info.data.uri)
-    const data = await res.json()
-    setImageFiles(data.properties.files)
-    setSrc(data.image)
-  }
-
-  const getSrc = async (art) => {
-    setLoading(true)
-    const metadata = arweaveMetadata[art.metadata.minted_token_pubkey]
+  const getSrc = async (art: any): Promise<void> => {
+    setLoading(true);
+    const metadata = arweaveMetadata[art.metadata.minted_token_pubkey];
 
     try {
       if (!metadata) {
-        await setImageFromIpfs(art.attributes?.image_url)
+        await setImageFromIpfs(art.attributes?.image_url);
       } else {
-        await setImageFromArweave(metadata)
+        await setImageFromArweave(metadata);
       }
     } catch (error) {
-      setError(error)
+      setError(error);
     }
 
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
-  return { src, loading, error, getSrc, imageFiles }
-}
+  return { src, loading, error, getSrc, imageFiles };
+};
+
+export const usePrivatePage = (): void => {
+  const { connected } = useWallet();
+  const history = useHistory();
+
+  useEffect(() => {
+    !connected && history.push(URLS.ROOT);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [connected]);
+};
+
+export const usePolling = (
+  callback: () => Promise<void>,
+  delay = 10000,
+  retryCount = 0,
+): {
+  isPolling: boolean;
+  startPolling: () => void;
+  stopPolling: () => void;
+} => {
+  const [isPolling, setIsPolling] = useState<boolean>(false);
+
+  const persistedIsPolling = useRef<boolean>();
+  const poll = useRef<any>();
+  const retryCountRef = useRef<number>(retryCount);
+
+  persistedIsPolling.current = isPolling;
+
+  const shouldRetry = retryCount ? true : false;
+
+  const stopPolling = () => {
+    if (poll.current) {
+      clearTimeout(poll.current);
+      poll.current = null;
+    }
+    setIsPolling(false);
+  };
+
+  const startPolling = () => {
+    setIsPolling(true);
+    runPolling();
+  };
+
+  const runPolling = () => {
+    const timeoutId = setTimeout(() => {
+      callback()
+        .then(() => {
+          persistedIsPolling.current ? runPolling() : stopPolling();
+        })
+        .catch(() => {
+          if (shouldRetry && retryCount > 0) {
+            retryCountRef.current--;
+            runPolling();
+          } else {
+            stopPolling();
+          }
+        });
+    }, delay);
+    poll.current = timeoutId;
+  };
+
+  return { isPolling, startPolling, stopPolling };
+};

@@ -1,25 +1,25 @@
-import React from 'react'
-import { ArrowRightIcon } from '../../icons'
-import styles from './styles.module.scss'
+import React from 'react';
+import { ArrowRightIcon } from '../../icons';
+import styles from './styles.module.scss';
 
-interface IButtonProps {
-  className?: string
-  onClick?: () => void
-  size?: string
-  arrowLeft?: boolean
-  children: any
+interface ButtonProps {
+  className?: string;
+  onClick?: () => void;
+  size?: string;
+  arrowLeft?: boolean;
+  children: any;
 }
 
 const ButtonArrow = ({
   className,
-  onClick = () => {},
+  onClick = (): void => {},
   size = 'md',
   arrowLeft = false,
   children,
-}: IButtonProps) => {
+}: ButtonProps): JSX.Element => {
   return (
     <button
-      type='button'
+      type="button"
       className={`${styles.root} ${
         size === 'lg' ? styles.lg : size === 'sm' ? styles.sm : ''
       } ${arrowLeft ? styles.arrowLeft : ''} ${className || ''}`}
@@ -29,7 +29,7 @@ const ButtonArrow = ({
       {children}
       {!arrowLeft && <ArrowRightIcon />}
     </button>
-  )
-}
+  );
+};
 
-export default ButtonArrow
+export default ButtonArrow;

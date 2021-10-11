@@ -7,7 +7,7 @@ export const SORTING = [
     name: 'Rarity',
     value: 'rarity',
   },
-]
+];
 
 export const FILTERS = [
   {
@@ -18,4 +18,4 @@ export const FILTERS = [
     name: 'My',
     value: 'my',
   },
-]
+];

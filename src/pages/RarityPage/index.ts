@@ -1,1 +1,1 @@
-export { default } from './RarityPage'
+export { default } from './RarityPage';

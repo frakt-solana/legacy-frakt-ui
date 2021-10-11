@@ -1,16 +1,16 @@
-import React from 'react'
-import styles from './styles.module.scss'
+import React from 'react';
+import styles from './styles.module.scss';
 
-import { SORTING, FILTERS } from './constants'
-import { useWallet } from '../../contexts/wallet'
+import { SORTING, FILTERS } from './constants';
+import { useWallet } from '../../external/contexts/wallet';
 
-interface IArtsSortProps {
-  hideFilter?: boolean
-  className?: string
-  sortValue: string
-  onSortChange: (value: any) => void
-  filterValue: string
-  onFilterChangeValue: (value: any) => void
+interface ArtsSortProps {
+  hideFilter?: boolean;
+  className?: string;
+  sortValue: string;
+  onSortChange: (value: any) => void;
+  filterValue: string;
+  onFilterChangeValue: (value: any) => void;
 }
 
 const ArtsFilter = ({
@@ -20,8 +20,8 @@ const ArtsFilter = ({
   filterValue,
   onSortChange,
   onFilterChangeValue,
-}: IArtsSortProps) => {
-  const { connected, select } = useWallet()
+}: ArtsSortProps): JSX.Element => {
+  const { connected, select } = useWallet();
 
   return (
     <div className={`${styles.root} ${className || ''}`}>
@@ -35,19 +35,21 @@ const ArtsFilter = ({
               className={`${styles.inputLabel} ${
                 value === filterValue ? styles.inputLabelActive : ''
               }`}
-              onClick={(event) => {
+              onClick={(event): void => {
                 if (!connected) {
-                  event.preventDefault()
-                  select()
+                  event.preventDefault();
+                  select();
                 }
               }}
             >
               <input
-                type='radio'
+                type="radio"
                 value={value}
-                name='sort'
+                name="sort"
                 checked={value === filterValue}
-                onChange={({ target }) => onFilterChangeValue(target.value)}
+                onChange={({ target }): void =>
+                  onFilterChangeValue(target.value)
+                }
               />
               {name}
             </label>
@@ -67,18 +69,18 @@ const ArtsFilter = ({
             }`}
           >
             <input
-              type='radio'
+              type="radio"
               value={value}
-              name='sort'
+              name="sort"
               checked={value === sortValue}
-              onChange={({ target }) => onSortChange(target.value)}
+              onChange={({ target }): void => onSortChange(target.value)}
             />
             {name}
           </label>
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ArtsFilter
+export default ArtsFilter;

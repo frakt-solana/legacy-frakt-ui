@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { Helmet } from 'react-helmet';
 
-import Table from '../../components/Table'
-import AppLayout from '../../components/AppLayout'
-import styles from './styles.module.scss'
+import Table from '../../components/Table';
+import AppLayout from '../../components/AppLayout';
+import styles from './styles.module.scss';
 
-const RarityPage = () => (
-  <AppLayout headerText='Rarity handbook'>
+const RarityPage = (): JSX.Element => (
+  <AppLayout headerText="Rarity handbook">
+    <Helmet>
+      <title>{`Rarity | FRAKT: Generative Art NFT Collection on Solana`}</title>
+    </Helmet>
     <div className={styles.root}>
       <div className={styles.tableContainer}>
         <Table
@@ -18,7 +22,7 @@ const RarityPage = () => (
             ['Eye', '5%'],
             ['Wave', '1%'],
           ]}
-          size='md'
+          size="md"
         />
       </div>
       <div className={styles.tableContainer}>
@@ -31,11 +35,11 @@ const RarityPage = () => (
             ['Red', '20%'],
             ['Magenta/Rainbow', '10%'],
           ]}
-          size='md'
+          size="md"
         />
       </div>
     </div>
   </AppLayout>
-)
+);
 
-export default RarityPage
+export default RarityPage;

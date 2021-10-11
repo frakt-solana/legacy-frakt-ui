@@ -1,47 +1,50 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import Button from '../../../../components/Button'
-import { downloadImageFromURL } from './helpers'
-import { SpinnerIcon, DownloadIcon } from '../../../../icons'
-import styles from './styles.module.scss'
+import Button from '../../../../components/Button';
+import { downloadImageFromURL } from './helpers';
+import { SpinnerIcon, DownloadIcon } from '../../../../icons';
+import styles from './styles.module.scss';
 
+export const useDownloadArt = (): {
+  loading: boolean;
+  downloadArt: (src: string, imageName?: string) => Promise<void>;
+} => {
+  const [loading, setLoading] = useState(false);
 
-export const useDownloadArt = () => {
-  const [loading, setLoading] = useState(false)
-
-  const downloadArt = async (src: string, imageName?: string) => {
-    setLoading(true)
+  const downloadArt = async (
+    src: string,
+    imageName?: string,
+  ): Promise<void> => {
+    setLoading(true);
 
     try {
-      await downloadImageFromURL(src, imageName)
+      await downloadImageFromURL(src, imageName);
     } catch (error) {
-
+      // eslint-disable-next-line no-console
+      console.error(error);
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
-  return { loading, downloadArt }
+  return { loading, downloadArt };
+};
+
+interface DownloadButtonProps {
+  className?: string;
+  size?: string;
+  imageFile: string;
+  title: string;
 }
-
-interface IDownloadButtonProps {
-  className?: string
-  size?: string
-  imageFile: string
-  title: string
-}
-
-
 
 const DownloadButton = ({
   className = '',
   size = 'md',
   imageFile,
-  title
-}: IDownloadButtonProps) => {
-  const { loading, downloadArt } = useDownloadArt()
+  title,
+}: DownloadButtonProps): JSX.Element => {
+  const { loading, downloadArt } = useDownloadArt();
 
-  const clickHandler = () =>
-    downloadArt(imageFile, title)
+  const clickHandler = (): Promise<void> => downloadArt(imageFile, title);
 
   return (
     <Button
@@ -53,7 +56,7 @@ const DownloadButton = ({
     >
       Download
     </Button>
-  )
-}
+  );
+};
 
-export default DownloadButton
+export default DownloadButton;

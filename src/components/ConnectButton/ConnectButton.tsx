@@ -1,20 +1,20 @@
-import React from 'react'
+import React from 'react';
 
-import { useWallet } from '../../contexts/wallet'
-import Button from '../Button'
+import { useWallet } from '../../external/contexts/wallet';
+import Button from '../Button';
 
-export interface IConnectButtonProps {
-  className?: string
+export interface ConnectButtonProps {
+  className?: string;
 }
 
-const ConnectButton = ({ className }: IConnectButtonProps) => {
-  const { select } = useWallet()
+const ConnectButton = ({ className }: ConnectButtonProps): JSX.Element => {
+  const { select } = useWallet();
 
   return (
-    <Button className={className} size='lg' onClick={select}>
+    <Button className={className} size="lg" onClick={select}>
       Connect wallet
     </Button>
-  )
-}
+  );
+};
 
-export default ConnectButton
+export default ConnectButton;

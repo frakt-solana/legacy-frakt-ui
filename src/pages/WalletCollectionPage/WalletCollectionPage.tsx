@@ -1,63 +1,63 @@
-import React, { useMemo, useEffect, useState } from 'react'
-import { Helmet } from 'react-helmet'
+import React, { useMemo, useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 
-import styles from './styles.module.scss'
-import AppLayout from '../../components/AppLayout'
-import ArtsList from '../../components/ArtsList'
-import Preloader from '../../components/Preloader'
-import { useFrakts } from '../../contexts/frakts'
-import { useHistory, useParams } from 'react-router'
-import { shortenAddress } from '../../utils/utils'
-import { PublicKey } from '@solana/web3.js'
-import { useCollectionFilters } from '../CollectionPage/hooks'
-import ArtsFilter from '../../components/ArtsFilter'
-import { sortArts } from '../CollectionPage/helpers'
-import { URLS } from '../../constants'
+import styles from './styles.module.scss';
+import AppLayout from '../../components/AppLayout';
+import ArtsList from '../../components/ArtsList';
+import Preloader from '../../components/Preloader';
+import { useFrakts } from '../../contexts/frakts';
+import { useHistory, useParams } from 'react-router';
+import { shortenAddress } from '../../external/utils/utils';
+import { PublicKey } from '@solana/web3.js';
+import { useCollectionFilters } from '../CollectionPage/hooks';
+import ArtsFilter from '../../components/ArtsFilter';
+import { sortArts } from '../CollectionPage/helpers';
+import { URLS } from '../../constants';
 
-const WalletCollectionPage = () => {
-  const { walletPubkey } = useParams<{ walletPubkey: string }>()
-  const history = useHistory()
+const WalletCollectionPage = (): JSX.Element => {
+  const { walletPubkey } = useParams<{ walletPubkey: string }>();
+  const history = useHistory();
 
-  const { fraktsLoading, getWalletFrakts } = useFrakts()
+  const { fraktsLoading, getWalletFrakts } = useFrakts();
 
-  const [loading, setLoading] = useState<boolean>(true)
-  const [walletFrakts, setWalletFrakts] = useState([])
+  const [loading, setLoading] = useState<boolean>(true);
+  const [walletFrakts, setWalletFrakts] = useState([]);
 
   const { filter, sortBy, onFilterChange, onSortChange } =
-    useCollectionFilters()
+    useCollectionFilters();
 
   useEffect(() => {
-    const fetchWalletFrakts = async () => {
+    const fetchWalletFrakts = async (): Promise<void> => {
       try {
-        const frakts = await getWalletFrakts(new PublicKey(walletPubkey))
-        setWalletFrakts(frakts)
+        const frakts = await getWalletFrakts(new PublicKey(walletPubkey));
+        setWalletFrakts(frakts);
       } catch (err) {
-        history.replace(URLS.PAGE_404)
+        history.replace(URLS.PAGE_404);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
     if (!fraktsLoading && walletPubkey) {
-      fetchWalletFrakts()
+      fetchWalletFrakts();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fraktsLoading, walletPubkey])
+  }, [fraktsLoading, walletPubkey]);
 
   const frakts = useMemo(
     () => sortArts(walletFrakts, sortBy),
-    [walletFrakts, sortBy]
-  )
+    [walletFrakts, sortBy],
+  );
 
   return (
     <AppLayout
-      CustomHeader={() => <Header walletPubkey={walletPubkey} />}
+      CustomHeader={(): JSX.Element => <Header walletPubkey={walletPubkey} />}
       mainClassName={styles.appMain}
     >
       <Helmet>
         <title>{`Collection of ${walletPubkey} | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>
-      {loading && <Preloader size='lg' className={styles.preloader} />}
+      {loading && <Preloader size="lg" className={styles.preloader} />}
       {!loading && (
         <>
           {!frakts.length && <NoFraktsBlock />}
@@ -74,25 +74,29 @@ const WalletCollectionPage = () => {
         </>
       )}
     </AppLayout>
-  )
-}
+  );
+};
 
-const Header = ({ walletPubkey = '' }: { walletPubkey?: string }) => (
+const Header = ({
+  walletPubkey = '',
+}: {
+  walletPubkey?: string;
+}): JSX.Element => (
   <div className={styles.header}>
     <p className={styles.header__text}>
       Collection of {shortenAddress(walletPubkey)}
     </p>
   </div>
-)
+);
 
-const NoFraktsBlock = () => {
+const NoFraktsBlock = (): JSX.Element => {
   return (
     <div className={styles.noFrakts}>
       <p className={styles.noFrakts__text}>
-        This wallet doesn't have any frakts yet
+        {"This wallet doesn't have any frakts yet"}
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default WalletCollectionPage
+export default WalletCollectionPage;

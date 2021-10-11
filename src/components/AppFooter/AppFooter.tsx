@@ -1,21 +1,14 @@
-import React from 'react'
+import { DiscordIcon, TwitterIcon, GitHubIcon } from '../../icons';
+import styles from './styles.module.scss';
+import { LinkItem } from './LinkItem';
 
-import { DiscordIcon, TwitterIcon, GitHubIcon, TelegramIcon } from '../../icons'
-import styles from './styles.module.scss'
-import { LinkItem } from './LinkItem'
+import { DISCORD_LINK, TWITTER_LINK, GITHUB_LINK } from './constants';
 
-import {
-  DISCORD_LINK,
-  TWITTER_LINK,
-  TELEGRAM_LINK,
-  GITHUB_LINK,
-} from './constants'
-
-interface IAppFooterProps {
-  className?: string
+interface AppFooterProps {
+  className?: string;
 }
 
-const AppFooter = ({ className }: IAppFooterProps) => {
+const AppFooter = ({ className }: AppFooterProps): JSX.Element => {
   return (
     <div className={`${styles.root} ${className || ''}`}>
       <ul className={styles.icons}>
@@ -25,7 +18,7 @@ const AppFooter = ({ className }: IAppFooterProps) => {
         <LinkItem url={GITHUB_LINK} Icon={GitHubIcon} />
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default AppFooter
+export default AppFooter;

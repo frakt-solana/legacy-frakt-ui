@@ -1,28 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 
-import styles from './styles.module.scss'
-import { useLazyArtImageSrc } from '../../hooks'
-import ArtImage from '../ArtImage'
+import styles from './styles.module.scss';
+import { useLazyArtImageSrc } from '../../hooks';
+import ArtImage from '../ArtImage';
 
-import { ArtTitle } from './ArtTitle'
-import ButtonArrow from '../ButtonArrow'
+import { ArtTitle } from './ArtTitle';
+import ButtonArrow from '../ButtonArrow';
 
-interface IArtCardProps {
-  className?: string
-  art: any
+interface ArtCardProps {
+  className?: string;
+  art: any;
 }
 
-const ArtCard = ({ className = '', art = {} }: IArtCardProps) => {
+const ArtCard = ({ className = '', art = {} }: ArtCardProps): JSX.Element => {
   const {
     attributes: { color, image_url, shape },
-  } = art
+  } = art;
 
-  const { src, getSrc } = useLazyArtImageSrc()
+  const { src, getSrc } = useLazyArtImageSrc();
 
   useEffect(() => {
-    image_url && getSrc(art)
+    image_url && getSrc(art);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
     <div className={`${styles.root} ${className || ''}`}>
@@ -34,12 +34,12 @@ const ArtCard = ({ className = '', art = {} }: IArtCardProps) => {
             ? `${art?.attributes.rarity.toFixed(2)}% rarity`
             : ''}
         </p>
-        <ButtonArrow size='lg' className={styles.exploreButton}>
+        <ButtonArrow size="lg" className={styles.exploreButton}>
           Explore
         </ButtonArrow>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ArtCard
+export default ArtCard;

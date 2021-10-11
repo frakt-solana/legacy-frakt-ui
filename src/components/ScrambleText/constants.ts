@@ -1,1 +1,1 @@
-export const SYMBOLS = '!<>-_\\/[]{}—=+*^?#'.split('')
+export const SYMBOLS = '!<>-_\\/[]{}—=+*^?#'.split('');

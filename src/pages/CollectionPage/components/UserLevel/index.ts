@@ -1,1 +1,1 @@
-export { default } from './UserLevel'
+export { default } from './UserLevel';

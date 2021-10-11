@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
-const Header = () => (
+const Header = (): JSX.Element => (
   <div className={`${styles.root} ${styles.hiddenOnMobile}`}>
     <p className={styles.text}>Collection</p>
   </div>
-)
+);
 
-export default Header
+export default Header;

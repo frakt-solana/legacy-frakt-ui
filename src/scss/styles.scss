@@ -12,3 +12,19 @@ body {
   color: $color-white;
   font-family: $font-family;
 }
+
+.frakt__notification {
+  svg {
+    fill: $color-gray-4;
+  }
+
+  background: $color-black !important;
+  border: 1px solid $color-gray-1;
+  border-radius: 0 !important;
+
+  :global {
+    .ant-notification-notice-message {
+      color: $color-white;
+    }
+  }
+}

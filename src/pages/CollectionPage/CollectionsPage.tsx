@@ -1,49 +1,49 @@
-import React, { useMemo, useCallback } from 'react'
-import { sum } from 'lodash'
-import { Helmet } from 'react-helmet'
+import React, { useMemo, useCallback } from 'react';
+import { sum } from 'lodash';
+import { Helmet } from 'react-helmet';
 
-import styles from './styles.module.scss'
-import { getPointsForArt, sortArts } from './helpers'
-import AppLayout from '../../components/AppLayout'
-import ArtsList from '../../components/ArtsList'
-import ArtsFilter from '../../components/ArtsFilter'
-import Preloader from '../../components/Preloader'
-import { useWallet } from '../../contexts/wallet'
-import NoFraktsBlock from './components/NoFraktsBlock'
-import Header from './components/Header'
-import UpgradeSection from './components/UpgradeSection'
-import { notify } from '../../utils/notifications'
-import UserLevel from './components/UserLevel'
-import { useFrakts } from '../../contexts/frakts'
-import { useCollectionFilters } from './hooks'
+import styles from './styles.module.scss';
+import { getPointsForArt, sortArts } from './helpers';
+import AppLayout from '../../components/AppLayout';
+import ArtsList from '../../components/ArtsList';
+import ArtsFilter from '../../components/ArtsFilter';
+import Preloader from '../../components/Preloader';
+import { useWallet } from '../../external/contexts/wallet';
+import NoFraktsBlock from './components/NoFraktsBlock';
+import Header from './components/Header';
+import UpgradeSection from './components/UpgradeSection';
+import { notify } from '../../external/utils/notifications';
+import UserLevel from './components/UserLevel';
+import { useFrakts } from '../../contexts/frakts';
+import { useCollectionFilters } from './hooks';
 
-const CollectionsPage = () => {
-  const { connected } = useWallet()
+const CollectionsPage = (): JSX.Element => {
+  const { connected } = useWallet();
 
   const { filter, sortBy, showUserFrakts, onFilterChange, onSortChange } =
-    useCollectionFilters()
+    useCollectionFilters();
 
   const {
     frakts: rawFrakts,
     fraktsLoading,
     currentUserFrakts: rawCurrentUserFrakts,
     upgradeFrakts,
-  } = useFrakts()
+  } = useFrakts();
 
   const frakts = useMemo(
     () =>
       showUserFrakts
         ? sortArts(rawCurrentUserFrakts, sortBy)
         : sortArts(rawFrakts, sortBy),
-    [rawFrakts, rawCurrentUserFrakts, sortBy, showUserFrakts]
-  )
+    [rawFrakts, rawCurrentUserFrakts, sortBy, showUserFrakts],
+  );
   const fraktsToUpgrade = useMemo(
     () => frakts.filter((art) => art.metadata.is_old_version),
-    [frakts]
-  )
+    [frakts],
+  );
 
   const onUpgradeFrakts = useCallback(async () => {
-    const success = await upgradeFrakts(fraktsToUpgrade.slice(0, 5))
+    const success = await upgradeFrakts(fraktsToUpgrade.slice(0, 5));
 
     success &&
       notify({
@@ -51,16 +51,16 @@ const CollectionsPage = () => {
         description:
           'Your frakts will be updated within seconds. If you have more to go, please wait for previos generation and repeat',
         type: 'success',
-      })
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fraktsToUpgrade.length])
+  }, [fraktsToUpgrade.length]);
 
   return (
     <AppLayout CustomHeader={Header} mainClassName={styles.appMain}>
       <Helmet>
         <title>{`Collection | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>
-      {fraktsLoading && <Preloader size='lg' className={styles.preloader} />}
+      {fraktsLoading && <Preloader size="lg" className={styles.preloader} />}
       {!fraktsLoading && (
         <>
           {connected && showUserFrakts && !!fraktsToUpgrade.length && (
@@ -85,7 +85,7 @@ const CollectionsPage = () => {
         </>
       )}
     </AppLayout>
-  )
-}
+  );
+};
 
-export default CollectionsPage
+export default CollectionsPage;

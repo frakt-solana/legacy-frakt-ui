@@ -1,31 +1,34 @@
-import React from 'react'
-import { notify } from '../../utils/notifications'
-import ButtonRegular from '../Button'
-import { CopyClipboardIcon } from '../../icons'
+import React from 'react';
+import { notify } from '../../external/utils/notifications';
+import ButtonRegular from '../Button';
+import { CopyClipboardIcon } from '../../icons';
 
-const LINK_COPIED_NOTIFICATION_TEXT = 'Link copied successfully!'
+const LINK_COPIED_NOTIFICATION_TEXT = 'Link copied successfully!';
 
-interface ICopyURLButtonProps {
-  className?: string
-  size?: string
+interface CopyURLButtonProps {
+  className?: string;
+  size?: string;
 }
-const CopyURLButton = ({ className, size = 'md' }: ICopyURLButtonProps) => {
+const CopyURLButton = ({
+  className,
+  size = 'md',
+}: CopyURLButtonProps): JSX.Element => {
   return (
     <ButtonRegular
       className={className}
       size={size}
       Icon={CopyClipboardIcon}
-      onClick={() => {
-        navigator.clipboard.writeText(window.location.href)
+      onClick={(): void => {
+        navigator.clipboard.writeText(window.location.href);
         notify({
           message: LINK_COPIED_NOTIFICATION_TEXT,
           type: 'success',
-        })
+        });
       }}
     >
       Copy link
     </ButtonRegular>
-  )
-}
+  );
+};
 
-export default CopyURLButton
+export default CopyURLButton;

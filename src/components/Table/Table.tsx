@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-import styles from './styles.module.scss'
-import { TableRow } from './TableRow'
-import { TableHeader } from './TableHeader'
+import styles from './styles.module.scss';
+import { TableRow } from './TableRow';
+import { TableHeader } from './TableHeader';
 
-interface ITableProps {
-  header?: Array<any> //? failed to describe the interface. Swears at the type of number
-  data: Array<any>
-  size?: string
-  className?: string
+interface TableProps {
+  header?: Array<any>; //? failed to describe the interface. Swears at the type of number
+  data: Array<any>;
+  size?: string;
+  className?: string;
 }
 
 //? header and data items are [name: string | Object, value: string | Object] pairs
@@ -20,7 +20,7 @@ const Table = ({
   size = 'md',
   header,
   data = [],
-}: ITableProps) => {
+}: TableProps): JSX.Element => {
   return (
     <div className={`${styles.root} ${styles[size]} ${className}`}>
       {header && <TableHeader name={header[0]} value={header[1]} />}
@@ -29,7 +29,7 @@ const Table = ({
         <TableRow key={idx} name={name} value={value} />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Table
+export default Table;
