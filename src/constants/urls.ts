@@ -1,7 +1,8 @@
 export const URLS = {
   ROOT: '/',
   COLLECTION: '/collection',
-  LAUNCHPAD: 'https://launchpd.frakt.art/',
+  LAUNCHPAD: 'https://launchpd.art/',
+  DROPS: 'https://drops.frakt.art',
   MARKETPLACE: '/marketplace',
   STAKING: '/stake',
   STAKING_CREATE: `/stake/create`,

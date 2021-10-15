@@ -28,6 +28,11 @@ const AppNavigation = ({ className }: AppNavigation): JSX.Element => {
           Launchpad
         </a>
       </li>
+      <li>
+        <a className={styles.link} href={URLS.DROPS}>
+          Drops
+        </a>
+      </li>
     </ul>
   );
 };
