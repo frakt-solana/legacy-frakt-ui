@@ -2,7 +2,7 @@ export const URLS = {
   ROOT: '/',
   COLLECTION: '/collection',
   LAUNCHPAD: 'https://launchpd.art/',
-  DROPS: 'https://drops.frakt.art',
+  SANDBOX: 'https://sandbox.frakt.art',
   MARKETPLACE: '/marketplace',
   STAKING: '/stake',
   STAKING_CREATE: `/stake/create`,

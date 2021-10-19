@@ -29,8 +29,8 @@ const AppNavigation = ({ className }: AppNavigation): JSX.Element => {
         </a>
       </li>
       <li>
-        <a className={styles.link} href={URLS.DROPS}>
-          Drops
+        <a className={styles.link} href={URLS.SANDBOX}>
+          Sandbox
         </a>
       </li>
     </ul>

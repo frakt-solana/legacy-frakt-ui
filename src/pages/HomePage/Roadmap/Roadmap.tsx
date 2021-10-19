@@ -18,11 +18,11 @@ const STEPS = [
     link: { external: false, url: URLS.STAKING },
   },
   {
-    title: 'Drops',
+    title: 'Sandbox',
     description:
-      "Drops is a platform to spotlight upcoming artists, incentivize staking and give utility to $FRKT. Every collection launching on Drops platform can be minted only with $FRKT",
+      "Sandbox is a platform to spotlight upcoming artists, incentivize staking and give utility to $FRKT. Every collection launching on Sandbox platform can be minted only with $FRKT",
     checked: true,
-    link: { external: true, url: 'https://drops.frakt.art/' },
+    link: { external: true, url: 'https://sandbox.frakt.art/' },
   },
   {
     title: 'DAO',
