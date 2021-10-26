@@ -1,7 +1,6 @@
 export const URLS = {
   ROOT: '/',
   COLLECTION: '/collection',
-  LAUNCHPAD: 'https://launchpd.art/',
   SANDBOX: 'https://sandbox.frakt.art',
   MARKETPLACE: '/marketplace',
   STAKING: '/stake',

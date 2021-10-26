@@ -1,9 +1,8 @@
-import React, { useMemo, useCallback } from 'react';
-import { sum } from 'lodash';
+import { useMemo, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 
 import styles from './styles.module.scss';
-import { getPointsForArt, sortArts } from './helpers';
+import { sortArts } from './helpers';
 import AppLayout from '../../components/AppLayout';
 import ArtsList from '../../components/ArtsList';
 import ArtsFilter from '../../components/ArtsFilter';
@@ -13,7 +12,6 @@ import NoFraktsBlock from './components/NoFraktsBlock';
 import Header from './components/Header';
 import UpgradeSection from './components/UpgradeSection';
 import { notify } from '../../external/utils/notifications';
-import UserLevel from './components/UserLevel';
 import { useFrakts } from '../../contexts/frakts';
 import { useCollectionFilters } from './hooks';
 
@@ -76,11 +74,6 @@ const CollectionsPage = (): JSX.Element => {
             onFilterChangeValue={onFilterChange}
           />
           {connected && showUserFrakts && !frakts.length && <NoFraktsBlock />}
-          {connected && showUserFrakts && !!frakts.length && (
-            <UserLevel
-              points={sum(frakts.map((art) => getPointsForArt(art)))}
-            />
-          )}
           <ArtsList arts={frakts} />
         </>
       )}

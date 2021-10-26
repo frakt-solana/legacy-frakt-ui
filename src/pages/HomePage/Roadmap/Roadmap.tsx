@@ -20,7 +20,7 @@ const STEPS = [
   {
     title: 'Sandbox',
     description:
-      "Sandbox is a platform to spotlight upcoming artists, incentivize staking and give utility to $FRKT. Every collection launching on Sandbox platform can be minted only with $FRKT",
+      'Sandbox is a platform to spotlight upcoming artists, incentivize staking and give utility to $FRKT. Every collection launching on Sandbox platform can be minted only with $FRKT',
     checked: true,
     link: { external: true, url: 'https://sandbox.frakt.art/' },
   },

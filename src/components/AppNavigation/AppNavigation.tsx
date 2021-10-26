@@ -24,11 +24,6 @@ const AppNavigation = ({ className }: AppNavigation): JSX.Element => {
       />
       <NavigationLink to={URLS.MARKETPLACE} text="Marketplace" />
       <li>
-        <a className={styles.link} href={URLS.LAUNCHPAD}>
-          Launchpad
-        </a>
-      </li>
-      <li>
         <a className={styles.link} href={URLS.SANDBOX}>
           Sandbox
         </a>
