@@ -1,70 +1,58 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { StakeView } from 'frakt-client';
-import { PublicKey } from '@solana/web3.js';
-import moment from 'moment';
-import { chunk } from 'lodash';
 
 import AppLayout from '../../components/AppLayout';
-import Preloader from '../../components/Preloader';
 import { useStaking } from '../../contexts/staking';
 import { usePrivatePage } from '../../hooks';
 import styles from './styles.module.scss';
-import { URLS } from '../../constants';
+import SelectStep from './unstakeSteps/SelectStep';
+import ApprovalStep from './unstakeSteps/ApprovalStep';
+import { HeaderUnstake } from './Header';
 
-const ACCOUNTS_PER_CHUNK = 2;
+const STEPS = ['Select Frakts', 'Approval'];
 
 const UnstakePage = (): JSX.Element => {
   usePrivatePage();
-  const {
-    // userStakeAccounts: userStakeAccountsAvailableToUnstake,
-    userStakeAccountsAvailableToUnstake,
-    unstakeFrakts,
-  } = useStaking();
+  const [currentStep, setCurrentStep] = useState<number>(0);
+  const { userStakeAccounts, userStakeAccountsAvailableToUnstake, loading } =
+    useStaking();
   const history = useHistory();
 
-  useEffect(() => {
-    const unstake = async () => {
-      const userStakeAccountsSorted = [
-        ...userStakeAccountsAvailableToUnstake,
-      ].sort((stakeAccountA, stakeAccountB) => {
-        const getSortValue = (stakeAccount: StakeView) => {
-          const seconds =
-            moment().unix() - Number(stakeAccount.last_harvested_at);
-          return seconds * Number(stakeAccount.points);
-        };
-        return getSortValue(stakeAccountB) - getSortValue(stakeAccountA);
-      });
+  const [selectedStakes, setSelectedStakes] = useState<StakeView[]>([]);
 
-      const chunks = chunk(userStakeAccountsSorted, ACCOUNTS_PER_CHUNK);
+  const nextStep = (): void => setCurrentStep((step) => step + 1);
 
-      for (let i = 0; i < chunks.length; ++i) {
-        const res = await unstakeFrakts(
-          chunks[i].map(({ stakeAccountPubkey, art_pubkey, mint_pubkey }) => ({
-            artPubKey: new PublicKey(art_pubkey),
-            mintPubKey: new PublicKey(mint_pubkey),
-            stakePubkey: new PublicKey(stakeAccountPubkey),
-          })),
-        );
-        if (!res) break;
-      }
-
-      history.replace(URLS.STAKING);
-    };
-
-    unstake();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const selectDeselectAllHandler = (): void => {
+    selectedStakes.length === userStakeAccountsAvailableToUnstake.length
+      ? setSelectedStakes([])
+      : setSelectedStakes(userStakeAccountsAvailableToUnstake);
+  };
 
   return (
-    <AppLayout mainClassName={styles.appMain} headerText="Unstake Frakts">
-      <div className={styles.approveStep}>
-        <Preloader size="lg" />
-        <p className={styles.approveStep__title}>Unstaking Frakts...</p>
-        <p className={styles.approveStep__subtitle}>
-          Please approve all transactions.
-        </p>
-      </div>
+    <AppLayout mainClassName={styles.appMain}>
+      <HeaderUnstake
+        stakes={userStakeAccounts}
+        stakesLoading={loading}
+        selectedStakes={selectedStakes}
+        steps={STEPS}
+        currentStep={currentStep}
+        onBackButtonClick={() => history.goBack()}
+        selectDeselectAllHandler={selectDeselectAllHandler}
+        disableSelectDeselectButton={
+          userStakeAccountsAvailableToUnstake.length === 0
+        }
+        nextStep={nextStep}
+      />
+      {currentStep === 0 && (
+        <SelectStep
+          stakes={userStakeAccounts}
+          stakesLoading={loading}
+          selectedStakes={selectedStakes}
+          setSelectedStakes={setSelectedStakes}
+        />
+      )}
+      {currentStep === 1 && <ApprovalStep selectedStakes={selectedStakes} />}
     </AppLayout>
   );
 };
