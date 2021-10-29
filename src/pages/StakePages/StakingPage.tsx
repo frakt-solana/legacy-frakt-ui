@@ -188,11 +188,9 @@ const StakingPage = (): JSX.Element => {
                 *In dev environment you are able to unstake all staking Frakts
               </p> */}
 
-              {!!userStakeAccountsAvailableToUnstake.length && (
+              {!!userStakeAccounts.length && (
                 <NavLink to={URLS.STAKING_UNSTAKE}>
-                  <Button size="md">
-                    Unstake {userStakeAccountsAvailableToUnstake.length}
-                  </Button>
+                  <Button size="md">Unstake</Button>
                 </NavLink>
               )}
             </div>

@@ -4,10 +4,10 @@ import { useHistory } from 'react-router';
 import AppLayout from '../../components/AppLayout';
 import { Frakt } from '../../contexts/frakts';
 import { useStaking } from '../../contexts/staking';
-import Header from './Header';
-import ApprovalStep from './steps/ApprovalStep';
-import WarningStep from './steps/WarningStep';
-import SelectStep from './steps/SelectStep';
+import { HeaderStake } from './Header';
+import ApprovalStep from './stakeSteps/ApprovalStep';
+import WarningStep from './stakeSteps/WarningStep';
+import SelectStep from './stakeSteps/SelectStep';
 import styles from './styles.module.scss';
 
 const STEPS = ['Select Frakts', 'Warning', 'Approval'];
@@ -37,7 +37,7 @@ const CreateStakePage = (): JSX.Element => {
 
   return (
     <AppLayout mainClassName={styles.appMain}>
-      <Header
+      <HeaderStake
         frakts={userFrakts}
         fraktsLoading={loading}
         selectedFrakts={selectedFrakts}
