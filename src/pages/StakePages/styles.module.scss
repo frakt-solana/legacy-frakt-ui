@@ -257,6 +257,11 @@
   &_locked {
     pointer-events: none;
     position: relative;
+    &:hover {
+      &::before {
+        display: none;
+      }
+    }
 
     .fraktCheckbox__lockMessage {
       position: absolute;
@@ -292,6 +297,23 @@
         background: transparentize($color-gray-1, 0.4);
         z-index: 1;
       }
+    }
+  }
+
+  &__artPageLink {
+    pointer-events: all;
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    z-index: 2;
+
+    &,
+    &:hover,
+    &:visited,
+    &:focus,
+    &:focus-visible {
+      text-decoration: underline;
+      color: $color-white;
     }
   }
 }

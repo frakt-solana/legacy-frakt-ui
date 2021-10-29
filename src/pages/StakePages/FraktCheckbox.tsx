@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import { ArtTitle } from '../../components/ArtCard/ArtTitle';
@@ -7,6 +8,7 @@ import { Frakt } from '../../contexts/frakts';
 import { useLazyArtImageSrc } from '../../hooks';
 import { getPointsForArt } from '../CollectionPage/helpers';
 import styles from './styles.module.scss';
+import { URLS } from '../../constants';
 
 interface FraktCheckboxProps {
   frakt: Frakt;
@@ -41,6 +43,12 @@ const FraktCheckbox = ({
       ])}
       onClick={onClick}
     >
+      <NavLink
+        className={styles.fraktCheckbox__artPageLink}
+        to={`${URLS.COLLECTION}/${frakt.metadata.artAccountPubkey}`}
+      >
+        Art page
+      </NavLink>
       <ArtImage className={styles.fraktCheckbox__img} src={src} />
       {lockedText && (
         <div className={styles.fraktCheckbox__lockMessage}>{lockedText}</div>

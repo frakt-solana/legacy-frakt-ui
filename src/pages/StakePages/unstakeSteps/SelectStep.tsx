@@ -71,7 +71,7 @@ const SelectStep = ({
   const getLockMessage = (stakeAccount: StakeView) => {
     const isLocked = moment().unix() - Number(stakeAccount.stake_end_at) <= 0;
     return isLocked
-      ? `Available to\nunstake at\n${moment
+      ? `Available to\nunstake on\n${moment
           .unix(stakeAccount.stake_end_at as number)
           .utc()
           .format('MMM D, HH:mm UTC')}`
