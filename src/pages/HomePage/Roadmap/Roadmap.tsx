@@ -4,13 +4,6 @@ import styles from './styles.module.scss';
 
 const STEPS = [
   {
-    title: 'Launchpad',
-    description:
-      'We are aiming to bring more into Solana NFT space with our launchpad. It means only original collections, true art and high utility projects. No bots, refunds or failing mint websites',
-    checked: true,
-    link: { external: true, url: 'https://launchpd.art/' },
-  },
-  {
     title: 'Staking',
     description:
       "Here's your chance to get involved with the FRAKT ecosystem. Stake your frakts and you will be eligible to vote in the FRAKT DAO, receive exclusive airdrops, access Launchpad lottery tickets, and earn yields from collection royalties and fraktionalizer fees",
@@ -20,7 +13,7 @@ const STEPS = [
   {
     title: 'Sandbox',
     description:
-      'Sandbox is a platform to spotlight upcoming artists, incentivize staking and give utility to $FRKT. Every collection launching on Sandbox platform can be minted only with $FRKT',
+      'Sandbox is a platform to spotlight individual artists, incentivize staking and give utility to $FRKT. Every kurated collection launching on platform can be minted only with $FRKT. We provide guidance and curate every single project, help with exposure and technical execution of the launch.',
     checked: true,
     link: { external: true, url: 'https://sandbox.frakt.art/' },
   },

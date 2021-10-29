@@ -65,7 +65,7 @@ const HomePage = (): JSX.Element => {
         </p>
       </div>
       <div className={styles.section} id={ROADMAP_SECTION_ID}>
-        <h2 className={styles.section__title}>Roadmap</h2>
+        <h2 className={styles.section__title}>Ecosystem</h2>
         <Roadmap />
       </div>
     </AppLayout>

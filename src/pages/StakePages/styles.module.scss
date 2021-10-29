@@ -82,6 +82,11 @@
     text-decoration: underline;
     cursor: pointer;
     padding: 0;
+
+    &_disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
   }
 }
 
@@ -246,6 +251,69 @@
         background: transparentize($color-gray-1, 0.4);
         z-index: 1;
       }
+    }
+  }
+
+  &_locked {
+    pointer-events: none;
+    position: relative;
+    &:hover {
+      &::before {
+        display: none;
+      }
+    }
+
+    .fraktCheckbox__lockMessage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: transparentize($color-gray-1, 0.4);
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      line-height: 28px;
+      text-align: center;
+      text-transform: uppercase;
+      white-space: pre-wrap;
+
+      &::after {
+        content: '';
+        display: block;
+        padding-bottom: 100%;
+      }
+    }
+
+    .fraktCheckbox__info {
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparentize($color-gray-1, 0.4);
+        z-index: 1;
+      }
+    }
+  }
+
+  &__artPageLink {
+    pointer-events: all;
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    z-index: 2;
+
+    &,
+    &:hover,
+    &:visited,
+    &:focus,
+    &:focus-visible {
+      text-decoration: underline;
+      color: $color-white;
     }
   }
 }
