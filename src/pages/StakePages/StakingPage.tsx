@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet';
 import { NavLink } from 'react-router-dom';
 import { sum } from 'lodash';
 import moment from 'moment';
-import BN from 'bn.js';
 
 import AppLayout from '../../components/AppLayout';
 import Button from '../../components/Button';
@@ -86,15 +85,13 @@ const StakingPage = (): JSX.Element => {
   );
 
   const frktsPerSecond =
-    new BN(farming_tokens_per_second_per_point)
-      .mul(new BN(pointsStaking))
-      .toNumber() / DECIMALS_PER_FRKT;
+    (farming_tokens_per_second_per_point / DECIMALS_PER_FRKT) *
+    (pointsStaking / DECIMALS_PER_FRKT);
 
   const frktsPerYear =
-    new BN(farming_tokens_per_second_per_point)
-      .mul(new BN(pointsStaking))
-      .mul(new BN(SECONDS_IN_YEAR))
-      .toNumber() / DECIMALS_PER_FRKT;
+    (farming_tokens_per_second_per_point / DECIMALS_PER_FRKT) *
+    (pointsStaking / DECIMALS_PER_FRKT) *
+    (SECONDS_IN_YEAR / DECIMALS_PER_FRKT);
 
   return (
     <AppLayout headerText="Staking" mainClassName={styles.appMain}>
