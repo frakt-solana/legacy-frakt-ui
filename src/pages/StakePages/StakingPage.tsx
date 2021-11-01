@@ -85,13 +85,12 @@ const StakingPage = (): JSX.Element => {
   );
 
   const frktsPerSecond =
-    (farming_tokens_per_second_per_point / DECIMALS_PER_FRKT) *
-    (pointsStaking / DECIMALS_PER_FRKT);
+    farming_tokens_per_second_per_point * (pointsStaking / DECIMALS_PER_FRKT);
 
   const frktsPerYear =
-    (farming_tokens_per_second_per_point / DECIMALS_PER_FRKT) *
+    farming_tokens_per_second_per_point *
     (pointsStaking / DECIMALS_PER_FRKT) *
-    (SECONDS_IN_YEAR / DECIMALS_PER_FRKT);
+    SECONDS_IN_YEAR;
 
   return (
     <AppLayout headerText="Staking" mainClassName={styles.appMain}>
