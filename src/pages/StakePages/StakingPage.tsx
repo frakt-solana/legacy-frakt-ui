@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 import { NavLink } from 'react-router-dom';
 import { sum } from 'lodash';
+import BN from 'bn.js';
 import moment from 'moment';
 
 import AppLayout from '../../components/AppLayout';
@@ -13,7 +14,7 @@ import styles from './styles.module.scss';
 import { getPointsForArt } from '../CollectionPage/helpers';
 import { usePolling, usePrivatePage } from '../../hooks';
 import Preloader from '../../components/Preloader';
-import { DECIMALS_PER_FRKT } from '../../contexts/frktBalance';
+import { DECIMALS_PER_FRKT, frktBNToString } from '../../contexts/frktBalance';
 import { WarnBanner } from './WarnBanner';
 
 const SECONDS_IN_YEAR = 31560000;
@@ -72,26 +73,31 @@ const StakingPage = (): JSX.Element => {
   );
 
   const frktsToHarvest = useMemo(
-    () =>
-      sum(
-        userStakeAccounts.map(
-          ({ points, last_harvested_at }) =>
-            (moment().unix() - Number(last_harvested_at)) *
-            Number(points) *
-            farming_tokens_per_second_per_point,
-        ),
-      ) / DECIMALS_PER_FRKT,
+    () => {
+      return userStakeAccounts.reduce((acc, { points, last_harvested_at }) => {
+        const frktPerAccount = new BN(
+          moment().unix() - Number(last_harvested_at),
+        )
+          .mul(new BN(Number(points)))
+          .mul(new BN(farming_tokens_per_second_per_point));
+
+        return acc.add(frktPerAccount);
+      }, new BN(0));
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [userStakeAccounts],
   );
 
   const frktsPerSecond =
-    farming_tokens_per_second_per_point * (pointsStaking / DECIMALS_PER_FRKT);
+    new BN(farming_tokens_per_second_per_point)
+      .mul(new BN(pointsStaking))
+      .toNumber() / DECIMALS_PER_FRKT;
 
-  const frktsPerYear =
-    farming_tokens_per_second_per_point *
-    (pointsStaking / DECIMALS_PER_FRKT) *
-    SECONDS_IN_YEAR;
+  const frktsPerYear = frktBNToString(
+    new BN(farming_tokens_per_second_per_point)
+      .mul(new BN(pointsStaking))
+      .mul(new BN(SECONDS_IN_YEAR)),
+  );
 
   return (
     <AppLayout headerText="Staking" mainClassName={styles.appMain}>
@@ -135,19 +141,19 @@ const StakingPage = (): JSX.Element => {
                       ).toFixed(VALUES_PRECISION),
                     ],
                     ['FRKT/second', frktsPerSecond.toFixed(VALUES_PRECISION)],
-                    ['FRKT/year', frktsPerYear.toFixed(VALUES_PRECISION)],
+                    ['FRKT/year', frktsPerYear],
                     [
                       {
                         text: 'FRKT to harvest',
                         tooltipText:
                           'Amount of FRKT available to withdraw. Withdrawing is available from 0.01 FRKT.',
                       },
-                      frktsToHarvest.toFixed(VALUES_PRECISION),
+                      frktBNToString(frktsToHarvest),
                     ],
                   ]}
                   className={styles.stakingPage__infoTable}
                 />
-                {frktsToHarvest > 0.01 && !IS_LOCKED_PERIOD && (
+                {frktsToHarvest.toNumber() > 0.01 && !IS_LOCKED_PERIOD && (
                   <NavLink to={URLS.STAKING_HARVEST}>
                     <Button size="lg">Harvest</Button>
                   </NavLink>

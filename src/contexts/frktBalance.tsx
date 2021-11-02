@@ -2,16 +2,25 @@
 import React, { useState, useContext } from 'react';
 import { TokenView } from 'frakt-client';
 import config from '../config';
+import BN from 'bn.js';
 
 export const DECIMALS_PER_FRKT = 1e8;
 
 interface FrktBalanceInterface {
-  balance: number;
+  balance: BN;
   setBalance: (userTokens: TokenView[]) => void;
 }
 
+export const frktBNToString = (bn: BN): string => {
+  const bnStr = bn.toString(10);
+  if (bnStr === '0') return '0';
+  const integerPart = bnStr.slice(0, -8);
+  const floatPart = bnStr.slice(-8, -2);
+  return `${integerPart}.${floatPart}` || '0';
+};
+
 export const FrktBalanceContext = React.createContext({
-  balance: 0,
+  balance: new BN(0),
   setBalance: (userTokens: TokenView[]) => {},
 });
 
@@ -20,15 +29,19 @@ export const FrktBalanceProvider = ({
 }: {
   children: JSX.Element;
 }): JSX.Element => {
-  const [balance, setBalance] = useState<number>();
+  const [balance, setBalance] = useState<BN>();
 
   const changeBalance = (userTokens: TokenView[]) => {
-    setBalance(
-      Number(
-        userTokens.filter(({ mint }) => mint === config.FARMING_TOKEN_MINT)?.[0]
-          ?.amount || 0,
-      ),
-    );
+    const frktToken = userTokens.filter(
+      ({ mint }) => mint === config.FARMING_TOKEN_MINT,
+    )?.[0];
+
+    const amount = frktToken?.amount
+      ? frktToken.amount === -1
+        ? frktToken.amountBN
+        : new BN(Number(frktToken.amount))
+      : new BN(0);
+    setBalance(amount);
   };
 
   return (
