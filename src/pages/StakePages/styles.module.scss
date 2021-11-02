@@ -433,6 +433,29 @@
     grid-template-rows: 1fr 1fr;
   }
 
+  &__warnBanner {
+    grid-column: 1 / -1;
+    background: $color-white;
+    color: $color-black;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 24px;
+
+    b {
+      font-weight: 600;
+    }
+
+    a {
+      &,
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        color: $color-black;
+        text-decoration: underline;
+      }
+    }
+  }
+
   &__infoTable {
     width: 100%;
     margin-bottom: 12px;
