@@ -11,10 +11,10 @@ export const WarnBanner = (): JSX.Element => {
       >
         tokenomics proposal
       </a>{' '}
-      by communty, we are going to implement the halving of the $FRKT staking
+      by community, we are going to implement the halving of the $FRKT staking
       rewards. In order to prepare for this transition, we STRONGLY advise to
       harvest your funds before <b>Friday 4:00 PM UTC</b> to preserve your
-      accumulated $FRKT.
+      accumulated $FRKT. <b>All accumulated $FRKT that was earned but not harvested will be cut in half</b>.
     </div>
   );
 };
