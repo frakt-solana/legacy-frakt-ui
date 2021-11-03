@@ -16,7 +16,7 @@ export const frktBNToString = (bn: BN): string => {
   if (bnStr === '0') return '0';
   const integerPart = bnStr.slice(0, -8);
   const floatPart = bnStr.slice(-8, -2);
-  return `${integerPart}.${floatPart}` || '0';
+  return `${integerPart || 0}.${floatPart || 0}`;
 };
 
 export const FrktBalanceContext = React.createContext({
@@ -41,6 +41,7 @@ export const FrktBalanceProvider = ({
         ? frktToken.amountBN
         : new BN(Number(frktToken.amount))
       : new BN(0);
+
     setBalance(amount);
   };
 
