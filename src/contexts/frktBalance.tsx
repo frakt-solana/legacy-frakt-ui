@@ -15,7 +15,7 @@ export const frktBNToString = (bn: BN): string => {
   const bnStr = bn.toString(10);
   if (bnStr === '0') return '0';
   const integerPart = bnStr.slice(0, -8);
-  const floatPart = bnStr.slice(-8, -2);
+  const floatPart = bnStr.padStart(8, '0').slice(-8, -2);
   return `${integerPart || 0}.${floatPart || 0}`;
 };
 
