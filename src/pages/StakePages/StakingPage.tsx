@@ -153,11 +153,12 @@ const StakingPage = (): JSX.Element => {
                   ]}
                   className={styles.stakingPage__infoTable}
                 />
-                {frktsToHarvest.toNumber() > 0.01 && !IS_LOCKED_PERIOD && (
-                  <NavLink to={URLS.STAKING_HARVEST}>
-                    <Button size="lg">Harvest</Button>
-                  </NavLink>
-                )}
+                {frktsToHarvest.toNumber() > 0.01 * DECIMALS_PER_FRKT &&
+                  !IS_LOCKED_PERIOD && (
+                    <NavLink to={URLS.STAKING_HARVEST}>
+                      <Button size="lg">Harvest</Button>
+                    </NavLink>
+                  )}
                 {IS_LOCKED_PERIOD && (
                   <p style={{ fontSize: 15, textAlign: 'right' }}>
                     Harvest unlocks on{' '}
