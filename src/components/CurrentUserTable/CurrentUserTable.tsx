@@ -7,7 +7,8 @@ import { useNativeAccount } from '../../external/contexts/accounts';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import Table from '../Table';
 import { DisconnectButton } from './DisconnectButton';
-import { frktBNToString, useFrktBalance } from '../../contexts/frktBalance';
+import { useFrktBalance } from '../../contexts/frktBalance';
+import { frktBNToString } from '../../utils';
 
 interface CurrentUserTableProps {
   className?: string;
@@ -28,7 +29,7 @@ const CurrentUserTable = ({
     `${formatNumber.format((account?.lamports || 0) / LAMPORTS_PER_SOL)} SOL`;
 
   const getFrktBalanceValue = (): string => {
-    const frktBalance = balance ? frktBNToString(balance) : '0';
+    const frktBalance = balance ? frktBNToString(balance, 2) : '0';
     return `${frktBalance !== '0' ? frktBalance : '--'} FRKT`;
   };
 
