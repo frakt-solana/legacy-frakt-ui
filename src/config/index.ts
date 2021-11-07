@@ -9,7 +9,7 @@ export const ENDPOINTS = [
     // endpoint: 'https://api.metaplex.solana.com/',
     // endpoint:
     //   'https://wild-muddy-dream.solana-mainnet.quiknode.pro/47edfe015adbb24664df02bc436d4cb6272dc01a/',
-    endpoint: 'https://connect.runnode.com/?apikey=zzyoGRqbpZqtGZexDHfV',
+    endpoint: 'https://connect.runnode.com/?apikey=Uj4AiozG48ZxMRra9arc',
     chainID: ChainID.MainnetBeta,
   },
   {
