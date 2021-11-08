@@ -10,6 +10,7 @@
 .sideBar {
   border-right: 1px solid $color-gray-1;
   display: grid;
+  overflow: auto;
   grid-template-rows: auto 1fr auto;
 }
 

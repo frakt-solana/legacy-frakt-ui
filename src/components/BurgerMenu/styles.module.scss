@@ -54,12 +54,13 @@
 
 .menuOverlay {
   position: fixed;
+  padding: 14px;
   inset: 0;
   width: 100%;
   height: 100%;
+  overflow: auto;
   background: $color-black;
   z-index: 10;
-  min-height: 480px;
 
   &Hidden {
     display: none;
@@ -81,7 +82,13 @@
 
 .navigation {
   width: 250px;
+  padding: 24px 0;
 }
+
+.footer {
+  padding-bottom: 14px;
+}
+
 
 @media screen and (min-width: 1024px) {
   .burgerIcon {
