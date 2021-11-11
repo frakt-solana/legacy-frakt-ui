@@ -126,7 +126,7 @@ export const StakingProvider = ({
 
   const userStakeAccountsAvailableToUnstake = useMemo(() => {
     return userStakeAccounts.filter(({ stake_end_at }) => {
-      moment().unix() - Number(stake_end_at) >= 0;
+      return moment().unix() - Number(stake_end_at) >= 0;
     });
   }, [userStakeAccounts]);
 
