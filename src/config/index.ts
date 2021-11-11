@@ -6,8 +6,10 @@ export type ENV = 'mainnet-beta' | 'testnet' | 'devnet' | 'localnet';
 export const ENDPOINTS = [
   {
     name: 'mainnet-beta' as ENV,
-    endpoint: 'https://api.metaplex.solana.com/',
+    endpoint: 'https://ssc-dao.genesysgo.net/',
     // endpoint:
+    //https://ssc-dao.genesysgo.net/
+    //https://api.metaplex.solana.com/
     //   'https://wild-muddy-dream.solana-mainnet.quiknode.pro/47edfe015adbb24664df02bc436d4cb6272dc01a/',
     // endpoint: 'https://connect.runnode.com/?apikey=Uj4AiozG48ZxMRra9arc',
     chainID: ChainID.MainnetBeta,
