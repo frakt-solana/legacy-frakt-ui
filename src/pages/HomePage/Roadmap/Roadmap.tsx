@@ -27,7 +27,8 @@ const STEPS = [
     title: 'Fraktionalizer',
     description:
       'As one of the first builders in the Solana NFT space, we aim to grow its ecosystem even further with a platform to split NFTs and trade fractions on a DEX and AMM. Stakers earn a portion of fees generated',
-    checked: false,
+    checked: true,
+    link: { external: true, url: 'https://fraktion.art/' },
   },
   // {
   //   title: 'Multichain bridge',

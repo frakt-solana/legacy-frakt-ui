@@ -2,6 +2,7 @@ export const URLS = {
   ROOT: '/',
   COLLECTION: '/collection',
   SANDBOX: 'https://sandbox.frakt.art',
+  FRAKTION: 'https://fraktion.art',
   MARKETPLACE: '/marketplace',
   STAKING: '/stake',
   STAKING_CREATE: `/stake/create`,

@@ -28,6 +28,11 @@ const AppNavigation = ({ className }: AppNavigation): JSX.Element => {
           Sandbox
         </a>
       </li>
+      <li>
+        <a className={styles.link} href={URLS.FRAKTION}>
+          Fraktionalization
+        </a>
+      </li>
     </ul>
   );
 };
