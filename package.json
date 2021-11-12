@@ -15,16 +15,16 @@
     "buffer-layout": "^1.2.0",
     "classnames": "^2.3.1",
     "eventemitter3": "^4.0.7",
-    "frakt-client": "^1.5.1",
+    "frakt-client": "^1.5.2",
     "moment": "^2.29.1",
-    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
     "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^5.2.0",
     "react-router-hash-link": "^2.4.3",
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^4.0.3",
+    "sass": "^1.43.4"
   },
   "scripts": {
     "start": "npm run devnet",
