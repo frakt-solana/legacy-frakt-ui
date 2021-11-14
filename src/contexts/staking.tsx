@@ -2,6 +2,7 @@
 import React, { useState, useContext, useMemo } from 'react';
 import { PublicKey } from '@solana/web3.js';
 import * as contract from 'frakt-client';
+import { getAllUserTokens } from 'solana-nft-metadata';
 import moment from 'moment';
 
 import { useConnection } from '../external/contexts/connection';
@@ -25,8 +26,12 @@ interface StakingContextInterface {
   error: Error | null;
   fetchData: () => Promise<void>;
   silentFetchData: () => Promise<void>;
-  stakeFrakts: (artsAndMints: contract.ArtAndMint[]) => Promise<boolean>;
-  unstakeFrakts: (artsAndMints: contract.UnstakeParams[]) => Promise<boolean>;
+  stakeFrakts: (
+    artsAndMints: ArtAndMintWithoutTokenPubkey[],
+  ) => Promise<boolean>;
+  unstakeFrakts: (
+    artsAndMints: UpdateStakeParamsWithoutTokenPubkey[],
+  ) => Promise<boolean>;
   updateStakeFrakts: (
     artsAndMints: contract.UnstakeParams[],
   ) => Promise<boolean>;
@@ -131,11 +136,26 @@ export const StakingProvider = ({
   }, [userStakeAccounts]);
 
   const stakeFrakts = async (
-    artsAndMints: contract.ArtAndMint[],
+    artsAndMints: ArtAndMintWithoutTokenPubkey[],
   ): Promise<boolean> => {
     try {
+      const userTokens = await getAllUserTokens(wallet.publicKey, {
+        connection,
+      });
+
+      const artsAndMintsWithAccountPubkey: contract.ArtAndMint[] =
+        artsAndMints.map((artAndMint) => {
+          const { tokenAccountPubkey } = userTokens.find(
+            (userToken) => userToken.mint === artAndMint.mintPubKey.toString(),
+          );
+          return {
+            ...artAndMint,
+            userTokenAccount: new PublicKey(tokenAccountPubkey),
+          };
+        });
+
       void (await contract.stakeBulkFrakts(
-        artsAndMints,
+        artsAndMintsWithAccountPubkey,
         wallet.publicKey,
         programPubKey,
         async (txn) => {
@@ -200,11 +220,26 @@ export const StakingProvider = ({
   };
 
   const updateStakeFrakts = async (
-    fraktsAndStakes: contract.UnstakeParams[],
+    fraktsAndStakes: UpdateStakeParamsWithoutTokenPubkey[],
   ): Promise<boolean> => {
+    const userTokens = await getAllUserTokens(wallet.publicKey, {
+      connection,
+    });
+
+    const fraktsAndStakesWithAccountPubkey: contract.UpdateStakeParams[] =
+      fraktsAndStakes.map((fraktAndStake) => {
+        const { tokenAccountPubkey } = userTokens.find(
+          (userToken) => userToken.mint === fraktAndStake.mintPubKey.toString(),
+        );
+        return {
+          ...fraktAndStake,
+          userTokenAccount: new PublicKey(tokenAccountPubkey),
+        };
+      });
+
     try {
       void (await contract.updateStakeBulkFrakts(
-        fraktsAndStakes,
+        fraktsAndStakesWithAccountPubkey,
         wallet.publicKey,
         programPubKey,
         async (txn) => {
@@ -326,3 +361,14 @@ export const useStaking = (): StakingContextInterface => {
     harvestStakes,
   };
 };
+
+export interface ArtAndMintWithoutTokenPubkey {
+  artPubKey: PublicKey;
+  mintPubKey: PublicKey;
+}
+
+export interface UpdateStakeParamsWithoutTokenPubkey {
+  artPubKey: PublicKey;
+  mintPubKey: PublicKey;
+  stakePubkey: PublicKey;
+}
