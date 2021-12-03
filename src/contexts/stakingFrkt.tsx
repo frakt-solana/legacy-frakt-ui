@@ -27,13 +27,6 @@ export const getStackedInfo = async (
     getAllUserTokens(wallet.publicKey, { connection }),
     contract.getAllProgramAccounts(PROGRAMM_PUB_KEY, { connection }),
   ]);
-  const unstakingWallets = data.stakeFRKTAccounts.filter((stakeWallet) => {
-    const isStakeOwnerTheSame = walletPubKey === stakeWallet.stake_owner;
-    const isStakedPeriodEnd = stakeWallet.stake_end_at < finishDate;
-    const isStaked = stakeWallet.is_staked;
-
-    return isStakeOwnerTheSame && isStakedPeriodEnd && isStaked;
-  });
 
   const reusableWallets = data.stakeFRKTAccounts
     .filter((stakeWallet) => {
@@ -45,8 +38,26 @@ export const getStackedInfo = async (
     })
     .map((el) => new PublicKey(el.stakeAccountPubkey));
 
+  let unstakingWallets = data.stakeFRKTAccounts.filter((stakeWallet) => {
+    const isStakeOwnerTheSame = walletPubKey === stakeWallet.stake_owner;
+    const isStaked = stakeWallet.is_staked;
+    return isStakeOwnerTheSame && isStaked;
+  });
+
+  let stakingAmount = new BN(0);
+
+  unstakingWallets.forEach((el) => {
+    const amountBN = new BN(el.amount);
+    stakingAmount = stakingAmount.add(amountBN);
+  });
+
   let unstakingAmount = new BN(0);
   let harvest = new BN(0);
+
+  unstakingWallets = unstakingWallets.filter((stakeWallet) => {
+    return stakeWallet.stake_end_at < finishDate;
+  });
+
   unstakingWallets.forEach((el) => {
     const amountBN = new BN(el.amount);
     const comulDiff = new BN(data.cumulativeAccount.cumulative).sub(
@@ -55,7 +66,6 @@ export const getStackedInfo = async (
     harvest = harvest.add(amountBN.mul(comulDiff));
     unstakingAmount = unstakingAmount.add(amountBN);
   });
-  const stakingAmount = new BN(data.cumulativeAccount.amount_of_staked);
 
   const apr = new BN(data.cumulativeAccount.apr);
 
