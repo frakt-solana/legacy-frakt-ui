@@ -88,7 +88,7 @@ export function Routes(): JSX.Element {
                       />
                       <Route
                         exact
-                        path={'/test'}
+                        path={URLS.FRKT_STAKING}
                         component={(): JSX.Element => <StakeFrktPage />}
                       />
                       <Route

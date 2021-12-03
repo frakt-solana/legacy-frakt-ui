@@ -6,7 +6,7 @@ import Button from '../../components/Button/Button';
 import AppLayout from '../../components/AppLayout';
 import { usePolling, usePrivatePage } from '../../hooks';
 import { useStakingFrkt } from '../../contexts/stakingFrkt';
-import { decimalBNToString, frktBNToString } from '../../utils';
+import { frktBNToString } from '../../utils';
 import BN from 'bn.js';
 import StakingForm from './StakingForm';
 
@@ -48,7 +48,7 @@ const StakeFrktPage = (): JSX.Element => {
                 ['FRKT/second', amountPerSec ? amountPerSec.toString() : '0'],
                 [
                   'FRKT/year',
-                  amountPerYear ? decimalBNToString(amountPerYear) : '0',
+                  amountPerYear ? frktBNToString(amountPerYear) : '0',
                 ],
                 [
                   {

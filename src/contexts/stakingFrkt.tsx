@@ -7,6 +7,7 @@ import BN from 'bn.js';
 import { useFrktBalance } from './frktBalance';
 import { notify } from '../external/utils/notifications';
 import { getAllUserTokens } from 'frakt-client';
+import { frktBNToString } from '../utils';
 
 const SECONDS_IN_YEAR = 31560000;
 
@@ -50,12 +51,16 @@ export const getStackedInfo = async (
 
   let unstakingAmount = new BN(0);
   unstakingWallets.forEach((el) => {
-    return (unstakingAmount = unstakingAmount.add(new BN(el.amount as number)));
+    return (unstakingAmount = unstakingAmount.add(new BN(el.amount)));
   });
 
-  const amountPerYear = new BN(data.cumulativeAccount.amount_of_staked).mul(
-    new BN(data.cumulativeAccount.apr),
-  );
+  const stakingAmount = new BN(data.cumulativeAccount.amount_of_staked);
+
+  const amountPerYear = new BN(data.cumulativeAccount.apr * 1e6)
+    .mul(stakingAmount)
+    .div(new BN(1e10));
+
+  const harvest = new BN(1);
 
   return {
     unstakingWallets: unstakingWallets.map(
@@ -65,7 +70,8 @@ export const getStackedInfo = async (
     reusableWallets,
     amountPerYear,
     balanceTokens,
-    stakingAmount: new BN(data.cumulativeAccount.amount_of_staked as number),
+    stakingAmount,
+    harvest,
   };
 };
 
@@ -119,7 +125,7 @@ const harvestFrakts =
   ) =>
   () => {
     return contract
-      .unstakeFRKT({
+      .harvestFRKT({
         programPubkey: PROGRAMM_PUB_KEY,
         userPublicKey: wallet.publicKey,
         mintPubkey: FRKT_MINT_PUB_KEY,
@@ -197,7 +203,7 @@ const stakeFrakts =
 interface StakingFrktContextState {
   staked: BN;
   amountPerYear: BN;
-  amountPerSec: BN;
+  amountPerSec: number;
   stakeFrakts: (amount: BN) => Promise<boolean>;
   harvestFrakts: () => Promise<boolean>;
   unstakeFrakts: () => Promise<boolean>;
@@ -229,7 +235,7 @@ export const StakingFrktProvider = ({
   const connection = useConnection();
   const [staked, setStaked] = useState<BN>(null);
   const [amountPerYear, setAmountPerYear] = useState<BN>(null);
-  const [amountPerSec, setAmountPerSec] = useState<BN>(null);
+  const [amountPerSec, setAmountPerSec] = useState<number>(null);
   const [readyForUnstaking, setReadyForUnstaking] = useState<PublicKey[]>([]);
   const [readyForUnstakingAmount, setReadyForUnstakingAmount] = useState<BN>(
     new BN(0),
@@ -247,14 +253,21 @@ export const StakingFrktProvider = ({
         reusableWallets,
         unstakingWallets,
         balanceTokens,
+        harvest,
       }) => {
+        console.log(
+          amountPerYear.div(new BN((SECONDS_IN_YEAR / 12) * 1e8)).toString(),
+        );
         setBalance(balanceTokens);
         setStaked(stakingAmount);
         setReadyForUnstakingAmount(unstakingAmount);
         setReadyForUnstaking(unstakingWallets);
         setAmountPerYear(amountPerYear);
         setReusableWallets(reusableWallets);
-        setAmountPerSec(amountPerYear.div(new BN(SECONDS_IN_YEAR * 1e8)));
+        setAmountPerSec(
+          Number.parseFloat(frktBNToString(amountPerYear)) / SECONDS_IN_YEAR,
+        );
+        setHarvest(harvest);
       },
     );
 
