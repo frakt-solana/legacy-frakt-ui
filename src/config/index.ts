@@ -32,7 +32,7 @@ export const ENDPOINTS = [
 const devnet = {
   PROGRAM_PUBLIC_KEY: 'D1bz9T4br5DaRfYx48aSaQsstcfuaytvvArxVjShLwca',
   ADMIN_PUBLIC_KEY: '8CoRNSG1gdWFo5hwWTyn8Vk8QtmwHnNfaLYSRyZ7pme3',
-  FARMING_TOKEN_MINT: '2kMr32vCwjehHizggK4Gdv7izk7NhTUyLrH7RYvQRFHH',
+  FARMING_TOKEN_MINT: '9V626r7SDWzY4HFg35uxDZpbJ1m5cCb2VLAVkTcaoRNw',
   ENDPOINT: ENDPOINTS[2],
   ARTS_CACHE_URL: '/arts_dev.json',
   METADATA_CACHE_URL: '/meta_dev.json',

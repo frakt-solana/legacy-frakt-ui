@@ -22,6 +22,8 @@ import {
 import MarketplacesPage from './pages/MarketplacesPage';
 import WalletCollectionPage from './pages/WalletCollectionPage';
 import { FrktBalanceProvider } from './contexts/frktBalance';
+import { StakeFrktPage } from './pages/StakeFrktPage';
+import { StakingFrktProvider } from './contexts/stakingFrkt';
 
 export function Routes(): JSX.Element {
   return (
@@ -31,70 +33,77 @@ export function Routes(): JSX.Element {
           <AccountsProvider>
             <FrktBalanceProvider>
               <FraktsProvider>
-                <StakingProvider>
-                  <Switch>
-                    <Route
-                      exact
-                      path={URLS.ROOT}
-                      component={(): JSX.Element => <HomePage />}
-                    />
-                    <Route
-                      exact
-                      path={`${URLS.WALLET}/:walletPubkey`}
-                      component={(): JSX.Element => <WalletCollectionPage />}
-                    />
-                    <Route
-                      exact
-                      path={URLS.COLLECTION}
-                      component={(): JSX.Element => <CollectionsPage />}
-                    />
-                    <Route
-                      exact
-                      path={`${URLS.COLLECTION}/:artAccountPubkey`}
-                      component={(): JSX.Element => <ArtPage />}
-                    />
-                    <Route
-                      exact
-                      path={URLS.RARITY}
-                      component={(): JSX.Element => <RarityPage />}
-                    />
-                    <Route
-                      exact
-                      path={URLS.STAKING}
-                      component={(): JSX.Element => <StakingPage />}
-                    />
-                    <Route
-                      exact
-                      path={URLS.STAKING_CREATE}
-                      component={(): JSX.Element => <CreateStakePage />}
-                    />
-                    <Route
-                      exact
-                      path={URLS.STAKING_UNSTAKE}
-                      component={(): JSX.Element => <UnstakePage />}
-                    />
-                    <Route
-                      exact
-                      path={URLS.STAKING_HARVEST}
-                      component={(): JSX.Element => <HarvestPage />}
-                    />
-                    <Route
-                      exact
-                      path={URLS.MARKETPLACE}
-                      component={(): JSX.Element => <MarketplacesPage />}
-                    />
-                    <Route
-                      exact
-                      path={URLS.PAGE_404}
-                      component={(): JSX.Element => <Page404 />}
-                    />
-                    <Route
-                      exact
-                      path={'*'}
-                      component={(): JSX.Element => <Page404 />}
-                    />
-                  </Switch>
-                </StakingProvider>
+                <StakingFrktProvider>
+                  <StakingProvider>
+                    <Switch>
+                      <Route
+                        exact
+                        path={URLS.ROOT}
+                        component={(): JSX.Element => <HomePage />}
+                      />
+                      <Route
+                        exact
+                        path={`${URLS.WALLET}/:walletPubkey`}
+                        component={(): JSX.Element => <WalletCollectionPage />}
+                      />
+                      <Route
+                        exact
+                        path={URLS.COLLECTION}
+                        component={(): JSX.Element => <CollectionsPage />}
+                      />
+                      <Route
+                        exact
+                        path={`${URLS.COLLECTION}/:artAccountPubkey`}
+                        component={(): JSX.Element => <ArtPage />}
+                      />
+                      <Route
+                        exact
+                        path={URLS.RARITY}
+                        component={(): JSX.Element => <RarityPage />}
+                      />
+                      <Route
+                        exact
+                        path={URLS.STAKING}
+                        component={(): JSX.Element => <StakingPage />}
+                      />
+                      <Route
+                        exact
+                        path={URLS.STAKING_CREATE}
+                        component={(): JSX.Element => <CreateStakePage />}
+                      />
+                      <Route
+                        exact
+                        path={URLS.STAKING_UNSTAKE}
+                        component={(): JSX.Element => <UnstakePage />}
+                      />
+                      <Route
+                        exact
+                        path={URLS.STAKING_HARVEST}
+                        component={(): JSX.Element => <HarvestPage />}
+                      />
+                      <Route
+                        exact
+                        path={URLS.MARKETPLACE}
+                        component={(): JSX.Element => <MarketplacesPage />}
+                      />
+                      <Route
+                        exact
+                        path={'/test'}
+                        component={(): JSX.Element => <StakeFrktPage />}
+                      />
+                      <Route
+                        exact
+                        path={URLS.PAGE_404}
+                        component={(): JSX.Element => <Page404 />}
+                      />
+                      <Route
+                        exact
+                        path={'*'}
+                        component={(): JSX.Element => <Page404 />}
+                      />
+                    </Switch>
+                  </StakingProvider>
+                </StakingFrktProvider>
               </FraktsProvider>
             </FrktBalanceProvider>
           </AccountsProvider>

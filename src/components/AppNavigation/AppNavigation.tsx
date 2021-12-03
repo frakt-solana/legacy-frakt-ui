@@ -22,6 +22,12 @@ const AppNavigation = ({ className }: AppNavigation): JSX.Element => {
         notLink={!connected}
         onClick={select}
       />
+      <NavigationLink
+        to={URLS.FRKT_STAKING}
+        text="FRKT Staking"
+        notLink={!connected}
+        onClick={select}
+      />
       <NavigationLink to={URLS.MARKETPLACE} text="Marketplace" />
       <li>
         <a className={styles.link} href={URLS.SANDBOX}>
