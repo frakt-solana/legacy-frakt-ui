@@ -1,0 +1,22 @@
+@import '../../scss/abstracts/variables.scss';
+
+.inputWrapper {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+}
+
+.numberInput {
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  font-size: 18px;
+  border-bottom: 1px solid $color-gray-4;
+}
+.inputError {
+  padding-top: 8px;
+  font-size: 14px;
+  color: $red-color;
+  min-height: 22px;
+}
