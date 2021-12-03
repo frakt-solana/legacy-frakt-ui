@@ -4,7 +4,11 @@ import Table from '../../../components/Table';
 import Button from '../../../components/Button/Button';
 import { usePrivatePage } from '../../../hooks';
 import { useStakingFrkt } from '../../../contexts/stakingFrkt';
-import { floatStringToBn, frktBNToString } from '../../../utils';
+import {
+  decimalBNToString,
+  floatStringToBn,
+  frktBNToString,
+} from '../../../utils';
 import NumericInput from '../../../components/NumericInput';
 
 interface StakingFormProps {
@@ -25,7 +29,6 @@ export const StakingForm = ({ className }: StakingFormProps): JSX.Element => {
       setErr('Amount should be less than wallet balance');
     else setErr(null);
   };
-
   const onSave = () => {
     setLoading(true);
     setAmountForStaking('');
@@ -37,10 +40,12 @@ export const StakingForm = ({ className }: StakingFormProps): JSX.Element => {
     <div className={className}>
       <Table
         size="md"
-        data={[['Frakts to stake', balance ? frktBNToString(balance) : '0']]}
+        data={[['FRKT to stake', balance ? frktBNToString(balance) : '0']]}
         className={styles.infoTable}
       />
       <NumericInput
+        btnClick={() => setAmountForStaking(decimalBNToString(balance, 8, 8))}
+        btnText="MAX"
         value={amountForStaking}
         onChange={amountForStakingChangeHandler}
         placeholder="Enter staking amount"

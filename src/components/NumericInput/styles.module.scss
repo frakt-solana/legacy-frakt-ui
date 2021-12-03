@@ -5,6 +5,23 @@
   justify-content: flex-start;
   flex-direction: column;
   width: 100%;
+  position: relative;
+}
+
+.btn {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px;
+  transition: color 0.2s ease-in;
+  &:active {
+    color: $color-gray-4;
+  }
+  &:hover {
+    color: $color-gray-2
+  }
 }
 
 .numberInput {

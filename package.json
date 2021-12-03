@@ -30,7 +30,7 @@
   },
   "scripts": {
     "start": "npm run devnet",
-    "devnet": "craco start",
+    "devnet": "REACT_APP_NETWORK=devnet craco start",
     "mainnet": "craco start",
     "build": "craco build",
     "build:devnet": "REACT_APP_NETWORK=devnet craco build",

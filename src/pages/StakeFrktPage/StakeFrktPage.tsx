@@ -6,16 +6,15 @@ import Button from '../../components/Button/Button';
 import AppLayout from '../../components/AppLayout';
 import { usePolling, usePrivatePage } from '../../hooks';
 import { useStakingFrkt } from '../../contexts/stakingFrkt';
-import { frktBNToString } from '../../utils';
+import { decimalBNToString, frktBNToString } from '../../utils';
 import BN from 'bn.js';
 import StakingForm from './StakingForm';
 
 const StakeFrktPage = (): JSX.Element => {
   usePrivatePage();
   const {
-    amountPerYear,
+    apr,
     staked,
-    amountPerSec,
     readyForUnstakingAmount,
     unstakeFrakts,
     refreshStakingInfo,
@@ -32,7 +31,6 @@ const StakeFrktPage = (): JSX.Element => {
     return stopPolling;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <AppLayout headerText="Staking" mainClassName={styles.appMain}>
       <Helmet>
@@ -45,18 +43,14 @@ const StakeFrktPage = (): JSX.Element => {
             <Table
               size="lg"
               data={[
-                ['FRKT/second', amountPerSec ? amountPerSec.toString() : '0'],
-                [
-                  'FRKT/year',
-                  amountPerYear ? frktBNToString(amountPerYear) : '0',
-                ],
+                ['APC', apr ? `${decimalBNToString(apr, 2, 2)}%` : '0%'],
                 [
                   {
                     text: 'FRKT to harvest',
                     tooltipText:
                       'Amount of FRKT available to withdraw. Withdrawing is available from 0.01 FRKT.',
                   },
-                  '2',
+                  harvest ? frktBNToString(harvest) : '0',
                 ],
               ]}
               className={styles.stakingPage__infoTable}
@@ -72,7 +66,7 @@ const StakeFrktPage = (): JSX.Element => {
               size="md"
               data={[
                 [
-                  'Frakts staked',
+                  'FRKT staked',
                   `${staked ? frktBNToString(new BN(staked)) : '0'}`,
                 ],
                 [

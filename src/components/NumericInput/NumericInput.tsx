@@ -6,11 +6,13 @@ interface NumericInputProps {
   value: string;
   placeholder?: string;
   onChange: (value: string) => void;
+  btnClick?: () => void;
   positiveOnly?: boolean;
   integerOnly?: boolean;
   className?: string;
   maxLength?: number;
   error?: string | boolean;
+  btnText?: string;
 }
 
 function isNumeric(value: any): boolean {
@@ -23,9 +25,11 @@ export const NumericInput = ({
   placeholder = '0.0',
   positiveOnly = false,
   integerOnly = false,
+  btnClick,
   className,
   error,
   maxLength,
+  btnText,
 }: NumericInputProps): JSX.Element => {
   const onChangeHanlder = (event) => {
     const { value } = event.target;
@@ -47,6 +51,11 @@ export const NumericInput = ({
         maxLength={25}
         className={classNames([styles.numberInput, className])}
       />
+      {btnText && (
+        <span onClick={btnClick} className={styles.btn}>
+          {btnText}
+        </span>
+      )}
       <div className={styles.inputError}> {error ? error : ' '}</div>
     </div>
   );
