@@ -15,8 +15,8 @@ const PROGRAMM_PUB_KEY = new PublicKey(
 const FRKT_MINT_PUB_KEY = new PublicKey(config.FARMING_TOKEN_MINT);
 
 const inUse: string[] = [];
+// eslint-disable-next-line
 export const getStackedInfo = async (
-  // eslint-disable-line
   wallet: WalletAdapter,
   connection: Connection,
 ) => {
