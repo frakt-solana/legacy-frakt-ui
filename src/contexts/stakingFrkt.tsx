@@ -45,25 +45,23 @@ export const getStackedInfo = async (
   });
 
   let stakingAmount = new BN(0);
-
-  unstakingWallets.forEach((el) => {
-    const amountBN = new BN(el.amount);
-    stakingAmount = stakingAmount.add(amountBN);
-  });
-
-  let unstakingAmount = new BN(0);
   let harvest = new BN(0);
-
-  unstakingWallets = unstakingWallets.filter((stakeWallet) => {
-    return stakeWallet.stake_end_at < finishDate;
-  });
-
   unstakingWallets.forEach((el) => {
     const amountBN = new BN(el.amount);
     const comulDiff = new BN(data.cumulativeAccount.cumulative).sub(
       new BN(el.staked_at_cumulative),
     );
     harvest = harvest.add(amountBN.mul(comulDiff));
+    stakingAmount = stakingAmount.add(amountBN);
+  });
+
+  unstakingWallets = unstakingWallets.filter((stakeWallet) => {
+    return stakeWallet.stake_end_at < finishDate;
+  });
+
+  let unstakingAmount = new BN(0);
+  unstakingWallets.forEach((el) => {
+    const amountBN = new BN(el.amount);
     unstakingAmount = unstakingAmount.add(amountBN);
   });
 
