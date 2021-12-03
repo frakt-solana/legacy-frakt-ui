@@ -11,7 +11,7 @@ interface StakingFormProps {
   className?: string;
 }
 
-const StakingForm = ({ className }: StakingFormProps): JSX.Element => {
+export const StakingForm = ({ className }: StakingFormProps): JSX.Element => {
   usePrivatePage();
   const [amountForStaking, setAmountForStaking] = useState<string>('');
   const { stakeFrakts, balance } = useStakingFrkt();

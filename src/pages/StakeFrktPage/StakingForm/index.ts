@@ -1,4 +1,1 @@
-/*
-export { default as StakingForm } from './StakingForm';
- */
-export const a = 2;
+export { StakingForm as default } from './StakingForm';

@@ -8,7 +8,7 @@ import { usePolling, usePrivatePage } from '../../hooks';
 import { useStakingFrkt } from '../../contexts/stakingFrkt';
 import { decimalBNToString, frktBNToString } from '../../utils';
 import BN from 'bn.js';
-import StakingForm from './StakingForm/StakingForm';
+import StakingForm from './StakingForm';
 
 const StakeFrktPage = (): JSX.Element => {
   usePrivatePage();
