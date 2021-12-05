@@ -43,7 +43,7 @@ const HarvestPage = (): JSX.Element => {
         if (!res) break;
       }
 
-      history.replace(URLS.STAKING);
+      history.replace(URLS.STAKING_NFT);
     };
 
     harvest();

@@ -48,7 +48,7 @@ export const HeaderStake = ({
     </ButtonArrow>
     <div className={styles.header__titleWrapper}>
       <div className={styles.title}>
-        <span>Stake Frakts</span>
+        <span>Stake FRAKT NFTs</span>
         <span className={styles.header__stepName}> / {steps[currentStep]}</span>
       </div>
       <div className={styles.header__stepCounter}>

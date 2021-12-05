@@ -13,12 +13,13 @@ import CollectionsPage from './pages/CollectionPage';
 import ArtPage from './pages/ArtPage';
 import Page404 from './pages/Page404';
 import RarityPage from './pages/RarityPage';
+import { StakePage } from './pages/StakePage';
 import {
-  StakingPage,
-  CreateStakePage,
-  UnstakePage,
-  HarvestPage,
-} from './pages/StakePages';
+  StakingNftPage,
+  CreateStakeNftPage,
+  UnstakeNftPage,
+  HarvestNftPage,
+} from './pages/StakeNftPages';
 import MarketplacesPage from './pages/MarketplacesPage';
 import WalletCollectionPage from './pages/WalletCollectionPage';
 import { FrktBalanceProvider } from './contexts/frktBalance';
@@ -63,23 +64,23 @@ export function Routes(): JSX.Element {
                       />
                       <Route
                         exact
-                        path={URLS.STAKING}
-                        component={(): JSX.Element => <StakingPage />}
+                        path={URLS.STAKING_NFT}
+                        component={(): JSX.Element => <StakingNftPage />}
                       />
                       <Route
                         exact
-                        path={URLS.STAKING_CREATE}
-                        component={(): JSX.Element => <CreateStakePage />}
+                        path={URLS.STAKING_NFT_CREATE}
+                        component={(): JSX.Element => <CreateStakeNftPage />}
                       />
                       <Route
                         exact
-                        path={URLS.STAKING_UNSTAKE}
-                        component={(): JSX.Element => <UnstakePage />}
+                        path={URLS.STAKING_NFT_UNSTAKE}
+                        component={(): JSX.Element => <UnstakeNftPage />}
                       />
                       <Route
                         exact
-                        path={URLS.STAKING_HARVEST}
-                        component={(): JSX.Element => <HarvestPage />}
+                        path={URLS.STAKING_NFT_HARVEST}
+                        component={(): JSX.Element => <HarvestNftPage />}
                       />
                       <Route
                         exact
@@ -88,7 +89,12 @@ export function Routes(): JSX.Element {
                       />
                       <Route
                         exact
-                        path={URLS.FRKT_STAKING}
+                        path={URLS.STAKE}
+                        component={(): JSX.Element => <StakePage />}
+                      />
+                      <Route
+                        exact
+                        path={URLS.STAKING_FRKT}
                         component={(): JSX.Element => <StakeFrktPage />}
                       />
                       <Route
