@@ -32,7 +32,7 @@ const StakeFrktPage = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <AppLayout headerText="Staking" mainClassName={styles.appMain}>
+    <AppLayout headerText="Staking FRKT" mainClassName={styles.appMain}>
       <Helmet>
         <title>{`Staking FRKT | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>
@@ -43,7 +43,7 @@ const StakeFrktPage = (): JSX.Element => {
             <Table
               size="lg"
               data={[
-                ['APC', apr ? `${decimalBNToString(apr, 2, 2)}%` : '0%'],
+                ['APR', apr ? `${decimalBNToString(apr, 2, 2)}%` : '0%'],
                 [
                   {
                     text: 'FRKT to harvest',
