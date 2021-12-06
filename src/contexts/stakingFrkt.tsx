@@ -7,6 +7,7 @@ import BN from 'bn.js';
 import { useFrktBalance } from './frktBalance';
 import { notify } from '../external/utils/notifications';
 import { getAllUserTokens } from 'frakt-client';
+import moment from 'moment';
 import config from '../config';
 
 const PROGRAMM_PUB_KEY = new PublicKey(
@@ -46,12 +47,23 @@ export const getStackedInfo = async (
 
   let stakingAmount = new BN(0);
   let harvest = new BN(0);
+  const apr = new BN(data.cumulativeAccount.apr);
+  const dateBN = new BN(
+    moment.utc().valueOf() / 1000 - data.cumulativeAccount.last_time,
+  ).mul(apr);
+  const cumulativeBN = new BN(data.cumulativeAccount.cumulative);
+
   unstakingWallets.forEach((el) => {
     const amountBN = new BN(el.amount);
-    const comulDiff = new BN(data.cumulativeAccount.cumulative).sub(
-      new BN(el.staked_at_cumulative),
+    const stakedAtCumulativeBN = new BN(el.staked_at_cumulative);
+    harvest = harvest.add(
+      cumulativeBN
+        .add(dateBN)
+        .sub(stakedAtCumulativeBN)
+        .mul(amountBN)
+        .div(new BN('100'))
+        .div(new BN('31536000')),
     );
-    harvest = harvest.add(amountBN.mul(comulDiff));
     stakingAmount = stakingAmount.add(amountBN);
   });
 
@@ -64,8 +76,6 @@ export const getStackedInfo = async (
     const amountBN = new BN(el.amount);
     unstakingAmount = unstakingAmount.add(amountBN);
   });
-
-  const apr = new BN(data.cumulativeAccount.apr);
 
   return {
     unstakingWallets: unstakingWallets.map(
