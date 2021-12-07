@@ -23,7 +23,7 @@ const VALUES_PRECISION = 7;
 const HARVEST_UNLOCK_DATE_UNIX = 1633889100;
 const IS_LOCKED_PERIOD = HARVEST_UNLOCK_DATE_UNIX - moment().unix() >= 0;
 
-const StakingPage = (): JSX.Element => {
+const StakingNftPage = (): JSX.Element => {
   usePrivatePage();
 
   const {
@@ -101,9 +101,9 @@ const StakingPage = (): JSX.Element => {
   );
 
   return (
-    <AppLayout headerText="Staking" mainClassName={styles.appMain}>
+    <AppLayout headerText="Staking FRAKT NFTs" mainClassName={styles.appMain}>
       <Helmet>
-        <title>{`Staking | FRAKT: Generative Art NFT Collection on Solana`}</title>
+        <title>{`Staking FRAKT NFT | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>
       <div className={styles.stakingPage}>
         {loading ? (
@@ -120,7 +120,7 @@ const StakingPage = (): JSX.Element => {
                 className={styles.stakingPage__infoTable}
               />
               {!!userFraktsNotStaked.length && (
-                <NavLink to={URLS.STAKING_CREATE}>
+                <NavLink to={URLS.STAKING_NFT_CREATE}>
                   <Button size="md">Stake</Button>
                 </NavLink>
               )}
@@ -154,7 +154,7 @@ const StakingPage = (): JSX.Element => {
               />
               {frktsToHarvest.toNumber() > 0.01 * DECIMALS_PER_FRKT &&
                 !IS_LOCKED_PERIOD && (
-                  <NavLink to={URLS.STAKING_HARVEST}>
+                  <NavLink to={URLS.STAKING_NFT_HARVEST}>
                     <Button size="lg">Harvest</Button>
                   </NavLink>
                 )}
@@ -194,7 +194,7 @@ const StakingPage = (): JSX.Element => {
               </p> */}
 
               {!!userStakeAccounts.length && (
-                <NavLink to={URLS.STAKING_UNSTAKE}>
+                <NavLink to={URLS.STAKING_NFT_UNSTAKE}>
                   <Button size="md">Unstake</Button>
                 </NavLink>
               )}
@@ -206,4 +206,4 @@ const StakingPage = (): JSX.Element => {
   );
 };
 
-export default StakingPage;
+export default StakingNftPage;

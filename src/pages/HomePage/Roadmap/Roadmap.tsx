@@ -8,7 +8,7 @@ const STEPS = [
     description:
       "Here's your chance to get involved with the FRAKT ecosystem. Stake your frakts and you will be eligible to vote in the FRAKT DAO, receive exclusive airdrops, access Launchpad lottery tickets, and earn yields from collection royalties and fraktionalizer fees",
     checked: true,
-    link: { external: false, url: URLS.STAKING },
+    link: { external: false, url: URLS.STAKING_NFT },
   },
   {
     title: 'Sandbox',
