@@ -16,6 +16,7 @@ import { usePolling, usePrivatePage } from '../../hooks';
 import Preloader from '../../components/Preloader';
 import { DECIMALS_PER_FRKT } from '../../contexts/frktBalance';
 import { frktBNToString } from '../../utils';
+import { WarnBanner } from './WarnBanner';
 
 const SECONDS_IN_YEAR = 31560000;
 const VALUES_PRECISION = 7;
@@ -109,97 +110,100 @@ const StakingPage = (): JSX.Element => {
         {loading ? (
           <Preloader size="lg" className={styles.stakingPage__preloader} />
         ) : (
-          <div className={styles.stakingPage__content}>
-            <div className={styles.stakingPage__stakeWrapper}>
-              <Table
-                size="md"
-                data={[
-                  ['Frakts to stake', fraktsToStake.toString()],
-                  ['Points to stake', pointsToStake.toString()],
-                ]}
-                className={styles.stakingPage__infoTable}
-              />
-              {!!userFraktsNotStaked.length && (
-                <NavLink to={URLS.STAKING_CREATE}>
-                  <Button size="md">Stake</Button>
-                </NavLink>
-              )}
-            </div>
-            <div className={styles.stakingPage__harvestWrapper}>
-              <Table
-                size="lg"
-                data={[
-                  [
-                    {
-                      text: 'FRKT/sec per point',
-                      tooltipText:
-                        'Amount of FRKT you earn per second for every point locked in the staking protocol.',
-                    },
-                    (
-                      farming_tokens_per_second_per_point / DECIMALS_PER_FRKT
-                    ).toFixed(VALUES_PRECISION),
-                  ],
-                  ['FRKT/second', frktsPerSecond.toFixed(VALUES_PRECISION)],
-                  ['FRKT/year', frktsPerYear],
-                  [
-                    {
-                      text: 'FRKT to harvest',
-                      tooltipText:
-                        'Amount of FRKT available to withdraw. Withdrawing is available from 0.01 FRKT.',
-                    },
-                    frktBNToString(frktsToHarvest, 7),
-                  ],
-                ]}
-                className={styles.stakingPage__infoTable}
-              />
-              {frktsToHarvest.toNumber() > 0.01 * DECIMALS_PER_FRKT &&
-                !IS_LOCKED_PERIOD && (
-                  <NavLink to={URLS.STAKING_HARVEST}>
-                    <Button size="lg">Harvest</Button>
+          <>
+            <WarnBanner />
+            <div className={styles.stakingPage__content}>
+              <div className={styles.stakingPage__stakeWrapper}>
+                <Table
+                  size="md"
+                  data={[
+                    ['Frakts to stake', fraktsToStake.toString()],
+                    ['Points to stake', pointsToStake.toString()],
+                  ]}
+                  className={styles.stakingPage__infoTable}
+                />
+                {!!userFraktsNotStaked.length && (
+                  <NavLink to={URLS.STAKING_CREATE}>
+                    <Button size="md">Stake</Button>
                   </NavLink>
                 )}
-              {IS_LOCKED_PERIOD && (
-                <p style={{ fontSize: 15, textAlign: 'right' }}>
-                  Harvest unlocks on{' '}
-                  {moment
-                    .unix(HARVEST_UNLOCK_DATE_UNIX)
-                    .utc()
-                    .format('DD MMMM H:mm')}{' '}
-                  UTC
-                </p>
-              )}
-            </div>
-            <div className={styles.stakingPage__unstakeWrapper}>
-              <Table
-                size="md"
-                data={[
-                  [
-                    'Frakts(Points) staked',
-                    `${fraktsStaking}(${pointsStaking})`,
-                  ],
-                  [
-                    'Available to unstake',
-                    userStakeAccountsAvailableToUnstake.length.toString(),
-                  ],
-                ]}
-                className={styles.stakingPage__infoTable}
-              />
+              </div>
+              <div className={styles.stakingPage__harvestWrapper}>
+                <Table
+                  size="lg"
+                  data={[
+                    [
+                      {
+                        text: 'FRKT/sec per point',
+                        tooltipText:
+                          'Amount of FRKT you earn per second for every point locked in the staking protocol.',
+                      },
+                      (
+                        farming_tokens_per_second_per_point / DECIMALS_PER_FRKT
+                      ).toFixed(VALUES_PRECISION),
+                    ],
+                    ['FRKT/second', frktsPerSecond.toFixed(VALUES_PRECISION)],
+                    ['FRKT/year', frktsPerYear],
+                    [
+                      {
+                        text: 'FRKT to harvest',
+                        tooltipText:
+                          'Amount of FRKT available to withdraw. Withdrawing is available from 0.01 FRKT.',
+                      },
+                      frktBNToString(frktsToHarvest, 7),
+                    ],
+                  ]}
+                  className={styles.stakingPage__infoTable}
+                />
+                {frktsToHarvest.toNumber() > 0.01 * DECIMALS_PER_FRKT &&
+                  !IS_LOCKED_PERIOD && (
+                    <NavLink to={URLS.STAKING_HARVEST}>
+                      <Button size="lg">Harvest</Button>
+                    </NavLink>
+                  )}
+                {IS_LOCKED_PERIOD && (
+                  <p style={{ fontSize: 15, textAlign: 'right' }}>
+                    Harvest unlocks on{' '}
+                    {moment
+                      .unix(HARVEST_UNLOCK_DATE_UNIX)
+                      .utc()
+                      .format('DD MMMM H:mm')}{' '}
+                    UTC
+                  </p>
+                )}
+              </div>
+              <div className={styles.stakingPage__unstakeWrapper}>
+                <Table
+                  size="md"
+                  data={[
+                    [
+                      'Frakts(Points) staked',
+                      `${fraktsStaking}(${pointsStaking})`,
+                    ],
+                    [
+                      'Available to unstake',
+                      userStakeAccountsAvailableToUnstake.length.toString(),
+                    ],
+                  ]}
+                  className={styles.stakingPage__infoTable}
+                />
 
-              {/* //? For dev */}
-              {/* <NavLink to={URLS.STAKING_UNSTAKE}>
+                {/* //? For dev */}
+                {/* <NavLink to={URLS.STAKING_UNSTAKE}>
                 <Button size="md">Unstake all</Button>
               </NavLink>
               <p style={{ marginTop: 10, textAlign: 'right' }}>
                 *In dev environment you are able to unstake all staking Frakts
               </p> */}
 
-              {!!userStakeAccounts.length && (
-                <NavLink to={URLS.STAKING_UNSTAKE}>
-                  <Button size="md">Unstake</Button>
-                </NavLink>
-              )}
+                {!!userStakeAccounts.length && (
+                  <NavLink to={URLS.STAKING_UNSTAKE}>
+                    <Button size="md">Unstake</Button>
+                  </NavLink>
+                )}
+              </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </AppLayout>
