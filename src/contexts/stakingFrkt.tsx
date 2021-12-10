@@ -11,7 +11,7 @@ import moment from 'moment';
 import config from '../config';
 
 const PROGRAMM_PUB_KEY = new PublicKey(
-  '4DnSukrEE6Pz6eFE7Gp4XTH6LYm1UVcKqZdJC2wz4ggr',
+  '8Tt5SNaGdcvGt7qzoGAzHCyYR7rFiF5PyasvMeuQkMkP',
 );
 const FRKT_MINT_PUB_KEY = new PublicKey(config.FARMING_TOKEN_MINT);
 
