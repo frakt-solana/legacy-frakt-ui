@@ -1,0 +1,47 @@
+@import '../../scss/abstracts/variables.scss';
+
+.root {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 100%;
+  gap: 1px;
+  background: $color-gray-1;
+}
+
+.link {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-white;
+  transition: background 0.2s ease-in, color 0.2s ease-in;
+  font-size: 36px;
+  text-align: center;
+  background: $color-black;
+  cursor: pointer;
+
+  &:hover,
+  &:focus,
+  &:focus-visible {
+    color: $color-black;
+    background: $color-white;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .root {
+    grid-template-columns: unset;
+    grid-template-rows: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .root {
+    height: calc(100vh - 73px);
+  }
+
+  .link {
+    font-size: 24px;
+  }
+}

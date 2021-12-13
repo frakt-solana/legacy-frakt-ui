@@ -10,7 +10,7 @@ import WarningStep from './stakeSteps/WarningStep';
 import SelectStep from './stakeSteps/SelectStep';
 import styles from './styles.module.scss';
 
-const STEPS = ['Select Frakts', 'Warning', 'Approval'];
+const STEPS = ['Select', 'Warning', 'Approval'];
 
 const CreateStakePage = (): JSX.Element => {
   const [currentStep, setCurrentStep] = useState<number>(0);

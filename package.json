@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^5.7.0",
+    "@frakters/frkt-staking-library": "^1.0.6",
     "@project-serum/serum": "^0.13.34",
     "@project-serum/sol-wallet-adapter": "^0.2.0",
     "@solana/spl-token": "0.1.3",

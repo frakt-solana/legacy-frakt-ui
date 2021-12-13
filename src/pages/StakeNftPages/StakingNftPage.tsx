@@ -24,7 +24,7 @@ const VALUES_PRECISION = 7;
 const HARVEST_UNLOCK_DATE_UNIX = 1633889100;
 const IS_LOCKED_PERIOD = HARVEST_UNLOCK_DATE_UNIX - moment().unix() >= 0;
 
-const StakingPage = (): JSX.Element => {
+const StakingNftPage = (): JSX.Element => {
   usePrivatePage();
 
   const {
@@ -102,9 +102,9 @@ const StakingPage = (): JSX.Element => {
   );
 
   return (
-    <AppLayout headerText="Staking" mainClassName={styles.appMain}>
+    <AppLayout headerText="Staking FRAKT NFTs" mainClassName={styles.appMain}>
       <Helmet>
-        <title>{`Staking | FRAKT: Generative Art NFT Collection on Solana`}</title>
+        <title>{`Staking FRAKT NFT | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>
       <div className={styles.stakingPage}>
         {loading ? (
@@ -210,4 +210,4 @@ const StakingPage = (): JSX.Element => {
   );
 };
 
-export default StakingPage;
+export default StakingNftPage;
