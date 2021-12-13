@@ -1,31 +1,42 @@
+import React, { useContext, useEffect, useState } from 'react';
+import moment from 'moment';
+import BN from 'bn.js';
+import { getAllUserTokens, TokenView } from 'frakt-client';
+import * as contract from '@frakters/frkt-staking-library';
+import { Connection, PublicKey } from '@solana/web3.js';
+
 import { useWallet, WalletAdapter } from '../external/contexts/wallet';
 import { useConnection } from '../external/contexts/connection';
-import React, { useContext, useEffect, useState } from 'react';
-import { Connection, PublicKey } from '@solana/web3.js';
-import * as contract from '@frakters/frkt-staking-library';
-import BN from 'bn.js';
 import { useFrktBalance } from './frktBalance';
 import { notify } from '../external/utils/notifications';
-import { getAllUserTokens } from 'frakt-client';
-import moment from 'moment';
 import config from '../config';
 
-const PROGRAMM_PUB_KEY = new PublicKey(config.FRKT_STAKING_PROGRAM_PUBLIC_KEY);
-const FRKT_MINT_PUB_KEY = new PublicKey(config.FARMING_TOKEN_MINT);
+const PROGRAMM_PUBLIC_KEY = new PublicKey(
+  config.FRKT_STAKING_PROGRAM_PUBLIC_KEY,
+);
+const FRKT_MINT_PUBLIC_KEY = new PublicKey(config.FARMING_TOKEN_MINT);
 
-const NOW_UNIX = new Date().getTime() / 1000;
-
-const inUse: string[] = [];
-// eslint-disable-next-line
-export const getStackedInfo = async (
+const reusableUserStakeAccountsInUse: string[] = [];
+export const getFrktStakeInfo = async (
   wallet: WalletAdapter,
   connection: Connection,
-) => {
+): Promise<{
+  userStakeAccountsAvailableToUnstake: PublicKey[];
+  userStakeAccountsReadyToHarvest: PublicKey[];
+  frktToUnstakeAmount: BN;
+  reusableUserStakeAccounts: PublicKey[];
+  APR: BN;
+  balanceTokens: TokenView[];
+  frktStakingAmount: BN;
+  harvestAmount: BN;
+}> => {
+  const NOW_UNIX = moment().unix();
+
   const walletPubKey = wallet.publicKey.toString();
 
   const [balanceTokens, data] = await Promise.all([
     getAllUserTokens(wallet.publicKey, { connection }),
-    contract.getAllProgramAccounts(PROGRAMM_PUB_KEY, { connection }),
+    contract.getAllProgramAccounts(PROGRAMM_PUBLIC_KEY, { connection }),
   ]);
 
   const reusableUserStakeAccounts = data.stakeFRKTAccounts
@@ -33,7 +44,9 @@ export const getStackedInfo = async (
       return (
         !stakeWallet.is_staked &&
         stakeWallet.is_initialized &&
-        !inUse.find((el) => el === stakeWallet.stakeAccountPubkey)
+        !reusableUserStakeAccountsInUse.find(
+          (el) => el === stakeWallet.stakeAccountPubkey,
+        )
       );
     })
     .map((el) => new PublicKey(el.stakeAccountPubkey));
@@ -47,9 +60,7 @@ export const getStackedInfo = async (
   );
 
   const APR = new BN(data.cumulativeAccount.apr);
-  const DATE_BN = new BN(
-    moment.utc().valueOf() / 1000 - data.cumulativeAccount.last_time,
-  ).mul(APR);
+  const DATE_BN = new BN(NOW_UNIX - data.cumulativeAccount.last_time).mul(APR);
   const CUMULATIVE_BN = new BN(data.cumulativeAccount.cumulative);
   const MIN_HARVEST_THRESHOLD = new BN(1e6); //? 0.01
 
@@ -66,13 +77,7 @@ export const getStackedInfo = async (
         .div(new BN('100'))
         .div(new BN('31536000'));
 
-      //? transaction fails when stake account has less than 1e6 frkt to harvest
-      const nextFrktToHarvest =
-        frktToHarvest.cmp(MIN_HARVEST_THRESHOLD) === -1
-          ? harvest
-          : harvest.add(frktToHarvest);
-
-      return [frktStakingAmount.add(amountBN), nextFrktToHarvest];
+      return [frktStakingAmount.add(amountBN), harvest.add(frktToHarvest)];
     },
     [new BN(0), new BN(0)],
   );
@@ -125,19 +130,19 @@ export const getStackedInfo = async (
   };
 };
 
-const unstakeFrakts =
+const unstakeFrkt =
   (
     wallet: WalletAdapter,
     connection: Connection,
-    customerFRKTAccounts: PublicKey[],
+    userFrktAccounts: PublicKey[],
     cb: () => any,
   ) =>
   () => {
     return contract
       .unstakeFRKT({
-        programPubkey: PROGRAMM_PUB_KEY,
+        programPubkey: PROGRAMM_PUBLIC_KEY,
         userPublicKey: wallet.publicKey,
-        mintPubkey: FRKT_MINT_PUB_KEY,
+        mintPubkey: FRKT_MINT_PUBLIC_KEY,
         sendTxn: async (txn) => {
           const { blockhash } = await connection.getRecentBlockhash();
           txn.recentBlockhash = blockhash;
@@ -147,7 +152,7 @@ const unstakeFrakts =
           return void connection.confirmTransaction(txid);
         },
         connection,
-        customerFRKTAccounts: customerFRKTAccounts,
+        customerFRKTAccounts: userFrktAccounts,
       })
       .then(() => {
         cb();
@@ -166,19 +171,19 @@ const unstakeFrakts =
       });
   };
 
-const harvestFrakts =
+const harvestFrkt =
   (
     wallet: WalletAdapter,
     connection: Connection,
-    customerFRKTAccounts: PublicKey[],
+    userFrktAccounts: PublicKey[],
     cb: () => any,
   ) =>
   () => {
     return contract
       .harvestFRKT({
-        programPubkey: PROGRAMM_PUB_KEY,
+        programPubkey: PROGRAMM_PUBLIC_KEY,
         userPublicKey: wallet.publicKey,
-        mintPubkey: FRKT_MINT_PUB_KEY,
+        mintPubkey: FRKT_MINT_PUBLIC_KEY,
         sendTxn: async (txn) => {
           const { blockhash } = await connection.getRecentBlockhash();
           txn.recentBlockhash = blockhash;
@@ -188,7 +193,7 @@ const harvestFrakts =
           return void connection.confirmTransaction(txid);
         },
         connection,
-        customerFRKTAccounts: customerFRKTAccounts,
+        customerFRKTAccounts: userFrktAccounts,
       })
       .then(() => {
         cb();
@@ -207,22 +212,23 @@ const harvestFrakts =
       });
   };
 
-const stakeFrakts =
+const stakeFrkt =
   (
     wallet: WalletAdapter,
     connection: Connection,
-    reusableWallet: PublicKey,
+    reusableUserStakeAccount: PublicKey,
     cb: () => any,
   ) =>
   (amount: BN) => {
-    if (reusableWallet) inUse.push(reusableWallet.toString());
+    if (reusableUserStakeAccount)
+      reusableUserStakeAccountsInUse.push(reusableUserStakeAccount.toString());
     return contract
       .stakeFRKT({
         amount,
-        programPubkey: PROGRAMM_PUB_KEY,
+        programPubkey: PROGRAMM_PUBLIC_KEY,
         userPublicKey: wallet.publicKey,
-        mintPubkey: FRKT_MINT_PUB_KEY,
-        stakeAccountGiven: reusableWallet,
+        mintPubkey: FRKT_MINT_PUBLIC_KEY,
+        stakeAccountGiven: reusableUserStakeAccount,
         connection,
         sendTxn: async (txn) => {
           const { blockhash } = await connection.getRecentBlockhash();
@@ -251,26 +257,26 @@ const stakeFrakts =
   };
 
 interface StakingFrktContextState {
-  staked: BN;
-  apr: BN;
-  stakeFrakts: (amount: BN) => Promise<boolean>;
-  harvestFrakts: () => Promise<boolean>;
-  unstakeFrakts: () => Promise<boolean>;
+  frktStakingAmount: BN;
+  APR: BN;
+  frktToUnstakeAmount: BN;
+  harvestAmount: BN;
   balance: BN;
-  readyForUnstakingAmount: BN;
-  harvest: BN;
+  stakeFrkt: (amount: BN) => Promise<boolean>;
+  harvestFrkt: () => Promise<boolean>;
+  unstakeFrkt: () => Promise<boolean>;
   refreshStakingInfo: () => Promise<void>;
 }
 
 export const StakingFrktContext = React.createContext<StakingFrktContextState>({
-  staked: null,
-  apr: null,
-  harvestFrakts: async () => await Promise.resolve(true),
-  stakeFrakts: async () => await Promise.resolve(true),
-  unstakeFrakts: async () => await Promise.resolve(true),
-  balance: null,
-  readyForUnstakingAmount: null,
-  harvest: null,
+  frktStakingAmount: new BN(0),
+  APR: new BN(0),
+  frktToUnstakeAmount: new BN(0),
+  harvestAmount: new BN(0),
+  balance: new BN(0),
+  harvestFrkt: async () => await Promise.resolve(true),
+  stakeFrkt: async () => await Promise.resolve(true),
+  unstakeFrkt: async () => await Promise.resolve(true),
   refreshStakingInfo: () => Promise.resolve(),
 });
 
@@ -281,20 +287,23 @@ export const StakingFrktProvider = ({
 }): JSX.Element => {
   const { connected, wallet } = useWallet();
   const connection = useConnection();
-  const [staked, setStaked] = useState<BN>(null);
-  const [apr, setApr] = useState<BN>(null);
-  const [readyForUnstaking, setReadyForUnstaking] = useState<PublicKey[]>([]);
+  const [frktStakingAmount, setFrktStakingAmount] = useState<BN>(new BN(0));
+  const [apr, setApr] = useState<BN>(new BN(0));
+  const [
+    userStakeAccountsAvailableToUnstake,
+    setUserStakeAccountsAvailableToUnstake,
+  ] = useState<PublicKey[]>([]);
   const [userStakeAccountsReadyToHarvest, setUserStakeAccountsReadyToHarvest] =
     useState<PublicKey[]>([]);
-  const [readyForUnstakingAmount, setReadyForUnstakingAmount] = useState<BN>(
-    new BN(0),
-  );
-  const [reusableWallets, setReusableWallets] = useState<PublicKey[]>([]);
-  const [harvest, setHarvest] = useState<BN>(new BN(0));
+  const [frktToUnstakeAmount, setFrktToUnstakeAmount] = useState<BN>(new BN(0));
+  const [reusableUserStakeAccounts, setReusableUserStakeAccounts] = useState<
+    PublicKey[]
+  >([]);
+  const [harvestAmount, setHarvestAmount] = useState<BN>(new BN(0));
   const { balance, setBalance } = useFrktBalance();
 
   const stakingInfoToState = () =>
-    getStackedInfo(wallet, connection).then(
+    getFrktStakeInfo(wallet, connection).then(
       ({
         userStakeAccountsAvailableToUnstake,
         userStakeAccountsReadyToHarvest,
@@ -306,29 +315,33 @@ export const StakingFrktProvider = ({
         harvestAmount,
       }) => {
         setBalance(balanceTokens);
-        setStaked(frktStakingAmount);
-        setReadyForUnstakingAmount(frktToUnstakeAmount);
-        setReadyForUnstaking(userStakeAccountsAvailableToUnstake);
+        setFrktStakingAmount(frktStakingAmount);
+        setFrktToUnstakeAmount(frktToUnstakeAmount);
+        setUserStakeAccountsAvailableToUnstake(
+          userStakeAccountsAvailableToUnstake,
+        );
         setApr(APR);
-        setReusableWallets(reusableUserStakeAccounts);
-        setHarvest(harvestAmount);
+        setReusableUserStakeAccounts(reusableUserStakeAccounts);
+        setHarvestAmount(harvestAmount);
         setUserStakeAccountsReadyToHarvest(userStakeAccountsReadyToHarvest);
       },
     );
 
-  const afterUnstakeFrakts = () => {
-    setReadyForUnstakingAmount(new BN(0));
-    setStaked(new BN(0));
+  const afterUnstake = () => {
+    setFrktToUnstakeAmount(new BN(0));
+    setFrktStakingAmount(new BN(0));
   };
 
   const afterStakeFrakts = () => {
-    if (reusableWallets.length) {
-      setReusableWallets(reusableWallets.splice(1, reusableWallets.length));
+    if (reusableUserStakeAccounts.length) {
+      setReusableUserStakeAccounts(
+        reusableUserStakeAccounts.slice(1, reusableUserStakeAccounts.length),
+      );
     }
   };
 
-  const afterHarvestFrakts = () => {
-    setHarvest(new BN(0));
+  const afterHarvest = () => {
+    setHarvestAmount(new BN(0));
   };
 
   useEffect(() => {
@@ -339,30 +352,30 @@ export const StakingFrktProvider = ({
   return (
     <StakingFrktContext.Provider
       value={{
-        apr,
-        staked,
-        harvest,
+        APR: apr,
+        frktStakingAmount,
+        harvestAmount,
         refreshStakingInfo: stakingInfoToState,
-        harvestFrakts: harvestFrakts(
+        harvestFrkt: harvestFrkt(
           wallet,
           connection,
           userStakeAccountsReadyToHarvest,
-          afterHarvestFrakts,
+          afterHarvest,
         ),
-        unstakeFrakts: unstakeFrakts(
+        unstakeFrkt: unstakeFrkt(
           wallet,
           connection,
-          readyForUnstaking,
-          afterUnstakeFrakts,
+          userStakeAccountsAvailableToUnstake,
+          afterUnstake,
         ),
-        stakeFrakts: stakeFrakts(
+        stakeFrkt: stakeFrkt(
           wallet,
           connection,
-          reusableWallets[0],
+          reusableUserStakeAccounts[0],
           afterStakeFrakts,
         ),
         balance,
-        readyForUnstakingAmount,
+        frktToUnstakeAmount,
       }}
     >
       {children}

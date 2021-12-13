@@ -18,7 +18,7 @@ interface StakingFormProps {
 export const StakingForm = ({ className }: StakingFormProps): JSX.Element => {
   usePrivatePage();
   const [amountForStaking, setAmountForStaking] = useState<string>('');
-  const { stakeFrakts, balance } = useStakingFrkt();
+  const { stakeFrkt, balance } = useStakingFrkt();
   const [err, setErr] = useState<null | string>(null);
   const [loading, setLoading] = useState(false);
 
@@ -32,7 +32,7 @@ export const StakingForm = ({ className }: StakingFormProps): JSX.Element => {
   const onSave = () => {
     setLoading(true);
     setAmountForStaking('');
-    stakeFrakts(floatStringToBn(amountForStaking)).finally(() =>
+    stakeFrkt(floatStringToBn(amountForStaking)).finally(() =>
       setLoading(false),
     );
   };

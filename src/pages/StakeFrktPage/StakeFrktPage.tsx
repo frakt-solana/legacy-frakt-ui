@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Table from '../../components/Table';
 import Button from '../../components/Button/Button';
@@ -10,16 +10,18 @@ import { decimalBNToString, frktBNToString } from '../../utils';
 import BN from 'bn.js';
 import StakingForm from './StakingForm';
 
+const MIN_HARVEST_THRESHOLD = new BN(1e6); //? 0.01
+
 const StakeFrktPage = (): JSX.Element => {
   usePrivatePage();
   const {
-    apr,
-    staked,
-    readyForUnstakingAmount,
-    unstakeFrakts,
+    APR,
+    frktStakingAmount,
+    frktToUnstakeAmount,
+    unstakeFrkt,
     refreshStakingInfo,
-    harvest,
-    harvestFrakts,
+    harvestAmount,
+    harvestFrkt,
   } = useStakingFrkt();
   const { isPolling, startPolling, stopPolling } = usePolling(
     refreshStakingInfo,
@@ -31,6 +33,7 @@ const StakeFrktPage = (): JSX.Element => {
     return stopPolling;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <AppLayout headerText="Staking FRKT" mainClassName={styles.appMain}>
       <Helmet>
@@ -43,20 +46,22 @@ const StakeFrktPage = (): JSX.Element => {
             <Table
               size="lg"
               data={[
-                ['APR', apr ? `${decimalBNToString(apr, 2, 2)}%` : '0%'],
+                ['APR', `${decimalBNToString(APR, 2, 2)}%`],
                 [
                   {
                     text: 'FRKT to harvest',
                     tooltipText:
                       'Amount of FRKT available to withdraw. Withdrawing is available from 0.01 FRKT.',
                   },
-                  harvest ? frktBNToString(harvest) : '0',
+                  harvestAmount.cmp(new BN(0)) === 1
+                    ? frktBNToString(harvestAmount)
+                    : '0',
                 ],
               ]}
               className={styles.stakingPage__infoTable}
             />
-            {harvest.toString() !== '0' && (
-              <Button onClick={harvestFrakts} size="md">
+            {harvestAmount.cmp(MIN_HARVEST_THRESHOLD) === 1 && (
+              <Button onClick={harvestFrkt} size="md">
                 Harvest
               </Button>
             )}
@@ -65,23 +70,16 @@ const StakeFrktPage = (): JSX.Element => {
             <Table
               size="md"
               data={[
-                [
-                  'FRKT staked',
-                  `${staked ? frktBNToString(new BN(staked)) : '0'}`,
-                ],
+                ['FRKT staked', `${frktBNToString(new BN(frktStakingAmount))}`],
                 [
                   'Available to unstake',
-                  `${
-                    readyForUnstakingAmount
-                      ? frktBNToString(readyForUnstakingAmount)
-                      : '0'
-                  }`,
+                  `${frktBNToString(frktToUnstakeAmount)}`,
                 ],
               ]}
               className={styles.stakingPage__infoTable}
             />
-            {readyForUnstakingAmount.toString() !== '0' && (
-              <Button onClick={() => unstakeFrakts()} size="md">
+            {frktToUnstakeAmount.toString() !== '0' && (
+              <Button onClick={() => unstakeFrkt()} size="md">
                 Unstake
               </Button>
             )}
