@@ -23,7 +23,7 @@ import {
 import MarketplacesPage from './pages/MarketplacesPage';
 import WalletCollectionPage from './pages/WalletCollectionPage';
 import { FrktBalanceProvider } from './contexts/frktBalance';
-import { StakeFrktPage } from './pages/StakeFrktPage';
+// import { StakeFrktPage } from './pages/StakeFrktPage';
 import { StakingFrktProvider } from './contexts/stakingFrkt';
 
 export function Routes(): JSX.Element {
@@ -92,11 +92,11 @@ export function Routes(): JSX.Element {
                         path={URLS.STAKE}
                         component={(): JSX.Element => <StakePage />}
                       />
-                      <Route
+                      {/* <Route
                         exact
                         path={URLS.STAKING_FRKT}
                         component={(): JSX.Element => <StakeFrktPage />}
-                      />
+                      /> */}
                       <Route
                         exact
                         path={URLS.PAGE_404}

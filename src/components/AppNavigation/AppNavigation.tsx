@@ -12,7 +12,7 @@ const AppNavigation = ({ className }: AppNavigation): JSX.Element => {
     <ul className={`${styles.root} ${className || ''}`}>
       <NavigationLink to={URLS.COLLECTION} text="Collection" />
       <NavigationLink to={URLS.RARITY} text="Rarity hdbk" />
-      <NavigationLink to={URLS.STAKE} text="Staking" />
+      <NavigationLink to={URLS.STAKING_NFT} text="Staking" />
       <NavigationLink to={URLS.MARKETPLACE} text="Marketplace" />
       <li>
         <a className={styles.link} href={URLS.SANDBOX}>
