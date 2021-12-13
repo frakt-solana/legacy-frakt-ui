@@ -11,10 +11,11 @@ export const WarnBanner = (): JSX.Element => {
       >
         tokenomics proposal
       </a>{' '}
-      by DAO, we are going to implement the reducing of the NFTs staking
-      rewards and allocate funds to single token staking and liquidity incentives treasuries. In order to prepare for this transition, we STRONGLY advise to
-      harvest your funds before <b>Dec 17 Friday 4:00 PM UTC</b> to preserve your
-      accumulated $FRKT.{' '}
+      by DAO, we are going to implement the reducing of the NFTs staking rewards
+      and allocate funds to single token staking and liquidity incentives
+      treasuries. In order to prepare for this transition, we STRONGLY advise to
+      harvest your funds before <b>Dec 17 Friday 4:00 PM UTC</b> to preserve
+      your accumulated $FRKT.{' '}
       <b>
         All accumulated $FRKT that was earned but not harvested will be cut in
         half
