@@ -10,9 +10,7 @@ import { getAllUserTokens } from 'frakt-client';
 import moment from 'moment';
 import config from '../config';
 
-const PROGRAMM_PUB_KEY = new PublicKey(
-  '8Tt5SNaGdcvGt7qzoGAzHCyYR7rFiF5PyasvMeuQkMkP',
-);
+const PROGRAMM_PUB_KEY = new PublicKey(config.FRKT_STAKING_PROGRAM_PUBLIC_KEY);
 const FRKT_MINT_PUB_KEY = new PublicKey(config.FARMING_TOKEN_MINT);
 
 const inUse: string[] = [];
