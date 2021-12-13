@@ -13,6 +13,8 @@ import config from '../config';
 const PROGRAMM_PUB_KEY = new PublicKey(config.FRKT_STAKING_PROGRAM_PUBLIC_KEY);
 const FRKT_MINT_PUB_KEY = new PublicKey(config.FARMING_TOKEN_MINT);
 
+const NOW_UNIX = new Date().getTime() / 1000;
+
 const inUse: string[] = [];
 // eslint-disable-next-line
 export const getStackedInfo = async (
@@ -20,14 +22,13 @@ export const getStackedInfo = async (
   connection: Connection,
 ) => {
   const walletPubKey = wallet.publicKey.toString();
-  const finishDate = new Date().getTime() / 1000;
 
   const [balanceTokens, data] = await Promise.all([
     getAllUserTokens(wallet.publicKey, { connection }),
     contract.getAllProgramAccounts(PROGRAMM_PUB_KEY, { connection }),
   ]);
 
-  const reusableWallets = data.stakeFRKTAccounts
+  const reusableUserStakeAccounts = data.stakeFRKTAccounts
     .filter((stakeWallet) => {
       return (
         !stakeWallet.is_staked &&
@@ -37,54 +38,90 @@ export const getStackedInfo = async (
     })
     .map((el) => new PublicKey(el.stakeAccountPubkey));
 
-  let unstakingWallets = data.stakeFRKTAccounts.filter((stakeWallet) => {
-    const isStakeOwnerTheSame = walletPubKey === stakeWallet.stake_owner;
-    const isStaked = stakeWallet.is_staked;
-    return isStakeOwnerTheSame && isStaked;
-  });
+  const userActiveStakeAccounts = data.stakeFRKTAccounts.filter(
+    (stakeAccount) => {
+      const isStakeOwnerTheSame = walletPubKey === stakeAccount.stake_owner;
+      const isStaked = stakeAccount.is_staked;
+      return isStakeOwnerTheSame && isStaked;
+    },
+  );
 
-  let stakingAmount = new BN(0);
-  let harvest = new BN(0);
-  const apr = new BN(data.cumulativeAccount.apr);
-  const dateBN = new BN(
+  const APR = new BN(data.cumulativeAccount.apr);
+  const DATE_BN = new BN(
     moment.utc().valueOf() / 1000 - data.cumulativeAccount.last_time,
-  ).mul(apr);
-  const cumulativeBN = new BN(data.cumulativeAccount.cumulative);
+  ).mul(APR);
+  const CUMULATIVE_BN = new BN(data.cumulativeAccount.cumulative);
+  const MIN_HARVEST_THRESHOLD = new BN(1e6); //? 0.01
 
-  unstakingWallets.forEach((el) => {
-    const amountBN = new BN(el.amount);
-    const stakedAtCumulativeBN = new BN(el.staked_at_cumulative);
-    harvest = harvest.add(
-      cumulativeBN
-        .add(dateBN)
+  const [frktStakingAmount, harvestAmount] = userActiveStakeAccounts.reduce(
+    ([frktStakingAmount, harvest], userStakeAccount) => {
+      const amountBN = new BN(userStakeAccount.amount);
+      const stakedAtCumulativeBN = new BN(
+        userStakeAccount.staked_at_cumulative,
+      );
+
+      const frktToHarvest = CUMULATIVE_BN.add(DATE_BN)
         .sub(stakedAtCumulativeBN)
         .mul(amountBN)
         .div(new BN('100'))
-        .div(new BN('31536000')),
-    );
-    stakingAmount = stakingAmount.add(amountBN);
-  });
+        .div(new BN('31536000'));
 
-  unstakingWallets = unstakingWallets.filter((stakeWallet) => {
-    return stakeWallet.stake_end_at < finishDate;
-  });
+      //? transaction fails when stake account has less than 1e6 frkt to harvest
+      const nextFrktToHarvest =
+        frktToHarvest.cmp(MIN_HARVEST_THRESHOLD) === -1
+          ? harvest
+          : harvest.add(frktToHarvest);
 
-  let unstakingAmount = new BN(0);
-  unstakingWallets.forEach((el) => {
-    const amountBN = new BN(el.amount);
-    unstakingAmount = unstakingAmount.add(amountBN);
-  });
+      return [frktStakingAmount.add(amountBN), nextFrktToHarvest];
+    },
+    [new BN(0), new BN(0)],
+  );
+  const userStakeAccountsReadyToHarvest = userActiveStakeAccounts.filter(
+    (userStakeAccount) => {
+      const amountBN = new BN(userStakeAccount.amount);
+      const stakedAtCumulativeBN = new BN(
+        userStakeAccount.staked_at_cumulative,
+      );
+
+      const frktToHarvest = CUMULATIVE_BN.add(DATE_BN)
+        .sub(stakedAtCumulativeBN)
+        .mul(amountBN)
+        .div(new BN('100'))
+        .div(new BN('31536000'));
+
+      return frktToHarvest.cmp(MIN_HARVEST_THRESHOLD) === 1;
+    },
+  );
+
+  const userStakeAccountsAvailableToUnstake = userActiveStakeAccounts.filter(
+    (stakeWallet) => {
+      return stakeWallet.stake_end_at < NOW_UNIX;
+    },
+  );
+
+  const frktToUnstakeAmount = userStakeAccountsAvailableToUnstake.reduce(
+    (acc, userStakeAccount) => {
+      const amountBN = new BN(userStakeAccount.amount);
+
+      return acc.add(amountBN);
+    },
+    new BN(0),
+  );
 
   return {
-    unstakingWallets: unstakingWallets.map(
+    userStakeAccountsAvailableToUnstake:
+      userStakeAccountsAvailableToUnstake.map(
+        (el) => new PublicKey(el.stakeAccountPubkey),
+      ),
+    userStakeAccountsReadyToHarvest: userStakeAccountsReadyToHarvest.map(
       (el) => new PublicKey(el.stakeAccountPubkey),
     ),
-    unstakingAmount,
-    reusableWallets,
-    apr,
+    frktToUnstakeAmount,
+    reusableUserStakeAccounts,
+    APR,
     balanceTokens,
-    stakingAmount,
-    harvest,
+    frktStakingAmount,
+    harvestAmount,
   };
 };
 
@@ -247,6 +284,8 @@ export const StakingFrktProvider = ({
   const [staked, setStaked] = useState<BN>(null);
   const [apr, setApr] = useState<BN>(null);
   const [readyForUnstaking, setReadyForUnstaking] = useState<PublicKey[]>([]);
+  const [userStakeAccountsReadyToHarvest, setUserStakeAccountsReadyToHarvest] =
+    useState<PublicKey[]>([]);
   const [readyForUnstakingAmount, setReadyForUnstakingAmount] = useState<BN>(
     new BN(0),
   );
@@ -257,21 +296,23 @@ export const StakingFrktProvider = ({
   const stakingInfoToState = () =>
     getStackedInfo(wallet, connection).then(
       ({
-        apr,
-        stakingAmount,
-        unstakingAmount,
-        reusableWallets,
-        unstakingWallets,
+        userStakeAccountsAvailableToUnstake,
+        userStakeAccountsReadyToHarvest,
+        frktToUnstakeAmount,
+        reusableUserStakeAccounts,
+        APR,
         balanceTokens,
-        harvest,
+        frktStakingAmount,
+        harvestAmount,
       }) => {
         setBalance(balanceTokens);
-        setStaked(stakingAmount);
-        setReadyForUnstakingAmount(unstakingAmount);
-        setReadyForUnstaking(unstakingWallets);
-        setApr(apr);
-        setReusableWallets(reusableWallets);
-        setHarvest(harvest);
+        setStaked(frktStakingAmount);
+        setReadyForUnstakingAmount(frktToUnstakeAmount);
+        setReadyForUnstaking(userStakeAccountsAvailableToUnstake);
+        setApr(APR);
+        setReusableWallets(reusableUserStakeAccounts);
+        setHarvest(harvestAmount);
+        setUserStakeAccountsReadyToHarvest(userStakeAccountsReadyToHarvest);
       },
     );
 
@@ -305,7 +346,7 @@ export const StakingFrktProvider = ({
         harvestFrakts: harvestFrakts(
           wallet,
           connection,
-          readyForUnstaking,
+          userStakeAccountsReadyToHarvest,
           afterHarvestFrakts,
         ),
         unstakeFrakts: unstakeFrakts(
