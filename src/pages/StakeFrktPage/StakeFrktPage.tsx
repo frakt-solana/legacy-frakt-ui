@@ -17,8 +17,8 @@ const StakeFrktPage = (): JSX.Element => {
   const {
     APR,
     frktStakingAmount,
-    frktToUnstakeAmount,
-    unstakeFrkt,
+    // frktToUnstakeAmount,
+    // unstakeFrkt,
     refreshStakingInfo,
     harvestAmount,
     harvestFrkt,
@@ -71,6 +71,17 @@ const StakeFrktPage = (): JSX.Element => {
               size="md"
               data={[
                 ['FRKT staked', `${frktBNToString(new BN(frktStakingAmount))}`],
+                ['Available to unstake', '0'],
+              ]}
+              className={styles.stakingPage__infoTable}
+            />
+          </div>
+          {/* // TODO: Uncomment when contract improved */}
+          {/* <div className={styles.stakingPage__unstakeWrapper}>
+            <Table
+              size="md"
+              data={[
+                ['FRKT staked', `${frktBNToString(new BN(frktStakingAmount))}`],
                 [
                   'Available to unstake',
                   `${frktBNToString(frktToUnstakeAmount)}`,
@@ -83,7 +94,7 @@ const StakeFrktPage = (): JSX.Element => {
                 Unstake
               </Button>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </AppLayout>
