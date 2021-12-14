@@ -74,8 +74,8 @@ export const getFrktStakeInfo = async (
       const frktToHarvest = CUMULATIVE_BN.add(DATE_BN)
         .sub(stakedAtCumulativeBN)
         .mul(amountBN)
-        .div(new BN('100'))
-        .div(new BN('31536000'));
+        .div(new BN(10000))
+        .div(new BN(31536000));
 
       return [frktStakingAmount.add(amountBN), harvest.add(frktToHarvest)];
     },
@@ -91,8 +91,8 @@ export const getFrktStakeInfo = async (
       const frktToHarvest = CUMULATIVE_BN.add(DATE_BN)
         .sub(stakedAtCumulativeBN)
         .mul(amountBN)
-        .div(new BN('100'))
-        .div(new BN('31536000'));
+        .div(new BN(10000))
+        .div(new BN(31536000));
 
       return frktToHarvest.cmp(MIN_HARVEST_THRESHOLD) === 1;
     },
