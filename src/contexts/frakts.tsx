@@ -53,9 +53,11 @@ export const FraktsContext = React.createContext({
   fraktsLoading: false,
   currentUserFrakts: [],
   currentUserFraktsLoading: false,
-  upgradeFrakts: async (): Promise<boolean> => false,
-  getFraktOwner: async (): Promise<string | null> => null,
-  getWalletFrakts: async (): Promise<Frakt[]> => [],
+  upgradeFrakts: async (frakts: Frakt[]): Promise<boolean> => false,
+  getFraktOwner: async (
+    fraktMintedTokenPubkey: PublicKey,
+  ): Promise<string | null> => null,
+  getWalletFrakts: async (walletPubkey: PublicKey): Promise<Frakt[]> => [],
 });
 
 export const getFraktRarity = ({
