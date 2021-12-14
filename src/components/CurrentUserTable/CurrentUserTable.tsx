@@ -1,14 +1,14 @@
 import React from 'react';
 
 import styles from './styles.module.scss';
-import { useWallet } from '../../external/contexts/wallet';
-import { formatNumber, shortenAddress } from '../../external/utils/utils';
-import { useNativeAccount } from '../../external/contexts/accounts';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import Table from '../Table';
 import { DisconnectButton } from './DisconnectButton';
 import { useFrktBalance } from '../../contexts/frktBalance';
 import { frktBNToString } from '../../utils';
+import { useNativeAccount } from '../../hooks/useNativeAccount';
+import { formatNumber, shortenAddress } from '../../utils/solanaUtils';
 
 interface CurrentUserTableProps {
   className?: string;
@@ -17,11 +17,11 @@ interface CurrentUserTableProps {
 const CurrentUserTable = ({
   className = '',
 }: CurrentUserTableProps): JSX.Element => {
-  const { wallet, disconnect } = useWallet();
+  const { disconnect, publicKey } = useWallet();
   const { balance } = useFrktBalance();
   const { account } = useNativeAccount();
 
-  if (!wallet?.publicKey) {
+  if (!publicKey) {
     return null;
   }
 
@@ -39,7 +39,7 @@ const CurrentUserTable = ({
       <Table
         className={styles.table}
         data={[
-          ['Address', shortenAddress(`${wallet.publicKey || ''}`)],
+          ['Address', shortenAddress(`${publicKey || ''}`)],
           ['Balance', getBalanceValue()],
           ['Tokens', getFrktBalanceValue()],
         ]}

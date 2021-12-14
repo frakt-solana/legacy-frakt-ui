@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useWallet } from '../../external/contexts/wallet';
+import { useWallet } from '@solana/wallet-adapter-react';
 import AppFooter from '../AppFooter';
 import AppNavigation from '../AppNavigation';
 import ConnectButton from '../ConnectButton';
@@ -25,7 +25,7 @@ const BurgerMenu = ({ className = '' }: BurgerMenuProps): JSX.Element => {
           isOpen ? styles.opened : ''
         } ${className}`}
         onClick={(): void => setIsOpen(!isOpen)}
-      ></div>
+      />
       <div
         className={`${styles.menuOverlay} ${
           !isOpen ? styles.menuOverlayHidden : ''

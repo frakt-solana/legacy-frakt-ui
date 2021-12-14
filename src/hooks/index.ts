@@ -1,7 +1,7 @@
-import { useFrakts } from './../contexts/frakts';
+import { useFrakts } from '../contexts/frakts';
 import { useEffect, useRef, useState } from 'react';
-import { ipfsUriToGatewayUrl } from '../external/utils/ipfs';
-import { useWallet } from '../external/contexts/wallet';
+import { ipfsUriToGatewayUrl } from '../utils/solanaUtils';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { useHistory } from 'react-router-dom';
 import { URLS } from '../constants';
 
@@ -78,7 +78,7 @@ export const usePolling = (
 
   persistedIsPolling.current = isPolling;
 
-  const shouldRetry = retryCount ? true : false;
+  const shouldRetry = !!retryCount;
 
   const stopPolling = () => {
     if (poll.current) {
@@ -94,7 +94,7 @@ export const usePolling = (
   };
 
   const runPolling = () => {
-    const timeoutId = setTimeout(() => {
+    poll.current = setTimeout(() => {
       callback()
         .then(() => {
           persistedIsPolling.current ? runPolling() : stopPolling();
@@ -108,7 +108,6 @@ export const usePolling = (
           }
         });
     }, delay);
-    poll.current = timeoutId;
   };
 
   return { isPolling, startPolling, stopPolling };

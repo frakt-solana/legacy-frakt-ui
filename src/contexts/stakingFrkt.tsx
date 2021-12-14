@@ -5,10 +5,13 @@ import { getAllUserTokens, TokenView } from 'frakt-client';
 import * as contract from '@frakters/frkt-staking-library';
 import { Connection, PublicKey } from '@solana/web3.js';
 
-import { useWallet, WalletAdapter } from '../external/contexts/wallet';
-import { useConnection } from '../external/contexts/connection';
+import {
+  useWallet,
+  useConnection,
+  WalletContextState,
+} from '@solana/wallet-adapter-react';
 import { useFrktBalance } from './frktBalance';
-import { notify } from '../external/utils/notifications';
+import { notify } from '../utils/solanaUtils';
 import config from '../config';
 
 const PROGRAMM_PUBLIC_KEY = new PublicKey(
@@ -18,7 +21,7 @@ const FRKT_MINT_PUBLIC_KEY = new PublicKey(config.FARMING_TOKEN_MINT);
 
 const reusableUserStakeAccountsInUse: string[] = [];
 export const getFrktStakeInfo = async (
-  wallet: WalletAdapter,
+  wallet: WalletContextState,
   connection: Connection,
 ): Promise<{
   userStakeAccountsAvailableToUnstake: PublicKey[];
@@ -132,7 +135,7 @@ export const getFrktStakeInfo = async (
 
 const unstakeFrkt =
   (
-    wallet: WalletAdapter,
+    wallet: WalletContextState,
     connection: Connection,
     userFrktAccounts: PublicKey[],
     cb: () => any,
@@ -173,7 +176,7 @@ const unstakeFrkt =
 
 const harvestFrkt =
   (
-    wallet: WalletAdapter,
+    wallet: WalletContextState,
     connection: Connection,
     userFrktAccounts: PublicKey[],
     cb: () => any,
@@ -214,7 +217,7 @@ const harvestFrkt =
 
 const stakeFrkt =
   (
-    wallet: WalletAdapter,
+    wallet: WalletContextState,
     connection: Connection,
     reusableUserStakeAccount: PublicKey,
     cb: () => any,
@@ -285,8 +288,8 @@ export const StakingFrktProvider = ({
 }: {
   children: JSX.Element;
 }): JSX.Element => {
-  const { connected, wallet } = useWallet();
-  const connection = useConnection();
+  const wallet = useWallet();
+  const { connection } = useConnection();
   const [frktStakingAmount, setFrktStakingAmount] = useState<BN>(new BN(0));
   const [apr, setApr] = useState<BN>(new BN(0));
   const [
@@ -345,9 +348,9 @@ export const StakingFrktProvider = ({
   };
 
   useEffect(() => {
-    connected && stakingInfoToState();
+    wallet.connected && stakingInfoToState();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [connected]);
+  }, [wallet.connected]);
 
   return (
     <StakingFrktContext.Provider

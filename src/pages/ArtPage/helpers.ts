@@ -1,5 +1,5 @@
-import { Frakt } from './../../contexts/frakts';
-import { shortenAddress } from '../../external/utils/utils';
+import { Frakt } from '../../contexts/frakts';
+import { shortenAddress } from '../../utils/solanaUtils';
 import { COLOR, SHAPE } from '../../components/ArtCard/constants';
 import { getArtName } from '../../components/ArtCard/helpers';
 import { URLS } from '../../constants';
