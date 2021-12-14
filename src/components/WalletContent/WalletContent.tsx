@@ -20,7 +20,7 @@ const WalletContent = ({ className = '' }: WalletContentProps): JSX.Element => {
           size="lg"
           arrowLeft
           className={styles.backButton}
-          onClick={() => setVisible(true)}
+          onClick={() => setVisible(false)}
         >
           Back
         </ButtonArrow>
