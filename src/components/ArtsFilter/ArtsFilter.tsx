@@ -40,7 +40,7 @@ const ArtsFilter = ({
               onClick={(event): void => {
                 if (!connected) {
                   event.preventDefault();
-                  setVisible(false);
+                  setVisible(true);
                 }
               }}
             >
