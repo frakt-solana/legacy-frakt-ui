@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { FILTERS, SORTING } from '../../components/ArtsFilter';
-import { useWallet } from '../../external/contexts/wallet';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 export const useCollectionFilters = (): {
   filter: string;

@@ -7,7 +7,7 @@ import ArtsList from '../../components/ArtsList';
 import Preloader from '../../components/Preloader';
 import { useFrakts } from '../../contexts/frakts';
 import { useHistory, useParams } from 'react-router';
-import { shortenAddress } from '../../external/utils/utils';
+import { shortenAddress } from '../../utils/solanaUtils';
 import { PublicKey } from '@solana/web3.js';
 import { useCollectionFilters } from '../CollectionPage/hooks';
 import ArtsFilter from '../../components/ArtsFilter';

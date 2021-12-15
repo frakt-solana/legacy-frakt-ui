@@ -1,10 +1,9 @@
 /* eslint-disable require-await */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { PublicKey } from '@solana/web3.js';
 import * as contract from 'frakt-client';
-import { useWallet } from '../external/contexts/wallet';
-import { useConnection } from '../external/contexts/connection';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import config from '../config';
 import { useFrktBalance } from './frktBalance';
 
@@ -74,6 +73,7 @@ export const getFraktRarity = ({
 export const FraktsProvider = ({ children = null as any }): JSX.Element => {
   const [frakts, setFrakts] = useState<Frakt[]>([]);
   const [fraktsLoading, setFraktsLoading] = useState<boolean>(true);
+  const { connection } = useConnection();
 
   const [arweaveMetadata, setArweaveMetadata] = useState({});
 
@@ -81,8 +81,7 @@ export const FraktsProvider = ({ children = null as any }): JSX.Element => {
   const [currentUserFraktsLoading, setCurrentUserFraktsLoading] =
     useState<boolean>(false);
 
-  const { wallet, connected } = useWallet();
-  const connection = useConnection();
+  const { connected, publicKey, signTransaction } = useWallet();
   const { setBalance: setFrktBalance } = useFrktBalance();
 
   const proccessFrakts = (frakts: Frakt[]): Frakt[] => {
@@ -139,7 +138,7 @@ export const FraktsProvider = ({ children = null as any }): JSX.Element => {
   const getCurrentUserFrakts = async (): Promise<void> => {
     setCurrentUserFraktsLoading(true);
     try {
-      const tokens = await contract.getAllUserTokens(wallet.publicKey, {
+      const tokens = await contract.getAllUserTokens(publicKey, {
         connection,
       });
 
@@ -174,11 +173,9 @@ export const FraktsProvider = ({ children = null as any }): JSX.Element => {
         await getFrakts();
       }
 
-      const userFrakts = frakts.filter((frakt) => {
+      return frakts.filter((frakt) => {
         return tokensMint.includes(frakt?.metadata?.minted_token_pubkey);
       });
-
-      return userFrakts;
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(err);
@@ -189,14 +186,14 @@ export const FraktsProvider = ({ children = null as any }): JSX.Element => {
     try {
       void (await contract.migrateArtsToNewTokens(
         arts,
-        wallet.publicKey,
+        publicKey,
         programPubKey,
         async (txn) => {
           const { blockhash } = await connection.getRecentBlockhash();
 
           txn.recentBlockhash = blockhash;
-          txn.feePayer = wallet.publicKey;
-          const signed = await wallet.signTransaction(txn);
+          txn.feePayer = publicKey;
+          const signed = await signTransaction(txn);
           const txid = await connection.sendRawTransaction(signed.serialize());
           return void connection.confirmTransaction(txid);
         },

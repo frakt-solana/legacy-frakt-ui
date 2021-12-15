@@ -1,17 +1,22 @@
 import React from 'react';
-
-import { useWallet } from '../../external/contexts/wallet';
 import Button from '../Button';
+import { useWalletModal } from '../../contexts/walletModal';
 
 export interface ConnectButtonProps {
   className?: string;
 }
 
 const ConnectButton = ({ className }: ConnectButtonProps): JSX.Element => {
-  const { select } = useWallet();
+  const { setVisible } = useWalletModal();
 
   return (
-    <Button className={className} size="lg" onClick={select}>
+    <Button
+      className={className}
+      size="lg"
+      onClick={() => {
+        setVisible(true);
+      }}
+    >
       Connect wallet
     </Button>
   );

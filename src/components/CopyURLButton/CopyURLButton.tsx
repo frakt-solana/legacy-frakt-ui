@@ -1,5 +1,5 @@
 import React from 'react';
-import { notify } from '../../external/utils/notifications';
+import { notify } from '../../utils/solanaUtils';
 import ButtonRegular from '../Button';
 import { CopyClipboardIcon } from '../../icons';
 

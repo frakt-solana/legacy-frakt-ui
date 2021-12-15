@@ -7,9 +7,10 @@ import ConnectButton from '../ConnectButton';
 import BurgerMenu from '../BurgerMenu';
 import AppFooter from '../AppFooter';
 import CurrentUserTable from '../CurrentUserTable';
-import { useWallet } from '../../external/contexts/wallet';
+import { useWallet } from '@solana/wallet-adapter-react';
 import WalletContent from '../WalletContent';
 import { useLocation } from 'react-router-dom';
+import { useWalletModal } from '../../contexts/walletModal';
 
 interface AppLayoutProps {
   CustomHeader?: React.FunctionComponent;
@@ -26,11 +27,12 @@ const AppLayout = ({
   className,
   mainClassName,
 }: AppLayoutProps): JSX.Element => {
-  const { connected, isModalVisible, closeModal } = useWallet();
+  const { connected } = useWallet();
+  const { visible, setVisible } = useWalletModal();
   const location = useLocation();
 
   useEffect(() => {
-    isModalVisible && closeModal();
+    visible && setVisible(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
@@ -44,7 +46,7 @@ const AppLayout = ({
         <div className={styles.profileWrapper}>
           {connected ? (
             <CurrentUserTable />
-          ) : isModalVisible ? null : (
+          ) : visible ? null : (
             <ConnectButton />
           )}
         </div>
@@ -54,7 +56,7 @@ const AppLayout = ({
         </div>
       </div>
       <div className={`${styles.main} ${mainClassName || ''}`} id="mainContent">
-        {isModalVisible ? (
+        {visible ? (
           <WalletContent />
         ) : (
           <>
