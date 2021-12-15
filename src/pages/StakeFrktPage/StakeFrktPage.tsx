@@ -38,6 +38,8 @@ const StakeFrktPage = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const frktPerYear = frktStakingAmount.mul(new BN(1000)).div(APR);
+
   return (
     <AppLayout headerText="Staking FRKT" mainClassName={styles.appMain}>
       <Helmet>
@@ -51,6 +53,7 @@ const StakeFrktPage = (): JSX.Element => {
               size="lg"
               data={[
                 ['APR', `${decimalBNToString(APR, 2, 2)}%`],
+                ['FRKT/year', `${frktBNToString(frktPerYear)}`],
                 [
                   {
                     text: 'FRKT to harvest',
@@ -58,7 +61,7 @@ const StakeFrktPage = (): JSX.Element => {
                       'Amount of FRKT available to withdraw. Withdrawing is available from 0.01 FRKT.',
                   },
                   harvestAmount.cmp(new BN(0)) === 1
-                    ? frktBNToString(harvestAmount)
+                    ? frktBNToString(harvestAmount, 7)
                     : '0',
                 ],
               ]}
@@ -75,10 +78,7 @@ const StakeFrktPage = (): JSX.Element => {
               <Table
                 size="md"
                 data={[
-                  [
-                    'FRKT staked',
-                    `${frktBNToString(new BN(frktStakingAmount))}`,
-                  ],
+                  ['FRKT staked', `${frktBNToString(frktStakingAmount)}`],
                   ['Available to unstake', '0'],
                 ]}
                 className={styles.stakingPage__infoTable}
@@ -89,10 +89,7 @@ const StakeFrktPage = (): JSX.Element => {
               <Table
                 size="md"
                 data={[
-                  [
-                    'FRKT staked',
-                    `${frktBNToString(new BN(frktStakingAmount))}`,
-                  ],
+                  ['FRKT staked', `${frktBNToString(frktStakingAmount)}`],
                   [
                     'Available to unstake',
                     `${frktBNToString(frktToUnstakeAmount)}`,
