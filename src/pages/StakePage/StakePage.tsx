@@ -3,11 +3,13 @@ import { NavLink } from 'react-router-dom';
 
 import AppLayout from '../../components/AppLayout';
 import { URLS } from '../../constants';
-import { useWallet } from '../../external/contexts/wallet';
+import { useWallet } from '@solana/wallet-adapter-react';
 import styles from './styles.module.scss';
+import { useWalletModal } from '../../contexts/walletModal';
 
 export const StakePage = (): JSX.Element => {
-  const { connected, select } = useWallet();
+  const { connected } = useWallet();
+  const { setVisible } = useWalletModal();
 
   return (
     <AppLayout>
@@ -28,10 +30,10 @@ export const StakePage = (): JSX.Element => {
           </>
         ) : (
           <>
-            <p className={styles.link} onClick={select}>
+            <p className={styles.link} onClick={() => setVisible(true)}>
               Stake FRKT
             </p>
-            <p className={styles.link} onClick={select}>
+            <p className={styles.link} onClick={() => setVisible(true)}>
               Stake FRAKT
               <br />
               NFTs

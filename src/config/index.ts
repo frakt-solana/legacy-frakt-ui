@@ -3,6 +3,8 @@ import { ENV as ChainID } from '@solana/spl-token-registry';
 
 export type ENV = 'mainnet-beta' | 'testnet' | 'devnet' | 'localnet';
 
+const IS_DEVNET = process.env.REACT_APP_NETWORK === 'devnet';
+
 export const ENDPOINTS = [
   {
     name: 'mainnet-beta' as ENV,
@@ -31,6 +33,12 @@ export const ENDPOINTS = [
   },
 ];
 
+export const NETWORK = IS_DEVNET ? 'devnet' : 'mainnet-beta';
+
+export const ENDPOINT = IS_DEVNET
+  ? clusterApiUrl('devnet')
+  : 'https://ssc-dao.genesysgo.net/';
+
 const devnet = {
   PROGRAM_PUBLIC_KEY: 'D1bz9T4br5DaRfYx48aSaQsstcfuaytvvArxVjShLwca',
   ADMIN_PUBLIC_KEY: '8CoRNSG1gdWFo5hwWTyn8Vk8QtmwHnNfaLYSRyZ7pme3',
@@ -53,4 +61,4 @@ const mainnet = {
   METADATA_CACHE_URL: 'https://cache.frakt.art/meta.json',
 };
 
-export default process.env.REACT_APP_NETWORK === 'devnet' ? devnet : mainnet;
+export default IS_DEVNET ? devnet : mainnet;

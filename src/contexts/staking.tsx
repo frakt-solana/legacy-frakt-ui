@@ -5,10 +5,9 @@ import * as contract from 'frakt-client';
 import { getAllUserTokens } from 'solana-nft-metadata';
 import moment from 'moment';
 
-import { useConnection } from '../external/contexts/connection';
 import config from '../config';
-import { useWallet } from '../external/contexts/wallet';
-import { notify } from '../external/utils/notifications';
+import { useWallet, useConnection } from '@solana/wallet-adapter-react';
+import { notify } from '../utils/solanaUtils';
 import { Frakt } from './frakts';
 import { useFrktBalance } from './frktBalance';
 
@@ -68,8 +67,8 @@ export const StakingProvider = ({
   const [stakeAccounts, setStakeAccounts] = useState<contract.StakeView[]>([]);
   const [userFrakts, setUserFrakts] = useState<Frakt[]>([]);
 
-  const connection = useConnection();
-  const { wallet } = useWallet();
+  const { connection } = useConnection();
+  const wallet = useWallet();
   const { setBalance: setFrktBalance } = useFrktBalance();
 
   const fetchData = async (): Promise<void> => {

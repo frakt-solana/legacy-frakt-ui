@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { WalletProvider } from './external/contexts/wallet';
-import { ConnectionProvider } from './external/contexts/connection';
-import { AccountsProvider } from './external/contexts/accounts';
+import {
+  WalletProvider,
+  ConnectionProvider,
+} from '@solana/wallet-adapter-react';
 
 import { StakingProvider } from './contexts/staking';
 import { FraktsProvider } from './contexts/frakts';
@@ -25,13 +26,31 @@ import WalletCollectionPage from './pages/WalletCollectionPage';
 import { FrktBalanceProvider } from './contexts/frktBalance';
 import { StakeFrktPage } from './pages/StakeFrktPage';
 import { StakingFrktProvider } from './contexts/stakingFrkt';
+import { ENDPOINT, NETWORK } from './config';
+import {
+  getLedgerWallet,
+  getPhantomWallet,
+  getSolflareWallet,
+  getSolletExtensionWallet,
+  getSolletWallet,
+} from '@solana/wallet-adapter-wallets';
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import { WalletModalProvider } from './contexts/walletModal';
+
+const wallets = [
+  getPhantomWallet(),
+  getSolflareWallet(),
+  getLedgerWallet(),
+  getSolletWallet({ network: NETWORK as WalletAdapterNetwork }),
+  getSolletExtensionWallet({ network: NETWORK as WalletAdapterNetwork }),
+];
 
 export function Routes(): JSX.Element {
   return (
     <Router>
-      <ConnectionProvider>
-        <WalletProvider>
-          <AccountsProvider>
+      <WalletModalProvider>
+        <ConnectionProvider endpoint={ENDPOINT}>
+          <WalletProvider wallets={wallets} autoConnect>
             <FrktBalanceProvider>
               <FraktsProvider>
                 <StakingFrktProvider>
@@ -112,9 +131,9 @@ export function Routes(): JSX.Element {
                 </StakingFrktProvider>
               </FraktsProvider>
             </FrktBalanceProvider>
-          </AccountsProvider>
-        </WalletProvider>
-      </ConnectionProvider>
+          </WalletProvider>
+        </ConnectionProvider>
+      </WalletModalProvider>
     </Router>
   );
 }

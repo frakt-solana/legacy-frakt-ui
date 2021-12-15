@@ -7,11 +7,11 @@ import AppLayout from '../../components/AppLayout';
 import ArtsList from '../../components/ArtsList';
 import ArtsFilter from '../../components/ArtsFilter';
 import Preloader from '../../components/Preloader';
-import { useWallet } from '../../external/contexts/wallet';
+import { useWallet } from '@solana/wallet-adapter-react';
 import NoFraktsBlock from './components/NoFraktsBlock';
 import Header from './components/Header';
 import UpgradeSection from './components/UpgradeSection';
-import { notify } from '../../external/utils/notifications';
+import { notify } from '../../utils/solanaUtils';
 import { useFrakts } from '../../contexts/frakts';
 import { useCollectionFilters } from './hooks';
 

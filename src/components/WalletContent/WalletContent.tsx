@@ -1,16 +1,17 @@
 import React from 'react';
-
-import { useWallet, WALLET_PROVIDERS } from '../../external/contexts/wallet';
 import ButtonArrow from '../ButtonArrow';
 import styles from './styles.module.scss';
 import { WalletItem } from './WalletItem';
+import { useWalletModal } from '../../contexts/walletModal';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 interface WalletContentProps {
   className?: string;
 }
 
 const WalletContent = ({ className = '' }: WalletContentProps): JSX.Element => {
-  const { setProviderUrl, setAutoConnect, closeModal } = useWallet();
+  const { wallets, select } = useWallet();
+  const { setVisible } = useWalletModal();
 
   return (
     <div className={className}>
@@ -19,20 +20,19 @@ const WalletContent = ({ className = '' }: WalletContentProps): JSX.Element => {
           size="lg"
           arrowLeft
           className={styles.backButton}
-          onClick={closeModal}
+          onClick={() => setVisible(false)}
         >
           Back
         </ButtonArrow>
       </div>
       <div className={styles.title}>Select wallet</div>
       <div className={styles.itemsContainer}>
-        {WALLET_PROVIDERS.map(({ url, name, icon: iconUrl }, idx) => (
+        {wallets.map(({ name, icon: iconUrl }, idx) => (
           <WalletItem
             key={idx}
             onClick={(): void => {
-              setProviderUrl(url);
-              setAutoConnect(true);
-              closeModal();
+              select(name);
+              setVisible(false);
             }}
             imageSrc={iconUrl}
             imageAlt={name}
