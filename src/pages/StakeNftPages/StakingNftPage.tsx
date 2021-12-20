@@ -111,7 +111,7 @@ const StakingNftPage = (): JSX.Element => {
           <Preloader size="lg" className={styles.stakingPage__preloader} />
         ) : (
           <>
-            <WarnBanner />
+            {/* <WarnBanner /> */}
             <div className={styles.stakingPage__content}>
               <div className={styles.stakingPage__stakeWrapper}>
                 <Table
