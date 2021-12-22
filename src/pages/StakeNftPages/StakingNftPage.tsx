@@ -16,7 +16,7 @@ import { usePolling, usePrivatePage } from '../../hooks';
 import Preloader from '../../components/Preloader';
 import { DECIMALS_PER_FRKT } from '../../contexts/frktBalance';
 import { frktBNToString } from '../../utils';
-import { WarnBanner } from './WarnBanner';
+// import { WarnBanner } from './WarnBanner';
 
 const SECONDS_IN_YEAR = 31560000;
 const VALUES_PRECISION = 7;
