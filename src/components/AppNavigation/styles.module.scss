@@ -11,12 +11,12 @@
 
 .link {
   text-decoration: none;
-  color: $color-white;
+  color: var(--color-white);
   display: block;
   cursor: pointer;
 
   &:hover {
-    color: $color-white;
+    color: var(--color-white);
   }
 }
 
@@ -32,6 +32,6 @@
     right: 0;
     width: 4px;
     height: 36px;
-    background: $color-white;
+    background: var(--color-white);
   }
 }

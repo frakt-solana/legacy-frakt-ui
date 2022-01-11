@@ -5,7 +5,7 @@
   grid-template-columns: repeat(2, 1fr);
   height: 100%;
   gap: 1px;
-  background: $color-gray-1;
+  background: var(--color-gray-1);
 }
 
 .link {
@@ -14,18 +14,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: $color-white;
+  color: var(--color-white);
   transition: background 0.2s ease-in, color 0.2s ease-in;
   font-size: 36px;
   text-align: center;
-  background: $color-black;
+  background: var(--color-black);
   cursor: pointer;
 
   &:hover,
   &:focus,
   &:focus-visible {
-    color: $color-black;
-    background: $color-white;
+    color: var(--color-black);
+    background: var(--color-white);
   }
 }
 

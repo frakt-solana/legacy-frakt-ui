@@ -6,13 +6,13 @@
 
 .backButton {
   padding: 0 40px 40px;
-  color: $color-gray-3;
+  color: var(--color-gray-3);
 }
 
 .title {
   font-size: 36px;
   padding: 0 40px 40px;
-  border-bottom: 1px solid $color-gray-1;
+  border-bottom: 1px solid var(--color-gray-1);
 }
 
 .itemsContainer {
@@ -38,16 +38,16 @@
   justify-content: center;
   align-items: center;
   border: {
-    bottom: 1px solid $color-gray-1;
-    right: 1px solid $color-gray-1;
+    bottom: 1px solid var(--color-gray-1);
+    right: 1px solid var(--color-gray-1);
   }
   font-size: 24px;
-  color: transparentize($color-white, 0.5);
+  color: var(--color-gray-05);
   transition: color 0.2s ease-in;
   cursor: pointer;
 
   &:hover {
-    color: $color-white;
+    color: var(--color-white);
 
     img {
       filter: grayscale(0);
@@ -86,7 +86,7 @@
   }
 
   .walletItem {
-    color: $color-white;
+    color: var(--color-white);
     font-size: 18px;
     img {
       margin-bottom: 18px;

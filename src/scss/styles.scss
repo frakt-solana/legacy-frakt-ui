@@ -4,27 +4,27 @@
 @import './abstracts/variables.scss';
 
 html {
-  font-size: $font-size;
+  font: var(--font-text-3);
 }
 
 body {
-  background: $color-black;
-  color: $color-white;
-  font-family: $font-family;
+  background: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--font-family-oxanium);
 }
 
 .frakt__notification {
   svg {
-    fill: $color-gray-4;
+    fill: var(--color-gray-4);
   }
 
-  background: $color-black !important;
-  border: 1px solid $color-gray-1;
+  background: var(--color-black) !important;
+  border: 1px solid var(--color-gray-1);
   border-radius: 0 !important;
 
   :global {
     .ant-notification-notice-message {
-      color: $color-white;
+      color: var(--color-white);
     }
   }
 }

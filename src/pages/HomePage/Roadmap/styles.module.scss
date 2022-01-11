@@ -8,7 +8,7 @@
     content: '';
     position: absolute;
     width: 2px;
-    background-color: $color-gray-4;
+    background-color: var(--color-gray-4);
     top: 32px;
     bottom: 32px;
     left: 50%;
@@ -29,8 +29,8 @@
     position: absolute;
     width: 28px;
     height: 28px;
-    background-color: $color-black;
-    border: 2px solid $color-gray-4;
+    background-color: var(--color-black);
+    border: 2px solid var(--color-gray-4);
     top: 14px;
     border-radius: 50%;
     z-index: 1;
@@ -44,7 +44,7 @@
     top: 28px;
     z-index: 1;
     left: 10px;
-    background: $color-gray-4;
+    background: var(--color-gray-4);
     width: 32px;
     height: 2px;
   }
@@ -67,38 +67,38 @@
 
   &_checked {
     &::after {
-      background-color: $color-white;
-      border: 2px solid $color-white;
+      background-color: var(--color-white);
+      border: 2px solid var(--color-white);
     }
     &::before {
-      background: $color-white;
+      background: var(--color-white);
     }
 
     .item__content {
-      border: 2px solid $color-white;
+      border: 2px solid var(--color-white);
     }
 
     .item__title {
-      color: $color-white;
+      color: var(--color-white);
     }
 
     .item__content {
-      color: $color-white;
+      color: var(--color-white);
     }
   }
 
   &__content {
     padding: 20px 30px;
-    background-color: $color-black;
-    border: 2px solid $color-gray-4;
+    background-color: var(--color-black);
+    border: 2px solid var(--color-gray-4);
     position: relative;
     font-size: 16px;
     line-height: 1.5;
-    color: $color-gray-4;
+    color: var(--color-gray-4);
   }
 
   &__title {
-    color: $color-gray-4;
+    color: var(--color-gray-4);
     font-size: 38px;
     margin-bottom: 0;
     text-transform: uppercase;

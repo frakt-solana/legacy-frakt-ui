@@ -5,10 +5,10 @@
   font-weight: 400;
   text-transform: uppercase;
   text-decoration: none;
-  color: $color-white;
+  color: var(--color-white);
 
   &:hover {
-    color: $color-white;
+    color: var(--color-white);
   }
 }
 

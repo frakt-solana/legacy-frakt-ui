@@ -23,16 +23,16 @@
   justify-content: center;
   align-items: center;
   border: {
-    bottom: 1px solid $color-gray-1;
-    right: 1px solid $color-gray-1;
+    bottom: 1px solid var(--color-gray-1);
+    right: 1px solid var(--color-gray-1);
   }
   font-size: 24px;
-  color: transparentize($color-white, 0.5);
+  color: var(--color-gray-05);
   transition: color 0.2s ease-in;
   cursor: pointer;
 
   &:hover {
-    color: $color-white;
+    color: var(--color-white);
 
     img {
       filter: grayscale(0);
@@ -59,7 +59,7 @@
 
 @media screen and (max-width: 1023px) {
   .item {
-    color: $color-white;
+    color: var(--color-white);
     font-size: 18px;
     img {
       margin-bottom: 18px;

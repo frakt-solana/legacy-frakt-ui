@@ -63,16 +63,16 @@
 
 .header {
   @include row;
-  border-bottom: 1px solid $color-white;
-  color: $color-white;
+  border-bottom: 1px solid var(--color-white);
+  color: var(--color-white);
   font-weight: 600;
   font-size: 1.2em;
 }
 
 .row {
   @include row;
-  border-bottom: 1px solid $color-gray-1;
-  color: $color-gray-2;
+  border-bottom: 1px solid var(--color-gray-1);
+  color: var(--color-gray-2);
 
   &:first-child {
     padding-top: 0;
@@ -86,15 +86,15 @@
 
 .questionIcon {
   cursor: pointer;
-  fill: $color-gray-2;
+  fill: var(--color-gray-2);
 }
 
 .link {
-  color: $color-white;
+  color: var(--color-white);
   text-decoration: underline;
 
   &:hover {
-    color: $color-gray-4;
+    color: var(--color-gray-4);
     text-decoration: underline;
   }
 }

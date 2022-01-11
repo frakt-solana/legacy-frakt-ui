@@ -1,8 +1,8 @@
 @import '../../scss/abstracts/variables.scss';
 
 .root {
-  background-color: $color-white;
-  color: $color-black;
+  background-color: var(--color-white);
+  color: var(--color-black);
   transition: 0.2s ease-in;
   border: none;
   display: flex;
@@ -10,12 +10,12 @@
   cursor: pointer;
 
   &:hover {
-    background-color: $color-gray-2;
-    color: $color-black;
+    background-color: var(--color-gray-2);
+    color: var(--color-black);
   }
 
   & svg {
-    fill: $color-black;
+    fill: var(--color-black);
   }
 
   &.sm {

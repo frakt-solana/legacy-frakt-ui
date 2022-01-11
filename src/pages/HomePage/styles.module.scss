@@ -45,7 +45,7 @@
 
   &__subtitle {
     font-size: 22px;
-    color: $color-gray-2;
+    color: var(--color-gray-2);
     text-align: center;
   }
 
@@ -54,7 +54,7 @@
     &:hover,
     &:focus,
     &:visited {
-      color: $color-white;
+      color: var(--color-white);
       text-decoration: underline;
     }
   }
@@ -123,8 +123,8 @@
 }
 
 .section {
-  border-top: 1px solid $color-gray-1;
-  border-bottom: 1px solid $color-gray-1;
+  border-top: 1px solid var(--color-gray-1);
+  border-bottom: 1px solid var(--color-gray-1);
   padding: 60px 40px;
 
   &:last-child {
@@ -134,7 +134,7 @@
   }
 
   &__title {
-    color: $color-white;
+    color: var(--color-white);
     font-size: 48px;
     text-align: center;
     text-transform: uppercase;
@@ -143,7 +143,7 @@
 
   &__text {
     font-size: 22px;
-    color: $color-gray-5;
+    color: var(--color-gray-5);
     text-align: justify;
     line-height: 31px;
   }
@@ -153,7 +153,7 @@
     &:hover,
     &:focus,
     &:visited {
-      color: $color-white;
+      color: var(--color-white);
       text-decoration: underline;
     }
   }

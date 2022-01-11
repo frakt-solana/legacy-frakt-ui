@@ -15,11 +15,11 @@
 
 .header {
   padding: 40px 0 0;
-  border-bottom: 1px solid $color-gray-1;
+  border-bottom: 1px solid var(--color-gray-1);
 
   &__backButton {
     padding: 0 40px 20px;
-    color: $color-gray-3;
+    color: var(--color-gray-3);
     transition: color 0.2s ease-in;
 
     &_hidden {
@@ -75,7 +75,7 @@
   &__selectDeselectButton {
     background: none;
     display: inline-block;
-    color: $color-white;
+    color: var(--color-white);
     outline: none;
     border: none;
     font-size: 22px;
@@ -111,7 +111,7 @@
 
     &__stepCounter {
       margin-top: 8px;
-      color: $color-gray-4;
+      color: var(--color-gray-4);
     }
 
     &_select {
@@ -144,7 +144,7 @@
       position: sticky;
       top: 0;
       left: 0;
-      background: $color-black;
+      background: var(--color-black);
       z-index: 3;
     }
   }
@@ -181,10 +181,10 @@
 
 .fraktCheckbox {
   cursor: pointer;
-  border-right: 1px solid $color-gray-1;
-  border-bottom: 1px solid $color-gray-1;
+  border-right: 1px solid var(--color-gray-1);
+  border-bottom: 1px solid var(--color-gray-1);
   position: relative;
-  color: $color-white;
+  color: var(--color-white);
   user-select: none;
   -webkit-user-drag: none;
 
@@ -195,7 +195,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: transparentize($color-gray-1, 0.4);
+    background: var(---color-gray-1-04);
     z-index: 2;
     transition: opacity 0.2s ease-in;
     opacity: 0;
@@ -229,7 +229,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: transparentize($color-gray-1, 0.4);
+        background: var(---color-gray-1-04);
         z-index: 1;
         display: flex;
         justify-content: center;
@@ -248,7 +248,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: transparentize($color-gray-1, 0.4);
+        background: var(---color-gray-1-04);
         z-index: 1;
       }
     }
@@ -268,7 +268,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      background: transparentize($color-gray-1, 0.4);
+      background: var(---color-gray-1-04);
       z-index: 1;
       display: flex;
       align-items: center;
@@ -294,7 +294,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: transparentize($color-gray-1, 0.4);
+        background: var(---color-gray-1-04);
         z-index: 1;
       }
     }
@@ -313,7 +313,7 @@
     &:focus,
     &:focus-visible {
       text-decoration: underline;
-      color: $color-white;
+      color: var(--color-white);
     }
   }
 }
@@ -338,14 +338,14 @@
 
   &__title {
     font-size: 64px;
-    color: $color-white;
+    color: var(--color-white);
     margin-bottom: 12px;
     text-align: center;
   }
 
   &__text {
     font-size: 24px;
-    color: $color-gray-4;
+    color: var(--color-gray-4);
     margin-bottom: 24px;
     text-align: center;
   }
@@ -384,7 +384,7 @@
 
   &__subtitle {
     font-size: 18px;
-    color: $color-gray-4;
+    color: var(--color-gray-4);
     text-align: center;
   }
 }
@@ -428,15 +428,15 @@
     flex-grow: 1;
     display: grid;
     gap: 1px;
-    background: $color-gray-1;
+    background: var(--color-gray-1);
     grid-template-columns: 5fr 7fr;
     grid-template-rows: 1fr 1fr;
   }
 
   &__warnBanner {
     grid-column: 1 / -1;
-    background: $color-white;
-    color: $color-black;
+    background: var(--color-white);
+    color: var(--color-black);
     font-size: 16px;
     line-height: 20px;
     padding: 24px;
@@ -450,7 +450,7 @@
       &:hover,
       &:focus,
       &:focus-visible {
-        color: $color-black;
+        color: var(--color-black);
         text-decoration: underline;
       }
     }
@@ -469,7 +469,7 @@
     justify-content: center;
     align-items: flex-end;
     padding: 0 60px;
-    background: $color-black;
+    background: var(--color-black);
   }
 
   &__stakeWrapper {
