@@ -1,0 +1,21 @@
+.header {
+  width: 100%;
+  border-bottom: 1px solid var(--color-gray-03);
+}
+
+.container {
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profileWrapper {
+}
+
+.walletBtn {
+  width: 167px;
+  height: 70px;
+  font: var(--font-text-3);
+  justify-content: center;
+}

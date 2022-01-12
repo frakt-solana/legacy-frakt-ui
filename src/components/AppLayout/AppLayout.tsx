@@ -11,6 +11,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import WalletContent from '../WalletContent';
 import { useLocation } from 'react-router-dom';
 import { useWalletModal } from '../../contexts/walletModal';
+import { Header } from './Header';
 
 interface AppLayoutProps {
   CustomHeader?: React.FunctionComponent;
@@ -38,33 +39,12 @@ const AppLayout = ({
 
   return (
     <div className={`${styles.root} ${className || ''}`}>
-      <div className={styles.sideBar}>
-        <div className={styles.logoWrapper}>
-          <CompanyLogo />
-          <BurgerMenu className={styles.burgerMenu} />
-        </div>
-        <div className={styles.profileWrapper}>
-          {connected ? (
-            <CurrentUserTable />
-          ) : visible ? null : (
-            <ConnectButton />
-          )}
-        </div>
-        <div className={styles.navigationWrapper}>
-          <AppNavigation />
-          <AppFooter className={styles.footer} />
-        </div>
-      </div>
+      <Header visible={visible} connected={connected} />
       <div className={`${styles.main} ${mainClassName || ''}`} id="mainContent">
-        {visible ? (
-          <WalletContent />
-        ) : (
-          <>
-            {CustomHeader && <CustomHeader />}
-            {headerText && <div className={styles.header}>{headerText}</div>}
-            {children}
-          </>
-        )}
+        {visible && <WalletContent />}
+        {CustomHeader && <CustomHeader />}
+        {headerText && <div className={styles.header}>{headerText}</div>}
+        {children}
       </div>
     </div>
   );

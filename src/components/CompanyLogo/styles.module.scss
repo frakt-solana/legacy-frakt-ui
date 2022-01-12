@@ -1,10 +1,7 @@
 @import '../../scss/abstracts/variables.scss';
 
 .root {
-  font-size: 64px;
-  font-weight: 400;
-  text-transform: uppercase;
-  text-decoration: none;
+  font: var(--font-text-2);
   color: var(--color-white);
 
   &:hover {

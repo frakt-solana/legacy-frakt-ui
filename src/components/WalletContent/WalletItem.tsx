@@ -16,8 +16,8 @@ export const WalletItem = ({
   name,
 }: WalletItemProps): JSX.Element => {
   return (
-    <div className={styles.walletItemContainer} onClick={onClick}>
-      <div className={styles.walletItem}>
+    <div className={styles.walletItemContainer}>
+      <div className={styles.walletItem} onClick={onClick}>
         <img alt={imageAlt} src={imageSrc} />
         {name}
       </div>

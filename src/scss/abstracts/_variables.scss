@@ -1,13 +1,13 @@
 :root {
-  --color-dark: #181818;
+  --color-dark: #191919;
   --color-black: #000;
-  --color-white: #ffffff;
   --color-white: #ffffff;
 
   --color-gray-1: #1e1e1e;
   --color-gray-1-01: rgba(30, 30, 30, 0.1);
   --color-gray-1-04: rgba(30, 30, 30, 0.4);
   --color-gray-2: rgba(255, 255, 255, 0.75);
+  --color-gray-03: rgba(255, 255, 255, 0.3);
   --color-gray-05: rgba(255, 255, 255, 0.5);
   --color-gray-3: #404040;
   --color-gray-4: #929292;
@@ -15,6 +15,8 @@
   --color-gray-6: #c4c4c4;
 
   --red-color: #f83e3e;
+
+  --border-gray-1: 1px solid #4d4d4d;
 
   --font-family-oxanium: 'Oxanium', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
   Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
@@ -34,4 +36,5 @@
   --font-text-4: 400 24px var(--font-family-inter);
   --font-text-5: 700 14px var(--font-family-oxanium);
   --font-text-6: 700 12px var(--font-family-oxanium);
+  --font-text-7: 700 10px var(--font-family-oxanium);
 }

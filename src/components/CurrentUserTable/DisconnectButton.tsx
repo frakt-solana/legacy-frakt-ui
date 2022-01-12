@@ -10,12 +10,7 @@ interface DisconnectButtonInterface {
 export const DisconnectButton = ({
   onClick,
 }: DisconnectButtonInterface): JSX.Element => (
-  <ButtonArrow
-    className={styles.disconnectButton}
-    onClick={onClick}
-    size="md"
-    arrowLeft
-  >
+  <ButtonArrow className={styles.disconnectButton} onClick={onClick} arrowLeft>
     Disconnect wallet
   </ButtonArrow>
 );
