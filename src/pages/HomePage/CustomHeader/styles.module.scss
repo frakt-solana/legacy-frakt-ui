@@ -1,0 +1,25 @@
+.wrapper {
+  border-top: 1px solid var(--color-gray-03);
+  background-color: var(--color-dark);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 43px;
+}
+
+.item {
+
+  a {
+    padding-left: 16px;
+    padding-right: 16px;
+    color: var(--color-gray-03);
+    font: var(--font-text-3);
+
+    &:hover {
+      color: var(--color-white);
+    }
+  }
+}

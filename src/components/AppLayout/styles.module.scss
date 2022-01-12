@@ -6,7 +6,8 @@
 .main {
   overflow-y: scroll;
   position: relative;
-  max-height: calc(100vh - 70px);
+  max-height: 100vh;
+  padding-top: 110px;
 }
 
 .profileWrapper {

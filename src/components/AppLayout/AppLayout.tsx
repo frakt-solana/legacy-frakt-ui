@@ -32,10 +32,13 @@ const AppLayout = ({
 
   return (
     <div className={`${styles.root} ${className || ''}`}>
-      <Header visible={visible} connected={connected} />
+      <Header
+        visible={visible}
+        connected={connected}
+        CustomHeader={CustomHeader}
+      />
       <div className={`${styles.main} ${mainClassName || ''}`} id="mainContent">
         {visible && <WalletContent />}
-        {CustomHeader && <CustomHeader />}
         {headerText && <div className={styles.header}>{headerText}</div>}
         {children}
       </div>

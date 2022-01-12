@@ -10,9 +10,10 @@ import classNames from 'classnames';
 interface HeaderProps {
   connected: boolean;
   visible: boolean;
+  CustomHeader?: FC;
 }
 
-export const Header: FC<HeaderProps> = ({ connected }) => {
+export const Header: FC<HeaderProps> = ({ connected, CustomHeader = null }) => {
   return (
     <div className={styles.header}>
       <div className={`${styles.container} container`}>
@@ -36,6 +37,7 @@ export const Header: FC<HeaderProps> = ({ connected }) => {
           )}
         </div>
       </div>
+      {CustomHeader && <CustomHeader />}
     </div>
   );
 };

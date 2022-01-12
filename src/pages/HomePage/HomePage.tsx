@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { HashLink as AnchorLink } from 'react-router-hash-link';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -12,10 +12,11 @@ import styles from './styles.module.scss';
 import ScrambleText from '../../components/ScrambleText';
 import { ROADMAP_SECTION_ID } from './constants';
 import { URLS } from '../../constants';
+import { CustomHeader } from './CustomHeader';
 
 const HomePage = (): JSX.Element => {
   return (
-    <AppLayout>
+    <AppLayout CustomHeader={CustomHeader}>
       <Helmet>
         <title>FRAKT | Generative Art NFT Collection on Solana</title>
       </Helmet>
