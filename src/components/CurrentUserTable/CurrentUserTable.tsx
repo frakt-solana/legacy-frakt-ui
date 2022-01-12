@@ -4,7 +4,6 @@ import styles from './styles.module.scss';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import Table from '../Table';
-import { DisconnectButton } from './DisconnectButton';
 import { useFrktBalance } from '../../contexts/frktBalance';
 import { frktBNToString } from '../../utils';
 import { useNativeAccount } from '../../hooks/useNativeAccount';
@@ -34,8 +33,7 @@ const CurrentUserTable = ({
   };
 
   return (
-    <div className={className}>
-      <DisconnectButton onClick={disconnect} />
+    <div className={`${className} ${styles.wrapper}`}>
       <Table
         className={styles.table}
         data={[
@@ -44,6 +42,9 @@ const CurrentUserTable = ({
           ['Tokens', getFrktBalanceValue()],
         ]}
       />
+      <button onClick={disconnect} className={styles.disconnectButton}>
+        Disconnect wallet
+      </button>
     </div>
   );
 };

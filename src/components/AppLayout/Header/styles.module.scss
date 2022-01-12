@@ -11,11 +11,22 @@
 }
 
 .profileWrapper {
-}
 
-.walletBtn {
-  width: 167px;
-  height: 70px;
-  font: var(--font-text-3);
-  justify-content: center;
+  .walletBtn {
+    width: 167px;
+    height: 70px;
+    font: var(--font-text-3);
+    justify-content: center;
+  }
+
+  .walletConnectedBtn {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+
+    &:hover {
+      svg path {
+        fill: var(--color-black)
+      }
+    }
+  }
 }

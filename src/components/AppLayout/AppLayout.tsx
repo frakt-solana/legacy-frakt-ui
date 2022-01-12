@@ -1,12 +1,5 @@
 import React, { useEffect } from 'react';
 import styles from './styles.module.scss';
-
-import CompanyLogo from '../CompanyLogo';
-import AppNavigation from '../AppNavigation';
-import ConnectButton from '../ConnectButton';
-import BurgerMenu from '../BurgerMenu';
-import AppFooter from '../AppFooter';
-import CurrentUserTable from '../CurrentUserTable';
 import { useWallet } from '@solana/wallet-adapter-react';
 import WalletContent from '../WalletContent';
 import { useLocation } from 'react-router-dom';

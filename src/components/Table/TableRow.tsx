@@ -18,7 +18,7 @@ const TooltipIcon = ({ text }): JSX.Element => (
 export const TableRow = ({ name, value }): JSX.Element => (
   <div className={styles.row}>
     {typeof name === 'string' ? (
-      <p>{name}</p>
+      <p className={styles.name}>{name}</p>
     ) : (
       <p>
         {name.text} <TooltipIcon text={name.tooltipText} />

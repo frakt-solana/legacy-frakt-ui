@@ -2,16 +2,17 @@ import React, { FC } from 'react';
 import styles from './styles.module.scss';
 import CompanyLogo from '../../CompanyLogo';
 import BurgerMenu from '../../BurgerMenu';
-import CurrentUserTable from '../../CurrentUserTable';
 import ConnectButton from '../../ConnectButton';
 import AppNavigation from '../../AppNavigation';
+import ConnectedButton from '../../ConnectedButton/ConnectedButton';
+import classNames from 'classnames';
 
 interface HeaderProps {
   connected: boolean;
   visible: boolean;
 }
 
-export const Header: FC<HeaderProps> = ({ connected, visible }) => {
+export const Header: FC<HeaderProps> = ({ connected }) => {
   return (
     <div className={styles.header}>
       <div className={`${styles.container} container`}>
@@ -24,7 +25,12 @@ export const Header: FC<HeaderProps> = ({ connected, visible }) => {
         </div>
         <div className={styles.profileWrapper}>
           {connected ? (
-            <CurrentUserTable className={styles.currentUserTable} />
+            <ConnectedButton
+              className={classNames(
+                styles.walletBtn,
+                styles.walletConnectedBtn,
+              )}
+            />
           ) : (
             <ConnectButton className={styles.walletBtn} />
           )}

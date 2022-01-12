@@ -1,6 +1,4 @@
 import React from 'react';
-
-import styles from './styles.module.scss';
 import { TableRow } from './TableRow';
 import { TableHeader } from './TableHeader';
 
@@ -17,12 +15,11 @@ interface TableProps {
 
 const Table = ({
   className = '',
-  size = 'md',
   header,
   data = [],
 }: TableProps): JSX.Element => {
   return (
-    <div className={`${styles.root} ${styles[size]} ${className}`}>
+    <div className={className}>
       {header && <TableHeader name={header[0]} value={header[1]} />}
 
       {data.map(([name, value], idx) => (
