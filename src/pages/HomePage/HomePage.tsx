@@ -11,12 +11,13 @@ import styles from './styles.module.scss';
 import { ROADMAP_SECTION_ID } from './constants';
 import { URLS } from '../../constants';
 import { CustomHeader } from './CustomHeader';
+import rainbowWaveImage from './assets/images/rainbowWave.jpg';
 
 const HomePage = (): JSX.Element => {
   return (
     <AppLayout CustomHeader={CustomHeader}>
       <div className={styles.noise} />
-      <div className={styles.firstSectionBg}>
+      <section className={styles.firstSectionBg}>
         <div className="container">
           <Helmet>
             <title>FRAKT | Generative Art NFT Collection on Solana</title>
@@ -37,19 +38,45 @@ const HomePage = (): JSX.Element => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className={styles.section}>
-        <h2 className={styles.section__title}>Collection</h2>
+      <section className={styles.whatIsFrakt}>
+        <div className={`container ${styles.whatContainer}`}>
+          <div className={styles.whatImgWrapper}>
+            <img
+              src={rainbowWaveImage}
+              alt="Rainbow Wave"
+              className={styles.rainbowImg}
+            />
+          </div>
+          <div className={styles.whatInfo}>
+            <h2 className={styles.whatTitle}>What is FRAKT?</h2>
+            <p className={styles.whatSubtitle}>
+              First generative art project with a full ecosystem of its own
+            </p>
+            <p className={styles.whatText}>
+              FRAKT is dedicated to pushing the Solana DeFi and NFT ecosystems
+              forward, and beyond. We are focused on leading the way in terms of
+              innovative community-driven projects aiming at providing
+              qualitative tools and products enabling all Solana projects to
+              grow and thrive.
+            </p>
+            <p className={styles.whatText}>Here&apos;s how</p>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.collection}>
+        <h2 className={styles.collection__title}>Collection</h2>
         <ArtExamples />
-        <p className={styles.section__text}>
+        <p className={styles.collection__text}>
           Each frakt is one uniquely generated art piece. There are 5 different
           types of shapes and 4 color schemes,{' '}
           <Link to={URLS.RARITY}>each with various rarities</Link>, and a
           limited supply of 10,000 frakts out of infinite possibilities.
         </p>
         <br />
-        <p className={styles.section__text}>
+        <p className={styles.collection__text}>
           Every time a frakt is generated, a token hash is used which makes it
           unique. All Frakts are minted on{' '}
           <a
@@ -62,9 +89,9 @@ const HomePage = (): JSX.Element => {
           and are avaliable only on{' '}
           <Link to={URLS.MARKETPLACE}> marketplaces </Link>
         </p>
-      </div>
-      <div className={styles.section} id={ROADMAP_SECTION_ID}>
-        <h2 className={styles.section__title}>Ecosystem</h2>
+      </section>
+      <div className={styles.collection} id={ROADMAP_SECTION_ID}>
+        <h2 className={styles.collection__title}>Ecosystem</h2>
         <Roadmap />
       </div>
     </AppLayout>
