@@ -6,7 +6,11 @@ interface ObserverProps {
   callback: () => void;
 }
 
-export default function useIntersectionObserver(parentRef, childRef, callback) {
+export default function useIntersectionObserver(
+  parentRef,
+  childrenRefs,
+  callback,
+) {
   const observer = useRef<IntersectionObserver>();
 
   useEffect(() => {
@@ -16,16 +20,20 @@ export default function useIntersectionObserver(parentRef, childRef, callback) {
       threshold: 0,
     };
 
-    observer.current = new IntersectionObserver(([target]) => {
-      if (target.isIntersecting) {
-        callback();
-      }
+    observer.current = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          callback();
+        }
+      });
     }, options);
 
-    observer.current.observe(childRef.current);
+    observer.current.observe(childrenRefs.current);
 
     return function () {
-      observer.current.unobserve(childRef.current);
+      childrenRefs.current.forEach((child) => {
+        observer.current.unobserve(child);
+      });
     };
-  }, [callback, parentRef, childRef]);
+  }, [callback, parentRef, childrenRefs]);
 }
