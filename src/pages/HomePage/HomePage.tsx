@@ -1,5 +1,4 @@
-import React, { FC } from 'react';
-import { HashLink as AnchorLink } from 'react-router-hash-link';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
@@ -9,7 +8,6 @@ import ArtExamples from './ArtExamples';
 import Roadmap from './Roadmap';
 
 import styles from './styles.module.scss';
-import ScrambleText from '../../components/ScrambleText';
 import { ROADMAP_SECTION_ID } from './constants';
 import { URLS } from '../../constants';
 import { CustomHeader } from './CustomHeader';
@@ -17,27 +15,27 @@ import { CustomHeader } from './CustomHeader';
 const HomePage = (): JSX.Element => {
   return (
     <AppLayout CustomHeader={CustomHeader}>
-      <Helmet>
-        <title>FRAKT | Generative Art NFT Collection on Solana</title>
-      </Helmet>
-      <div className={styles.hero}>
-        <ScrambleText
-          texts={['Frakt', 'Frakt ']}
-          className={styles.hero__title}
-          letterSpeed={100}
-          pauseTime={4000}
-        />
-        <p className={styles.hero__subtitle}>
-          The first generative art NFT project
-          <br />
-          on Solana that builds{' '}
-          <AnchorLink smooth to={`#${ROADMAP_SECTION_ID}`}>
-            the ecosystem
-          </AnchorLink>{' '}
-          around
-        </p>
-        <div className={styles.hero__bg}>
-          <SVG_IMAGE />
+      <div className={styles.noise} />
+      <div className={styles.firstSectionBg}>
+        <div className="container">
+          <Helmet>
+            <title>FRAKT | Generative Art NFT Collection on Solana</title>
+          </Helmet>
+          <div className={styles.hero}>
+            <div className={styles.titleWrapper}>
+              <h1 className={styles.mainTitle}>
+                A NFT-DeFi ecosystem on Solana
+              </h1>
+              <div className={styles.subtitleWrapper}>
+                <p className={styles.subtitle}>
+                  For NFT collectors, investors and creators
+                </p>
+              </div>
+            </div>
+            <div className={styles.hero__bg}>
+              <SVG_IMAGE />
+            </div>
+          </div>
         </div>
       </div>
 
