@@ -8,14 +8,19 @@ import ConnectedButton from '../../ConnectedButton/ConnectedButton';
 import classNames from 'classnames';
 
 interface HeaderProps {
+  className?: string;
   connected: boolean;
   visible: boolean;
   CustomHeader?: FC;
 }
 
-export const Header: FC<HeaderProps> = ({ connected, CustomHeader = null }) => {
+export const Header: FC<HeaderProps> = ({
+  connected,
+  CustomHeader,
+  className,
+}) => {
   return (
-    <div className={styles.header}>
+    <div className={`${styles.header} ${className}`}>
       <div className={`${styles.container} container`}>
         <div className={styles.logoWrapper}>
           <CompanyLogo />

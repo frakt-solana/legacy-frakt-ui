@@ -24,6 +24,13 @@
 }
 
 .header {
+  &.headerHide {
+    top: -70px;
+    transition: top .3s ease-in;
+  }
+}
+
+.subHeader {
   padding: 40px;
   border-bottom: 1px solid var(--color-gray-1);
   font-size: 36px;
