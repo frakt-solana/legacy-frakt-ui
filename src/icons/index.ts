@@ -9,3 +9,4 @@ export { DownloadIcon } from './DownloadIcon';
 export { SpinnerIcon } from './SpinnerIcon';
 export { ArrowDownBtn } from './ArrowDownBtn';
 export { SolanaIcon } from './SolanaIcon';
+export { FRKTIcon } from './FRKTIcon';
