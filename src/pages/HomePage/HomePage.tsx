@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import AppLayout from '../../components/AppLayout';
@@ -12,14 +12,15 @@ import { ROADMAP_SECTION_ID } from './constants';
 import { URLS } from '../../constants';
 import { CustomHeader } from './CustomHeader';
 import rainbowWaveImage from './assets/images/rainbowWave.jpg';
-import fraktionArt from './assets/images/fraktion.art.png';
+import fraktionArtImage from './assets/images/fraktion.art.png';
+import howWorkImage from './assets/images/howWork.jpg';
 import { ArrowRightIcon, ArrowRightTop } from '../../icons';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import 'swiper/swiper.min.css';
 import 'swiper/modules/navigation/navigation.scss';
 import 'swiper/modules/pagination/pagination.scss';
 import 'swiper/modules/thumbs/thumbs';
-import SwiperCore, { Navigation, Scrollbar, Autoplay } from 'swiper';
+import SwiperCore, { Autoplay, Navigation, Scrollbar } from 'swiper';
 import {
   imageCollectionsExamples,
   imageExamples,
@@ -41,7 +42,7 @@ const sliderBreakpoints = {
 
 const HomePage = (): JSX.Element => {
   return (
-    <AppLayout CustomHeader={CustomHeader}>
+    <AppLayout CustomHeader={CustomHeader} className={styles.homeLayout}>
       <div className={styles.noise} />
       <section className={styles.firstSectionBg}>
         <div className="container">
@@ -150,7 +151,7 @@ const HomePage = (): JSX.Element => {
                 loop={true}
                 loopedSlides={20}
               >
-                {imageCollectionsExamples.map((img, index) => (
+                {imageCollectionsExamples.map((img) => (
                   <SwiperSlide key={img} className={styles.ecoSlide}>
                     <div
                       className={styles.ecoSlideImage}
@@ -220,7 +221,7 @@ const HomePage = (): JSX.Element => {
             <div className={styles.ecoContentBlock}>
               <h5 className={styles.ecoBlockTitle}>Fraktion.art</h5>
               <img
-                src={fraktionArt}
+                src={fraktionArtImage}
                 alt="Fraktion Art"
                 className={styles.fraktionArtImage}
               />
@@ -246,6 +247,34 @@ const HomePage = (): JSX.Element => {
               </ul>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className={styles.howWork}>
+        <div className={`container ${styles.howWorkContainer}`}>
+          <h2 className={styles.howWorkTitle}>
+            How does it all work together?
+          </h2>
+          <div className={styles.howWorkButton}>
+            <NavLink to={'/'} className={styles.howWorkLink}>
+              BUY & STAKE FRAKTS
+            </NavLink>
+            <NavLink to={'/'} className={styles.howWorkLink}>
+              BUY & STAKE$FRKT
+            </NavLink>
+          </div>
+          <h4 className={styles.howWorkSubtitle}>FRAKT ECOSYSTEM</h4>
+          <img
+            src={howWorkImage}
+            alt="FRAKT Ecosystem"
+            className={styles.howWorkImage}
+          />
+        </div>
+      </section>
+
+      <section className={styles.team}>
+        <div className={`container ${styles.teamContainer}`}>
+          <h2 className={styles.teamTitle}>Meet the team</h2>
         </div>
       </section>
 

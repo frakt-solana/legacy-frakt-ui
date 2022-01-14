@@ -1,3 +1,9 @@
+.homeLayout {
+  h2 {
+    color: var(--color-white);
+  }
+}
+
 .firstSectionBg {
   height: calc(100vh - 110px);
   position: relative;
@@ -356,6 +362,44 @@
   margin-bottom: 20px;
 }
 
+.howWork {
+  padding-top: 150px;
+  padding-bottom: 150px;
+}
+
+.howWorkTitle {
+  font: var(--font-title-2);
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.howWorkButton {
+  display: flex;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.howWorkLink {
+  height: 61px;
+  width: 50%;
+  border: var(--border-gray-1);
+  font: var(--font-text-3);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.howWorkSubtitle {
+  font: var(--font-text-1);
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.howWorkImage {
+  width: 100%;
+}
 
 
 
