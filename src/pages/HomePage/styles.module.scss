@@ -401,6 +401,57 @@
   width: 100%;
 }
 
+.team {
+  padding-top: 150px;
+  padding-bottom: 150px;
+}
+
+.teamTitle {
+  font: var(--font-title-2);
+  margin-bottom: 100px;
+}
+
+.teamList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.teamItem {
+  width: calc(20% - 8px);
+  border: var(--border-gray-1);
+}
+
+.teamPhotoTim {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.teamInfo {
+  padding: 20px;
+}
+
+.teamName {
+  font: var(--font-text-2);
+  margin-bottom: 10px;
+}
+
+.teamName {
+  font: var(--font-text-2);
+  margin-bottom: 10px;
+}
+
+.teamPosition {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    font: var(--font-text-3);
+  }
+}
+
 
 
 
