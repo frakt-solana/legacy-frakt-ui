@@ -189,6 +189,178 @@
   margin-top: 30px;
 }
 
+.ecosystem {
+  padding-top: 150px;
+  padding-bottom: 150px;
+}
+
+.ecoContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+}
+
+.ecoTitleWrapper {
+  width: 50%;
+  flex-shrink: 0;
+  padding-right: 15px;
+  position: sticky;
+  top: 0;
+}
+
+.ecoTitleArrow {
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.ecoTitle {
+  font: var(--font-title-2);
+}
+
+.ecoArrowIcon {
+  width: 62px;
+  margin-left: 42px;
+}
+
+.ecoSubtitle {
+  font: var(--font-text-1);
+}
+
+.ecoContentWrapper {
+  border-left: var(--border-white-1);
+  margin-left: 15px;
+}
+
+.ecoContentBlock {
+  padding-top: 60px;
+  padding-bottom: 30px;
+  padding-left: 30px;
+  border-bottom: var(--border-white-1);
+
+  &:first-of-type {
+    padding-top: 0;
+  }
+}
+
+.ecoBlockTitle {
+  font: var(--font-title-2);
+  color: var(--color-black);
+  text-shadow: var(--text-shadow-white-1);
+  margin-bottom: 30px;
+}
+
+.ecoSlider {
+  max-width: 510px;
+  width: 100%;
+  position: relative;
+  border-left: var(--border-gray-1);
+  margin-bottom: 30px;
+
+  &::after {
+    display: block;
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 32px;
+    background: linear-gradient(270deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
+}
+
+.ecoSlideImage {
+  width: 145px;
+  height: 145px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  border-top: var(--border-gray-1);
+  border-bottom: var(--border-gray-1);
+  border-right: var(--border-gray-1);
+}
+
+.ecoBlockSubtitle {
+  font: var(--font-text-2);
+  margin-bottom: 20px;
+}
+
+.ecoTable {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.ecoTableItem {
+  max-width: 33%;
+  min-width: 30%;
+
+  &.tableItem2 {
+    max-width: 50%;
+    min-width: 45%;
+  }
+}
+
+.ecoTableLabel {
+  font: var(--font-text-5);
+  color: var(--color-gray-7);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+  margin-top: auto;
+}
+
+.ecoTableValue {
+  font: var(--font-text-2);
+}
+
+.ecoSlideInfo {
+  padding: 10px;
+  border-bottom: var(--border-gray-1);
+  border-right: var(--border-gray-1);
+}
+
+.ecoSlideLabel {
+  font: var(--font-text-3);
+}
+
+.ecoSlideName {
+  font: var(--font-text-5);
+}
+
+.litepaper {
+  font: var(--font-text-3);
+  display: inline-flex;
+  align-items: center;
+  border-bottom: var(--border-white-1);
+  margin-bottom: 20px;
+  color: var(--color-white);
+}
+
+.litepaperIcon {
+  margin-left: 11px;
+}
+
+.fraktionArtImage {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.ecoBlockText {
+  font: var(--font-text-3);
+  margin-bottom: 20px;
+}
+
+
+
+
+
+
 .collection {
   border-top: 1px solid var(--color-gray-1);
   border-bottom: 1px solid var(--color-gray-1);

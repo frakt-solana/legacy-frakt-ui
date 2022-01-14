@@ -18,6 +18,14 @@ import example17 from '../../../images/examples/17.png';
 import example18 from '../../../images/examples/18.png';
 import example19 from '../../../images/examples/19.png';
 import example20 from '../../../images/examples/20.png';
+import collection1 from '../../../images/examples/collectionNations.png';
+import collection2 from '../../../images/examples/collectionMaze2.png';
+import collection3 from '../../../images/examples/collectionCingular.png';
+import collection4 from '../../../images/examples/collectionMoments.jpg';
+import collection5 from '../../../images/examples/collectionNations2.png';
+import collection6 from '../../../images/examples/collectionMaze.jpg';
+import collection7 from '../../../images/examples/collectionCingular2.png';
+import collection8 from '../../../images/examples/collectionMoments2.jpg';
 // import example21 from '../../../images/examples/21.png'
 // import example22 from '../../../images/examples/22.png'
 // import example23 from '../../../images/examples/23.png'
@@ -49,3 +57,14 @@ export const imageExamples = [
   // example23,
   // example24,
 ].sort(() => Math.random() - 0.5); //? Shuffle items in array
+
+export const imageCollectionsExamples = [
+  collection1,
+  collection2,
+  collection3,
+  collection4,
+  collection5,
+  collection6,
+  collection7,
+  collection8,
+];
