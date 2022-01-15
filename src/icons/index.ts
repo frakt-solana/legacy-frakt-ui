@@ -11,3 +11,5 @@ export { ArrowDownBtn } from './ArrowDownBtn';
 export { SolanaIcon } from './SolanaIcon';
 export { FRKTIcon } from './FRKTIcon';
 export { ArrowRightTop } from './ArrowRightTop';
+export { PlusIcon } from './PlusIcon';
+export { MinusIcon } from './MinusIcon';
