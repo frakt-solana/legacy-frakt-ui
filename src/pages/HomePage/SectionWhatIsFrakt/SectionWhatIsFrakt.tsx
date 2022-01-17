@@ -1,10 +1,14 @@
 import React, { FC } from 'react';
 import styles from './styles.module.scss';
 import rainbowWaveImage from '../assets/images/rainbowWave.jpg';
+import { WHAT_IS_FRAKT_SECTION_ID } from '../constants';
 
 export const SectionWhatIsFrakt: FC = () => {
   return (
-    <section className={`section ${styles.whatIsFrakt}`}>
+    <section
+      id={WHAT_IS_FRAKT_SECTION_ID}
+      className={`section ${styles.whatIsFrakt}`}
+    >
       <div className={`container ${styles.whatContainer}`}>
         <div className={styles.whatImgWrapper}>
           <img

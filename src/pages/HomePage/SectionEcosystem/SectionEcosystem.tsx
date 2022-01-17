@@ -9,6 +9,7 @@ import {
 import { ArrowRightTop } from '../../../icons';
 import fraktionArtImage from '../assets/images/fraktion.art.png';
 import SwiperCore, { Autoplay, Navigation, Scrollbar } from 'swiper';
+import { ECOSYSTEM_SECTION_ID } from '../constants';
 
 SwiperCore.use([Navigation, Scrollbar, Autoplay]);
 
@@ -26,7 +27,10 @@ const sliderBreakpoints = {
 
 export const SectionEcosystem: FC = () => {
   return (
-    <section className={`section ${styles.ecosystem}`}>
+    <section
+      id={ECOSYSTEM_SECTION_ID}
+      className={`section ${styles.ecosystem}`}
+    >
       <div className={`container ${styles.ecoContainer}`}>
         <div className={styles.ecoTitleWrapper}>
           <div className={styles.ecoTitleArrow}>

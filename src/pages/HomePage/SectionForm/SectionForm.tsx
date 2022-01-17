@@ -3,6 +3,7 @@ import { ArrowRightTop } from '../../../icons';
 import { Button, Form, Input } from 'antd';
 import React, { FC } from 'react';
 import 'antd/dist/antd.css';
+import { CONTACT_SECTION_ID } from '../constants';
 
 const validateMessages = {
   required: '${label} is required!',
@@ -13,7 +14,7 @@ export const SectionForm: FC = () => {
   const onFinish = (values) => values;
 
   return (
-    <section className={styles.form}>
+    <section id={CONTACT_SECTION_ID} className={styles.form}>
       <div className={`container ${styles.formContainer}`}>
         <h2 className={styles.formTitle}>
           Can&apos;t find what you&apos;re looking for?

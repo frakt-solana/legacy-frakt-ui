@@ -9,10 +9,11 @@ import teamPhotoPhil from '../assets/images/team/teamPhotoPhil.jpg';
 import teamPhotoViktor from '../assets/images/team/teamPhotoViktor.jpg';
 import teamPhotoSid from '../assets/images/team/teamPhotoSid.jpg';
 import teamPhotoRoman from '../assets/images/team/teamPhotoRoman.jpg';
+import { TEAM_SECTION_ID } from '../constants';
 
 export const SectionTeam: FC = () => {
   return (
-    <section className={`section ${styles.team}`}>
+    <section id={TEAM_SECTION_ID} className={`section ${styles.team}`}>
       <div className={`container ${styles.teamContainer}`}>
         <h2 className={styles.teamTitle}>Meet the team</h2>
         <ul className={styles.teamList}>

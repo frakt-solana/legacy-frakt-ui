@@ -2,10 +2,11 @@ import React, { FC } from 'react';
 import styles from './styles.module.scss';
 import { NavLink } from 'react-router-dom';
 import howWorkImage from '../assets/images/howWork.jpg';
+import { HOW_WORK_SECTION_ID } from '../constants';
 
 export const SectionHowWork: FC = () => {
   return (
-    <section className={`section ${styles.howWork}`}>
+    <section id={HOW_WORK_SECTION_ID} className={`section ${styles.howWork}`}>
       <div className={`container ${styles.howWorkContainer}`}>
         <h2 className={styles.howWorkTitle}>How does it all work together?</h2>
         <div className={styles.howWorkButton}>

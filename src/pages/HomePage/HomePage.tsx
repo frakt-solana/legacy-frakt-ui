@@ -15,6 +15,7 @@ import { SectionHowWork } from './SectionHowWork';
 import { SectionEcosystem } from './SectionEcosystem';
 import { SectionWhatIsFrakt } from './SectionWhatIsFrakt';
 import { SectionHeader } from './SectionHeader';
+import { SectionFooter } from './SectionFooter';
 
 const HomePage = (): JSX.Element => {
   return (
@@ -34,6 +35,8 @@ const HomePage = (): JSX.Element => {
       <SectionFaq />
 
       <SectionForm />
+
+      <SectionFooter />
     </AppLayout>
   );
 };

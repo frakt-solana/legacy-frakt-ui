@@ -1,27 +1,22 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import styles from './styles.module.scss';
 import { Collapse } from 'antd';
 import 'antd/dist/antd.css';
 import { MinusIcon, PlusIcon } from '../../../icons';
+import { FAQ_SECTION_ID } from '../constants';
 
 const { Panel } = Collapse;
 
 export const SectionFaq: FC = () => {
-  const [isCollapsePanelOpened, setIsCollapsePanelOpened] =
-    useState<boolean>(false);
-  const onCollapsePanelClick = () =>
-    setIsCollapsePanelOpened(!isCollapsePanelOpened);
-
   return (
-    <section className={`section ${styles.faq}`}>
+    <section id={FAQ_SECTION_ID} className={`section ${styles.faq}`}>
       <div className={`container ${styles.faqContainer}`}>
         <h2 className={styles.faqTitle}>FAQ</h2>
         <Collapse
           bordered={false}
           className={styles.faqList}
-          onChange={onCollapsePanelClick}
-          expandIcon={() =>
-            isCollapsePanelOpened ? <MinusIcon /> : <PlusIcon />
+          expandIcon={({ isActive }) =>
+            isActive ? <MinusIcon /> : <PlusIcon />
           }
         >
           <Panel key="1" header="What is FRAKT?" className={styles.faqItem}>
