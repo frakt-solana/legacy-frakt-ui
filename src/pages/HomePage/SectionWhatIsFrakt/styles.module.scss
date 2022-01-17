@@ -1,0 +1,58 @@
+.whatContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.whatImgWrapper {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-width: 620px;
+  z-index: -1;
+
+  &::before,
+  &::after {
+    display: block;
+    position: absolute;
+    content: '';
+    width: 35%;
+    height: 100%;
+    top: 0;
+  }
+
+  &::before {
+    left: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+  }
+
+  &::after {
+    right: 0;
+    background: linear-gradient(270deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+  }
+}
+
+.rainbowImg {
+  width: 100%;
+}
+
+.whatInfo {
+  margin-left: auto;
+  max-width: 50%;
+  padding-left: 17px;
+  position: relative;
+}
+
+.whatTitle {
+  font: var(--font-title-2);
+  margin-bottom: 50px;
+}
+
+.whatSubtitle {
+  font: var(--font-text-1);
+}
+
+.whatText {
+  font: var(--font-text-2);
+  margin-top: 30px;
+}

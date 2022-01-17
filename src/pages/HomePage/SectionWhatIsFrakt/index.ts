@@ -1,0 +1,1 @@
+export { SectionWhatIsFrakt } from './SectionWhatIsFrakt';

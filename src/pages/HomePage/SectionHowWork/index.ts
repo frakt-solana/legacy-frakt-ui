@@ -1,0 +1,1 @@
+export { SectionHowWork } from './SectionHowWork';

@@ -1,0 +1,1 @@
+export { SectionTeam } from './Section';

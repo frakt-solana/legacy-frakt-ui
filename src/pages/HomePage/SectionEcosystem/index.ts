@@ -1,0 +1,1 @@
+export { SectionEcosystem } from './SectionEcosystem';

@@ -1,0 +1,1 @@
+export { SectionFaq } from './SectionFaq';
