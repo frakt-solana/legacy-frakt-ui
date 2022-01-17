@@ -39,7 +39,13 @@ import {
   imageCollectionsExamples,
   imageExamples,
 } from './ArtExamples/imageExamples';
-import { Collapse } from 'antd';
+import { Collapse, Form, Input, InputNumber, Button } from 'antd';
+import 'antd/dist/antd.css';
+
+const validateMessages = {
+  required: '${label} is required!',
+  types: { email: '${label} is not a valid email!' },
+};
 
 const { Panel } = Collapse;
 
@@ -62,6 +68,9 @@ const HomePage = (): JSX.Element => {
     useState<boolean>(false);
   const onCollapsePanelClick = () =>
     setIsCollapsePanelOpened(!isCollapsePanelOpened);
+  const onFinish = (values) => {
+    console.log(values);
+  };
 
   return (
     <AppLayout CustomHeader={CustomHeader} className={styles.homeLayout}>
@@ -89,7 +98,7 @@ const HomePage = (): JSX.Element => {
         </div>
       </section>
 
-      <section className={styles.whatIsFrakt}>
+      <section className={`section ${styles.whatIsFrakt}`}>
         <div className={`container ${styles.whatContainer}`}>
           <div className={styles.whatImgWrapper}>
             <img
@@ -115,7 +124,7 @@ const HomePage = (): JSX.Element => {
         </div>
       </section>
 
-      <section className={styles.ecosystem}>
+      <section className={`section ${styles.ecosystem}`}>
         <div className={`container ${styles.ecoContainer}`}>
           <div className={styles.ecoTitleWrapper}>
             <div className={styles.ecoTitleArrow}>
@@ -272,7 +281,7 @@ const HomePage = (): JSX.Element => {
         </div>
       </section>
 
-      <section className={styles.howWork}>
+      <section className={`section ${styles.howWork}`}>
         <div className={`container ${styles.howWorkContainer}`}>
           <h2 className={styles.howWorkTitle}>
             How does it all work together?
@@ -294,7 +303,7 @@ const HomePage = (): JSX.Element => {
         </div>
       </section>
 
-      <section className={styles.team}>
+      <section className={`section ${styles.team}`}>
         <div className={`container ${styles.teamContainer}`}>
           <h2 className={styles.teamTitle}>Meet the team</h2>
           <ul className={styles.teamList}>
@@ -406,7 +415,7 @@ const HomePage = (): JSX.Element => {
         </div>
       </section>
 
-      <section className={styles.faq}>
+      <section className={`section ${styles.faq}`}>
         <div className={`container ${styles.faqContainer}`}>
           <h2 className={styles.faqTitle}>FAQ</h2>
           <Collapse
@@ -546,6 +555,52 @@ const HomePage = (): JSX.Element => {
               <a href="https://frakt.art/stake">https://frakt.art/stake</a>
             </Panel>
           </Collapse>
+        </div>
+      </section>
+
+      <section className={styles.form}>
+        <div className={`container ${styles.formContainer}`}>
+          <h2 className={styles.formTitle}>
+            Can&apos;t find what you&apos;re looking for?
+          </h2>
+          <div className={styles.formWrapper}>
+            <p className={styles.formText}>
+              Write to us by mail
+              <a href="mailto:hello@frakt.art">
+                hello@frakt.art
+                <ArrowRightTop className={styles.formArrowIcon} />
+              </a>
+              or leave message in the form below
+            </p>
+            <Form
+              name="nest-messages"
+              onFinish={onFinish}
+              validateMessages={validateMessages}
+            >
+              <Form.Item
+                name={['user', 'message']}
+                rules={[{ required: true }]}
+              >
+                <Input placeholder="Your message" />
+              </Form.Item>
+
+              <div className={styles.formItemsWrapper}>
+                <Form.Item
+                  name={['user', 'email']}
+                  rules={[{ type: 'email', required: true }]}
+                >
+                  <Input placeholder="Your Email address" />
+                </Form.Item>
+
+                <Form.Item>
+                  <Button type="primary" htmlType="submit">
+                    {' '}
+                    Send{' '}
+                  </Button>
+                </Form.Item>
+              </div>
+            </Form>
+          </div>
         </div>
       </section>
 
