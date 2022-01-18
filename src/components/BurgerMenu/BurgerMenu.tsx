@@ -27,7 +27,7 @@ const BurgerMenu = ({ className = '' }: BurgerMenuProps): JSX.Element => {
           !isOpen ? styles.menuOverlayHidden : ''
         }`}
       >
-        <div onClick={closeMenu} className={`${styles.menuOverlay}`}></div>
+        <div onClick={closeMenu} className={`${styles.menuOverlay}`} />
         <div className={styles.menuContent} onClick={closeMenu}>
           <AppNavigation className={styles.navigation} />
         </div>

@@ -43,4 +43,14 @@
   --font-text-5: 700 14px var(--font-family-oxanium);
   --font-text-6: 700 12px var(--font-family-oxanium);
   --font-text-7: 700 10px var(--font-family-oxanium);
+
+
+
+  @media screen and (max-width: 1023px) {
+    --font-title-1: 900 90px var(--font-family-inter);
+  }
+
+  @media screen and (max-width: 900px) {
+    --font-title-1: 900 70px var(--font-family-inter);
+  }
 }

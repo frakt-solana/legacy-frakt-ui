@@ -8,6 +8,10 @@
   position: relative;
   max-height: 100vh;
   padding-top: 110px;
+
+  @media screen and (max-width: 500px) {
+    padding-top: 76px;
+  }
 }
 
 .profileWrapper {

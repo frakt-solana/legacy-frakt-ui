@@ -15,6 +15,14 @@
   &.menuOverlayHidden {
     display: none;
   }
+
+  @media screen and (max-width: 550px) {
+    top: 110px;
+  }
+
+  @media screen and (max-width: 500px) {
+    top: 76px;
+  }
 }
 
 .burgerIcon {
