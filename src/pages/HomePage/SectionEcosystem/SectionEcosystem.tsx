@@ -8,20 +8,41 @@ import {
 } from '../ArtExamples/imageExamples';
 import { ArrowRightTop } from '../../../icons';
 import fraktionArtImage from '../assets/images/fraktion.art.png';
-import SwiperCore, { Autoplay, Navigation, Scrollbar } from 'swiper';
+import SwiperCore, { Autoplay } from 'swiper';
 import { ECOSYSTEM_SECTION_ID } from '../constants';
 
-SwiperCore.use([Navigation, Scrollbar, Autoplay]);
+SwiperCore.use([Autoplay]);
 
 const sliderBreakpoints = {
   250: {
-    slidesPerView: 3.51,
+    slidesPerView: 2,
     spaceBetween: 0,
     autoplay: {
-      delay: 3000,
+      delay: 300,
       disableOnInteraction: false,
     },
-    speed: 300,
+    speed: 3000,
+  },
+  350: {
+    slidesPerView: 2.3,
+  },
+  400: {
+    slidesPerView: 2.7,
+  },
+  450: {
+    slidesPerView: 3.2,
+  },
+  500: {
+    slidesPerView: 3.51,
+  },
+  600: {
+    slidesPerView: 4.2,
+  },
+  700: {
+    slidesPerView: 4.8,
+  },
+  1023: {
+    slidesPerView: 3.51,
   },
 };
 
@@ -56,6 +77,7 @@ export const SectionEcosystem: FC<{
               className={styles.ecoSlider}
               loop={true}
               loopedSlides={20}
+              autoplay={true}
             >
               {imageExamples.map((img) => (
                 <SwiperSlide key={img} className={styles.ecoSlide}>
@@ -92,7 +114,8 @@ export const SectionEcosystem: FC<{
               breakpoints={sliderBreakpoints}
               className={styles.ecoSlider}
               loop={true}
-              loopedSlides={20}
+              autoplay={true}
+              loopedSlides={16}
             >
               {imageCollectionsExamples.map((img) => (
                 <SwiperSlide key={img} className={styles.ecoSlide}>
