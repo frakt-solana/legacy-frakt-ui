@@ -7,9 +7,14 @@ import { FAQ_SECTION_ID } from '../constants';
 
 const { Panel } = Collapse;
 
-export const SectionFaq: FC = () => {
+export const SectionFaq: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
+  navRef,
+}) => {
   return (
-    <section id={FAQ_SECTION_ID} className={`section ${styles.faq}`}>
+    <section className={`section ${styles.faq}`}>
+      <p className="itemForIntersectionMenu" id={FAQ_SECTION_ID} ref={navRef}>
+        FAQ
+      </p>
       <div className={`container ${styles.faqContainer}`}>
         <h2 className={styles.faqTitle}>FAQ</h2>
         <Collapse

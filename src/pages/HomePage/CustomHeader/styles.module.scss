@@ -22,4 +22,8 @@
       color: var(--color-white);
     }
   }
+
+  &.active a {
+    color: var(--color-white);
+  }
 }

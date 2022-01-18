@@ -11,9 +11,14 @@ import teamPhotoSid from '../assets/images/team/teamPhotoSid.jpg';
 import teamPhotoRoman from '../assets/images/team/teamPhotoRoman.jpg';
 import { TEAM_SECTION_ID } from '../constants';
 
-export const SectionTeam: FC = () => {
+export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
+  navRef,
+}) => {
   return (
     <section id={TEAM_SECTION_ID} className={`section ${styles.team}`}>
+      <p className="itemForIntersectionMenu" id={TEAM_SECTION_ID} ref={navRef}>
+        Team
+      </p>
       <div className={`container ${styles.teamContainer}`}>
         <h2 className={styles.teamTitle}>Meet the team</h2>
         <ul className={styles.teamList}>

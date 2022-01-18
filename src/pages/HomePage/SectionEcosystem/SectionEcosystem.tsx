@@ -25,12 +25,18 @@ const sliderBreakpoints = {
   },
 };
 
-export const SectionEcosystem: FC = () => {
+export const SectionEcosystem: FC<{
+  navRef: { current: HTMLParagraphElement };
+}> = ({ navRef }) => {
   return (
-    <section
-      id={ECOSYSTEM_SECTION_ID}
-      className={`section ${styles.ecosystem}`}
-    >
+    <section className={`section ${styles.ecosystem}`}>
+      <p
+        className="itemForIntersectionMenu"
+        id={ECOSYSTEM_SECTION_ID}
+        ref={navRef}
+      >
+        Ecosystem
+      </p>
       <div className={`container ${styles.ecoContainer}`}>
         <div className={styles.ecoTitleWrapper}>
           <div className={styles.ecoTitleArrow}>

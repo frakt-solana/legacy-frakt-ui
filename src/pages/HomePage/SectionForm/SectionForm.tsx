@@ -10,11 +10,20 @@ const validateMessages = {
   types: { email: '${label} is not a valid email!' },
 };
 
-export const SectionForm: FC = () => {
+export const SectionForm: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
+  navRef,
+}) => {
   const onFinish = (values) => values;
 
   return (
-    <section id={CONTACT_SECTION_ID} className={styles.form}>
+    <section className={styles.form}>
+      <p
+        className="itemForIntersectionMenu"
+        id={CONTACT_SECTION_ID}
+        ref={navRef}
+      >
+        Contact us
+      </p>
       <div className={`container ${styles.formContainer}`}>
         <h2 className={styles.formTitle}>
           Can&apos;t find what you&apos;re looking for?

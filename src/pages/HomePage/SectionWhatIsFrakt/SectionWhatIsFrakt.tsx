@@ -3,12 +3,18 @@ import styles from './styles.module.scss';
 import rainbowWaveImage from '../assets/images/rainbowWave.jpg';
 import { WHAT_IS_FRAKT_SECTION_ID } from '../constants';
 
-export const SectionWhatIsFrakt: FC = () => {
+export const SectionWhatIsFrakt: FC<{
+  navRef: { current: HTMLParagraphElement };
+}> = ({ navRef }) => {
   return (
-    <section
-      id={WHAT_IS_FRAKT_SECTION_ID}
-      className={`section ${styles.whatIsFrakt}`}
-    >
+    <section className={`section ${styles.whatIsFrakt}`}>
+      <p
+        className="itemForIntersectionMenu"
+        id={WHAT_IS_FRAKT_SECTION_ID}
+        ref={navRef}
+      >
+        What is FRAKT?
+      </p>
       <div className={`container ${styles.whatContainer}`}>
         <div className={styles.whatImgWrapper}>
           <img

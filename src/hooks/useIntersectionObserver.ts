@@ -1,38 +1,39 @@
 import { useEffect, useRef } from 'react';
 
-interface ObserverProps {
-  parentRef: HTMLElement;
-  childRef: HTMLElement;
-  callback: () => void;
+interface ChildrenRefs {
+  sectionRef: { current: HTMLParagraphElement };
 }
 
 export default function useIntersectionObserver(
-  parentRef,
-  childrenRefs,
-  callback,
-) {
+  parentRef?: { current: HTMLParagraphElement },
+  childrenRefs?: ChildrenRefs[],
+  callback?: (currentItemId: string) => void,
+): void {
   const observer = useRef<IntersectionObserver>();
 
   useEffect(() => {
     const options = {
-      root: parentRef.cuechange,
+      root: parentRef?.current || null,
       rootMargin: '0px',
-      threshold: 0,
+      threshold: 1,
     };
 
     observer.current = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          callback();
+          callback && callback(entry.target.textContent);
         }
       });
     }, options);
 
-    observer.current.observe(childrenRefs.current);
+    childrenRefs?.forEach((child) => {
+      child.sectionRef && observer.current.observe(child.sectionRef.current);
+    });
 
     return function () {
-      childrenRefs.current.forEach((child) => {
-        observer.current.unobserve(child);
+      childrenRefs.forEach((child) => {
+        child.sectionRef &&
+          observer.current.unobserve(child.sectionRef.current);
       });
     };
   }, [callback, parentRef, childrenRefs]);

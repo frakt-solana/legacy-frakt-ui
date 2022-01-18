@@ -1,43 +1,36 @@
 import React, { FC } from 'react';
 import styles from './styles.module.scss';
 import { HashLink as AnchorLink } from 'react-router-hash-link';
-import {
-  CONTACT_SECTION_ID,
-  ECOSYSTEM_SECTION_ID,
-  FAQ_SECTION_ID,
-  TEAM_SECTION_ID,
-  WHAT_IS_FRAKT_SECTION_ID,
-} from '../constants';
+import classNames from 'classnames';
 
-export const CustomHeader: FC = () => {
+interface CustomHeaderProps {
+  activeLink: string;
+  menuLinksData: { sectionRef: { current: HTMLParagraphElement } }[];
+}
+
+export const CustomHeader: FC<CustomHeaderProps> = ({
+  menuLinksData,
+  activeLink,
+}) => {
   return (
     <div className={styles.wrapper}>
       <ul className={`${styles.container} container`}>
-        <li className={styles.item}>
-          <AnchorLink smooth to={`#${WHAT_IS_FRAKT_SECTION_ID}`}>
-            What is FRAKT?
-          </AnchorLink>
-        </li>
-        <li className={styles.item}>
-          <AnchorLink smooth to={`#${ECOSYSTEM_SECTION_ID}`}>
-            Ecosystem
-          </AnchorLink>
-        </li>
-        <li className={styles.item}>
-          <AnchorLink smooth to={`#${TEAM_SECTION_ID}`}>
-            Team
-          </AnchorLink>
-        </li>
-        <li className={styles.item}>
-          <AnchorLink smooth to={`#${FAQ_SECTION_ID}`}>
-            FAQ
-          </AnchorLink>
-        </li>
-        <li className={styles.item}>
-          <AnchorLink smooth to={`#${CONTACT_SECTION_ID}`}>
-            Contact us
-          </AnchorLink>
-        </li>
+        {menuLinksData.map(
+          (linkData) =>
+            linkData.sectionRef?.current && (
+              <li
+                key={linkData.sectionRef.current.id}
+                className={classNames(styles.item, {
+                  [styles.active]:
+                    activeLink === linkData.sectionRef.current.innerText,
+                })}
+              >
+                <AnchorLink smooth to={`#${linkData.sectionRef.current.id}`}>
+                  {linkData.sectionRef.current.innerText}
+                </AnchorLink>
+              </li>
+            ),
+        )}
       </ul>
     </div>
   );
