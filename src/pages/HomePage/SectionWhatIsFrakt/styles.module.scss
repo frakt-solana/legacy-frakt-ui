@@ -2,13 +2,17 @@
   display: flex;
   align-items: center;
   position: relative;
+
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+  }
 }
 
 .whatImgWrapper {
   position: absolute;
   left: 0;
   bottom: 0;
-  max-width: 620px;
+  max-width: 55%;
   z-index: -1;
 
   &::before,
@@ -30,6 +34,21 @@
     right: 0;
     background: linear-gradient(270deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
   }
+
+  @media screen and (max-width: 767px) {
+    position: static;
+    max-width: none;
+    order: 1;
+    margin-top: -200px;
+  }
+
+  @media screen and (max-width: 550px) {
+    margin-top: -100px;
+  }
+
+  @media screen and (max-width: 400px) {
+    margin-top: -50px;
+  }
 }
 
 .rainbowImg {
@@ -41,6 +60,10 @@
   max-width: 50%;
   padding-left: 17px;
   position: relative;
+
+  @media screen and (max-width: 767px) {
+    max-width: none;
+  }
 }
 
 .whatTitle {
@@ -55,4 +78,8 @@
 .whatText {
   font: var(--font-text-2);
   margin-top: 30px;
+
+  @media screen and (max-width: 500px) {
+    margin-top: 20px;
+  }
 }

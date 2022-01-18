@@ -32,6 +32,16 @@ body {
 .section {
   padding-top: 150px;
   padding-bottom: 150px;
+
+  @media screen and (max-width: 1023px) {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding-top: 75px;
+    padding-bottom: 75px;
+  }
 }
 
 .container {

@@ -52,5 +52,20 @@
 
   @media screen and (max-width: 900px) {
     --font-title-1: 900 70px var(--font-family-inter);
+    --font-title-2: 600 40px var(--font-family-oxanium);
+    --font-text-1: 400 28px var(--font-family-oxanium);
+    --font-text-2: 400 20px var(--font-family-oxanium);
+  }
+
+  @media screen and (max-width: 767px) {
+    --font-title-1: 900 32px var(--font-family-inter);
+    --font-title-2: 600 32px var(--font-family-oxanium);
+    --font-text-1: 400 24px var(--font-family-oxanium);
+    --font-text-2: 400 18px var(--font-family-oxanium);
+  }
+
+  @media screen and (max-width: 500px) {
+    --font-text-1: 400 18px var(--font-family-oxanium);
+    --font-text-2: 400 15px var(--font-family-oxanium);
   }
 }
