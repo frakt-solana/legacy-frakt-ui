@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-
-import { useWallet } from '@solana/wallet-adapter-react';
-import AppFooter from '../AppFooter';
 import AppNavigation from '../AppNavigation';
-import ConnectButton from '../ConnectButton';
-import CurrentUserTable from '../CurrentUserTable';
 
 import styles from './styles.module.scss';
 
@@ -13,7 +8,6 @@ interface BurgerMenuProps {
 }
 
 const BurgerMenu = ({ className = '' }: BurgerMenuProps): JSX.Element => {
-  const { connected } = useWallet();
   const [isOpen, setIsOpen] = useState(false);
 
   const closeMenu = (): void => setIsOpen(false);
@@ -25,20 +19,17 @@ const BurgerMenu = ({ className = '' }: BurgerMenuProps): JSX.Element => {
           isOpen ? styles.opened : ''
         } ${className}`}
         onClick={(): void => setIsOpen(!isOpen)}
-      />
+      >
+        <div className={styles.centerIconLine} />
+      </div>
       <div
-        className={`${styles.menuOverlay} ${
+        className={`${styles.wrapper} ${
           !isOpen ? styles.menuOverlayHidden : ''
         }`}
       >
+        <div onClick={closeMenu} className={`${styles.menuOverlay}`}></div>
         <div className={styles.menuContent} onClick={closeMenu}>
-          {connected ? (
-            <CurrentUserTable className={styles.table} />
-          ) : (
-            <ConnectButton />
-          )}
           <AppNavigation className={styles.navigation} />
-          <AppFooter className={styles.footer} />
         </div>
       </div>
     </>

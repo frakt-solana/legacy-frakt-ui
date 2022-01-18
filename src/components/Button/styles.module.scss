@@ -17,7 +17,6 @@
   }
 
   &.sm {
-    font-size: 14px;
     padding: 3px 6px;
 
     & svg {
@@ -26,7 +25,6 @@
   }
 
   &.md {
-    font-size: 18px;
     padding: 5px 10px;
 
     & svg {
@@ -36,7 +34,6 @@
 
   &.lg {
     padding: 7px 14px;
-    font: var(--font-text-3);
 
     & svg {
       margin-right: 7px;
@@ -47,27 +44,4 @@
 .disabled {
   opacity: 0.5;
   pointer-events: none;
-}
-
-@media screen and (max-width: 1023px) {
-  .root {
-    &.sm {
-      font-size: 12px;
-      padding: 2px 5px;
-
-      & svg {
-        margin-right: 2px;
-      }
-    }
-
-    &.md {
-      font-size: 14px;
-      padding: 3px 7px;
-    }
-
-    &.lg {
-      font-size: 20px;
-      padding: 5px 12px;
-    }
-  }
 }

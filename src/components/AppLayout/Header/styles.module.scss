@@ -14,6 +14,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 500px) {
+    height: 36px;
+  }
 }
 
 .profileWrapper {
@@ -23,6 +27,17 @@
     height: 70px;
     font: var(--font-text-3);
     justify-content: center;
+
+    @media screen and (max-width: 767px) {
+      font-size: 14px;
+      width: 138px;
+    }
+
+    @media screen and (max-width: 500px) {
+      font-size: 10px;
+      height: 36px;
+      width: 96px;
+    }
   }
 
   .walletConnectedBtn {
@@ -34,5 +49,16 @@
         fill: var(--color-black)
       }
     }
+  }
+
+  @media screen and (max-width: 1023px) {
+    margin-left: auto;
+    margin-right: 15px;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .navigationWrapper {
+    display: none;
   }
 }

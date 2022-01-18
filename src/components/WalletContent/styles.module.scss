@@ -5,6 +5,10 @@
   top: 70px;
   bottom: 0;
   z-index: 91;
+
+  @media screen and (max-width: 500px) {
+    top: 36px;
+  }
 }
 
 .overlay {
@@ -40,6 +44,15 @@
     right: 20%;
     top: -11px;
     z-index: 1;
+  }
+
+  @media screen and (max-width: 1200px) {
+    right: 15px;
+  }
+
+  @media screen and (max-width: 340px) {
+    grid-template-columns: repeat(2, 105px);
+    max-width: 250px;
   }
 }
 

@@ -27,6 +27,10 @@
   &.headerHide {
     top: -70px;
     transition: top .3s ease-in;
+
+    @media screen and (max-width: 500px) {
+      top: -36px;
+    }
   }
 }
 
@@ -42,21 +46,5 @@
     display: block;
     height: unset;
     overflow-y: unset;
-  }
-
-  .header {
-    // padding: 24px 24px 20px;
-    // font-size: 20px;
-    display: none;
-  }
-
-  .main {
-    overflow-y: unset;
-  }
-}
-
-@media screen and (min-width: 1024px) and (max-width: 1199px) {
-  .root {
-    grid-template-columns: 300px auto;
   }
 }

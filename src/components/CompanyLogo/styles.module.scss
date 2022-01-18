@@ -3,6 +3,7 @@
 .root {
   font: var(--font-text-2);
   color: var(--color-white);
+  text-transform: uppercase;
 
   &:hover {
     color: var(--color-white);
@@ -14,9 +15,6 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .root {
-    font-size: 28px;
-  }
   .generatedCounter {
     display: none;
   }

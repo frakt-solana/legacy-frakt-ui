@@ -24,7 +24,6 @@ export const Header: FC<HeaderProps> = ({
       <div className={`${styles.container} container`}>
         <div className={styles.logoWrapper}>
           <CompanyLogo />
-          <BurgerMenu className={styles.burgerMenu} />
         </div>
         <div className={styles.navigationWrapper}>
           <AppNavigation />
@@ -41,6 +40,7 @@ export const Header: FC<HeaderProps> = ({
             <ConnectButton className={styles.walletBtn} />
           )}
         </div>
+        <BurgerMenu className={styles.burgerMenu} />
       </div>
       {CustomHeader && <CustomHeader />}
     </div>
