@@ -132,4 +132,8 @@
 .socialItem {
   width: 24px;
   margin-right: 5px;
+
+  &:hover {
+    opacity: .7;
+  }
 }

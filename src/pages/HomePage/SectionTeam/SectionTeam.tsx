@@ -28,7 +28,11 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
               <p className={styles.teamName}>Tim</p>
               <div className={styles.teamPosition}>
                 <span>CEO</span>
-                <a href="/" target="_blank">
+                <a
+                  href="https://twitter.com/timsamoylov"
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   <TwitterIcon width={24} />
                 </a>
               </div>
@@ -44,7 +48,11 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
               <p className={styles.teamName}>Vedamire</p>
               <div className={styles.teamPosition}>
                 <span>CTO</span>
-                <a href="/" target="_blank">
+                <a
+                  href="https://github.com/vedamire"
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   <GitHubIcon width={24} />
                 </a>
               </div>
@@ -56,7 +64,11 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
               <p className={styles.teamName}>Vlad</p>
               <div className={styles.teamPosition}>
                 <span>CDO, UX Lead</span>
-                <a href="/" target="_blank">
+                <a
+                  href="https://github.com/sablevsky"
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   <GitHubIcon width={24} />
                 </a>
               </div>
@@ -68,7 +80,11 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
               <p className={styles.teamName}>Phil</p>
               <div className={styles.teamPosition}>
                 <span>COO</span>
-                <a href="/" target="_blank">
+                <a
+                  href="https://twitter.com/rawrxbt"
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   <TwitterIcon width={24} />
                 </a>
               </div>
@@ -84,7 +100,7 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
               <p className={styles.teamName}>Viktor</p>
               <div className={styles.teamPosition}>
                 <span>Developer</span>
-                <a href="/" target="_blank">
+                <a href="https://github.com" rel="noreferrer" target="_blank">
                   <GitHubIcon width={24} />
                 </a>
               </div>
@@ -96,7 +112,11 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
               <p className={styles.teamName}>Sid</p>
               <div className={styles.teamPosition}>
                 <span>Art Director</span>
-                <a href="/" target="_blank">
+                <a
+                  href="https://twitter.com/SiD_Phi11ips"
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   <TwitterIcon width={24} />
                 </a>
               </div>
@@ -112,7 +132,11 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
               <p className={styles.teamName}>Roman</p>
               <div className={styles.teamPosition}>
                 <span>Developer</span>
-                <a href="/" target="_blank">
+                <a
+                  href="https://github.com/Piterom911"
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   <GitHubIcon width={24} />
                 </a>
               </div>

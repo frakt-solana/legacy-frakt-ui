@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import styles from './styles.module.scss';
 import { FooterSvgLogo } from '../FooterSvgLogo';
-import { NavigationLink } from '../../../components/AppNavigation/NavigationLink';
 import { URLS } from '../../../constants';
 import { HashLink as AnchorLink } from 'react-router-hash-link';
 import {
@@ -14,8 +13,8 @@ import {
 import {
   ArrowRightTop,
   DiscordIcon,
-  TwitterIcon,
   GitHubIcon,
+  TwitterIcon,
 } from '../../../icons';
 import { NavLink } from 'react-router-dom';
 
