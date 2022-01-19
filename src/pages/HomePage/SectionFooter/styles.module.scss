@@ -1,37 +1,79 @@
 .footer {
   padding-top: 300px;
   padding-bottom: 300px;
+
+  @media screen and (max-width: 1023px) {
+    padding-top: 200px;
+    padding-bottom: 200px;
+  }
+
+  @media screen and (max-width: 700px) {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
 }
 
 .container {
   display: flex;
   align-items: flex-start;
+
+  @media screen and (max-width: 700px) {
+    margin-right: 90px;
+    flex-direction: column;
+    gap: 50px;
+  }
 }
 
 .logoWrapper {
   max-width: 250px;
   margin-right: 130px;
+  flex-shrink: 1;
 
   svg {
     width: 100%;
+    height: auto;
+  }
+
+  @media screen and (max-width: 1023px) {
+    margin-right: 90px;
+  }
+
+  @media screen and (max-width: 767px) {
+    max-width: 90px;
+    margin-right: 50px;
   }
 }
 
 .footerNavs {
   display: flex;
+  flex-shrink: 0;
+  flex-grow: 1;
+  width: 540px;
+  gap: 50px;
+
+  @media screen and (max-width: 700px) {
+    width: 100% ;
+    flex-wrap: wrap;
+    column-gap: 60px;
+  }
 }
 
 .navWrapper {
-  max-width: 195px;
-  width: 100%;
   flex-shrink: 0;
-  flex-grow: 1;
 }
 
 .navTitle {
   font: var(--font-text-2);
   color: var(--color-gray-7);
   margin-bottom: 30px;
+
+  @media screen and (max-width: 900px) {
+    font-size: 24px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 18px;
+  }
 }
 
 .navItem {
@@ -40,6 +82,11 @@
   a {
     font: var(--font-text-3);
     color: var(--color-white);
+    white-space: nowrap;
+
+    @media screen and (max-width: 500px) {
+      font-size: 15px;
+    }
   }
 }
 
@@ -47,8 +94,29 @@
   font: var(--font-text-3);
   display: flex;
   align-items: center;
-  border-bottom: var(--border-white-1);
   color: var(--color-white);
+  overflow: hidden;
+  position: relative;
+
+  &:hover {
+    color: var(--color-white);
+
+    &::after {
+      left: 0;
+    }
+  }
+
+  &::after {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 100%;
+    bottom: 0;
+    background-color: var(--color-white);
+    left: 100%;
+    height: 1px;
+    transition: left .2s ease-out;
+  }
 
   svg {
     margin-left: 11px;
