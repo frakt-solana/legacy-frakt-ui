@@ -8,7 +8,7 @@ export const SectionHowWork: FC = () => {
     <section className={`section ${styles.howWork}`}>
       <div className={`container ${styles.howWorkContainer}`}>
         <h2 className={styles.howWorkTitle}>How does it all work together?</h2>
-        <div className={styles.howWorkButton}>
+        <div className={styles.buttonsWrapper}>
           <NavLink to={'/'} className={styles.howWorkLink}>
             BUY & STAKE FRAKTS
           </NavLink>

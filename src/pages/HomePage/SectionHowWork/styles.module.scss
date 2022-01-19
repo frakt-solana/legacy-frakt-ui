@@ -2,16 +2,22 @@
   font: var(--font-title-2);
   text-align: center;
   margin-bottom: 100px;
+
+  @media screen and (max-width: 900px) {
+    margin-bottom: 50px;
+  }
 }
 
-.howWorkButton {
+.buttonsWrapper {
   display: flex;
-  align-items: center;
   margin-bottom: 35px;
+
+  @media screen and (max-width: 900px) {
+    margin-bottom: 50px;
+  }
 }
 
 .howWorkLink {
-  height: 61px;
   width: 50%;
   border: var(--border-gray-1);
   font: var(--font-text-3);
@@ -19,6 +25,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  padding: 19px 24px;
+
+  @media screen and (max-width: 500px) {
+    font-size: 15px;
+  }
 }
 
 .howWorkSubtitle {
