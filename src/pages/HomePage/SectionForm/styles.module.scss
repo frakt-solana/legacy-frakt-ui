@@ -78,8 +78,67 @@
   margin-left: 13px;
 }
 
+
 .form {
   :global {
+    .ant-modal-mask {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(16px);
+    }
+
+    .ant-modal-content {
+      max-width: 500px;
+      border: var(--border-gray-1);
+      border-radius: 10px;
+      background-color: var(--color-black);
+    }
+
+    .ant-modal-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 38px 30px 30px;
+    }
+
+    .ant-modal-close-x {
+      border-radius: 50%;
+      border: var(--border-gray-1);
+      width: 43px;
+      height: 43px;
+      top: 20px;
+      right: 20px;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        width: 27px;
+        height: 27px;
+
+        path {
+          fill: var(--color-white);
+        }
+      }
+
+      &:hover {
+        background-color: var(--color-dark);
+      }
+    }
+
+    .ant-form {
+      .ant-form-item-has-error :not(.ant-input-disabled).ant-input,
+      .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled).ant-input-affix-wrapper,
+      .ant-form-item-has-error :not(.ant-input-disabled).ant-input:hover,
+      .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled).ant-input-affix-wrapper:hover {
+        border-color: var(--red-error-color);
+      }
+
+      .ant-form-item-explain.ant-form-item-explain-error {
+        color: var(--red-error-color);
+      }
+    }
+
     .ant-form-item {
       @media screen and (max-width: 900px) {
         margin-bottom: 20px;
@@ -143,4 +202,16 @@
   @media screen and (max-width: 900px) {
     gap: 20px
   }
+}
+
+.modalTitle {
+  font: var(--font-text-1);
+  font-weight: 600;
+  margin-top: 28px;
+  margin-bottom: 20px;
+}
+
+.modalText {
+  font: var(--font-text-2);
+  text-align: center;
 }

@@ -1,7 +1,7 @@
 import styles from './styles.module.scss';
-import { ArrowRightTop } from '../../../icons';
-import { Button, Form, Input } from 'antd';
-import React, { FC } from 'react';
+import { ArrowRightTop, CheckSuccessIcon } from '../../../icons';
+import { Button, Form, Input, Modal } from 'antd';
+import React, { FC, useState } from 'react';
 import 'antd/dist/antd.css';
 import { CONTACT_SECTION_ID } from '../constants';
 
@@ -13,10 +13,18 @@ const validateMessages = {
 export const SectionForm: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
   navRef,
 }) => {
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
+  const sendForm = () => {
+    setIsModalVisible(true);
+  };
+
+  const closeModal = () => setIsModalVisible(false);
+
   const onFinish = (values) => values;
 
   return (
-    <section className={styles.form}>
+    <section id={'contactForm'} className={styles.form}>
       <p
         className="itemForIntersectionMenu"
         id={CONTACT_SECTION_ID}
@@ -55,7 +63,7 @@ export const SectionForm: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
               </Form.Item>
 
               <Form.Item>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" onClick={sendForm}>
                   Send
                 </Button>
               </Form.Item>
@@ -63,6 +71,20 @@ export const SectionForm: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
           </Form>
         </div>
       </div>
+      <Modal
+        className={styles.formModal}
+        getContainer={'#contactForm'}
+        visible={isModalVisible}
+        footer={false}
+        centered={true}
+        onCancel={closeModal}
+      >
+        <CheckSuccessIcon />
+        <p className={styles.modalTitle}>Thank you!</p>
+        <span className={styles.modalText}>
+          We&apos;ve got your message! We will contact you shortly
+        </span>
+      </Modal>
     </section>
   );
 };
