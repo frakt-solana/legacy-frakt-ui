@@ -31,3 +31,26 @@
   justify-content: center;
   align-items: flex-end;
 }
+
+.row {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-start;
+   font: var(--font-text-3);
+   border-bottom: var(--border-gray-1);
+   margin-bottom: 10px;
+
+  span {
+    margin-right: auto;
+  }
+
+  svg {
+    margin-left: 10px;
+    margin-right: 5px;
+  }
+ }
+
+.name {
+  margin-right: 20px;
+}

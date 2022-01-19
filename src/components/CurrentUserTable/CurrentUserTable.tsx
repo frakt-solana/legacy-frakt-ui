@@ -3,11 +3,11 @@ import React from 'react';
 import styles from './styles.module.scss';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
-import Table from '../Table';
 import { useFrktBalance } from '../../contexts/frktBalance';
 import { frktBNToString } from '../../utils';
 import { useNativeAccount } from '../../hooks/useNativeAccount';
 import { formatNumber, shortenAddress } from '../../utils/solanaUtils';
+import { FRKTIcon, SolanaIcon } from '../../icons';
 
 interface CurrentUserTableProps {
   className?: string;
@@ -24,24 +24,41 @@ const CurrentUserTable = ({
     return null;
   }
 
-  const getBalanceValue = (): string =>
-    `${formatNumber.format((account?.lamports || 0) / LAMPORTS_PER_SOL)} SOL`;
+  const getAddress = () => {
+    const valueStr = shortenAddress(`${publicKey || ''}`);
+    return (
+      <div className={styles.row}>
+        <span>Address</span> {valueStr}
+      </div>
+    );
+  };
 
-  const getFrktBalanceValue = (): string => {
+  const getBalanceValue = () => {
+    const valueStr = `${formatNumber.format(
+      (account?.lamports || 0) / LAMPORTS_PER_SOL,
+    )}`;
+    return (
+      <div className={styles.row}>
+        <span>Balance</span> {valueStr} <SolanaIcon /> SOL
+      </div>
+    );
+  };
+
+  const getFrktBalanceValue = () => {
     const frktBalance = balance ? frktBNToString(balance, 2) : '0';
-    return `${frktBalance !== '0' ? frktBalance : '--'} FRKT`;
+    const valueStr = `${frktBalance !== '0' ? frktBalance : '--'} `;
+    return (
+      <div className={styles.row}>
+        <span>Tokens</span> {valueStr} {<FRKTIcon />} FRKT
+      </div>
+    );
   };
 
   return (
     <div className={`${className} ${styles.wrapper}`}>
-      <Table
-        className={styles.table}
-        data={[
-          ['Address', shortenAddress(`${publicKey || ''}`)],
-          ['Balance', getBalanceValue()],
-          ['Tokens', getFrktBalanceValue()],
-        ]}
-      />
+      {getAddress()}
+      {getBalanceValue()}
+      {getFrktBalanceValue()}
       <button onClick={disconnect} className={styles.disconnectButton}>
         Disconnect wallet
       </button>
