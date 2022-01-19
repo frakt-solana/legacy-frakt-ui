@@ -1,6 +1,10 @@
 .teamTitle {
   font: var(--font-title-2);
   margin-bottom: 100px;
+
+  @media screen and (max-width: 767px) {
+    margin-bottom: 50px;
+  }
 }
 
 .teamList {
@@ -10,11 +14,27 @@
 }
 
 .teamItem {
-  width: calc(20% - 8px);
+  min-width: calc(20% - 8px);
+  max-width: 214px;
+  flex-shrink: 1;
   border: var(--border-gray-1);
+
+  @media screen and (max-width: 1023px) {
+    max-width: 240px;
+    width: calc(25% - 8px);
+  }
+
+  @media screen and (max-width: 850px) {
+    max-width: 260px;
+    width: calc(33% - 8px);
+  }
+
+  @media screen and (max-width: 550px) {
+    width: calc(50% - 5px);
+  }
 }
 
-.teamPhotoTim {
+.teamPhoto {
   width: 100%;
   position: relative;
   z-index: 1;
@@ -29,11 +49,6 @@
   margin-bottom: 10px;
 }
 
-.teamName {
-  font: var(--font-text-2);
-  margin-bottom: 10px;
-}
-
 .teamPosition {
   display: flex;
   justify-content: space-between;
@@ -41,5 +56,9 @@
 
   span {
     font: var(--font-text-3);
+
+    @media screen and (max-width: 650px) {
+      font-size: 15px;
+    }
   }
 }
