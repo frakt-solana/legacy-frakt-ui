@@ -4,28 +4,71 @@
   z-index: 5;
   padding-top: 50px;
   padding-bottom: 26px;
+
+  @media screen and (max-width: 700px) {
+    padding-top: 100px;
+    padding-bottom: 80px;
+  }
 }
 
 .formContainer {
   display: flex;
   align-items: center;
   gap: 30px;
+
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+    gap: 26px;
+    align-items: flex-start;
+  }
 }
 
 .formTitle {
   font: var(--font-title-2);
+  margin-bottom: 24px;
 }
 
 .formText {
   font: var(--font-text-2);
   margin-bottom: 30px;
+  max-width: 90%;
+
+  @media screen and (max-width: 1023px) {
+    max-width: 100%;
+  }
+
+  @media screen and (max-width: 700px) {
+    max-width: 500px;
+  }
 
   a {
     color: var(--color-white);
-    margin-bottom: 30px;
-    border-bottom: var(--border-white-1);
     margin-left: 10px;
+    overflow: hidden;
     margin-right: 18px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+
+    &:hover {
+      color: var(--color-white);
+
+      &::after {
+        left: 0;
+      }
+    }
+
+    &::after {
+      position: absolute;
+      display: block;
+      content: '';
+      width: 100%;
+      bottom: 0;
+      background-color: var(--color-white);
+      left: 100%;
+      height: 1px;
+      transition: left .2s ease-out;
+    }
   }
 }
 
@@ -37,12 +80,27 @@
 
 .form {
   :global {
+    .ant-form-item {
+      @media screen and (max-width: 900px) {
+        margin-bottom: 20px;
+      }
+    }
+
     .ant-input {
       border-radius: 0;
       height: 48px;
       padding-left: 17px;
       padding-top: 10px;
       font: var(--font-text-3);
+
+      @media screen and (max-width: 900px) {
+        height: 40px;
+        padding-top: 6px;
+      }
+
+      @media screen and (max-width: 700px) {
+        font-size: 15px;
+      }
     }
 
     .ant-btn {
@@ -56,6 +114,14 @@
 
       &:hover {
         background-color: var(--darken-green-color);
+      }
+
+      @media screen and (max-width: 900px) {
+        height: 40px;
+      }
+
+      @media screen and (max-width: 700px) {
+        font-size: 15px;
       }
     }
   }
@@ -72,5 +138,9 @@
 
   > div:last-of-type {
     max-width: 42%;
+  }
+
+  @media screen and (max-width: 900px) {
+    gap: 20px
   }
 }
