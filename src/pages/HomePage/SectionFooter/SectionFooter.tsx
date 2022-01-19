@@ -17,6 +17,7 @@ import {
   TwitterIcon,
   GitHubIcon,
 } from '../../../icons';
+import { NavLink } from 'react-router-dom';
 
 export const SectionFooter: FC = () => {
   return (
@@ -30,16 +31,16 @@ export const SectionFooter: FC = () => {
             <h5 className={styles.navTitle}>Ecosystem</h5>
             <ul className={styles.navList}>
               <li className={styles.navItem}>
-                <NavigationLink to={URLS.COLLECTION} text="Collection" />
+                <NavLink to={URLS.COLLECTION}>Collection</NavLink>
               </li>
               <li className={styles.navItem}>
-                <NavigationLink to={URLS.RARITY} text="Rarity hdbk" />
+                <NavLink to={URLS.RARITY}>Rarity hdbk</NavLink>
               </li>
               <li className={styles.navItem}>
-                <NavigationLink to={URLS.STAKE} text="Staking" />
+                <NavLink to={URLS.STAKE}>Staking</NavLink>
               </li>
               <li className={styles.navItem}>
-                <NavigationLink to={URLS.MARKETPLACE} text="Marketplace" />
+                <NavLink to={URLS.MARKETPLACE}>Marketplace</NavLink>
               </li>
               <li className={styles.navItem}>
                 <a className={styles.link} href={URLS.SANDBOX}>

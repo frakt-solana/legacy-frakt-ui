@@ -27,6 +27,12 @@
   justify-content: center;
   text-align: center;
   padding: 19px 24px;
+  transition: background-color .3s ease-out, color .3s ease-out;
+
+  &:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
+  }
 
   @media screen and (max-width: 500px) {
     font-size: 15px;
