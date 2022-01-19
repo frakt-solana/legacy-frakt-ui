@@ -1,9 +1,17 @@
 .faqTitle {
   font: var(--font-title-2);
   margin-bottom: 100px;
+
+  @media screen and (max-width: 900px) {
+    margin-bottom: 50px;
+  }
 }
 
-.faq {
+section.faq {
+  @media screen and (max-width: 767px) {
+    padding-bottom: 100px;
+  }
+
   :global {
     .ant-collapse {
       border-top: var(--border-gray-1);
@@ -16,9 +24,26 @@
       > .ant-collapse-item {
         padding-bottom: 30px;
 
+        @media screen and (max-width: 500px) {
+          padding-bottom: 20px;
+        }
+
         > .ant-collapse-header {
           position: relative;
-          padding: 30px 30px 0 0;
+          font: var(--font-text-2);
+          padding: 30px 50px 0 0;
+
+          @media screen and (max-width: 900px) {
+            font-size: 24px;
+          }
+
+          @media screen and (max-width: 767px) {
+            font-size: 18px;
+          }
+
+          @media screen and (max-width: 500px) {
+            padding: 20px 40px 0 0;
+          }
 
           &:hover svg rect:first-of-type {
             fill: var(--color-dark);
@@ -29,6 +54,18 @@
           padding: 30px 30px 0 0;
           max-width: 750px;
           font: var(--font-text-3);
+
+          @media screen and (max-width: 767px) {
+            max-width: 560px;
+          }
+
+          @media screen and (max-width: 650px) {
+            max-width: 90%;
+          }
+
+          @media screen and (max-width: 500px) {
+            padding: 20px 40px 0 0;
+          }
 
           a {
             border-bottom: var(--border-white-1);
@@ -41,7 +78,15 @@
         margin: 0;
         position: absolute;
         right: 0;
-        top: 37px;
+        top: 33px;
+
+        @media screen and (max-width: 767px) {
+          top: 28px;
+        }
+
+        @media screen and (max-width: 500px) {
+          top: 18px;
+        }
       }
     }
   }
