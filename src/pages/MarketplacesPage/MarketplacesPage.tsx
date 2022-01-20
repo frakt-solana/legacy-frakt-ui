@@ -27,24 +27,27 @@ const MARKETPLACES = [
 ];
 
 const MarketplacesPage = (): JSX.Element => (
-  <AppLayout headerText="Select marketplace">
-    <Helmet>
-      <title>{`Marketplace | FRAKT: Generative Art NFT Collection on Solana`}</title>
-    </Helmet>
-    <div className={styles.root}>
-      {MARKETPLACES.map(({ href, name, imageSrc }, idx) => (
-        <div className={styles.itemWrapper} key={idx}>
-          <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.item}
-          >
-            <img alt={name} src={imageSrc} />
-            {name}
-          </a>
-        </div>
-      ))}
+  <AppLayout>
+    <div className="container">
+      <Helmet>
+        <title>{`Marketplace | FRAKT: Generative Art NFT Collection on Solana`}</title>
+      </Helmet>
+      <h2 className={styles.pageTitle}>Select marketplace</h2>
+      <div className={styles.root}>
+        {MARKETPLACES.map(({ href, name, imageSrc }, idx) => (
+          <div className={styles.itemWrapper} key={idx}>
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.item}
+            >
+              <img alt={name} src={imageSrc} />
+              {name}
+            </a>
+          </div>
+        ))}
+      </div>
     </div>
   </AppLayout>
 );
