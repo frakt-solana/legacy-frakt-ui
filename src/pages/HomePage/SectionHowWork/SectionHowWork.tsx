@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styles from './styles.module.scss';
 import { NavLink } from 'react-router-dom';
-import howWorkImage from '../assets/images/howWork.jpg';
+import howWorkImage from '../assets/images/fraktEcosystem.svg';
 
 export const SectionHowWork: FC = () => {
   return (
@@ -16,7 +16,6 @@ export const SectionHowWork: FC = () => {
             BUY & STAKE$FRKT
           </NavLink>
         </div>
-        <h4 className={styles.howWorkSubtitle}>FRAKT ECOSYSTEM</h4>
         <img
           src={howWorkImage}
           alt="FRAKT Ecosystem"

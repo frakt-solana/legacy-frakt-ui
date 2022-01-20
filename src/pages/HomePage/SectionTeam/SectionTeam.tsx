@@ -100,7 +100,11 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
               <p className={styles.teamName}>Viktor</p>
               <div className={styles.teamPosition}>
                 <span>Developer</span>
-                <a href="https://github.com" rel="noreferrer" target="_blank">
+                <a
+                  href="https://github.com/valpaq"
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   <GitHubIcon width={24} />
                 </a>
               </div>

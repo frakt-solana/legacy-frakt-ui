@@ -16,7 +16,7 @@ import { SectionEcosystem } from './SectionEcosystem';
 import { SectionWhatIsFrakt } from './SectionWhatIsFrakt';
 import { SectionHeader } from './SectionHeader';
 import { SectionFooter } from './SectionFooter';
-import useIntersectionObserver from '../../hooks/useIntersectionObserver';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 
 const HomePage = (): JSX.Element => {
   const [menuLinksData, setMenuLinksData] = useState<

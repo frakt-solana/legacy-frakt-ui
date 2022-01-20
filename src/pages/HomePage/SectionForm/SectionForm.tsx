@@ -6,8 +6,8 @@ import 'antd/dist/antd.css';
 import { CONTACT_SECTION_ID } from '../constants';
 
 const validateMessages = {
-  required: '${label} is required!',
-  types: { email: '${label} is not a valid email!' },
+  required: '',
+  types: { email: '' },
 };
 
 export const SectionForm: FC<{ navRef: { current: HTMLParagraphElement } }> = ({

@@ -132,6 +132,10 @@
       .ant-form-item-has-error :not(.ant-input-disabled).ant-input:hover,
       .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled).ant-input-affix-wrapper:hover {
         border-color: var(--red-error-color);
+
+        &::placeholder {
+          color: var(--color-white);
+        }
       }
 
       .ant-form-item-explain.ant-form-item-explain-error {

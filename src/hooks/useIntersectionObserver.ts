@@ -4,18 +4,18 @@ interface ChildrenRefs {
   sectionRef: { current: HTMLParagraphElement };
 }
 
-export default function useIntersectionObserver(
+export const useIntersectionObserver = (
   parentRef?: { current: HTMLParagraphElement },
   childrenRefs?: ChildrenRefs[],
   callback?: (currentItemId: string) => void,
-): void {
+): void => {
   const observer = useRef<IntersectionObserver>();
 
   useEffect(() => {
     const options = {
       root: parentRef?.current || null,
       rootMargin: '0px',
-      threshold: 1,
+      threshold: 0.7,
     };
 
     observer.current = new IntersectionObserver((entries) => {
@@ -30,11 +30,11 @@ export default function useIntersectionObserver(
       child.sectionRef && observer.current.observe(child.sectionRef.current);
     });
 
-    return function () {
+    return () => {
       childrenRefs.forEach((child) => {
         child.sectionRef &&
           observer.current.unobserve(child.sectionRef.current);
       });
     };
   }, [callback, parentRef, childrenRefs]);
-}
+};

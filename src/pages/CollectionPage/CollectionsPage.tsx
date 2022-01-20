@@ -60,7 +60,7 @@ const CollectionsPage = (): JSX.Element => {
       </Helmet>
       {fraktsLoading && <Preloader size="lg" className={styles.preloader} />}
       {!fraktsLoading && (
-        <>
+        <div className="container">
           {connected && showUserFrakts && !!fraktsToUpgrade.length && (
             <UpgradeSection
               oldFraktsAmount={fraktsToUpgrade.length}
@@ -75,7 +75,7 @@ const CollectionsPage = (): JSX.Element => {
           />
           {connected && showUserFrakts && !frakts.length && <NoFraktsBlock />}
           <ArtsList arts={frakts} />
-        </>
+        </div>
       )}
     </AppLayout>
   );
