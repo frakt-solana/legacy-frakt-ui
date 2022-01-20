@@ -7,13 +7,15 @@
 }
 
 .tableContainer {
-  padding: 0 40px;
+  padding-top: 35px;
+  padding-bottom: 35px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 
   &:first-child {
     border-bottom: 1px solid var(--color-gray-1);
+    padding-top: 0;
   }
 }
 
@@ -26,9 +28,5 @@
     display: flex;
     flex-direction: column;
     height: unset;
-  }
-
-  .tableContainer {
-    padding: 24px 24px;
   }
 }
