@@ -20,7 +20,11 @@ export const Header: FC<HeaderProps> = ({
   className,
 }) => {
   return (
-    <div className={`${styles.header} ${className}`}>
+    <div
+      className={classNames(styles.header, className, {
+        [styles.hasCustomHeader]: CustomHeader,
+      })}
+    >
       <div className={`${styles.container} container`}>
         <div className={styles.logoWrapper}>
           <CompanyLogo />

@@ -1,4 +1,4 @@
-import { useMemo, useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 
 import styles from './styles.module.scss';
@@ -9,7 +9,6 @@ import ArtsFilter from '../../components/ArtsFilter';
 import Preloader from '../../components/Preloader';
 import { useWallet } from '@solana/wallet-adapter-react';
 import NoFraktsBlock from './components/NoFraktsBlock';
-import Header from './components/Header';
 import UpgradeSection from './components/UpgradeSection';
 import { notify } from '../../utils/solanaUtils';
 import { useFrakts } from '../../contexts/frakts';
