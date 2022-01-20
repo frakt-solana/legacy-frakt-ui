@@ -223,7 +223,7 @@
     left: 100%;
     height: 1px;
     background-color: var(--color-white);
-    transition: left .2s ease-out;
+    transition: left .2s ease-in;
   }
 
   &:hover {
