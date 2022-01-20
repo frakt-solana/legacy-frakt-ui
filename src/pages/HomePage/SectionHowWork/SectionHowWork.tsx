@@ -13,7 +13,7 @@ export const SectionHowWork: FC = () => {
             BUY & STAKE FRAKTS
           </NavLink>
           <NavLink to={'/'} className={styles.howWorkLink}>
-            BUY & STAKE$FRKT
+            BUY & STAKE $FRKT
           </NavLink>
         </div>
         <img
