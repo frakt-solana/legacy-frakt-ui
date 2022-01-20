@@ -54,7 +54,7 @@ const CollectionsPage = (): JSX.Element => {
   }, [fraktsToUpgrade.length]);
 
   return (
-    <AppLayout CustomHeader={Header} mainClassName={styles.appMain}>
+    <AppLayout mainClassName={styles.appMain}>
       <Helmet>
         <title>{`Collection | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>

@@ -1,7 +1,7 @@
 @import '../../../../scss/abstracts/variables.scss';
 
 .root {
-  padding: 22px 40px;
+  padding: 22px 40px 22px 0;
   border-bottom: 1px solid var(--color-gray-1);
   font-size: 18px;
 }
@@ -21,6 +21,6 @@
 
 @media screen and (max-width: 1023px) {
   .root {
-    padding: 22px 24px;
+    padding: 22px 24px 22px 0;
   }
 }
