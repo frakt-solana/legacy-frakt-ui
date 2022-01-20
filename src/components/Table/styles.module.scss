@@ -5,9 +5,20 @@
   align-items: flex-start;
   font: var(--font-text-3);
   border-bottom: var(--border-gray-1);
-  margin-bottom: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 .name {
   margin-right: 20px;
+}
+
+.header {
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
 }
