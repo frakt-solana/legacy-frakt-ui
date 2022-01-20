@@ -1,8 +1,10 @@
-@import '../../scss/abstracts/variables.scss';
-
 .appMain {
   display: flex;
   flex-direction: column;
+}
+
+.pageTitle {
+  font: var(--font-title-2);
 }
 
 @media screen and (max-width: 1023px) {
@@ -10,8 +12,6 @@
     min-height: calc(100vh - 73px);
   }
 }
-
-//? Header
 
 .header {
   padding: 40px 0 0;
@@ -468,16 +468,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    padding: 0 60px;
+    padding: 30px 60px;
     background: var(--color-black);
   }
 
   &__stakeWrapper {
     grid-column: 1 / 1;
+    padding-left: 0;
   }
 
   &__unstakeWrapper {
     grid-column: 1 / 1;
+    padding-left: 0;
   }
 
   &__harvestWrapper {
@@ -544,6 +546,7 @@
 
     &__harvestWrapper {
       grid-column: unset;
+      padding-left: 0;
       grid-row: 1 / 2;
     }
   }

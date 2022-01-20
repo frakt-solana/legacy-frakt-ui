@@ -1,5 +1,3 @@
-@import '../../scss/abstracts/variables.scss';
-
 .appMain {
   display: flex;
   flex-direction: column;
@@ -11,7 +9,13 @@
   }
 }
 
+.pageTitle {
+  font: var(--font-title-2);
+  margin-bottom: 50px;
+}
+
 //? Header
+
 
 .header {
   padding: 40px 0 0;
@@ -474,10 +478,12 @@
 
   &__stakeWrapper {
     grid-column: 1 / 1;
+    padding-left: 0;
   }
 
   &__unstakeWrapper {
     grid-column: 1 / 1;
+    padding-left: 0;
   }
 
   &__harvestWrapper {
@@ -545,6 +551,7 @@
     &__harvestWrapper {
       grid-column: unset;
       grid-row: 1 / 2;
+      padding-left: 0;
     }
   }
 }

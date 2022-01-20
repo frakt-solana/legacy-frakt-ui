@@ -41,69 +41,72 @@ const StakeFrktPage = (): JSX.Element => {
   const frktPerYear = frktStakingAmount.mul(new BN(1000)).div(APR);
 
   return (
-    <AppLayout headerText="Staking FRKT" mainClassName={styles.appMain}>
-      <Helmet>
-        <title>{`Staking FRKT | FRAKT: Generative Art NFT Collection on Solana`}</title>
-      </Helmet>
-      <div className={styles.stakingPage}>
-        <div className={styles.stakingPage__content}>
-          <StakingForm className={styles.stakingPage__stakeWrapper} />
-          <div className={styles.stakingPage__harvestWrapper}>
-            <Table
-              size="lg"
-              data={[
-                ['APR', `${decimalBNToString(APR, 2, 2)}%`],
-                ['FRKT/year', `${frktBNToString(frktPerYear)}`],
-                [
-                  {
-                    text: 'FRKT to harvest',
-                    tooltipText:
-                      'Amount of FRKT available to withdraw. Withdrawing is available from 0.01 FRKT.',
-                  },
-                  harvestAmount.cmp(new BN(0)) === 1
-                    ? frktBNToString(harvestAmount, 7)
-                    : '0',
-                ],
-              ]}
-              className={styles.stakingPage__infoTable}
-            />
-            {harvestAmount.cmp(MIN_HARVEST_THRESHOLD) === 1 && (
-              <Button onClick={harvestFrkt} size="md">
-                Harvest
-              </Button>
-            )}
-          </div>
-          {IS_UNSTAKE_LOCKED ? (
-            <div className={styles.stakingPage__unstakeWrapper}>
+    <AppLayout mainClassName={styles.appMain}>
+      <div className="container">
+        <Helmet>
+          <title>{`Staking FRKT | FRAKT: Generative Art NFT Collection on Solana`}</title>
+        </Helmet>
+        <h2 className={styles.pageTitle}>Staking FRKT</h2>
+        <div className={styles.stakingPage}>
+          <div className={styles.stakingPage__content}>
+            <StakingForm className={styles.stakingPage__stakeWrapper} />
+            <div className={styles.stakingPage__harvestWrapper}>
               <Table
-                size="md"
+                size="lg"
                 data={[
-                  ['FRKT staked', `${frktBNToString(frktStakingAmount)}`],
-                  ['Available to unstake', '0'],
-                ]}
-                className={styles.stakingPage__infoTable}
-              />
-            </div>
-          ) : (
-            <div className={styles.stakingPage__unstakeWrapper}>
-              <Table
-                size="md"
-                data={[
-                  ['FRKT staked', `${frktBNToString(frktStakingAmount)}`],
+                  ['APR', `${decimalBNToString(APR, 2, 2)}%`],
+                  ['FRKT/year', `${frktBNToString(frktPerYear)}`],
                   [
-                    'Available to unstake',
-                    `${frktBNToString(frktToUnstakeAmount)}`,
+                    {
+                      text: 'FRKT to harvest',
+                      tooltipText:
+                        'Amount of FRKT available to withdraw. Withdrawing is available from 0.01 FRKT.',
+                    },
+                    harvestAmount.cmp(new BN(0)) === 1
+                      ? frktBNToString(harvestAmount, 7)
+                      : '0',
                   ],
                 ]}
                 className={styles.stakingPage__infoTable}
               />
-              {frktToUnstakeAmount.toString() !== '0' && (
-                <Button onClick={() => unstakeFrkt()} size="md">
-                  Unstake
+              {harvestAmount.cmp(MIN_HARVEST_THRESHOLD) === 1 && (
+                <Button onClick={harvestFrkt} size="md">
+                  Harvest
                 </Button>
               )}
             </div>
-          )}
+            {IS_UNSTAKE_LOCKED ? (
+              <div className={styles.stakingPage__unstakeWrapper}>
+                <Table
+                  size="md"
+                  data={[
+                    ['FRKT staked', `${frktBNToString(frktStakingAmount)}`],
+                    ['Available to unstake', '0'],
+                  ]}
+                  className={styles.stakingPage__infoTable}
+                />
+              </div>
+            ) : (
+              <div className={styles.stakingPage__unstakeWrapper}>
+                <Table
+                  size="md"
+                  data={[
+                    ['FRKT staked', `${frktBNToString(frktStakingAmount)}`],
+                    [
+                      'Available to unstake',
+                      `${frktBNToString(frktToUnstakeAmount)}`,
+                    ],
+                  ]}
+                  className={styles.stakingPage__infoTable}
+                />
+                {frktToUnstakeAmount.toString() !== '0' && (
+                  <Button onClick={() => unstakeFrkt()} size="md">
+                    Unstake
+                  </Button>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </AppLayout>
