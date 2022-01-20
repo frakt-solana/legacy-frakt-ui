@@ -11,6 +11,7 @@ const RarityPage = (): JSX.Element => (
       <Helmet>
         <title>{`Rarity | FRAKT: Generative Art NFT Collection on Solana`}</title>
       </Helmet>
+      <h2 className={styles.pageTitle}>Rarity Handbook</h2>
       <div className={styles.root}>
         <div className={styles.tableContainer}>
           <Table

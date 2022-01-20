@@ -60,6 +60,7 @@ const CollectionsPage = (): JSX.Element => {
       {fraktsLoading && <Preloader size="lg" className={styles.preloader} />}
       {!fraktsLoading && (
         <div className="container">
+          <h2 className={styles.pageTitle}>Collection</h2>
           {connected && showUserFrakts && !!fraktsToUpgrade.length && (
             <UpgradeSection
               oldFraktsAmount={fraktsToUpgrade.length}
