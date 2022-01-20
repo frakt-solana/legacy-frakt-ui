@@ -36,6 +36,7 @@ import {
 } from '@solana/wallet-adapter-wallets';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { WalletModalProvider } from './contexts/walletModal';
+import React from 'react';
 
 const wallets = [
   getPhantomWallet(),
@@ -55,78 +56,83 @@ export function Routes(): JSX.Element {
               <FraktsProvider>
                 <StakingFrktProvider>
                   <StakingProvider>
-                    <Switch>
-                      <Route
-                        exact
-                        path={URLS.ROOT}
-                        component={(): JSX.Element => <HomePage />}
-                      />
-                      <Route
-                        exact
-                        path={`${URLS.WALLET}/:walletPubkey`}
-                        component={(): JSX.Element => <WalletCollectionPage />}
-                      />
-                      <Route
-                        exact
-                        path={URLS.COLLECTION}
-                        component={(): JSX.Element => <CollectionsPage />}
-                      />
-                      <Route
-                        exact
-                        path={`${URLS.COLLECTION}/:artAccountPubkey`}
-                        component={(): JSX.Element => <ArtPage />}
-                      />
-                      <Route
-                        exact
-                        path={URLS.RARITY}
-                        component={(): JSX.Element => <RarityPage />}
-                      />
-                      <Route
-                        exact
-                        path={URLS.STAKING_NFT}
-                        component={(): JSX.Element => <StakingNftPage />}
-                      />
-                      <Route
-                        exact
-                        path={URLS.STAKING_NFT_CREATE}
-                        component={(): JSX.Element => <CreateStakeNftPage />}
-                      />
-                      <Route
-                        exact
-                        path={URLS.STAKING_NFT_UNSTAKE}
-                        component={(): JSX.Element => <UnstakeNftPage />}
-                      />
-                      <Route
-                        exact
-                        path={URLS.STAKING_NFT_HARVEST}
-                        component={(): JSX.Element => <HarvestNftPage />}
-                      />
-                      <Route
-                        exact
-                        path={URLS.MARKETPLACE}
-                        component={(): JSX.Element => <MarketplacesPage />}
-                      />
-                      <Route
-                        exact
-                        path={URLS.STAKE}
-                        component={(): JSX.Element => <StakePage />}
-                      />
-                      <Route
-                        exact
-                        path={URLS.STAKING_FRKT}
-                        component={(): JSX.Element => <StakeFrktPage />}
-                      />
-                      <Route
-                        exact
-                        path={URLS.PAGE_404}
-                        component={(): JSX.Element => <Page404 />}
-                      />
-                      <Route
-                        exact
-                        path={'*'}
-                        component={(): JSX.Element => <Page404 />}
-                      />
-                    </Switch>
+                    <>
+                      <div className="noise" />
+                      <Switch>
+                        <Route
+                          exact
+                          path={URLS.ROOT}
+                          component={(): JSX.Element => <HomePage />}
+                        />
+                        <Route
+                          exact
+                          path={`${URLS.WALLET}/:walletPubkey`}
+                          component={(): JSX.Element => (
+                            <WalletCollectionPage />
+                          )}
+                        />
+                        <Route
+                          exact
+                          path={URLS.COLLECTION}
+                          component={(): JSX.Element => <CollectionsPage />}
+                        />
+                        <Route
+                          exact
+                          path={`${URLS.COLLECTION}/:artAccountPubkey`}
+                          component={(): JSX.Element => <ArtPage />}
+                        />
+                        <Route
+                          exact
+                          path={URLS.RARITY}
+                          component={(): JSX.Element => <RarityPage />}
+                        />
+                        <Route
+                          exact
+                          path={URLS.STAKING_NFT}
+                          component={(): JSX.Element => <StakingNftPage />}
+                        />
+                        <Route
+                          exact
+                          path={URLS.STAKING_NFT_CREATE}
+                          component={(): JSX.Element => <CreateStakeNftPage />}
+                        />
+                        <Route
+                          exact
+                          path={URLS.STAKING_NFT_UNSTAKE}
+                          component={(): JSX.Element => <UnstakeNftPage />}
+                        />
+                        <Route
+                          exact
+                          path={URLS.STAKING_NFT_HARVEST}
+                          component={(): JSX.Element => <HarvestNftPage />}
+                        />
+                        <Route
+                          exact
+                          path={URLS.MARKETPLACE}
+                          component={(): JSX.Element => <MarketplacesPage />}
+                        />
+                        <Route
+                          exact
+                          path={URLS.STAKE}
+                          component={(): JSX.Element => <StakePage />}
+                        />
+                        <Route
+                          exact
+                          path={URLS.STAKING_FRKT}
+                          component={(): JSX.Element => <StakeFrktPage />}
+                        />
+                        <Route
+                          exact
+                          path={URLS.PAGE_404}
+                          component={(): JSX.Element => <Page404 />}
+                        />
+                        <Route
+                          exact
+                          path={'*'}
+                          component={(): JSX.Element => <Page404 />}
+                        />
+                      </Switch>
+                    </>
                   </StakingProvider>
                 </StakingFrktProvider>
               </FraktsProvider>

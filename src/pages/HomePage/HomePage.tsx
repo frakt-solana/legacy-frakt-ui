@@ -56,8 +56,6 @@ const HomePage = (): JSX.Element => {
       CustomHeader={customHeaderWithLinks}
       className={styles.homeLayout}
     >
-      <div className={styles.noise} />
-
       <SectionHeader />
 
       <SectionWhatIsFrakt navRef={sectionRef1} />

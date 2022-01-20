@@ -17,11 +17,6 @@ const sliderBreakpoints = {
   250: {
     slidesPerView: 2,
     spaceBetween: 0,
-    autoplay: {
-      delay: 300,
-      disableOnInteraction: false,
-    },
-    speed: 3000,
   },
   350: {
     slidesPerView: 2.3,
@@ -77,7 +72,11 @@ export const SectionEcosystem: FC<{
               className={styles.ecoSlider}
               loop={true}
               loopedSlides={20}
-              autoplay={true}
+              speed={2400}
+              autoplay={{
+                delay: 0,
+                disableOnInteraction: false,
+              }}
             >
               {imageExamples.map((img) => (
                 <SwiperSlide key={img} className={styles.ecoSlide}>
@@ -114,8 +113,12 @@ export const SectionEcosystem: FC<{
               breakpoints={sliderBreakpoints}
               className={styles.ecoSlider}
               loop={true}
-              autoplay={true}
               loopedSlides={16}
+              speed={2400}
+              autoplay={{
+                delay: 0,
+                disableOnInteraction: false,
+              }}
             >
               {imageCollectionsExamples.map((img) => (
                 <SwiperSlide key={img} className={styles.ecoSlide}>

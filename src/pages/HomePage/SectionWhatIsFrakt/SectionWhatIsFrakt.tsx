@@ -9,7 +9,7 @@ export const SectionWhatIsFrakt: FC<{
   return (
     <section className={`section ${styles.whatIsFrakt}`}>
       <p
-        className="itemForIntersectionMenu"
+        className={`itemForIntersectionMenu ${styles.navAnchor}`}
         id={WHAT_IS_FRAKT_SECTION_ID}
         ref={navRef}
       >

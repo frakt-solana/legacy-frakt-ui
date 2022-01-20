@@ -1,3 +1,7 @@
+.ecosystem {
+  overflow: unset;
+}
+
 .ecoContainer {
   display: flex;
   justify-content: space-between;
@@ -20,6 +24,7 @@
     width: 100%;
     max-width: 70%;
     margin-bottom: 50px;
+    position: static;
   }
 
   @media screen and (max-width: 900px) {
