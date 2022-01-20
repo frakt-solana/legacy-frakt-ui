@@ -27,12 +27,13 @@ export const useIntersectionObserver = (
     }, options);
 
     childrenRefs?.forEach((child) => {
-      child.sectionRef && observer.current.observe(child.sectionRef.current);
+      child.sectionRef?.current &&
+        observer.current.observe(child.sectionRef.current);
     });
 
     return () => {
       childrenRefs.forEach((child) => {
-        child.sectionRef &&
+        child.sectionRef?.current &&
           observer.current.unobserve(child.sectionRef.current);
       });
     };

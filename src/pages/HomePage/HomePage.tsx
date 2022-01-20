@@ -8,7 +8,6 @@ import 'swiper/swiper.min.css';
 import 'swiper/modules/navigation/navigation.scss';
 import 'swiper/modules/pagination/pagination.scss';
 import 'swiper/modules/thumbs/thumbs';
-import { SectionForm } from './SectionForm';
 import { SectionFaq } from './SectionFaq';
 import { SectionTeam } from './SectionTeam';
 import { SectionHowWork } from './SectionHowWork';
@@ -71,7 +70,7 @@ const HomePage = (): JSX.Element => {
 
       <SectionFaq navRef={sectionRef4} />
 
-      <SectionForm navRef={sectionRef5} />
+      {/*<SectionForm navRef={sectionRef5} />*/}
 
       <SectionFooter />
     </AppLayout>

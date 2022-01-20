@@ -18,6 +18,7 @@ export const SectionFaq: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
       <div className={`container ${styles.faqContainer}`}>
         <h2 className={styles.faqTitle}>FAQ</h2>
         <Collapse
+          accordion
           bordered={false}
           className={styles.faqList}
           expandIcon={({ isActive }) =>
