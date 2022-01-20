@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  font: var(--font-text-3);
+  font-size: 100%;
   border-bottom: var(--border-gray-1);
   padding-bottom: 10px;
   padding-top: 10px;
@@ -21,4 +21,11 @@
   display: flex;
   justify-content: space-between;
   padding-bottom: 10px;
+}
+
+.questionIcon {
+  width: 20px;
+  margin-left: 8px;
+  cursor: pointer;
+  fill: hsla(0,0%,100%,.75);
 }
