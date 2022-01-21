@@ -50,11 +50,9 @@ const WalletCollectionPage = (): JSX.Element => {
   );
 
   return (
-    <AppLayout
-      CustomHeader={(): JSX.Element => <Header walletPubkey={walletPubkey} />}
-      mainClassName={styles.appMain}
-    >
+    <AppLayout mainClassName={styles.appMain}>
       <div className="container">
+        <Header walletPubkey={walletPubkey} />
         <Helmet>
           <title>{`Collection of ${walletPubkey} | FRAKT: Generative Art NFT Collection on Solana`}</title>
         </Helmet>

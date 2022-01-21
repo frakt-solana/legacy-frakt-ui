@@ -7,6 +7,7 @@ import ButtonArrow from '../../components/ButtonArrow';
 import { Frakt } from '../../contexts/frakts';
 import { getPointsForArt } from '../CollectionPage/helpers';
 import styles from './styles.module.scss';
+import React from 'react';
 
 interface HeaderStakeProps {
   steps: Array<string>;
@@ -36,6 +37,7 @@ export const HeaderStake = ({
       currentStep === 0 ? `${styles.header_select}` : ''
     } ${className}`}
   >
+    <div className={styles.noise} />
     <ButtonArrow
       arrowLeft
       size="lg"

@@ -74,17 +74,13 @@ const ArtPage = (): JSX.Element => {
     history.length <= 2 ? history.replace(URLS.ROOT) : history.goBack();
 
   return (
-    <AppLayout
-      CustomHeader={(): JSX.Element => (
+    <AppLayout mainClassName={!imageSrc && styles.appLayoutMain}>
+      <div className="container">
         <ArtHeader
           title={getHeaderTitle(frakt)}
           onBackButtonClick={onBackButtonHandler}
           imageFile={imageFiles[2]}
         />
-      )}
-      mainClassName={!imageSrc && styles.appLayoutMain}
-    >
-      <div className="container">
         <Helmet>
           <title>{`Art ${
             frakt?.attributes?.art_hash ? `#${frakt.attributes.art_hash}` : ''

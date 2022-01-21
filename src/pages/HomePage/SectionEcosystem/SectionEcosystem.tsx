@@ -162,7 +162,12 @@ export const SectionEcosystem: FC<{
               projects with FRKT or stake FRKT to vote in DAO, reduce fees and
               earn rewards on fraktion.art
             </p>
-            <a href="#" target="_blank" className={styles.litepaper}>
+            <a
+              href="https://medium.com/@frakt_nft/frakt-litepaper-5c87236fb1d1"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.litepaper}
+            >
               Litepaper
               <ArrowRightTop className={styles.litepaperIcon} />
             </a>

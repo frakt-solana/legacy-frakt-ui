@@ -4,7 +4,6 @@ import { FooterSvgLogo } from '../FooterSvgLogo';
 import { URLS } from '../../../constants';
 import { HashLink as AnchorLink } from 'react-router-hash-link';
 import {
-  CONTACT_SECTION_ID,
   ECOSYSTEM_SECTION_ID,
   FAQ_SECTION_ID,
   TEAM_SECTION_ID,
@@ -74,11 +73,6 @@ export const SectionFooter: FC = () => {
               <li className={styles.navItem}>
                 <AnchorLink smooth to={`#${FAQ_SECTION_ID}`}>
                   FAQ
-                </AnchorLink>
-              </li>
-              <li className={styles.navItem}>
-                <AnchorLink smooth to={`#${CONTACT_SECTION_ID}`}>
-                  Contact us
                 </AnchorLink>
               </li>
             </ul>

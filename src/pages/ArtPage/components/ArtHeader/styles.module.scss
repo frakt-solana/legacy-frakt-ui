@@ -1,10 +1,6 @@
-.root {
-  padding: 40px 0 0;
-}
-
 .title {
   font-size: 36px;
-  padding: 0 40px 40px;
+  padding-bottom: 40px;
   border-bottom: 1px solid var(--color-gray-1);
 
   display: flex;
@@ -14,12 +10,13 @@
 }
 
 .backButton {
-  padding: 0 40px 40px;
+  padding-bottom: 40px;
   color: var(--color-gray-3);
 }
 
 .buttonsWrapper {
   display: flex;
+  font-size: 18px;
 
   & :nth-child(1),
   & :nth-child(2) {
@@ -27,13 +24,10 @@
   }
 }
 
-@media screen and (max-width: 1023px) {
-  .root {
-    padding: 24px 0 0;
-  }
+@media screen and (max-width: 900px) {
   .title {
     font-size: 24px;
-    padding: 0 24px 24px;
+    padding-bottom: 24px;
 
     display: flex;
     flex-direction: column;
@@ -42,7 +36,7 @@
   }
 
   .backButton {
-    padding: 0 24px 18px;
+    padding-bottom: 24px;
     color: var(--color-gray-3);
   }
 

@@ -2,6 +2,7 @@
   flex-grow: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  border-right: 1px solid var(--color-gray-1);
   border-bottom: 1px solid var(--color-gray-1);
 }
 
@@ -29,7 +30,7 @@
   align-items: center;
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 900px) {
   .artContainer {
     display: flex;
     flex-direction: column;

@@ -17,11 +17,70 @@
 //? Header
 
 .header {
-  padding: 40px 0 0;
   border-bottom: 1px solid var(--color-gray-1);
 
+  .noise {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: none;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: -100%;
+      height: 300%;
+      width: 300%;
+      background: url("../../images/noise.png");
+      pointer-events: none;
+      display: block;
+      opacity: 1;
+      animation: grain 2s steps(10) infinite;
+      will-change: transform;
+    }
+  }
+
+  @keyframes grain {
+    0%, to {
+      transform: translate(0)
+    }
+    10% {
+      transform: translate(-5%, -10%)
+    }
+    20% {
+      transform: translate(-15%, 5%)
+    }
+    30% {
+      transform: translate(7%, -25%)
+    }
+    40% {
+      transform: translate(21%, 25%)
+    }
+    50% {
+      transform: translate(-25%, 10%)
+    }
+    60% {
+      transform: translate(15%, 5%)
+    }
+    70% {
+      transform: translateY(15%)
+    }
+    80% {
+      transform: translate(25%, 35%)
+    }
+    90% {
+      transform: translate(-10%, 10%)
+    }
+  }
+
   &__backButton {
-    padding: 0 40px 20px;
+    padding-bottom: 20px;
     color: var(--color-gray-3);
     transition: color 0.2s ease-in;
 
@@ -32,7 +91,7 @@
 
   &__titleWrapper {
     font-size: 24px;
-    padding: 0 40px 40px;
+    padding-bottom: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -47,7 +106,7 @@
 
   &_select {
     .header__titleWrapper {
-      padding: 0 40px 24px;
+      padding-bottom: 24px;
     }
   }
 
@@ -59,11 +118,12 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 0 40px 24px;
+    padding-bottom: 24px;
   }
 
   &__selectCounter {
     font-size: 18px;
+
     b {
       font-weight: 600;
     }
@@ -95,7 +155,6 @@
 
 @media screen and (max-width: 1023px) {
   .header {
-    padding: 24px 0 0;
 
     &__backButton {
       padding: 0 24px 18px;
@@ -145,7 +204,9 @@
   .header {
     &_select {
       position: sticky;
-      top: 0;
+      padding-top: 110px;
+      top: -110px;
+      margin-top: -110px;
       left: 0;
       background: var(--color-black);
       z-index: 3;
@@ -159,6 +220,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+
   &__frakts {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -174,6 +236,7 @@
     &__frakts {
       grid-template-columns: 1fr 1fr;
     }
+
     &__preloader {
       min-height: calc(100vh - 210px);
     }
@@ -198,7 +261,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(---color-gray-1-04);
+    background: var(--color-gray-1-04);
     z-index: 2;
     transition: opacity 0.2s ease-in;
     opacity: 0;
@@ -220,11 +283,15 @@
   }
 
   &_selected {
+    &::before {
+      opacity: 1;
+    }
     &:hover {
       &::before {
         display: none;
       }
     }
+
     .fraktCheckbox__img {
       &:after {
         position: absolute;
@@ -260,6 +327,7 @@
   &_locked {
     pointer-events: none;
     position: relative;
+
     &:hover {
       &::before {
         display: none;
@@ -337,7 +405,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 40px;
+  padding: 40px;
 
   &__title {
     font-size: 64px;
@@ -357,6 +425,7 @@
 @media screen and (max-width: 1023px) {
   .attentionStep {
     padding: 0 24px;
+
     &__title {
       font-size: 48px;
       margin-bottom: 8px;

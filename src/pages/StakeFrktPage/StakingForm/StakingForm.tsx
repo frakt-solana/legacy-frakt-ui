@@ -52,7 +52,7 @@ export const StakingForm = ({ className }: StakingFormProps): JSX.Element => {
         positiveOnly
         error={err}
       />
-      <p style={{ marginTop: 10, marginBottom: 10 }}>
+      <p style={{ marginTop: 10, marginBottom: 10, fontSize: '14px' }}>
         Please note that FRKT will be locked during staking period of 30 days
       </p>
       <Button
