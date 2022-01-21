@@ -18,6 +18,8 @@
 
 .header {
   border-bottom: 1px solid var(--color-gray-1);
+  background: var(--color-black);
+  position: relative;
 
   .noise {
     position: absolute;
@@ -208,7 +210,6 @@
       top: -110px;
       margin-top: -110px;
       left: 0;
-      background: var(--color-black);
       z-index: 3;
     }
   }
