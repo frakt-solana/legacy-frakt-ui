@@ -7,7 +7,7 @@ import {
   imageExamples,
 } from '../ArtExamples/imageExamples';
 import { ArrowRightTop } from '../../../icons';
-import fraktionArtImage from '../assets/images/fraktion.art.png';
+import fraktionArtImage from '../assets/images/fraktion.art.svg';
 import SwiperCore, { Autoplay } from 'swiper';
 import { ECOSYSTEM_SECTION_ID } from '../constants';
 
@@ -130,6 +130,7 @@ export const SectionEcosystem: FC<{
                     <p className={styles.ecoSlideLabel}>Collection:</p>
                     <span className={styles.ecoSlideName}>
                       {img.includes('Moments') && 'Moments'}
+                      {img.includes('Synapses') && 'Synapses'}
                       {img.includes('Nations') && 'Wealth of Nations'}
                       {img.includes('Maze') && 'Broken Maze'}
                       {img.includes('Cingular') && 'Cingular'}
@@ -159,8 +160,7 @@ export const SectionEcosystem: FC<{
             <h5 className={styles.ecoBlockTitle}>$FRKT</h5>
             <p className={styles.ecoBlockSubtitle}>
               Governance and utility token of FRAKT ecosystem. Mint Sandbox
-              projects with FRKT or stake FRKT to vote in DAO, reduce fees and
-              earn rewards on fraktion.art
+              projects with FRKT or stake FRKT to vote in DAO
             </p>
             <a
               href="https://medium.com/@frakt_nft/frakt-litepaper-5c87236fb1d1"

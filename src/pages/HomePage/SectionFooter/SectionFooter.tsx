@@ -47,7 +47,7 @@ export const SectionFooter: FC = () => {
               </li>
               <li className={styles.navItem}>
                 <a className={styles.link} href={URLS.FRAKTION}>
-                  Fraktionalization
+                  Fraktion
                 </a>
               </li>
             </ul>

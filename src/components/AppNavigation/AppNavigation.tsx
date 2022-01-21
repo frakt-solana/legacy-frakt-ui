@@ -21,7 +21,7 @@ const AppNavigation = ({ className }: AppNavigation): JSX.Element => {
       </li>
       <li>
         <a className={styles.link} href={URLS.FRAKTION}>
-          Fraktionalization
+          Fraktion
         </a>
       </li>
     </ul>

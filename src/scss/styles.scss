@@ -92,7 +92,7 @@ section {
     background: url("../images/noise.png");
     pointer-events: none;
     display: block;
-    opacity: 1;
+    opacity: .7;
     animation: grain 2s steps(10) infinite;
     will-change: transform;
   }
