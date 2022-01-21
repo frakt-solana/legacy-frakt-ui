@@ -79,7 +79,7 @@
 .teamPosition {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 
   span {
     font: var(--font-text-3);
