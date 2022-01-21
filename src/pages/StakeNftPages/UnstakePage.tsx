@@ -31,28 +31,30 @@ const UnstakePage = (): JSX.Element => {
 
   return (
     <AppLayout mainClassName={styles.appMain}>
-      <HeaderUnstake
-        stakes={userStakeAccounts}
-        stakesLoading={loading}
-        selectedStakes={selectedStakes}
-        steps={STEPS}
-        currentStep={currentStep}
-        onBackButtonClick={() => history.goBack()}
-        selectDeselectAllHandler={selectDeselectAllHandler}
-        disableSelectDeselectButton={
-          userStakeAccountsAvailableToUnstake.length === 0
-        }
-        nextStep={nextStep}
-      />
-      {currentStep === 0 && (
-        <SelectStep
+      <div className="container">
+        <HeaderUnstake
           stakes={userStakeAccounts}
           stakesLoading={loading}
           selectedStakes={selectedStakes}
-          setSelectedStakes={setSelectedStakes}
+          steps={STEPS}
+          currentStep={currentStep}
+          onBackButtonClick={() => history.goBack()}
+          selectDeselectAllHandler={selectDeselectAllHandler}
+          disableSelectDeselectButton={
+            userStakeAccountsAvailableToUnstake.length === 0
+          }
+          nextStep={nextStep}
         />
-      )}
-      {currentStep === 1 && <ApprovalStep selectedStakes={selectedStakes} />}
+        {currentStep === 0 && (
+          <SelectStep
+            stakes={userStakeAccounts}
+            stakesLoading={loading}
+            selectedStakes={selectedStakes}
+            setSelectedStakes={setSelectedStakes}
+          />
+        )}
+        {currentStep === 1 && <ApprovalStep selectedStakes={selectedStakes} />}
+      </div>
     </AppLayout>
   );
 };

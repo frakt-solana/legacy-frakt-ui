@@ -84,33 +84,35 @@ const ArtPage = (): JSX.Element => {
       )}
       mainClassName={!imageSrc && styles.appLayoutMain}
     >
-      <Helmet>
-        <title>{`Art ${
-          frakt?.attributes?.art_hash ? `#${frakt.attributes.art_hash}` : ''
-        } | FRAKT: Generative Art NFT Collection on Solana`}</title>
-      </Helmet>
-      <div className={styles.artContainer}>
-        {!imageSrc ? (
-          <div className={styles.preloaderWrapper}>
-            <Preloader size="lg" />
-          </div>
-        ) : (
-          <>
-            <ArtImage src={imageFiles[1] || imageSrc} preloaderSize="md" />
-            {frakt && (
-              <div className={styles.info}>
-                <Table
-                  data={getArtInfoData({
-                    ownerAddress,
-                    artData: frakt,
-                    tokenPubkey,
-                  })}
-                  size="md"
-                />
-              </div>
-            )}
-          </>
-        )}
+      <div className="container">
+        <Helmet>
+          <title>{`Art ${
+            frakt?.attributes?.art_hash ? `#${frakt.attributes.art_hash}` : ''
+          } | FRAKT: Generative Art NFT Collection on Solana`}</title>
+        </Helmet>
+        <div className={styles.artContainer}>
+          {!imageSrc ? (
+            <div className={styles.preloaderWrapper}>
+              <Preloader size="lg" />
+            </div>
+          ) : (
+            <>
+              <ArtImage src={imageFiles[1] || imageSrc} preloaderSize="md" />
+              {frakt && (
+                <div className={styles.info}>
+                  <Table
+                    data={getArtInfoData({
+                      ownerAddress,
+                      artData: frakt,
+                      tokenPubkey,
+                    })}
+                    size="md"
+                  />
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
     </AppLayout>
   );

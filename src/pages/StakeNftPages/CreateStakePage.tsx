@@ -37,28 +37,30 @@ const CreateStakePage = (): JSX.Element => {
 
   return (
     <AppLayout mainClassName={styles.appMain}>
-      <HeaderStake
-        frakts={userFrakts}
-        fraktsLoading={loading}
-        selectedFrakts={selectedFrakts}
-        steps={STEPS}
-        currentStep={currentStep}
-        onBackButtonClick={onBackButtonClick}
-        selectDeselectAllHandler={selectDeselectAllHandler}
-        nextStep={nextStep}
-      />
-      {currentStep === 0 && (
-        <SelectStep
+      <div className="container">
+        <HeaderStake
           frakts={userFrakts}
           fraktsLoading={loading}
           selectedFrakts={selectedFrakts}
-          setSelectedFrakts={setSelectedFrakts}
+          steps={STEPS}
+          currentStep={currentStep}
+          onBackButtonClick={onBackButtonClick}
+          selectDeselectAllHandler={selectDeselectAllHandler}
+          nextStep={nextStep}
         />
-      )}
-      {currentStep === 1 && (
-        <WarningStep selectedFrakts={selectedFrakts} nextStep={nextStep} />
-      )}
-      {currentStep === 2 && <ApprovalStep selectedFrakts={selectedFrakts} />}
+        {currentStep === 0 && (
+          <SelectStep
+            frakts={userFrakts}
+            fraktsLoading={loading}
+            selectedFrakts={selectedFrakts}
+            setSelectedFrakts={setSelectedFrakts}
+          />
+        )}
+        {currentStep === 1 && (
+          <WarningStep selectedFrakts={selectedFrakts} nextStep={nextStep} />
+        )}
+        {currentStep === 2 && <ApprovalStep selectedFrakts={selectedFrakts} />}
+      </div>
     </AppLayout>
   );
 };

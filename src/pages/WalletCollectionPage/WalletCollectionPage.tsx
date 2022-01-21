@@ -54,25 +54,27 @@ const WalletCollectionPage = (): JSX.Element => {
       CustomHeader={(): JSX.Element => <Header walletPubkey={walletPubkey} />}
       mainClassName={styles.appMain}
     >
-      <Helmet>
-        <title>{`Collection of ${walletPubkey} | FRAKT: Generative Art NFT Collection on Solana`}</title>
-      </Helmet>
-      {loading && <Preloader size="lg" className={styles.preloader} />}
-      {!loading && (
-        <>
-          {!frakts.length && <NoFraktsBlock />}
-          {!!frakts.length && (
-            <ArtsFilter
-              hideFilter
-              sortValue={sortBy}
-              onSortChange={onSortChange}
-              filterValue={filter}
-              onFilterChangeValue={onFilterChange}
-            />
-          )}
-          <ArtsList arts={frakts} />
-        </>
-      )}
+      <div className="container">
+        <Helmet>
+          <title>{`Collection of ${walletPubkey} | FRAKT: Generative Art NFT Collection on Solana`}</title>
+        </Helmet>
+        {loading && <Preloader size="lg" className={styles.preloader} />}
+        {!loading && (
+          <>
+            {!frakts.length && <NoFraktsBlock />}
+            {!!frakts.length && (
+              <ArtsFilter
+                hideFilter
+                sortValue={sortBy}
+                onSortChange={onSortChange}
+                filterValue={filter}
+                onFilterChangeValue={onFilterChange}
+              />
+            )}
+            <ArtsList arts={frakts} />
+          </>
+        )}
+      </div>
     </AppLayout>
   );
 };

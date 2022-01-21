@@ -5,6 +5,7 @@
 
 .pageTitle {
   font: var(--font-title-2);
+  margin-bottom: 50px;
 }
 
 @media screen and (max-width: 1023px) {
@@ -427,10 +428,10 @@
   &__content {
     flex-grow: 1;
     display: grid;
-    gap: 1px;
-    background: var(--color-gray-1);
     grid-template-columns: 5fr 7fr;
     grid-template-rows: 1fr 1fr;
+    border: 1px solid var(--color-gray-1);
+    min-height: calc(100vh - 250px);
   }
 
   &__warnBanner {
@@ -469,22 +470,23 @@
     justify-content: center;
     align-items: flex-end;
     padding: 30px 60px;
-    background: var(--color-black);
   }
 
   &__stakeWrapper {
     grid-column: 1 / 1;
-    padding-left: 0;
+    border-right: 1px solid var(--color-gray-1);
+    border-bottom: 1px solid var(--color-gray-1);
   }
 
   &__unstakeWrapper {
     grid-column: 1 / 1;
-    padding-left: 0;
+    border-right: 1px solid var(--color-gray-1);
   }
 
   &__harvestWrapper {
     grid-column: 2 / 2;
     grid-row: 1/ -1;
+    font: var(--font-text-2);
   }
 }
 
@@ -523,6 +525,7 @@
     &__harvestWrapper {
       grid-column: unset;
       grid-row: 1 / 1;
+      border-bottom: 1px solid var(--color-gray-1);
     }
   }
 }
@@ -532,6 +535,7 @@
     &__content {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr 1fr 1fr;
+      margin-bottom: 50px;
     }
 
     &__stakeWrapper {
@@ -546,7 +550,7 @@
 
     &__harvestWrapper {
       grid-column: unset;
-      padding-left: 0;
+      border-bottom: 1px solid var(--color-gray-1);
       grid-row: 1 / 2;
     }
   }
