@@ -7,6 +7,16 @@
   border-bottom: var(--border-gray-1);
   padding-bottom: 10px;
   padding-top: 10px;
+
+  a {
+    color: var(--color-white);
+    border-bottom: var(--border-white-1);
+
+    &:hover {
+      color: var(--color-white);
+      opacity: .6;
+    }
+  }
 }
 
 .name {

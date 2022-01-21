@@ -118,6 +118,7 @@ export const HeaderUnstake = ({
       currentStep === 0 ? `${styles.header_select}` : ''
     } ${className}`}
   >
+    <div className={styles.noise} />
     <ButtonArrow
       arrowLeft
       size="lg"

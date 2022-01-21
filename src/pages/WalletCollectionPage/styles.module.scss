@@ -15,16 +15,13 @@
 
 //? Header
 .header {
-  padding-bottom: 40px;
-  margin-bottom: 40px;
-  border-bottom: 1px solid var(--color-gray-1);
+  margin-bottom: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   &__text {
-    font-size: 36px;
-    text-transform: uppercase;
+    font: var(--font-title-2);
   }
 }
 
