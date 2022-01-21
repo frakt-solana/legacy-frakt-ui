@@ -36,4 +36,8 @@
 
 .activeLink {
   color: var(--color-gray-7);
+
+  &:hover {
+    color: var(--color-gray-7);
+  }
 }

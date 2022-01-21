@@ -7,7 +7,6 @@ import { GitHubIcon } from '../../../icons/GitHubIcon';
 import teamPhotoVlad from '../assets/images/team/teamPhotoVlad.jpg';
 import teamPhotoPhil from '../assets/images/team/teamPhotoPhil.jpg';
 import teamPhotoViktor from '../assets/images/team/teamPhotoViktor.jpg';
-import teamPhotoSid from '../assets/images/team/teamPhotoSid.jpg';
 import teamPhotoRoman from '../assets/images/team/teamPhotoRoman.jpg';
 import { TEAM_SECTION_ID } from '../constants';
 
@@ -23,7 +22,9 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
         <h2 className={styles.teamTitle}>Meet the team</h2>
         <ul className={styles.teamList}>
           <li className={styles.teamItem}>
-            <img src={teamPhotoTim} alt="Tim" className={styles.teamPhoto} />
+            <div className={styles.teamPhotoWrapper}>
+              <img src={teamPhotoTim} alt="Tim" className={styles.teamPhoto} />
+            </div>
             <div className={styles.teamInfo}>
               <p className={styles.teamName}>Tim</p>
               <div className={styles.teamPosition}>
@@ -39,11 +40,13 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
             </div>
           </li>
           <li className={styles.teamItem}>
-            <img
-              src={teamPhotoVedamire}
-              alt="Vedamire"
-              className={styles.teamPhoto}
-            />
+            <div className={styles.teamPhotoWrapper}>
+              <img
+                src={teamPhotoVedamire}
+                alt="Vedamire"
+                className={styles.teamPhoto}
+              />
+            </div>
             <div className={styles.teamInfo}>
               <p className={styles.teamName}>Vedamire</p>
               <div className={styles.teamPosition}>
@@ -59,7 +62,13 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
             </div>
           </li>
           <li className={styles.teamItem}>
-            <img src={teamPhotoVlad} alt="Vlad" className={styles.teamPhoto} />
+            <div className={styles.teamPhotoWrapper}>
+              <img
+                src={teamPhotoVlad}
+                alt="Vlad"
+                className={styles.teamPhoto}
+              />
+            </div>
             <div className={styles.teamInfo}>
               <p className={styles.teamName}>Vlad</p>
               <div className={styles.teamPosition}>
@@ -75,7 +84,13 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
             </div>
           </li>
           <li className={styles.teamItem}>
-            <img src={teamPhotoPhil} alt="Phil" className={styles.teamPhoto} />
+            <div className={styles.teamPhotoWrapper}>
+              <img
+                src={teamPhotoPhil}
+                alt="Phil"
+                className={styles.teamPhoto}
+              />
+            </div>
             <div className={styles.teamInfo}>
               <p className={styles.teamName}>Phil</p>
               <div className={styles.teamPosition}>
@@ -91,11 +106,13 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
             </div>
           </li>
           <li className={styles.teamItem}>
-            <img
-              src={teamPhotoViktor}
-              alt="Viktor"
-              className={styles.teamPhoto}
-            />
+            <div className={styles.teamPhotoWrapper}>
+              <img
+                src={teamPhotoViktor}
+                alt="Viktor"
+                className={styles.teamPhoto}
+              />
+            </div>
             <div className={styles.teamInfo}>
               <p className={styles.teamName}>Viktor</p>
               <div className={styles.teamPosition}>
@@ -111,27 +128,13 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
             </div>
           </li>
           <li className={styles.teamItem}>
-            <img src={teamPhotoSid} alt="Sid" className={styles.teamPhoto} />
-            <div className={styles.teamInfo}>
-              <p className={styles.teamName}>Sid</p>
-              <div className={styles.teamPosition}>
-                <span>Art Director</span>
-                <a
-                  href="https://twitter.com/SiD_Phi11ips"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <TwitterIcon width={24} />
-                </a>
-              </div>
+            <div className={styles.teamPhotoWrapper}>
+              <img
+                src={teamPhotoRoman}
+                alt="Roman"
+                className={styles.teamPhoto}
+              />
             </div>
-          </li>
-          <li className={styles.teamItem}>
-            <img
-              src={teamPhotoRoman}
-              alt="Roman"
-              className={styles.teamPhoto}
-            />
             <div className={styles.teamInfo}>
               <p className={styles.teamName}>Roman</p>
               <div className={styles.teamPosition}>

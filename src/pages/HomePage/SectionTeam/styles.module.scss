@@ -36,8 +36,35 @@
 
 .teamPhoto {
   width: 100%;
-  position: relative;
   z-index: 1;
+  filter: grayscale(1);
+  display: block;
+}
+
+.teamPhotoWrapper {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+
+  &::before {
+    background: #F6FFFA;
+    mix-blend-mode: color;
+  }
+
+  &::after {
+    background: linear-gradient(360deg, rgba(131, 214, 164, 0.3) 0%, rgba(131, 214, 164, 0) 39.02%);
+  }
 }
 
 .teamInfo {
