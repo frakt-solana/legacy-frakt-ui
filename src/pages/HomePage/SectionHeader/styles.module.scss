@@ -2,6 +2,7 @@
   height: calc(100vh - 110px);
   position: relative;
   background: url("../assets/images/greenBg.png") no-repeat right bottom / 70% 120%;
+  overflow: unset;
 
   @media screen and (max-width: 1023px) {
     background-size: 100% 120%;
