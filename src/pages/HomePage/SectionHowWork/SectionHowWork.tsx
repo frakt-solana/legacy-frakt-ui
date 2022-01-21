@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import styles from './styles.module.scss';
-import { NavLink } from 'react-router-dom';
 import howWorkImage from '../assets/images/fraktEcosystem.svg';
 
 export const SectionHowWork: FC = () => {
