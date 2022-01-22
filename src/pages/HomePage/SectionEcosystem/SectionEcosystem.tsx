@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import styles from './styles.module.scss';
 import { ArrowRightIcon } from '../../../icons/ArrowRightIcon';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
@@ -10,6 +10,7 @@ import { ArrowRightTop } from '../../../icons';
 import fraktionArtImage from '../assets/images/fraktion.art.svg';
 import SwiperCore, { Autoplay } from 'swiper';
 import { ECOSYSTEM_SECTION_ID } from '../constants';
+import { useStatistics } from './hooks';
 
 SwiperCore.use([Autoplay]);
 
@@ -44,6 +45,8 @@ const sliderBreakpoints = {
 export const SectionEcosystem: FC<{
   navRef: { current: HTMLParagraphElement };
 }> = ({ navRef }) => {
+  const statistics = useStatistics();
+
   return (
     <section className={`section ${styles.ecosystem}`}>
       <p
@@ -95,15 +98,21 @@ export const SectionEcosystem: FC<{
             <ul className={styles.ecoTable}>
               <li className={styles.ecoTableItem}>
                 <span className={styles.ecoTableLabel}>Total Supply: </span>
-                <span className={styles.ecoTableValue}>10 000</span>
+                <span className={styles.ecoTableValue}>
+                  {statistics.fraktNFTs.totalSupply}
+                </span>
               </li>
               <li className={styles.ecoTableItem}>
                 <span className={styles.ecoTableLabel}>Staked NFTs:</span>
-                <span className={styles.ecoTableValue}>7670</span>
+                <span className={styles.ecoTableValue}>
+                  {statistics.fraktNFTs.stakedNFTs}
+                </span>
               </li>
               <li className={styles.ecoTableItem}>
                 <span className={styles.ecoTableLabel}>Holders: </span>
-                <span className={styles.ecoTableValue}>2000</span>
+                <span className={styles.ecoTableValue}>
+                  {statistics.fraktNFTs.holdersAmout}
+                </span>
               </li>
             </ul>
           </div>
@@ -148,11 +157,15 @@ export const SectionEcosystem: FC<{
                 <span className={styles.ecoTableLabel}>
                   Featured authors collections:
                 </span>
-                <span className={styles.ecoTableValue}>5</span>
+                <span className={styles.ecoTableValue}>
+                  {statistics.sandbox.collectionsAmount}
+                </span>
               </li>
               <li className={`${styles.ecoTableItem} ${styles.tableItem2}`}>
                 <span className={styles.ecoTableLabel}>Minted NFTs:</span>
-                <span className={styles.ecoTableValue}>5500</span>
+                <span className={styles.ecoTableValue}>
+                  {statistics.sandbox.totalNFTsAmount}
+                </span>
               </li>
             </ul>
           </div>
@@ -174,21 +187,29 @@ export const SectionEcosystem: FC<{
             <ul className={styles.ecoTable}>
               <li className={`${styles.ecoTableItem} ${styles.tableItem2}`}>
                 <span className={styles.ecoTableLabel}>Total Supply:</span>
-                <span className={styles.ecoTableValue}>50 000 000</span>
+                <span className={styles.ecoTableValue}>
+                  {statistics.frktToken.totalSupply}
+                </span>
               </li>
               <li className={`${styles.ecoTableItem} ${styles.tableItem2}`}>
                 <span className={styles.ecoTableLabel}>
                   Circulating Supply:
                 </span>
-                <span className={styles.ecoTableValue}>50 000 000</span>
+                <span className={styles.ecoTableValue}>
+                  {statistics.frktToken.circulatingSupply}
+                </span>
               </li>
               <li className={`${styles.ecoTableItem} ${styles.tableItem2}`}>
                 <span className={styles.ecoTableLabel}>Staked:</span>
-                <span className={styles.ecoTableValue}>76%</span>
+                <span className={styles.ecoTableValue}>
+                  {statistics.frktToken.stakedPercentage}
+                </span>
               </li>
               <li className={`${styles.ecoTableItem} ${styles.tableItem2}`}>
                 <span className={styles.ecoTableLabel}>Holders:</span>
-                <span className={styles.ecoTableValue}>2000</span>
+                <span className={styles.ecoTableValue}>
+                  {statistics.frktToken.holdersAmout}
+                </span>
               </li>
             </ul>
           </div>
@@ -210,11 +231,15 @@ export const SectionEcosystem: FC<{
             <ul className={styles.ecoTable}>
               <li className={`${styles.ecoTableItem} ${styles.tableItem2}`}>
                 <span className={styles.ecoTableLabel}>TVL:</span>
-                <span className={styles.ecoTableValue}>50 000 $</span>
+                <span className={styles.ecoTableValue}>
+                  {statistics.fraktion.TVL}
+                </span>
               </li>
               <li className={`${styles.ecoTableItem} ${styles.tableItem2}`}>
                 <span className={styles.ecoTableLabel}>Locked NFTs:</span>
-                <span className={styles.ecoTableValue}>35</span>
+                <span className={styles.ecoTableValue}>
+                  {statistics.fraktion.lockedNFTsAmount}
+                </span>
               </li>
             </ul>
           </div>
