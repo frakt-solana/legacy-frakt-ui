@@ -93,7 +93,7 @@ export const SectionEcosystem: FC<{
             <p className={styles.ecoBlockSubtitle}>
               First generative art NFT collection on Solana that gives exclusive
               access to our community, DAO and ability to generate FRKT via
-              staking
+              staking.
             </p>
             <ul className={styles.ecoTable}>
               <li className={styles.ecoTableItem}>
@@ -150,7 +150,7 @@ export const SectionEcosystem: FC<{
             </Swiper>
             <p className={styles.ecoBlockSubtitle}>
               Platform that focused on bringing the beauty of Generative Art to
-              the public, utility and burning mechanism for FRKT
+              the public, utility and burning mechanism for FRKT.
             </p>
             <ul className={styles.ecoTable}>
               <li className={`${styles.ecoTableItem} ${styles.tableItem2}`}>
@@ -173,7 +173,7 @@ export const SectionEcosystem: FC<{
             <h5 className={styles.ecoBlockTitle}>$FRKT</h5>
             <p className={styles.ecoBlockSubtitle}>
               Governance and utility token of FRAKT ecosystem. Mint Sandbox
-              projects with FRKT or stake FRKT to vote in DAO
+              projects with FRKT or stake FRKT to vote in DAO.
             </p>
             <a
               href="https://medium.com/@frakt_nft/frakt-litepaper-5c87236fb1d1"
@@ -221,12 +221,13 @@ export const SectionEcosystem: FC<{
               className={styles.fraktionArtImage}
             />
             <p className={styles.ecoBlockSubtitle}>
-              A platform for creating liquid markets for illiquid NFTs on Solana
+              A platform to make NFTs liquid and accessible.
             </p>
             <p className={styles.ecoBlockText}>
-              Trade, shop and earn yield on the most liquid decentralized NFT
-              marketplace on Solana. Fraktion allows custodial partial ownership
-              of NFTs and helps NFT owners free up liquidity from their asset
+              The FRAKTION Protocol is a set of tools to unlock liquidity from
+              NFTs and make use of them in DeFi. Users can fraktionalize, pool
+              and farm their illiquid NFTs into liquid tokens to instantly
+              unlock liquidity and earn yield from protocol&apos;s volume.
             </p>
             <ul className={styles.ecoTable}>
               <li className={`${styles.ecoTableItem} ${styles.tableItem2}`}>
