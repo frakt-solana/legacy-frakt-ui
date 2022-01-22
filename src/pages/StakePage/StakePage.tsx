@@ -15,7 +15,7 @@ export const StakePage = (): JSX.Element => {
     <AppLayout>
       <div className="container">
         <Helmet>
-          <title>{`Rarity | FRAKT: Generative Art NFT Collection on Solana`}</title>
+          <title>{`Rarity | FRAKT: A NFT-DeFi ecosystem on Solana`}</title>
         </Helmet>
         <div className={styles.root}>
           {connected ? (

@@ -30,7 +30,7 @@ const MarketplacesPage = (): JSX.Element => (
   <AppLayout>
     <div className="container">
       <Helmet>
-        <title>{`Marketplace | FRAKT: Generative Art NFT Collection on Solana`}</title>
+        <title>{`Marketplace | FRAKT: A NFT-DeFi ecosystem on Solana`}</title>
       </Helmet>
       <h2 className={styles.pageTitle}>Select marketplace</h2>
       <div className={styles.root}>

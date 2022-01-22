@@ -105,7 +105,7 @@ const StakingNftPage = (): JSX.Element => {
     <AppLayout mainClassName={styles.appMain}>
       <div className="container">
         <Helmet>
-          <title>{`Staking FRAKT NFT | FRAKT: Generative Art NFT Collection on Solana`}</title>
+          <title>{`Staking FRAKT NFT | FRAKT: A NFT-DeFi ecosystem on Solana`}</title>
         </Helmet>
         <h2 className={styles.pageTitle}>Staking FRAKT NFTs</h2>
         <div className={styles.stakingPage}>

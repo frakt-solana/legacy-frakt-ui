@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 const Page404 = (): JSX.Element => (
   <AppLayout>
     <Helmet>
-      <title>{`Not found | FRAKT: Generative Art NFT Collection on Solana`}</title>
+      <title>{`Not found | FRAKT: A NFT-DeFi ecosystem on Solana`}</title>
     </Helmet>
     <div className={styles.root}>
       <h1 className={styles.title}>404</h1>

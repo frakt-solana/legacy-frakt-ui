@@ -9,7 +9,7 @@ const RarityPage = (): JSX.Element => (
   <AppLayout>
     <div className="container">
       <Helmet>
-        <title>{`Rarity | FRAKT: Generative Art NFT Collection on Solana`}</title>
+        <title>{`Rarity | FRAKT: A NFT-DeFi ecosystem on Solana`}</title>
       </Helmet>
       <h2 className={styles.pageTitle}>Rarity Handbook</h2>
       <div className={styles.root}>

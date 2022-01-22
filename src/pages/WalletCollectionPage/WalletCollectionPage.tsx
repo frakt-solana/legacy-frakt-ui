@@ -54,7 +54,7 @@ const WalletCollectionPage = (): JSX.Element => {
       <div className="container">
         <Header walletPubkey={walletPubkey} />
         <Helmet>
-          <title>{`Collection of ${walletPubkey} | FRAKT: Generative Art NFT Collection on Solana`}</title>
+          <title>{`Collection of ${walletPubkey} | FRAKT: A NFT-DeFi ecosystem on Solana`}</title>
         </Helmet>
         {loading && <Preloader size="lg" className={styles.preloader} />}
         {!loading && (

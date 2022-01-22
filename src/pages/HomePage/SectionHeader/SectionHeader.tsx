@@ -8,7 +8,7 @@ export const SectionHeader: FC = () => {
     <section className={styles.firstSectionBg}>
       <div className="container">
         <Helmet>
-          <title>FRAKT | Generative Art NFT Collection on Solana</title>
+          <title>FRAKT | A NFT-DeFi ecosystem on Solana</title>
         </Helmet>
         <div className={styles.hero}>
           <div className={styles.titleWrapper}>

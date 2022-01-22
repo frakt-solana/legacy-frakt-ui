@@ -1,7 +1,8 @@
 .firstSectionBg {
   height: calc(100vh - 110px);
   position: relative;
-  background: url("../assets/images/greenBg.png") no-repeat right bottom / 70% 120%;
+  background: url('../assets/images/greenBg.png') no-repeat right bottom / 70%
+    120%;
   overflow: unset;
 
   @media screen and (max-width: 1023px) {
@@ -43,6 +44,10 @@
         }
       }
     }
+  }
+
+  @media screen and (max-width: 1320px) {
+    overflow: hidden;
   }
 
   @media screen and (max-width: 1023px) {

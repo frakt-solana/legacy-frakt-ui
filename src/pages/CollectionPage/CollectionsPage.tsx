@@ -55,7 +55,7 @@ const CollectionsPage = (): JSX.Element => {
   return (
     <AppLayout mainClassName={styles.appMain}>
       <Helmet>
-        <title>{`Collection | FRAKT: Generative Art NFT Collection on Solana`}</title>
+        <title>{`Collection | FRAKT: A NFT-DeFi ecosystem on Solana`}</title>
       </Helmet>
       {fraktsLoading && <Preloader size="lg" className={styles.preloader} />}
       {!fraktsLoading && (
