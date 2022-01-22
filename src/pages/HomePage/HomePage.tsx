@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 
 import AppLayout from '../../components/AppLayout';
 
@@ -10,7 +10,7 @@ import 'swiper/modules/pagination/pagination.scss';
 import 'swiper/modules/thumbs/thumbs';
 import { SectionFaq } from './SectionFaq';
 import { SectionTeam } from './SectionTeam';
-import { SectionHowWork } from './SectionHowWork';
+// import { SectionHowWork } from './SectionHowWork';
 import { SectionEcosystem } from './SectionEcosystem';
 import { SectionWhatIsFrakt } from './SectionWhatIsFrakt';
 import { SectionHeader } from './SectionHeader';
@@ -62,7 +62,7 @@ const HomePage = (): JSX.Element => {
 
       <SectionEcosystem navRef={sectionRef2} />
 
-      <SectionHowWork />
+      {/* <SectionHowWork /> */}
 
       <SectionTeam navRef={sectionRef3} />
 
