@@ -191,7 +191,7 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
             <div className={styles.teamInfo}>
               <p className={styles.teamName}>Egor</p>
               <div className={styles.teamPosition}>
-                <span>Designer</span>
+                <span>UX/UI designer</span>
               </div>
             </div>
           </li>
