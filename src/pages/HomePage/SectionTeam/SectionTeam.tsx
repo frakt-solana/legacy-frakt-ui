@@ -62,7 +62,9 @@ const MEMBERS = [
     photoUrl: teamPhotoPhil,
     position: (
       <span>
-        Operations, <br /> Community
+        Swiss Army
+        <br />
+        Knife
       </span>
     ),
     socialLink: (
