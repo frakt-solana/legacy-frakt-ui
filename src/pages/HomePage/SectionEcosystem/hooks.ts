@@ -6,13 +6,13 @@ interface Statistics {
   fraktNFTs: {
     totalSupply: string;
     stakedNFTs: string;
-    holdersAmout: string;
+    stakersAmout: string;
   };
   frktToken: {
     totalSupply: string;
     circulatingSupply: string;
     stakedPercentage: string;
-    holdersAmout: string;
+    holdersAmount: string;
   };
   sandbox: {
     collectionsAmount: string;
@@ -29,17 +29,17 @@ export const useStatistics = (): Statistics => {
     fraktNFTs: {
       totalSupply: '10 000',
       stakedNFTs: LOADING_PLACEHOLDER,
-      holdersAmout: LOADING_PLACEHOLDER,
+      stakersAmout: LOADING_PLACEHOLDER,
     },
     frktToken: {
       totalSupply: LOADING_PLACEHOLDER,
       circulatingSupply: LOADING_PLACEHOLDER,
       stakedPercentage: LOADING_PLACEHOLDER,
-      holdersAmout: LOADING_PLACEHOLDER,
+      holdersAmount: LOADING_PLACEHOLDER,
     },
     sandbox: {
-      collectionsAmount: LOADING_PLACEHOLDER,
-      totalNFTsAmount: LOADING_PLACEHOLDER,
+      collectionsAmount: '6',
+      totalNFTsAmount: '12 588',
     },
     fraktion: {
       TVL: LOADING_PLACEHOLDER,
@@ -50,56 +50,42 @@ export const useStatistics = (): Statistics => {
   const fetchStatistics = async () => {
     try {
       const solanaPrice = await fetchSolanaPrice();
-
-      const [
-        fraktNFTsStatistics,
-        frktTokensStatistics,
-        sandboxStatistics,
-        fraktionStatistics,
-      ] = await Promise.all([
-        fetchFraktNFTsStatistics(),
-        fetchFrktTokensStatistics(),
-        fetchSandboxStatistics(),
-        fetchFraktionStatistics(),
-      ]);
+      const { fraktNFTs, frktToken, sandbox, fraktion } =
+        await fetchRawStatistics();
 
       setStatistics((prevState) => ({
         ...prevState,
         fraktNFTs: {
           ...prevState.fraktNFTs,
-          holdersAmout: formatNumberWithSpaceSeparator(
-            fraktNFTsStatistics.holdersAmout,
-          ),
-          stakedNFTs: formatNumberWithSpaceSeparator(
-            fraktNFTsStatistics.stakedNFTs,
-          ),
+          stakedNFTs: formatNumberWithSpaceSeparator(fraktNFTs.stakedNFTs),
+          stakersAmout: formatNumberWithSpaceSeparator(fraktNFTs.stakersAmout),
         },
         frktToken: {
-          totalSupply: formatNumberWithSpaceSeparator(
-            frktTokensStatistics.totalSupply,
-          ),
+          totalSupply: formatNumberWithSpaceSeparator(frktToken.totalSupply),
           circulatingSupply: formatNumberWithSpaceSeparator(
-            frktTokensStatistics.circulatingSupply,
+            frktToken.circulatingSupply,
           ),
-          stakedPercentage: `${frktTokensStatistics.stakedPercentage}%`,
-          holdersAmout: formatNumberWithSpaceSeparator(
-            frktTokensStatistics.holdersAmout,
+          stakedPercentage: `${formatNumberWithSpaceSeparator(
+            frktToken.stakedPercentage,
+          )}%`,
+          holdersAmount: formatNumberWithSpaceSeparator(
+            frktToken.holdersAmount,
           ),
         },
         sandbox: {
           collectionsAmount: formatNumberWithSpaceSeparator(
-            sandboxStatistics.collectionsAmount,
+            sandbox.collectionsAmount,
           ),
           totalNFTsAmount: formatNumberWithSpaceSeparator(
-            sandboxStatistics.totalNFTsAmount,
+            sandbox.totalNFTsAmount,
           ),
         },
         fraktion: {
           TVL: `$ ${formatNumberWithSpaceSeparator(
-            fraktionStatistics.TVL * solanaPrice,
+            fraktion.TVL * solanaPrice,
           )}`,
           lockedNFTsAmount: formatNumberWithSpaceSeparator(
-            fraktionStatistics.lockedNFTs,
+            fraktion.lockedNFTsAmount,
           ),
         },
       }));
@@ -116,61 +102,68 @@ export const useStatistics = (): Statistics => {
   return statistics;
 };
 
-interface FraktNFTsStatistics {
-  stakedNFTs: number;
-  holdersAmout: number;
-}
-const fetchFraktNFTsStatistics = (): Promise<FraktNFTsStatistics> => {
-  return Promise.resolve({
-    stakedNFTs: 7_670,
-    holdersAmout: 2_134,
-  });
+const fetchSolanaPrice = async (): Promise<number> => {
+  const { tickers } = await (
+    await fetch('https://api.coingecko.com/api/v3/coins/solana/tickers')
+  ).json();
+
+  return tickers.find((ticker) => ticker.target === 'USD').converted_last.usd;
 };
 
-const fetchSolanaPrice = (): Promise<number> =>
-  fetch('https://api.coingecko.com/api/v3/coins/solana/tickers')
-    .then((res) => res.json())
-    .then(
-      (data) =>
-        data.tickers.find((ticker) => ticker.target === 'USD').converted_last
-          .usd,
-    );
-
-interface FrktTokensStatistics {
-  totalSupply: number;
-  circulatingSupply: number;
-  stakedPercentage: number;
-  holdersAmout: number;
+interface RawStatistics {
+  fraktNFTs: {
+    totalSupply: number;
+    stakedNFTs: number;
+    stakersAmout: number;
+  };
+  frktToken: {
+    totalSupply: number;
+    circulatingSupply: number;
+    stakedPercentage: number;
+    holdersAmount: number;
+  };
+  sandbox: {
+    collectionsAmount: number;
+    totalNFTsAmount: number;
+  };
+  fraktion: {
+    TVL: number;
+    lockedNFTsAmount: number;
+  };
 }
-const fetchFrktTokensStatistics = (): Promise<FrktTokensStatistics> => {
-  return Promise.resolve({
-    totalSupply: 50_000_000,
-    circulatingSupply: 50_000_000,
-    stakedPercentage: 76,
-    holdersAmout: 15_783,
-  });
-};
 
-interface SandboxStatistics {
-  collectionsAmount: number;
-  totalNFTsAmount: number;
-}
-const fetchSandboxStatistics = (): Promise<SandboxStatistics> => {
-  return Promise.resolve({
-    collectionsAmount: 6,
-    totalNFTsAmount: 43_023,
-  });
-};
-
-interface FraktionStatistics {
-  lockedNFTs: number;
-  issuedTokens: number;
-  TVL: number;
-}
-const fetchFraktionStatistics = () =>
-  fetch('https://frakt-stats.herokuapp.com/fraktion').then(
-    (res) => res.json() as Promise<FraktionStatistics>,
+const fetchRawStatistics = async (): Promise<RawStatistics> => {
+  const {
+    fraktion,
+    holders: frktHolders,
+    nft: fraktNFTs,
+    supply: frktSupply,
+  } = (await (await fetch('https://fraktdao.com/api?group=hourly?')).json()).at(
+    -1,
   );
+
+  return {
+    fraktNFTs: {
+      totalSupply: 10_000,
+      stakedNFTs: fraktNFTs.stacked,
+      stakersAmout: fraktNFTs.wallets,
+    },
+    frktToken: {
+      totalSupply: frktSupply.total,
+      circulatingSupply: frktSupply.circulating,
+      stakedPercentage: (frktSupply.circulating / frktSupply.total) * 100,
+      holdersAmount: frktHolders,
+    },
+    sandbox: {
+      collectionsAmount: 6,
+      totalNFTsAmount: 12_588,
+    },
+    fraktion: {
+      TVL: fraktion.TVL,
+      lockedNFTsAmount: fraktion.lockedNFTs,
+    },
+  };
+};
 
 const formatNumberWithSpaceSeparator = (num: number): string =>
   new Intl.NumberFormat('en-US', {

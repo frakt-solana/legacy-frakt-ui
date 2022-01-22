@@ -109,9 +109,9 @@ export const SectionEcosystem: FC<{
                 </span>
               </li>
               <li className={styles.ecoTableItem}>
-                <span className={styles.ecoTableLabel}>Holders: </span>
+                <span className={styles.ecoTableLabel}>Stakers: </span>
                 <span className={styles.ecoTableValue}>
-                  {statistics.fraktNFTs.holdersAmout}
+                  {statistics.fraktNFTs.stakersAmout}
                 </span>
               </li>
             </ul>
@@ -208,7 +208,7 @@ export const SectionEcosystem: FC<{
               <li className={`${styles.ecoTableItem} ${styles.tableItem2}`}>
                 <span className={styles.ecoTableLabel}>Holders:</span>
                 <span className={styles.ecoTableValue}>
-                  {statistics.frktToken.holdersAmout}
+                  {statistics.frktToken.holdersAmount}
                 </span>
               </li>
             </ul>
