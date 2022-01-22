@@ -25,12 +25,8 @@ export const SectionFaq: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
             isActive ? <MinusIcon /> : <PlusIcon />
           }
         >
-          <Panel key="1" header="What is FRAKT?" className={styles.faqItem}>
-            FRAKT started by launching the first generative art on Solana and is
-            now building infrastructure to push the ecosystem forward.
-          </Panel>
           <Panel
-            key="2"
+            key="1"
             header="Where can I buy frakts?"
             className={styles.faqItem}
           >
@@ -44,7 +40,7 @@ export const SectionFaq: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
             </a>
           </Panel>
           <Panel
-            key="3"
+            key="2"
             header="Where can I see my frakts?"
             className={styles.faqItem}
           >
@@ -53,7 +49,7 @@ export const SectionFaq: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
             wallet on Collection tab and filtering by Show - My
           </Panel>
           <Panel
-            key="4"
+            key="3"
             header="What is the points system and how does it work?"
             className={styles.faqItem}
           >
@@ -70,7 +66,7 @@ export const SectionFaq: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
             that determines amount of $FRKT you are getting while staking.
           </Panel>
           <Panel
-            key="5"
+            key="4"
             header="How to stake my frakts?"
             className={styles.faqItem}
           >
@@ -79,28 +75,9 @@ export const SectionFaq: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
               {' '}
               @Croaker{' '}
             </a>
-            <br />
-            or this one from &nbsp;
-            <a href="https://medium.com/@theonlynom/frakt-and-you-a-staking-story-77b686f04077">
-              @Nom - WILL NEVER DM YOU FIRST
-            </a>
           </Panel>
           <Panel
-            key="6"
-            header="What is the FRAKT Sandbox?"
-            className={styles.faqItem}
-          >
-            Sandbox is the easiest way for top artists and creators to release
-            new projects. To participate in upcoming launch you need to stake
-            frakts for determined period - usually a week prior launch and fill
-            the whitelist form. Amount of points staked determines amount of
-            lottery tickets you have in upcoming whitelist lottery. Every
-            winning ticket gives you guaranteed mint on low price. Wallets with
-            500 and more points receive at least one guaranteed mint. After
-            private sale is ended there is public sale with fcfs.
-          </Panel>
-          <Panel
-            key="7"
+            key="5"
             header="What is FRAKT Sandbox Kurated collection?"
             className={styles.faqItem}
           >
@@ -112,7 +89,7 @@ export const SectionFaq: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
             we bring more or less same system as with regular Sandbox project.
           </Panel>
           <Panel
-            key="8"
+            key="6"
             header="What’s the process on getting access before public mint for Sandbox?"
             className={styles.faqItem}
           >
@@ -134,7 +111,7 @@ export const SectionFaq: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
             we will contact you right after!
           </Panel>
           <Panel
-            key="10"
+            key="7"
             header="Where can I buy $FRKT?"
             className={styles.faqItem}
           >
@@ -144,11 +121,7 @@ export const SectionFaq: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
             </a>{' '}
             only
           </Panel>
-          <Panel
-            key="11"
-            header="Can I stake $FRKT?"
-            className={styles.faqItem}
-          >
+          <Panel key="8" header="Can I stake $FRKT?" className={styles.faqItem}>
             Sure! Here: <br />
             <a href="https://frakt.art/stake">https://frakt.art/stake</a>
           </Panel>
