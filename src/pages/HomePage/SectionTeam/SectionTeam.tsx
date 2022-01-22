@@ -10,7 +10,7 @@ import teamPhotoViktor from '../assets/images/team/teamPhotoViktor.jpg';
 import teamPhotoRoman from '../assets/images/team/teamPhotoRoman.jpg';
 import teamPhotoAdrian from '../assets/images/team/teamPhotoAdrian.jpg';
 import teamPhotoEgor from '../assets/images/team/teamPhotoEgor.jpg';
-import teamPhotoVlad2 from '../assets/images/team/teamPhotoVlad2.jpeg';
+import teamPhotoVlad2 from '../assets/images/team/teamPhotoVlad2.jpg';
 import { TEAM_SECTION_ID } from '../constants';
 import { BehanceIcon } from '../../../icons';
 
@@ -82,21 +82,21 @@ const MEMBERS = [
     ),
   },
   {
-    name: 'Viktor',
-    photoUrl: teamPhotoViktor,
-    position: <span>Developer</span>,
-    socialLink: (
-      <a href="https://github.com/valpaq" rel="noreferrer" target="_blank">
-        <GitHubIcon width={24} />
-      </a>
-    ),
-  },
-  {
     name: 'Roman',
     photoUrl: teamPhotoRoman,
     position: <span>Developer</span>,
     socialLink: (
       <a href="https://github.com/Piterom911" rel="noreferrer" target="_blank">
+        <GitHubIcon width={24} />
+      </a>
+    ),
+  },
+  {
+    name: 'Viktor',
+    photoUrl: teamPhotoViktor,
+    position: <span>Developer</span>,
+    socialLink: (
+      <a href="https://github.com/valpaq" rel="noreferrer" target="_blank">
         <GitHubIcon width={24} />
       </a>
     ),
@@ -140,9 +140,7 @@ export const SectionTeam: FC<{ navRef: { current: HTMLParagraphElement } }> = ({
         <ul className={styles.teamList}>
           {MEMBERS.map(({ name, photoUrl, position, socialLink }, idx) => (
             <li key={idx} className={styles.teamItem}>
-              <div className={styles.teamPhotoWrapper}>
-                <img src={photoUrl} alt={name} className={styles.teamPhoto} />
-              </div>
+              <img src={photoUrl} alt={name} className={styles.teamPhoto} />
               <div className={styles.teamInfo}>
                 <p className={styles.teamName}>{name}</p>
                 <div className={styles.teamPosition}>
