@@ -9,12 +9,8 @@ import { useStakingFrkt } from '../../contexts/stakingFrkt';
 import { decimalBNToString, frktBNToString } from '../../utils';
 import BN from 'bn.js';
 import StakingForm from './StakingForm';
-import moment from 'moment';
 
 const MIN_HARVEST_THRESHOLD = new BN(1e6); //? 0.01
-
-const UNSTAKE_UNLOCK_DATE_UNIX = 1642068000; //? Thu Jan 13 2022 10:00:00 UTC
-const IS_UNSTAKE_LOCKED = UNSTAKE_UNLOCK_DATE_UNIX - moment().unix() >= 0;
 
 const StakeFrktPage = (): JSX.Element => {
   usePrivatePage();
@@ -75,37 +71,24 @@ const StakeFrktPage = (): JSX.Element => {
                 </Button>
               )}
             </div>
-            {IS_UNSTAKE_LOCKED ? (
-              <div className={styles.stakingPage__unstakeWrapper}>
-                <Table
-                  size="md"
-                  data={[
-                    ['FRKT staked', `${frktBNToString(frktStakingAmount)}`],
-                    ['Available to unstake', '0'],
-                  ]}
-                  className={styles.stakingPage__infoTable}
-                />
-              </div>
-            ) : (
-              <div className={styles.stakingPage__unstakeWrapper}>
-                <Table
-                  size="md"
-                  data={[
-                    ['FRKT staked', `${frktBNToString(frktStakingAmount)}`],
-                    [
-                      'Available to unstake',
-                      `${frktBNToString(frktToUnstakeAmount)}`,
-                    ],
-                  ]}
-                  className={styles.stakingPage__infoTable}
-                />
-                {frktToUnstakeAmount.toString() !== '0' && (
-                  <Button onClick={() => unstakeFrkt()} size="md">
-                    Unstake
-                  </Button>
-                )}
-              </div>
-            )}
+            <div className={styles.stakingPage__unstakeWrapper}>
+              <Table
+                size="md"
+                data={[
+                  ['FRKT staked', `${frktBNToString(frktStakingAmount)}`],
+                  [
+                    'Available to unstake',
+                    `${frktBNToString(frktToUnstakeAmount)}`,
+                  ],
+                ]}
+                className={styles.stakingPage__infoTable}
+              />
+              {frktToUnstakeAmount.toString() !== '0' && (
+                <Button onClick={() => unstakeFrkt()} size="md">
+                  Unstake
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>
