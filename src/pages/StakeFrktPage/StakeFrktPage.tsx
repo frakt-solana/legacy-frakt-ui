@@ -1,13 +1,14 @@
-import styles from './styles.module.scss';
+import BN from 'bn.js';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+
+import styles from './styles.module.scss';
 import Table from '../../components/Table';
 import Button from '../../components/Button/Button';
 import AppLayout from '../../components/AppLayout';
 import { usePolling, usePrivatePage } from '../../hooks';
 import { useStakingFrkt } from '../../contexts/stakingFrkt';
 import { decimalBNToString, frktBNToString } from '../../utils';
-import BN from 'bn.js';
 import StakingForm from './StakingForm';
 
 const MIN_HARVEST_THRESHOLD = new BN(1e6); //? 0.01
