@@ -35,7 +35,10 @@ const StakeFrktPage = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const frktPerYear = frktStakingAmount.mul(new BN(1000)).div(APR);
+  const frktPerYear =
+    APR.toNumber() !== 0
+      ? frktStakingAmount.mul(new BN(1000)).div(APR)
+      : new BN(0);
 
   return (
     <AppLayout mainClassName={styles.appMain}>
