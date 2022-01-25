@@ -19,7 +19,7 @@ import example18 from '../../../images/examples/18.png';
 import example19 from '../../../images/examples/19.png';
 import example20 from '../../../images/examples/20.png';
 import collection1 from '../../../images/examples/collectionSynapses.gif';
-import collection2 from '../../../images/examples/collectionMaze2.png';
+import collection2 from '../../../images/examples/collectionMaze2.jpg';
 import collection3 from '../../../images/examples/collectionCingular.png';
 import collection4 from '../../../images/examples/collectionMoments.jpg';
 import collection5 from '../../../images/examples/collectionSynapses2.gif';
