@@ -84,17 +84,32 @@ export const SectionFooter: FC = () => {
             </a>
             <ul className={styles.socialNavs}>
               <li className={styles.socialItem}>
-                <a href="/" className={styles.socialLink}>
+                <a
+                  href="http://discord.gg/frakt"
+                  className={styles.socialLink}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <DiscordIcon />
                 </a>
               </li>
               <li className={styles.socialItem}>
-                <a href="/" className={styles.socialLink}>
+                <a
+                  href="https://twitter.com/FraktArt"
+                  className={styles.socialLink}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <TwitterIcon />
                 </a>
               </li>
               <li className={styles.socialItem}>
-                <a href="/" className={styles.socialLink}>
+                <a
+                  href="https://github.com/frakt-solana"
+                  className={styles.socialLink}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <GitHubIcon />
                 </a>
               </li>
