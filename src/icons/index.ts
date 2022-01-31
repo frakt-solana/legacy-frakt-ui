@@ -16,3 +16,4 @@ export { MinusIcon } from './MinusIcon';
 export { CheckSuccessIcon } from './CheckSuccessIcon';
 export { BehanceIcon } from './BehanceIcon';
 export { SwapIcon } from './SwapIcon';
+export { ArrowDownSmallIcon } from './arrowDownSmall';
