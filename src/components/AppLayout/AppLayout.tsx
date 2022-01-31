@@ -13,6 +13,7 @@ interface AppLayoutProps {
   children: any;
   className?: string;
   mainClassName?: string;
+  isLarge?: boolean;
 }
 
 const AppLayout = ({
@@ -21,6 +22,7 @@ const AppLayout = ({
   children,
   className,
   mainClassName,
+  isLarge = false,
 }: AppLayoutProps): JSX.Element => {
   const { connected } = useWallet();
   const { visible, setVisible } = useWalletModal();
@@ -53,6 +55,7 @@ const AppLayout = ({
         visible={visible}
         connected={connected}
         CustomHeader={CustomHeader}
+        isLarge={isLarge}
       />
       <div
         className={`${styles.main} ${mainClassName || ''}`}

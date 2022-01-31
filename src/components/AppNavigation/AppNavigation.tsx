@@ -10,6 +10,7 @@ interface AppNavigation {
 const AppNavigation = ({ className }: AppNavigation): JSX.Element => {
   return (
     <ul className={`${styles.root} ${className || ''}`}>
+      <NavigationLink to={URLS.MARKET} text="Market" />
       <NavigationLink to={URLS.COLLECTION} text="Collection" />
       <NavigationLink to={URLS.RARITY} text="Rarity hdbk" />
       <NavigationLink to={URLS.STAKE} text="Staking" />

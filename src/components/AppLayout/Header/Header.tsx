@@ -12,20 +12,24 @@ interface HeaderProps {
   connected: boolean;
   visible: boolean;
   CustomHeader?: FC;
+  isLarge?: boolean;
 }
 
 export const Header: FC<HeaderProps> = ({
   connected,
   CustomHeader,
   className,
+  isLarge,
 }) => {
+  const containerSize = isLarge ? 'container_lg' : 'container';
+
   return (
     <div
       className={classNames(styles.header, className, {
         [styles.hasCustomHeader]: CustomHeader,
       })}
     >
-      <div className={`${styles.container} container`}>
+      <div className={classNames(styles.container, containerSize)}>
         <div className={styles.logoWrapper}>
           <CompanyLogo />
         </div>

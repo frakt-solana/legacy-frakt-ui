@@ -37,6 +37,7 @@ import {
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { WalletModalProvider } from './contexts/walletModal';
 import React from 'react';
+import MarketPage from './pages/MarketPage';
 
 const wallets = [
   getPhantomWallet(),
@@ -105,6 +106,11 @@ export function Routes(): JSX.Element {
                           exact
                           path={URLS.STAKING_NFT_HARVEST}
                           component={(): JSX.Element => <HarvestNftPage />}
+                        />
+                        <Route
+                          exact
+                          path={URLS.MARKET}
+                          component={(): JSX.Element => <MarketPage />}
                         />
                         <Route
                           exact

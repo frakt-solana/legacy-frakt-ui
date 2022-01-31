@@ -4,6 +4,7 @@ export const URLS = {
   SANDBOX: 'https://sandbox.frakt.art',
   FRAKTION: 'https://fraktion.art',
   MARKETPLACE: '/marketplace',
+  MARKET: '/market',
   STAKE: '/stake',
   STAKING_FRKT: '/stake-frkt',
   STAKING_NFT: '/stake-nft',
