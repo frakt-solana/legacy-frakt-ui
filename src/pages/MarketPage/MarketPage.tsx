@@ -4,7 +4,8 @@ import { Helmet } from 'react-helmet';
 import AppLayout from '../../components/AppLayout';
 import styles from './styles.module.scss';
 import classNames from 'classnames';
-import { SwapIcon } from '../../icons';
+import { ArrowRightTop, SwapIcon } from '../../icons';
+import { NavLink } from 'react-router-dom';
 
 const TRENDING_DATA = [
   { name: 'mask', percent: '45%' },
@@ -12,6 +13,14 @@ const TRENDING_DATA = [
   { name: 'punks', percent: '42%' },
   { name: 'yobidoyobi', percent: '40%' },
   { name: 'mask', percent: '38%' },
+];
+
+const BEST_APRS_DATA = [
+  { name: 'mask', percent: '1 324.00%', image: '#' },
+  { name: 'mask', percent: '1 324.00%', image: '#' },
+  { name: 'mask', percent: '1 324.00%', image: '#' },
+  { name: 'mask', percent: '1 324.00%', image: '#' },
+  { name: 'safdfsd', percent: '1 324.00%', image: '#' },
 ];
 
 const ACTIVITY_DATA = [
@@ -85,6 +94,33 @@ const MarketPage = (): JSX.Element => (
                 </li>
               ))}
             </ul>
+            <NavLink to={`/`} className={styles.seeMoreLink}>
+              See More <ArrowRightTop />
+            </NavLink>
+          </div>
+
+          <div className={styles.sidebarItem}>
+            <h6 className={styles.sidebarTitle}>
+              best apr<span>s</span>
+            </h6>
+            <ul className={styles.sidebarList}>
+              {BEST_APRS_DATA.map((item, index) => (
+                <li
+                  className={styles.sidebarListItem}
+                  key={item.name + item.percent}
+                >
+                  <div
+                    className={styles.sidebarItemImg}
+                    style={{ backgroundImage: `url(${item.image})` }}
+                  />
+                  <span className={styles.sidebarItemName}>{item.name}</span>
+                  <span className={styles.sidebarItemData}>{item.percent}</span>
+                </li>
+              ))}
+            </ul>
+            <NavLink to={`/`} className={styles.seeMoreLink}>
+              See More <ArrowRightTop />
+            </NavLink>
           </div>
         </div>
         <div className={styles.content}>
