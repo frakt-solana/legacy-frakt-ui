@@ -15,3 +15,4 @@ export { PlusIcon } from './PlusIcon';
 export { MinusIcon } from './MinusIcon';
 export { CheckSuccessIcon } from './CheckSuccessIcon';
 export { BehanceIcon } from './BehanceIcon';
+export { SwapIcon } from './SwapIcon';
