@@ -41,7 +41,7 @@ const MarketPage = (): JSX.Element => {
   const sort = watch('sort');
 
   return (
-    <AppLayout isLarge>
+    <AppLayout isLarge className={styles.layout}>
       <div className="container_lg">
         <Helmet>
           <title>{`Market | FRAKT: A NFT-DeFi ecosystem on Solana`}</title>

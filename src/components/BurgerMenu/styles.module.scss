@@ -2,12 +2,13 @@
   position: fixed;
   inset: 0;
   width: 100%;
-  height: calc(100vh - 114px);
+  height: 100vh;
+  padding-top: 110px;
   overflow: auto;
   background: var(--color-dark-06);
   backdrop-filter: blur(16px);
-  z-index: 10;
-  top: 114px;
+  z-index: -1;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -16,12 +17,8 @@
     display: none;
   }
 
-  @media screen and (max-width: 550px) {
-    top: 110px;
-  }
-
   @media screen and (max-width: 500px) {
-    top: 76px;
+    padding-top: 76px;
   }
 }
 
@@ -126,7 +123,7 @@
 
 .menuContent {
   height: 100%;
-  padding: 60px 15px 24px;
+  padding: 25px 15px;
   max-width: 370px;
   width: 100%;
   background-color: var(--color-black);

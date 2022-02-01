@@ -1,7 +1,50 @@
 .sidebar {
   max-width: 214px;
   width: 100%;
+  background-color: var(--color-black);
   border-right: var(--border-gray-1);
+  transition: transform .2s ease-in;
+  z-index: 9;
+  padding-bottom: 50px;
+
+  @media screen and (max-width: 700px) {
+    max-width: 230px;
+    padding-left: 15px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translateX(calc(-100% + 45px));
+    height: 100vh;
+    overflow: auto;
+    padding-top: 110px;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding-top: 80px;
+  }
+}
+
+.sidebarVisible {
+  transform: translateX(0);
+}
+
+.overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px);
+  transition: width .2s ease-in;
+  z-index: 8;
+}
+
+.overlayVisible {
+  @media screen and (max-width: 700px) {
+    width: 100vw;
+  }
 }
 
 .sidebarItem {
@@ -9,6 +52,10 @@
   padding-top: 20px;
   padding-bottom: 20px;
   border-bottom: var(--border-gray-1);
+
+  @media screen and (max-width: 700px) {
+    padding-right: 15px;
+  }
 
   &:first-of-type {
     padding-top: 0;

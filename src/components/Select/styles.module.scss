@@ -11,19 +11,15 @@
       min-height: 24px;
       height: 24px;
       justify-content: flex-end;
-
-      @media screen and (max-width: 550px) {
-        justify-content: flex-start;
-      }
     }
     .custom-select__control--is-focused {
       box-shadow: none;
     }
     .custom-select__menu {
-      background-color: var(--black-color);
       border: var(--border-gray-1);
       border-radius: 0;
       z-index: 5;
+      background-color: var(--color-black);
     }
     .custom-select__indicator-separator {
       display: none;
