@@ -13,6 +13,10 @@ body {
   font-family: var(--font-family-oxanium);
 }
 
+img {
+  max-width: 100%;
+}
+
 .frakt__notification {
   svg {
     fill: var(--color-gray-4);
@@ -55,7 +59,7 @@ body {
 }
 
 .container_lg {
-  max-width: 1400px;
+  max-width: 1430px;
 }
 
 section {
