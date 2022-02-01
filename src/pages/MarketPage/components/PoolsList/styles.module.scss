@@ -1,0 +1,102 @@
+.poolsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.poolCard {
+  max-width: 270px;
+  width: 100%;
+  position: relative;
+  background-color: var(--color-black);
+  border: 1px solid var(--color-gray-03);
+
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid var(--color-gray-03);
+    z-index: -1;
+  }
+}
+
+.poolImgWrapper {
+  position: relative;
+  border-bottom: 1px solid var(--color-gray-03);
+}
+
+.poolImage {
+  height: 270px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.poolShadow {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 23px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100px;
+  background: linear-gradient(360deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.poolInfoLabel {
+  padding: 6px 8px;
+  border: 1px solid var(--color-gray-03);
+  font: var(--font-text-7);
+  text-transform: uppercase;
+  line-height: 10px;
+  text-align: center;
+  letter-spacing: 0.03em;
+  margin-top: 30px;
+}
+
+.cardContentWrapper {
+  padding: 24px;
+}
+
+.poolTokenInfo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.tokenImage {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-size: cover;
+  background-color: var(--color-gray-1);
+  margin-right: 10px;
+}
+
+.tokenName {
+  font: var(--font-text-2);
+}
+
+.priceLabel {
+  font: var(--font-text-7);
+  color: var(--color-gray-7);
+}
+
+.priceWrapper {
+  display: flex;
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 10px;
+
+  svg {
+    margin-left: 10px;
+    margin-right: 5px;
+  }
+}
