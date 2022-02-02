@@ -1,0 +1,16 @@
+export enum PATHS {
+  ROOT = '/',
+  COLLECTION = '/collection',
+  MARKETPLACE = '/marketplace',
+  STAKE = '/stake',
+  STAKING_FRKT = '/stake-frkt',
+  STAKING_NFT = '/stake-nft',
+  STAKING_NFT_CREATE = `/stake-nft/create`,
+  STAKING_NFT_UNSTAKE = '/stake-nft/unstake',
+  STAKING_NFT_HARVEST = '/stake-nft/harvest',
+  WALLET = '/wallet',
+  RARITY = '/rarity',
+  PAGE_404 = '/404',
+  WALLET_PUBLIC_KEY = '/:walletPubkey',
+  ART_ACCOUNT_PUBLIC_KEY = '/:artAccountPubkey',
+}

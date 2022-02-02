@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet';
 import { NavLink } from 'react-router-dom';
 
 import AppLayout from '../../components/AppLayout';
-import { URLS } from '../../constants';
+import { PATHS } from '../../constants';
 import { useWallet } from '@solana/wallet-adapter-react';
 import styles from './styles.module.scss';
 import { useWalletModal } from '../../contexts/walletModal';
@@ -20,10 +20,10 @@ export const StakePage = (): JSX.Element => {
         <div className={styles.root}>
           {connected ? (
             <>
-              <NavLink className={styles.link} to={URLS.STAKING_FRKT}>
+              <NavLink className={styles.link} to={PATHS.STAKING_FRKT}>
                 Stake FRKT
               </NavLink>
-              <NavLink className={styles.link} to={URLS.STAKING_NFT}>
+              <NavLink className={styles.link} to={PATHS.STAKING_NFT}>
                 Stake FRAKT
                 <br />
                 NFTs

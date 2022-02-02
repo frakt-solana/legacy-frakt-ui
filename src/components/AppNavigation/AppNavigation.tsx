@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { URLS } from '../../constants';
+import { PATHS } from '../../constants';
 import styles from './styles.module.scss';
 import { NavigationLink } from './NavigationLink';
 interface AppNavigation {
@@ -10,17 +10,17 @@ interface AppNavigation {
 const AppNavigation = ({ className }: AppNavigation): JSX.Element => {
   return (
     <ul className={`${styles.root} ${className || ''}`}>
-      <NavigationLink to={URLS.COLLECTION} text="Collection" />
-      <NavigationLink to={URLS.RARITY} text="Rarity hdbk" />
-      <NavigationLink to={URLS.STAKE} text="Staking" />
-      <NavigationLink to={URLS.MARKETPLACE} text="Marketplace" />
+      <NavigationLink to={PATHS.COLLECTION} text="Collection" />
+      <NavigationLink to={PATHS.RARITY} text="Rarity hdbk" />
+      <NavigationLink to={PATHS.STAKE} text="Staking" />
+      <NavigationLink to={PATHS.MARKETPLACE} text="Marketplace" />
       <li>
-        <a className={styles.link} href={URLS.SANDBOX}>
+        <a className={styles.link} href={process.env.REACT_APP_SANDBOX_URL}>
           Sandbox
         </a>
       </li>
       <li>
-        <a className={styles.link} href={URLS.FRAKTION}>
+        <a className={styles.link} href={process.env.REACT_APP_FRAKTION_URL}>
           Fraktion
         </a>
       </li>

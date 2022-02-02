@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styles from './styles.module.scss';
 import { FooterSvgLogo } from '../FooterSvgLogo';
-import { URLS } from '../../../constants';
+import { PATHS } from '../../../constants';
 import { HashLink as AnchorLink } from 'react-router-hash-link';
 import {
   ECOSYSTEM_SECTION_ID,
@@ -29,24 +29,30 @@ export const SectionFooter: FC = () => {
             <h5 className={styles.navTitle}>Ecosystem</h5>
             <ul className={styles.navList}>
               <li className={styles.navItem}>
-                <NavLink to={URLS.COLLECTION}>Collection</NavLink>
+                <NavLink to={PATHS.COLLECTION}>Collection</NavLink>
               </li>
               <li className={styles.navItem}>
-                <NavLink to={URLS.RARITY}>Rarity hdbk</NavLink>
+                <NavLink to={PATHS.RARITY}>Rarity hdbk</NavLink>
               </li>
               <li className={styles.navItem}>
-                <NavLink to={URLS.STAKE}>Staking</NavLink>
+                <NavLink to={PATHS.STAKE}>Staking</NavLink>
               </li>
               <li className={styles.navItem}>
-                <NavLink to={URLS.MARKETPLACE}>Marketplace</NavLink>
+                <NavLink to={PATHS.MARKETPLACE}>Marketplace</NavLink>
               </li>
               <li className={styles.navItem}>
-                <a className={styles.link} href={URLS.SANDBOX}>
+                <a
+                  className={styles.link}
+                  href={process.env.REACT_APP_SANDBOX_URL}
+                >
                   Sandbox
                 </a>
               </li>
               <li className={styles.navItem}>
-                <a className={styles.link} href={URLS.FRAKTION}>
+                <a
+                  className={styles.link}
+                  href={process.env.REACT_APP_FRAKTION_URL}
+                >
                   Fraktion
                 </a>
               </li>
