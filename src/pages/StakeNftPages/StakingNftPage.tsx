@@ -8,7 +8,7 @@ import moment from 'moment';
 import AppLayout from '../../components/AppLayout';
 import Button from '../../components/Button';
 import Table from '../../components/Table';
-import { URLS } from '../../constants';
+import { PATHS } from '../../constants';
 import { useStaking } from '../../contexts/staking';
 import styles from './styles.module.scss';
 import { getPointsForArt } from '../CollectionPage/helpers';
@@ -125,7 +125,7 @@ const StakingNftPage = (): JSX.Element => {
                     className={styles.stakingPage__infoTable}
                   />
                   {!!userFraktsNotStaked.length && (
-                    <NavLink to={URLS.STAKING_NFT_CREATE}>
+                    <NavLink to={PATHS.STAKING_NFT_CREATE}>
                       <Button size="md">Stake</Button>
                     </NavLink>
                   )}
@@ -160,7 +160,7 @@ const StakingNftPage = (): JSX.Element => {
                   />
                   {frktsToHarvest.toNumber() > 0.01 * DECIMALS_PER_FRKT &&
                     !IS_LOCKED_PERIOD && (
-                      <NavLink to={URLS.STAKING_NFT_HARVEST}>
+                      <NavLink to={PATHS.STAKING_NFT_HARVEST}>
                         <Button size="lg">Harvest</Button>
                       </NavLink>
                     )}
@@ -200,7 +200,7 @@ const StakingNftPage = (): JSX.Element => {
               </p> */}
 
                   {!!userStakeAccounts.length && (
-                    <NavLink to={URLS.STAKING_NFT_UNSTAKE}>
+                    <NavLink to={PATHS.STAKING_NFT_UNSTAKE}>
                       <Button size="md">Unstake</Button>
                     </NavLink>
                   )}

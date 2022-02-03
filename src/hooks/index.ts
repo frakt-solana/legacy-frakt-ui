@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ipfsUriToGatewayUrl } from '../utils/solanaUtils';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useHistory } from 'react-router-dom';
-import { URLS } from '../constants';
+import { PATHS } from '../constants';
 
 export const useLazyArtImageSrc = (): {
   src: string | null;
@@ -56,7 +56,7 @@ export const usePrivatePage = (): void => {
   const history = useHistory();
 
   useEffect(() => {
-    !connected && history.push(URLS.ROOT);
+    !connected && history.push(PATHS.ROOT);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connected]);
 };

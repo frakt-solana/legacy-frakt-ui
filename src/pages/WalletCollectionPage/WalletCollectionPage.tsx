@@ -12,7 +12,7 @@ import { PublicKey } from '@solana/web3.js';
 import { useCollectionFilters } from '../CollectionPage/hooks';
 import ArtsFilter from '../../components/ArtsFilter';
 import { sortArts } from '../CollectionPage/helpers';
-import { URLS } from '../../constants';
+import { PATHS } from '../../constants';
 
 const WalletCollectionPage = (): JSX.Element => {
   const { walletPubkey } = useParams<{ walletPubkey: string }>();
@@ -32,7 +32,7 @@ const WalletCollectionPage = (): JSX.Element => {
         const frakts = await getWalletFrakts(new PublicKey(walletPubkey));
         setWalletFrakts(frakts);
       } catch (err) {
-        history.replace(URLS.PAGE_404);
+        history.replace(PATHS.PAGE_404);
       } finally {
         setLoading(false);
       }

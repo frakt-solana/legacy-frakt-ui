@@ -7,7 +7,7 @@ import { Frakt } from '../../../contexts/frakts';
 import { useStaking } from '../../../contexts/staking';
 import styles from '../styles.module.scss';
 import { useHistory } from 'react-router';
-import { URLS } from '../../../constants';
+import { PATHS } from '../../../constants';
 import { usePrivatePage } from '../../../hooks';
 
 const FRAKTS_PER_CHUNK = 2;
@@ -71,7 +71,7 @@ const ApprovalStep = ({ selectedFrakts }: ApprovalStepProps): JSX.Element => {
         if (!res) break;
       }
 
-      history.replace(URLS.STAKING_NFT);
+      history.replace(PATHS.STAKING_NFT);
     };
 
     stake();

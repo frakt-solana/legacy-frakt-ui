@@ -8,7 +8,7 @@ import { Frakt } from '../../contexts/frakts';
 import { useLazyArtImageSrc } from '../../hooks';
 import { getPointsForArt } from '../CollectionPage/helpers';
 import styles from './styles.module.scss';
-import { URLS } from '../../constants';
+import { PATHS } from '../../constants';
 
 interface FraktCheckboxProps {
   frakt: Frakt;
@@ -45,7 +45,7 @@ const FraktCheckbox = ({
     >
       <NavLink
         className={styles.fraktCheckbox__artPageLink}
-        to={`${URLS.COLLECTION}/${frakt.metadata.artAccountPubkey}`}
+        to={`${PATHS.COLLECTION}/${frakt.metadata.artAccountPubkey}`}
       >
         Art page
       </NavLink>

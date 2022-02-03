@@ -2,7 +2,7 @@ import { Frakt } from '../../contexts/frakts';
 import { shortenAddress } from '../../utils/solanaUtils';
 import { COLOR, SHAPE } from '../../components/ArtCard/constants';
 import { getArtName } from '../../components/ArtCard/helpers';
-import { URLS } from '../../constants';
+import { PATHS } from '../../constants';
 
 export const getHeaderTitle = (artData: Frakt): string => {
   const color = artData?.attributes?.color;
@@ -58,7 +58,7 @@ export const getArtInfoData = ({
     ownerAddress
       ? {
           text: shortenAddress(ownerAddress),
-          linkTo: `${URLS.WALLET}/${ownerAddress}`,
+          linkTo: `${PATHS.WALLET}/${ownerAddress}`,
         }
       : 'Loading...',
   ];

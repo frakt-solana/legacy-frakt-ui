@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from './styles.module.scss';
 import { checkIsArtInMigration } from './helpers';
 import { ARTS_PER_SCROLL } from './constants';
-import { URLS } from '../../constants';
+import { PATHS } from '../../constants';
 import ArtCard from '../ArtCard';
 
 interface ArtsListProps {
@@ -36,7 +36,7 @@ const ArtsList = ({ className = '', arts }: ArtsListProps): JSX.Element => {
         const isMigrating = checkIsArtInMigration(art);
         return (
           <Link
-            to={`${URLS.COLLECTION}/${art?.metadata?.artAccountPubkey}`}
+            to={`${PATHS.COLLECTION}/${art?.metadata?.artAccountPubkey}`}
             key={art?.metadata?.artAccountPubkey}
             className={isMigrating ? styles.migratingArt : ''}
           >

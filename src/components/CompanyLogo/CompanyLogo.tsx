@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import styles from './styles.module.scss';
-import { URLS } from '../../constants';
+import { PATHS } from '../../constants';
 
 interface CompanyLogoProps {
   className?: string;
@@ -10,7 +10,7 @@ interface CompanyLogoProps {
 
 const CompanyLogo = ({ className }: CompanyLogoProps): JSX.Element => {
   return (
-    <NavLink to={URLS.ROOT} className={`${styles.root} ${className || ''}`}>
+    <NavLink to={PATHS.ROOT} className={`${styles.root} ${className || ''}`}>
       Frakt
     </NavLink>
   );

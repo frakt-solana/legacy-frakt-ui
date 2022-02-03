@@ -9,7 +9,7 @@ import Preloader from '../../components/Preloader';
 import { useStaking } from '../../contexts/staking';
 import styles from './styles.module.scss';
 import { usePrivatePage } from '../../hooks';
-import { URLS } from '../../constants';
+import { PATHS } from '../../constants';
 import { StakeView } from 'frakt-client';
 
 const ACCOUNTS_PER_CHUNK = 12;
@@ -43,7 +43,7 @@ const HarvestPage = (): JSX.Element => {
         if (!res) break;
       }
 
-      history.replace(URLS.STAKING_NFT);
+      history.replace(PATHS.STAKING_NFT);
     };
 
     harvest();
