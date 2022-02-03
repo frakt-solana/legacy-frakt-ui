@@ -15,13 +15,13 @@ import {
   WalletCollectionPage,
 } from '../pages';
 
-interface IRoute {
+interface Route {
   path: string;
   exact: boolean;
   component: () => JSX.Element;
 }
 
-export const routes: IRoute[] = [
+export const routes: Route[] = [
   {
     exact: true,
     path: PATHS.ROOT,
