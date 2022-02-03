@@ -4,7 +4,7 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import AppLayout from '../../components/AppLayout';
 import styles from './styles.module.scss';
-import { URLS } from '../../constants';
+import { PATHS } from '../../constants';
 import { PublicKey } from '@solana/web3.js';
 import Preloader from '../../components/Preloader';
 import ArtHeader from './components/ArtHeader';
@@ -71,7 +71,7 @@ const ArtPage = (): JSX.Element => {
   }, [frakt]);
 
   const onBackButtonHandler = (): void =>
-    history.length <= 2 ? history.replace(URLS.ROOT) : history.goBack();
+    history.length <= 2 ? history.replace(PATHS.ROOT) : history.goBack();
 
   return (
     <AppLayout mainClassName={!imageSrc && styles.appLayoutMain}>

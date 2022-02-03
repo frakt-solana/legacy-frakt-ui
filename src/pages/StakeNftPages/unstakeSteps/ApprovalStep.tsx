@@ -7,7 +7,7 @@ import Preloader from '../../../components/Preloader';
 import { useStaking } from '../../../contexts/staking';
 import styles from '../styles.module.scss';
 import { useHistory } from 'react-router';
-import { URLS } from '../../../constants';
+import { PATHS } from '../../../constants';
 import { usePrivatePage } from '../../../hooks';
 import { StakeView } from 'frakt-client';
 
@@ -48,7 +48,7 @@ const ApprovalStep = ({ selectedStakes }: ApprovalStepProps): JSX.Element => {
         if (!res) break;
       }
 
-      history.replace(URLS.STAKING_NFT);
+      history.replace(PATHS.STAKING_NFT);
     };
 
     unstake();

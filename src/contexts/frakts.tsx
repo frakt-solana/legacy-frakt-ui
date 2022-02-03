@@ -68,9 +68,11 @@ export const getFraktRarity = ({
   shape_rarity: number;
 }): number => (color_rarity * shape_rarity) / 100;
 
-//TODO: Describe type
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const FraktsProvider = ({ children = null as any }): JSX.Element => {
+export const FraktsProvider = ({
+  children = null,
+}: {
+  children: JSX.Element;
+}): JSX.Element => {
   const [frakts, setFrakts] = useState<Frakt[]>([]);
   const [fraktsLoading, setFraktsLoading] = useState<boolean>(true);
   const { connection } = useConnection();
