@@ -8,7 +8,7 @@ const IS_DEVNET = process.env.REACT_APP_NETWORK === 'devnet';
 export const ENDPOINTS = [
   {
     name: 'mainnet-beta' as ENV,
-    endpoint: 'https://solana-api.projectserum.com',
+    endpoint: 'https://fraktion.rpcpool.com',
     // endpoint: 'https://frakt.genesysgo.net/',
     // endpoint:
     //https://ssc-dao.genesysgo.net/
@@ -38,7 +38,7 @@ export const NETWORK = IS_DEVNET ? 'devnet' : 'mainnet-beta';
 
 export const ENDPOINT = IS_DEVNET
   ? clusterApiUrl('devnet')
-  : 'https://solana-api.projectserum.com';
+  : 'https://fraktion.rpcpool.com';
 
 const devnet = {
   PROGRAM_PUBLIC_KEY: 'D1bz9T4br5DaRfYx48aSaQsstcfuaytvvArxVjShLwca',
