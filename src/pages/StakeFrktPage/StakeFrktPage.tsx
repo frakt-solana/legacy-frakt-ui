@@ -37,7 +37,7 @@ const StakeFrktPage = (): JSX.Element => {
 
   const frktPerYear =
     APR.toNumber() !== 0
-      ? frktStakingAmount.mul(new BN(1000)).div(APR)
+      ? frktStakingAmount.div(new BN(10000)).mul(APR)
       : new BN(0);
 
   return (
