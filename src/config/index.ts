@@ -8,7 +8,8 @@ const IS_DEVNET = process.env.REACT_APP_NETWORK === 'devnet';
 export const ENDPOINTS = [
   {
     name: 'mainnet-beta' as ENV,
-    endpoint: 'https://fraktion.rpcpool.com',
+    endpoint: 'https://wild-red-morning.solana-mainnet.quiknode.pro/e48180a05f9f7ab63b6d9f0609f0ba675854e471/',
+    // endpoint: 'https://fraktion.rpcpool.com',
     // endpoint: 'https://frakt.genesysgo.net/',
     // endpoint:
     //https://ssc-dao.genesysgo.net/
