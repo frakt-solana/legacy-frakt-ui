@@ -39,7 +39,7 @@ export const NETWORK = IS_DEVNET ? 'devnet' : 'mainnet-beta';
 
 export const ENDPOINT = IS_DEVNET
   ? clusterApiUrl('devnet')
-  : 'https://fraktion.rpcpool.com';
+  : 'https://wild-red-morning.solana-mainnet.quiknode.pro/e48180a05f9f7ab63b6d9f0609f0ba675854e471';
 
 const devnet = {
   PROGRAM_PUBLIC_KEY: 'D1bz9T4br5DaRfYx48aSaQsstcfuaytvvArxVjShLwca',
